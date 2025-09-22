@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBKRIST:Java Hub:Java Packages and Access Modifiers</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0; /* Removing default body padding */
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2px auto 0; /* top margin is set to 2px, centered horizontally */
+            background: #ffffff;
+            padding: 20px; /* Reduced container padding to minimize overall space */
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2, h3 {
+            color: #004d99;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 1.25em; /* 50% of 2.5em */
+        }
+
+        h3 {
+            font-size: 0.8em; /* 50% of 1.6em */
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            color: #007BFF;
+            text-align: center;
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .highlight-box {
+            background-color: #f8f9fa;
+            border-left: 5px solid #007BFF;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .image-container img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #e0e0e0;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e9ecef;
+        }
+
+        .info-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 1.1em;
+            color: #007BFF;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .info-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .section-heading {
+            margin-top: 40px;
+            font-size: 1.5em;
+            color: #555;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        .section-heading:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: #007BFF;
+        }
+
+        .top-nav {
+            background-color: #e9ecef;
+            padding: 5px 0; /* Reduced padding for a smaller menu bar */
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .top-nav a {
+            color: #007BFF;
+            text-decoration: none;
+            padding: 0 10px;
+            font-weight: normal; /* Removed bold */
+            font-style: italic; /* Added italics */
+            font-size: 0.9em; /* Reduced font size */
+            transition: color 0.3s;
+        }
+        
+        .top-nav a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Java Packages Access Demo</h1>
+        <h3>Packages are an essential feature in Java for organizing large-scale applications. Understanding how to create, import, and manage packages is crucial for efficient Java programming.</h3>
+
+        <div class="top-nav">
+            <a href="index.html">Back to Index</a>
+            <a href="accessexample.html">Packages Access Demo</a>
+            <a href="moreexamples.html">Basic Examples</a>
+            <a href="jars.html">JARs</a>
+        </div>
+        
+        <p>
+            Packages in Java are used to group related classes, interfaces, and sub-packages into a namespace. They provide a way to organize files in larger projects, avoid name conflicts, and manage access control. Packages also help in making code modular and manageable, especially when dealing with large-scale applications.
+        </p>
+        
+        <div class="image-container">
+            <img src="package.jpg" alt="Java Package Diagram">
+        </div>
+
+        <h2 class="section-heading">Access Modifiers in Java</h2>
+        <table>
+            <tr>
+                <th>&nbsp;</th>
+                <th>Private</th>
+                <th>No Modifier (Default)</th>
+                <th>Protected</th>
+                <th>Public</th>
+            </tr>
+            <tr>
+                <td>Same Class</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>Same Package</td>
+                <td>No</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>Different Package Subclass</td>
+                <td>No</td>
+                <td>No</td>
+                <td>Yes</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>Different Package Non-Subclass</td>
+                <td>No</td>
+                <td>No</td>
+                <td>No</td>
+                <td>Yes</td>
+            </tr>
+        </table>
+
+        <h2 class="section-heading">Questions and Answers</h2>
+
+        <div class="highlight-box">
+            <h4>1. What is a Package in Java?</h4>
+            <p>A package is a namespace that organizes a set of related classes and interfaces. Packages are used to prevent name clashes and to control the access of classes, interfaces, and methods.</p>
+            <pre class="code-block"><code>package com.example.utils;</code></pre>
+            <p>In the above example, <code>com.example.utils</code> is a package that could contain utility classes related to an application. Classes inside the package can be imported and used by other classes.</p>
+        </div>
+        
+        <div class="highlight-box">
+            <h4>2. Why Use Packages?</h4>
+            <ol>
+                <li><b>Organizing Code:</b> Packages help group similar functionality into modules.</li>
+                <li><b>Avoiding Naming Conflicts:</b> Packages provide namespaces, so two classes with the same name can exist in different packages.</li>
+                <li><b>Access Control:</b> Java packages provide access control mechanisms. Classes, methods, and fields can have package-level visibility.</li>
+                <li><b>Reusability:</b> Code can be organized into packages that can be reused across projects.</li>
+            </ol>
+        </div>
+        
+        <div class="highlight-box">
+            <h4>3. Types of Packages in Java</h4>
+            <ul>
+                <li><b>Built-in Packages:</b> These are provided by the Java API (e.g., <code>java.util</code>, <code>java.io</code>, <code>java.lang</code>).</li>
+                <li><b>User-defined Packages:</b> These are created by users to organize their classes and interfaces.</li>
+            </ul>
+        </div>
+        
+        <div class="highlight-box">
+            <h4>4. How to Create a Package?</h4>
+            <p>To create a package in Java, you use the <code>package</code> keyword. The package statement must be the first line in the source file (excluding comments).</p>
+            <pre class="code-block"><code>// File: com/example/HelloWorld.java
+package com.example;
+
+public class HelloWorld {
+    public void greet() {
+        System.out.println("Hello from the com.example package!");
+    }
+}</code></pre>
+        </div>
+        
+        <div class="highlight-box">
+            <h4>5. Accessing Classes from Packages</h4>
+            <p>To access a class from a package, the fully qualified name of the class should be used, or the class should be imported.</p>
+            <p><b>Accessing With Import:</b></p>
+            <pre class="code-block"><code>import com.example.HelloWorld;
+
+public class Main {
+    public static void main(String[] args) {
+        HelloWorld hello = new HelloWorld();
+        hello.greet();
+    }
+}</code></pre>
+        </div>
+        
+        <div class="highlight-box">
+            <h4>6. Importing Packages</h4>
+            <p>Java provides the <code>import</code> statement to import classes or entire packages.</p>
+            <ul>
+                <li><b>Importing a Single Class:</b> <code>import com.example.HelloWorld;</code></li>
+                <li><b>Importing All Classes:</b> <code>import com.example.*;</code></li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h4>7. Sub-packages in Java</h4>
+            <p>Java supports sub-packages, which are packages within other packages. They are treated like regular packages, but the hierarchy is created by adding dots in the package name.</p>
+            <pre class="code-block"><code>package com.example.utils;</code></pre>
+        </div>
+
+        <div class="highlight-box">
+            <h4>8. Package Naming Conventions</h4>
+            <ul>
+                <li><b>Reverse Domain Name:</b> Use your domain name in reverse as the base of your package names (e.g., <code>com.mycompany.product</code>).</li>
+                <li><b>Lowercase Names:</b> Use lowercase letters to avoid conflicts.</li>
+                <li><b>Meaningful Names:</b> Use descriptive names to reflect the content.</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h4>9. Java Built-in Packages</h4>
+            <p>Java comes with several built-in packages that provide a wide range of functionalities.</p>
+            <ul>
+                <li><code>java.lang</code>: Fundamental classes (automatically imported).</li>
+                <li><code>java.util</code>: Utility classes, collections framework.</li>
+                <li><code>java.io</code>: Input/output operations.</li>
+                <li><code>java.net</code>: Networking operations.</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h4>10. Example Program Using Packages</h4>
+            <p>Here’s a full example of creating and using user-defined packages.</p>
+            <pre class="code-block"><code>// Step 1: Define a Package
+// File: com/example/greetings/Greeter.java
+package com.example.greetings;
+
+public class Greeter {
+    public void sayHello() {
+        System.out.println("Hello from the Greeter class!");
+    }
+}
+
+// Step 2: Create Another Class to Use This Package
+// File: com/example/app/MainApp.java
+package com.example.app;
+import com.example.greetings.Greeter;
+
+public class MainApp {
+    public static void main(String[] args) {
+        Greeter greeter = new Greeter();
+        greeter.sayHello();
+    }
+}</code></pre>
+            <p>To compile and run this example, navigate to the root directory and compile both files before running <code>java com.example.app.MainApp</code>.</p>
+        </div>
+        
+        <div class="highlight-box" style="background-color: #e3f2fd; border-color: #2196F3;">
+            <h4>Benefits of Using Packages in Java</h4>
+            <ul>
+                <li><b>Namespace Management:</b> Avoid name conflicts by grouping related classes and interfaces.</li>
+                <li><b>Access Protection:</b> Provide controlled access to classes and members.</li>
+                <li><b>Modularity:</b> Promote modular programming by organizing code into distinct units.</li>
+                <li><b>Reusability:</b> Classes in packages can be easily reused across different projects.</li>
+            </ul>
+        </div>
+        
+        <a class="info-link" href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html">
+            For more information, you can refer to the official documentation.
+        </a>
+    </div>
+</body>
+</html>

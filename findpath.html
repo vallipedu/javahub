@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+    <img src="PackagesHeader.png" alt="NBKRIST" style="width:400px;height:300px;">    
+   ## Packages and the Classpath
+
+Packages in Java are a way to organize classes and interfaces into
+ a logical hierarchy, mirroring the file system's directory structure.
+For the Java Runtime Environment (JRE) to find and load 
+these packages, 
+it relies on a concept called the **classpath**.
+The classpath is a list of directories and/or JAR files 
+where the JRE looks for compiled `.class` files.
+
+-----
+
+### How the JRE Finds Packages
+
+By default, the JRE uses the **current working directory** 
+as the starting point for its search. If your package structure, 
+such as `org.edu.nbkrist.cse`, is a subdirectory of the current path,
+ the JRE will be able to find the classes within it.
+
+You can explicitly specify the classpath in two primary ways:
+
+1.  **Using the `CLASSPATH` environment variable**: 
+You can set this system-wide variable to include the paths to your 
+class files.
+2.  **Using the `-classpath` (or `-cp`) option**: 
+This is a more common and flexible method, allowing you 
+to specify the path for a single execution of the `java` or `javac` 
+command.
+
+-----
+
+### Example: Running a Class from a Package
+
+Let's consider a simple class within a package:
+
+```java
+// File: org/edu/nbkrist/cse/Test.java
+package org.edu.nbkrist.cse;
+
+public class Test {
+    public static void main(String ar[]) {
+        System.out.println("Package tester");
+    }
+}
+```
+
+To compile and run this class, you must ensure the classpath is
+ correctly configured.
+
+#### Method 1: Using the `-d` option for compilation
+<div style="background-color: hsl(196, 65%, 73%); padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+This method compiles the source file and places the resulting `.class` file into
+ the appropriate directory structure relative to the specified 
+ destination.
+
+1.  **Compilation**:
+    Assuming you are in the directory that will be the 
+    root of your package (e.g., a `src` folder), 
+    you can use the `-d .` option to tell the compiler 
+    to place the output in the **current working directory**.
+
+    ```bash
+    > javac -d . Test.java
+    ```
+
+    This command compiles `Test.java` and creates the directory 
+    structure `org/edu/nbkrist/cse` with `Test.class` inside it.
+
+2.  **Running the program**:
+    From the directory that is the root of your package
+     (where the `org` folder is located),
+      you can run the program by specifying the fully
+       qualified class name.
+
+    ```bash
+    > java org.edu.nbkrist.cse.Test
+    ```
+
+    The JRE finds the class by starting its search 
+    in the current directory and navigating through 
+    the package structure `org/edu/nbkrist/cse`
+     to find `Test.class`.
+</div>
+#### Method 2: Specifying the Classpath
+
+This method is useful when your compiled `.class`
+ files are in a different location than 
+ your current working directory. The `-classpath` flag
+  tells the JVM **where to look** for the class files.
+
+  * **What is the classpath?**
+    Think of the classpath as a **search path** for the JVM.
+     It's a list of locations—directories or JAR files—that 
+     the JVM scans to find the `.class`
+      files needed to run a program. 
+      Without a correct classpath, the JVM will 
+      throw a `NoClassDefFoundError` because it can't find the 
+      necessary class files.
+
+  * **Example Usage**:
+    If you're in a project's root directory (`my-project/`)
+     and your compiled `.class` files are in a subdirectory 
+     named `bin`, you would use the following command to run your
+      main class (`com.mycompany.Main`):
+
+    ```bash
+    > java -classpath bin com.mycompany.Main
+    ```
+
+    The `-classpath bin` part tells the JVM to look inside 
+    the `bin` directory to find the `com.mycompany.Main.class` file.
+    </pre>
+</body>
+</html>

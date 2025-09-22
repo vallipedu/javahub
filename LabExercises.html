@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Lab Exercises: Core Concepts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .persuasion-box {
+            background-image: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+        .exercise-link {
+            transition: background-color 0.2s ease-in-out;
+            padding: 1rem 1.5rem;
+            border-left: 4px solid transparent;
+        }
+        .exercise-link.active,
+        .exercise-link:hover {
+            background-color: #34495e;
+            border-left: 4px solid #3498db;
+        }
+        .code-block {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-top: 1rem;
+        }
+        pre code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-md py-4 px-6">
+        <div class="container mx-auto">
+            <h1 class="text-3xl font-bold text-gray-800">Core Java Lab Exercises</h1>
+        </div>
+    </header>
+
+    <div class="flex flex-1 flex-col md:flex-row">
+        <!-- Vertical Menu -->
+        <nav class="bg-gray-800 text-white shadow-lg p-6 w-full md:w-1/4 lg:w-1/5 flex-shrink-0">
+            <div class="text-2xl font-bold mb-8">Java Labs</div>
+            <ul class="space-y-2">
+                <li><a href="exercise1.html" class="exercise-link block rounded-lg active" data-exercise="1">Exercise 1</a></li>
+                <li><a href="exercise2.html" class="exercise-link block rounded-lg" data-exercise="2">Exercise 2</a></li>
+                <li><a href="exercise3.html" class="exercise-link block rounded-lg" data-exercise="3">Exercise 3</a></li>
+                <li><a href="exercise4.html" class="exercise-link block rounded-lg" data-exercise="4">Exercise 4</a></li>
+                <li><a href="exercise5.html" class="exercise-link block rounded-lg" data-exercise="5">Exercise 5</a></li>
+                <li><a href="exercise6.html" class="exercise-link block rounded-lg" data-exercise="6">Exercise 6</a></li>
+                <li><a href="exercise7.html" class="exercise-link block rounded-lg" data-exercise="7">Exercise 7</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 p-6 md:p-10">
+            <!-- Back Button -->
+            <a href="index.html" class="inline-block bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors duration-200 mb-6">
+                &larr; Back to Home
+            </a>
+            <div class="container mx-auto">
+                <!-- Persuasive Intro -->
+                <div id="intro-section" class="persuasion-box rounded-lg p-8 mb-10 shadow-lg">
+                    <h1 class="text-4xl font-bold mb-4">Master Java by Doing</h1>
+                    <p class="text-lg">
+                        Welcome to the core Java exercises! Theory is just the beginning. The real key to becoming a proficient Java developer lies in consistent, hands-on practice. These exercises are designed to solidify your understanding of fundamental concepts, from basic syntax to object-oriented principles. Each problem is a stepping stone on your journey. Click on a menu link to view the problem statement and its solution.
+                    </p>
+                </div>
+
+                <!-- Exercise Content will be dynamically loaded here -->
+                <div id="exercise-content" class="bg-white rounded-lg shadow-lg p-8 hidden">
+                    <h2 id="exercise-title" class="text-2xl font-bold mb-4 text-blue-700"></h2>
+                    <div id="exercise-problem" class="text-gray-700 mb-8 pb-8 border-b border-gray-200"></div>
+                    <h3 class="text-xl font-bold mb-4 text-blue-700">Solution</h3>
+                    <div id="exercise-solution" class="code-block"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-4 mt-auto">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 NBKRIST JavaHub Java Lab Exercises. All rights reserved.</p>
+            <p class="text-xs mt-1">
+                <a href="https://www.nbkrist.co.in/index.php" class="text-blue-400 hover:underline">www.nbkrist.co.in</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for dynamic content loading -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const exercises = {
+                '1': {
+                    title: 'Exercise 1: Basic Input & Output',
+                    problem: 'Write a Java program that prompts the user to enter their name and age. The program should then print a greeting message that includes the user\'s name and confirms their age. This exercise focuses on using the <code>Scanner</code> class for input and <code>System.out.println()</code> for output.',
+                    solution: `import java.util.Scanner;
+
+public class UserInfo {
+    public static void main(String[] args) {
+        // Create a Scanner object to read user input
+        Scanner scanner = new Scanner(System.in);
+        
+        // Prompt the user for their name
+        System.out.print("Please enter your name: ");
+        String name = scanner.nextLine();
+        
+        // Prompt the user for their age
+        System.out.print("Please enter your age: ");
+        int age = scanner.nextInt();
+        
+        // Print the greeting message
+        System.out.println("Hello, " + name + "! You are " + age + " years old.");
+        
+        // Close the scanner
+        scanner.close();
+    }
+}`
+                },
+                '2': {
+                    title: 'Exercise 2: Control Flow (Loops)',
+                    problem: 'Create a program that calculates the factorial of a given positive integer. The program should use a <code>for</code> loop to perform the calculation and handle cases where the input is a non-positive integer.',
+                    solution: `import java.util.Scanner;
+
+public class FactorialCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a non-negative integer: ");
+        int number = scanner.nextInt();
+        
+        if (number < 0) {
+            System.out.println("Factorial is not defined for negative numbers.");
+        } else {
+            long factorial = 1;
+            for (int i = 1; i <= number; i++) {
+                factorial *= i;
+            }
+            System.out.println("The factorial of " + number + " is " + factorial);
+        }
+        
+        scanner.close();
+    }
+}`
+                },
+                '3': {
+                    title: 'Exercise 3: Arrays',
+                    problem: 'Write a program to find the largest and smallest elements in an array of integers. You should initialize the array with at least 10 numbers and then iterate through it to find the minimum and maximum values.',
+                    solution: `public class ArrayMinMax {
+    public static void main(String[] args) {
+        int[] numbers = {10, 5, 23, 1, 45, -7, 18, 50, 2, 33};
+        
+        int min = numbers[0];
+        int max = numbers[0];
+        
+        for (int i = 1; i < numbers.length; i++) {
+            if (numbers[i] < min) {
+                min = numbers[i];
+            }
+            if (numbers[i] > max) {
+                max = numbers[i];
+            }
+        }
+        
+        System.out.println("The smallest element is: " + min);
+        System.out.println("The largest element is: " + max);
+    }
+}`
+                },
+                '4': {
+                    title: 'Exercise 4: Methods and Functions',
+                    problem: 'Develop a simple calculator program that defines separate methods for addition, subtraction, multiplication, and division. The main method should take two numbers as input and call the appropriate method based on the user\'s choice.',
+                    solution: `import java.util.Scanner;
+
+public class SimpleCalculator {
+    public static double add(double a, double b) {
+        return a + b;
+    }
+    
+    public static double subtract(double a, double b) {
+        return a - b;
+    }
+    
+    public static double multiply(double a, double b) {
+        return a * b;
+    }
+    
+    public static double divide(double a, double b) {
+        if (b == 0) {
+            throw new IllegalArgumentException("Cannot divide by zero.");
+        }
+        return a / b;
+    }
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the first number: ");
+        double num1 = scanner.nextDouble();
+        System.out.print("Enter the second number: ");
+        double num2 = scanner.nextDouble();
+        
+        System.out.println("Sum: " + add(num1, num2));
+        System.out.println("Difference: " + subtract(num1, num2));
+        System.out.println("Product: " + multiply(num1, num2));
+        
+        try {
+            System.out.println("Quotient: " + divide(num1, num2));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        scanner.close();
+    }
+}`
+                },
+                '5': {
+                    title: 'Exercise 5: Strings',
+                    problem: 'Create a method that takes a string and reverses it without using any built-in `reverse()` methods. The program should also check if the reversed string is a palindrome.',
+                    solution: `public class StringReverserAndPalindromeChecker {
+
+    public static String reverseString(String str) {
+        char[] charArray = str.toCharArray();
+        int left = 0;
+        int right = charArray.length - 1;
+        while (left < right) {
+            char temp = charArray[left];
+            charArray[left] = charArray[right];
+            charArray[right] = temp;
+            left++;
+            right--;
+        }
+        return new String(charArray);
+    }
+
+    public static boolean isPalindrome(String str) {
+        String reversed = reverseString(str);
+        return str.equalsIgnoreCase(reversed);
+    }
+    
+    public static void main(String[] args) {
+        String test1 = "racecar";
+        String test2 = "hello";
+        
+        System.out.println("Original: " + test1);
+        System.out.println("Reversed: " + reverseString(test1));
+        System.out.println("Is Palindrome? " + isPalindrome(test1));
+        
+        System.out.println("\\nOriginal: " + test2);
+        System.out.println("Reversed: " + reverseString(test2));
+        System.out.println("Is Palindrome? " + isPalindrome(test2));
+    }
+}`
+                },
+                '6': {
+                    title: 'Exercise 6: Object-Oriented Programming (Classes)',
+                    problem: 'Design a `Book` class with fields for `title`, `author`, and `publicationYear`. Include a constructor to initialize these fields and a method `displayBookInfo()` that prints the book\'s details. In the main method, create two `Book` objects and call the `displayBookInfo()` method for each.',
+                    solution: `public class Book {
+    String title;
+    String author;
+    int publicationYear;
+
+    public Book(String title, String author, int publicationYear) {
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
+    }
+
+    public void displayBookInfo() {
+        System.out.println("Title: " + this.title);
+        System.out.println("Author: " + this.author);
+        System.out.println("Year: " + this.publicationYear);
+    }
+
+    public static void main(String[] args) {
+        Book book1 = new Book("The Lord of the Rings", "J.R.R. Tolkien", 1954);
+        Book book2 = new Book("Pride and Prejudice", "Jane Austen", 1813);
+        
+        System.out.println("Book 1 Info:");
+        book1.displayBookInfo();
+        
+        System.out.println("\\nBook 2 Info:");
+        book2.displayBookInfo();
+    }
+}`
+                },
+                '7': {
+                    title: 'Exercise 7: Inheritance',
+                    problem: 'Build on the previous exercise. Create a `Magazine` class that inherits from the `Book` class. Add a new field for `issueNumber` and a constructor to initialize all fields. Override the `displayBookInfo()` method to also include the issue number.',
+                    solution: `public class Magazine extends Book {
+    int issueNumber;
+
+    public Magazine(String title, String author, int publicationYear, int issueNumber) {
+        super(title, author, publicationYear);
+        this.issueNumber = issueNumber;
+    }
+
+    @Override
+    public void displayBookInfo() {
+        super.displayBookInfo();
+        System.out.println("Issue Number: " + this.issueNumber);
+    }
+
+    public static void main(String[] args) {
+        Book classicBook = new Book("The Great Gatsby", "F. Scott Fitzgerald", 1925);
+        Magazine magazine = new Magazine("National Geographic", "Various", 2024, 150);
+        
+        System.out.println("Book Info:");
+        classicBook.displayBookInfo();
+        
+        System.out.println("\\nMagazine Info:");
+        magazine.displayBookInfo();
+    }
+}`
+                }
+            };
+
+            const exerciseLinks = document.querySelectorAll('.exercise-link');
+            const introSection = document.getElementById('intro-section');
+            const exerciseContent = document.getElementById('exercise-content');
+            const exerciseTitle = document.getElementById('exercise-title');
+            const exerciseProblem = document.getElementById('exercise-problem');
+            const exerciseSolution = document.getElementById('exercise-solution');
+
+            const showSolution = (exerciseId) => {
+                // Remove 'active' class from all links
+                exerciseLinks.forEach(link => link.classList.remove('active'));
+                
+                // Add 'active' class to the clicked link
+                const currentLink = document.querySelector(`[data-exercise="${exerciseId}"]`);
+                if (currentLink) {
+                    currentLink.classList.add('active');
+                }
+
+                // Get the content for the selected exercise
+                const content = exercises[exerciseId];
+
+                // Update the main content area
+                introSection.classList.add('hidden');
+                exerciseContent.classList.remove('hidden');
+
+                exerciseTitle.textContent = content.title;
+                exerciseProblem.innerHTML = content.problem;
+                exerciseSolution.innerHTML = `<pre><code>` + content.solution + `</code></pre>`;
+            };
+
+            exerciseLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const exerciseId = e.target.getAttribute('data-exercise');
+                    showSolution(exerciseId);
+                });
+            });
+
+            // Initially hide the solution area and show the intro
+            introSection.classList.remove('hidden');
+            exerciseContent.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

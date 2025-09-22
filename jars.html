@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java JARs: A Comprehensive Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+        .header-bg {
+            background-image: linear-gradient(135deg, #1f2937, #374151);
+        }
+        .content-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .code-block {
+            background-color: #1f2937;
+            color: #f9fafb;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        .list-circle li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .list-circle li::before {
+            content: "•";
+            color: #2563eb;
+            font-size: 1.25rem;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="header-bg text-white shadow-md py-6 px-6 sm:px-10">
+        <div class="container mx-auto">
+            <h1 class="text-4xl font-bold text-center">Java JAR Files: A Comprehensive Guide</h1>
+            <p class="text-center mt-2 text-gray-300 text-lg">A professional overview for students and developers.</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6 md:p-10">
+        <div class="container mx-auto max-w-4xl">
+            <!-- Back Button -->
+            <a href="index.html" class="inline-block bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors duration-200 mb-6">
+                &larr; Back to Home
+            </a>
+
+            <!-- Introduction Section -->
+            <section class="content-card">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">A Practical Overview</h2>
+                <p class="text-gray-600 mb-4">
+                    This guide provides a practical overview of **Java JAR (Java Archive) files**. It covers what JAR files are, their purpose, how to create and use them, and some common use cases. It is designed to equip you with the knowledge to effectively utilize JAR files in your Java development workflow.
+                </p>
+                <p class="text-gray-600">
+                    A JAR file is a package file format based on the **ZIP file format**. Think of it as a container that bundles all the necessary components of a Java application or library into a single, manageable unit for distribution.
+                </p>
+            </section>
+
+            <!-- Purpose of JAR Files -->
+            <section class="content-card">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Purpose of JAR Files</h2>
+                <p class="text-gray-600 mb-6">
+                    JAR files serve several important purposes in Java development, promoting efficient and organized project management.
+                </p>
+                <ul class="list-circle">
+                    <li>
+                        <strong class="text-gray-800">Packaging and Distribution:</strong> They provide a convenient way to package all components of a Java application or library into a single file for easy distribution.
+                    </li>
+                    <li>
+                        <strong class="text-gray-800">Code Reusability:</strong> JAR files allow developers to create reusable components (libraries) that can be easily incorporated into other Java projects, reducing development time.
+                    </li>
+                    <li>
+                        <strong class="text-gray-800">Version Control and Dependencies:</strong> They can be versioned, allowing you to track changes and manage dependencies effectively.
+                    </li>
+                    <li>
+                        <strong class="text-gray-800">Compression:</strong> Using ZIP compression, JAR files reduce the size of the packaged files, making them easier to store and transfer.
+                    </li>
+                    <li>
+                        <strong class="text-gray-800">Metadata:</strong> JAR files can contain a manifest file (`MANIFEST.MF`) with important metadata about the application, such as the main class and version.
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Creating JAR Files -->
+            <section class="content-card">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Creating JAR Files</h2>
+                <p class="text-gray-600 mb-4">
+                    The most common way to create a JAR file is by using the `jar` command-line tool included with the Java Development Kit (JDK).
+                </p>
+                <h3 class="text-xl font-bold text-gray-700 mt-6 mb-2">Using the `jar` Command</h3>
+                <p class="text-gray-600 mb-2">
+                    Here is a basic example to create a JAR file containing all class files in the current directory:
+                </p>
+                <div class="code-block">
+                    jar cf myapp.jar *.class
+                </div>
+                <ul class="mt-4 list-disc pl-6 text-gray-600">
+                    <li>`jar`: Invokes the JAR tool.</li>
+                    <li>`c`: Specifies that you want to create a new JAR file.</li>
+                    <li>`f`: Specifies the name of the JAR file to be created.</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-gray-700 mt-6 mb-2">Including a Manifest File</h3>
+                <p class="text-gray-600 mb-2">
+                    A manifest file is a special file that contains metadata. You can create one to specify the main class of your application.
+                </p>
+                <div class="code-block">
+                    Manifest-Version: 1.0<br>
+                    Main-Class: com.example.MyApp<br>
+                    Created-By: Your Name
+                </div>
+                <p class="text-gray-600 mt-4 mb-2">
+                    To include this manifest file when creating the JAR:
+                </p>
+                <div class="code-block">
+                    jar cfm myapp.jar manifest.txt *.class
+                </div>
+            </section>
+            
+            <!-- Using JAR Files -->
+            <section class="content-card">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Using JAR Files</h2>
+                <p class="text-gray-600 mb-4">
+                    To use a JAR file, you must add it to the classpath. The classpath is a list of directories and JARs that the JVM searches for class files.
+                </p>
+                <h3 class="text-xl font-bold text-gray-700 mt-6 mb-2">As an Executable JAR</h3>
+                <p class="text-gray-600 mb-2">
+                    If the JAR file is configured with a main class in its manifest, you can run it directly from the command line:
+                </p>
+                <div class="code-block">
+                    java -jar myapp.jar
+                </div>
+                
+                <h3 class="text-xl font-bold text-gray-700 mt-6 mb-2">As a Library Dependency</h3>
+                <p class="text-gray-600 mb-2">
+                    You can add a JAR file to your project's classpath using the `-classpath` or `-cp` option:
+                </p>
+                <div class="code-block">
+                    java -cp mylib.jar:myapp.jar com.example.MyApp
+                </div>
+                <p class="text-gray-600 mt-4">
+                    For modern projects, it is highly recommended to use build tools like **Maven** or **Gradle** to manage dependencies. These tools automatically download and manage JAR files, simplifying the process.
+                </p>
+            </section>
+
+            <!-- Related Topics Section -->
+            <section class="content-card">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Related Topics</h2>
+                <p class="text-gray-600 mb-2">
+                    For a deeper understanding of how Java organizes code, explore Java packages.
+                </p>
+                <a href="packages.html" class="text-blue-600 hover:text-blue-800 font-medium">Learn more about Java Packages</a>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white text-center py-4 mt-auto w-full">
+        <p class="text-sm">&copy; 2025 NBKRIST Java Hub</p>
+        <p class="text-xs mt-1">
+            <a href="https://www.nbkrist.co.in/index.php" class="text-blue-400 hover:underline">www.nbkrist.co.in</a>
+            <span class="mx-2">|</span>
+            <a href="packages.html" class="text-blue-400 hover:underline">Java Packages</a>
+        </p>
+    </footer>
+
+</body>
+</html>

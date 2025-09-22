@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Exception Handling Exercises</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .code-block {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        pre code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .section-separator {
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 2.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 p-6 md:p-10">
+
+    <div class="container mx-auto bg-white shadow-lg rounded-lg p-6 md:p-10 mt-8">
+
+        <h1 class="text-4xl font-bold mb-6 text-center text-blue-800">Java Exception Handling</h1>
+        <p class="text-lg text-center mb-10">
+            This page demonstrates various aspects of exception handling in Java, including basic <code>try-catch</code> blocks, multiple <code>catch</code> clauses, and the creation of both built-in and user-defined exceptions.
+        </p>
+
+        <!-- Exercise A: Basic Exception Handling -->
+        <div class="mb-10 section-separator">
+            <h2 class="text-2xl font-semibold mb-4 text-blue-600">a) Describing Exception Handling Mechanism</h2>
+            <p class="mb-4">
+                This program demonstrates the fundamental <code>try-catch-finally</code> mechanism. The code within the <code>try</code> block is monitored for exceptions. If an exception occurs, the program's control is transferred to the <code>catch</code> block. The <code>finally</code> block will always execute, regardless of whether an exception was caught or not.
+            </p>
+            <div class="code-block">
+                <pre><code>
+public class BasicExceptionHandling {
+    public static void main(String[] args) {
+        int numerator = 10;
+        int denominator = 0;
+
+        try {
+            // This block contains the code that might throw an exception.
+            int result = numerator / denominator; // This will throw an ArithmeticException.
+            System.out.println("Result: " + result); // This line is skipped.
+        } catch (ArithmeticException e) {
+            // This block catches the exception and handles it gracefully.
+            System.out.println("Error: Cannot divide by zero.");
+            System.out.println("Exception details: " + e.getMessage());
+        } finally {
+            // The finally block always executes, whether an exception occurred or not.
+            System.out.println("Execution of finally block.");
+        }
+
+        System.out.println("Program continues after the try-catch-finally block.");
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <!-- Exercise B: Multiple Catch Clauses -->
+        <div class="mb-10 section-separator">
+            <h2 class="text-2xl font-semibold mb-4 text-blue-600">b) Illustrating Multiple Catch Clauses</h2>
+            <p class="mb-4">
+                A single <code>try</code> block can be followed by multiple <code>catch</code> blocks to handle different types of exceptions. The JVM will execute the first <code>catch</code> block whose exception type matches the thrown exception.
+            </p>
+            <div class="code-block">
+                <pre><code>
+public class MultipleCatchBlocks {
+    public static void main(String[] args) {
+        try {
+            String str = null;
+            // Example 1: NullPointerException
+            System.out.println(str.length()); 
+
+            // Example 2: ArithmeticException (uncomment to test this one)
+            // int a = 10 / 0;
+
+            // Example 3: ArrayIndexOutOfBoundsException (uncomment to test this one)
+            // int[] numbers = {1, 2, 3};
+            // System.out.println(numbers[4]);
+
+        } catch (NullPointerException e) {
+            System.out.println("Caught NullPointerException: " + e.getMessage());
+        } catch (ArithmeticException e) {
+            System.out.println("Caught ArithmeticException: " + e.getMessage());
+        } catch (Exception e) {
+            // A generic catch block to handle any other exception.
+            System.out.println("Caught a generic Exception: " + e.getMessage());
+        }
+
+        System.out.println("Program finished.");
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <!-- Exercise C: Java Built-in Exceptions -->
+        <div class="mb-10 section-separator">
+            <h2 class="text-2xl font-semibold mb-4 text-blue-600">c) Creation of Java Built-in Exceptions</h2>
+            <p class="mb-4">
+                This program demonstrates how a built-in exception, specifically <code>NumberFormatException</code>, is thrown when an operation fails. We'll use <code>Integer.parseInt()</code>, which throws this exception if the string cannot be converted to a number.
+            </p>
+            <div class="code-block">
+                <pre><code>
+public class BuiltinExceptionDemo {
+    public static void main(String[] args) {
+        String numString = "abc";
+
+        try {
+            int number = Integer.parseInt(numString);
+            System.out.println("The number is: " + number);
+        } catch (NumberFormatException e) {
+            System.out.println("An exception occurred during number conversion.");
+            System.out.println("Exception message: " + e.getMessage());
+            System.out.println("This is a built-in exception handler.");
+        }
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <!-- Exercise D: User-Defined Exception -->
+        <div class="mb-10">
+            <h2 class="text-2xl font-semibold mb-4 text-blue-600">d) Creation of User Defined Exception</h2>
+            <p class="mb-4">
+                You can create your own custom exception classes to represent specific error conditions in your application. This example defines a custom exception called <code>InvalidAgeException</code>.
+            </p>
+            <div class="code-block">
+                <pre><code>
+// Step 1: Define a custom exception class.
+// It's good practice to extend Exception for checked exceptions, or RuntimeException for unchecked.
+class InvalidAgeException extends Exception {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+// Step 2: Use the custom exception in a class.
+public class UserDefinedExceptionDemo {
+
+    public static void checkAge(int age) throws InvalidAgeException {
+        if (age < 0 || age > 150) {
+            throw new InvalidAgeException("Age is not valid: " + age);
+        } else {
+            System.out.println("Age is valid.");
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            // Example with a valid age
+            checkAge(25); 
+            // Example with an invalid age
+            checkAge(-5); 
+        } catch (InvalidAgeException e) {
+            System.out.println("Caught user-defined exception!");
+            System.out.println(e.getMessage());
+        }
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

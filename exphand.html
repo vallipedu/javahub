@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Exception Handling</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 5px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #0056b3;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        pre {
+            margin: 0;
+        }
+
+        .comment {
+            color: #888;
+        }
+
+        .keyword {
+            color: #ff79c6;
+        }
+
+        .string {
+            color: #f1fa8c;
+        }
+
+        .method {
+            color: #50fa7b;
+        }
+
+        .class-name {
+            color: #bd93f9;
+        }
+
+        .variable {
+            color: #ffb86c;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ccc;
+            margin: 20px 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        li:before {
+            content: "•";
+            color: #0056b3;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <a href="Index.html" class="back-button">← Back to Index</a>
+        <h1>Java Exception Handling Basics</h1>
+        <h3 style="text-align: center;">NBKRIST - CSE DEPARTMENT</h3>
+        <p> <a href="jehpv.pdf" target="_blank">Practical Guide</a>.</p>
+        <hr>
+        <p>
+            In Java, **exception handling** is a robust mechanism to manage runtime errors, which are known as
+            exceptions. It helps maintain the normal flow of the application even when unexpected events occur.
+        </p>
+        <p>
+            The core keywords used for exception handling are **<code>try</code>**, **<code>catch</code>**,
+            **<code>finally</code>**, **<code>throw</code>**, and **<code>throws</code>**.
+        </p>
+
+        <h2>The <code>try-catch</code> Block</h2>
+        <p>
+            The **<code>try</code>** block encloses the code that might throw an exception. The **<code>catch</code>**
+            block handles the exception if it occurs. You can have multiple <code>catch</code> blocks to handle
+            different types of exceptions.
+        </p>
+
+        <h3>Practical Demo: <code>ArithmeticException</code></h3>
+        <p>
+            This example demonstrates how to handle a common runtime exception, **<code>ArithmeticException</code>**,
+            which occurs when you try to divide a number by zero.
+        </p>
+        <div class="code-block">
+            <pre><code><span class="keyword">public class</span> <span class="class-name">DivisionDemo</span> {
+
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="string">String</span>[] args) {
+        <span class="keyword">int</span> <span class="variable">numerator</span> = 10;
+        <span class="keyword">int</span> <span class="variable">denominator</span> = 0; // This will cause an ArithmeticException
+
+        <span class="keyword">try</span> {
+            <span class="comment">// The code that might throw an exception</span>
+            <span class="keyword">int</span> <span class="variable">result</span> = <span class="variable">numerator</span> / <span class="variable">denominator</span>;
+            System.out.<span class="method">println</span>("Result: " + <span class="variable">result</span>);
+        } <span class="keyword">catch</span> (<span class="class-name">ArithmeticException</span> e) {
+            <span class="comment">// The code to handle the exception</span>
+            System.err.<span class="method">println</span>("Error: Cannot divide by zero.");
+            System.err.<span class="method">println</span>("Exception details: " + e.<span class="method">getMessage</span>());
+        }
+
+        System.out.<span class="method">println</span>("Program continues after exception handling.");
+    }
+}</code></pre>
+        </div>
+
+        <h3>Output</h3>
+        <div class="code-block">
+            <pre><code>Error: Cannot divide by zero.
+Exception details: / by zero
+Program continues after exception handling.</code></pre>
+        </div>
+
+        <h2>The <code>finally</code> Block</h2>
+        <p>
+            The **<code>finally</code>** block contains code that will be executed regardless of whether an exception
+            occurred or not. It's often used for cleanup tasks, such as closing resources like files or database
+            connections.
+        </p>
+
+        <h3>Practical Demo: Using <code>finally</code></h3>
+        <div class="code-block">
+            <pre><code><span class="keyword">public class</span> <span class="class-name">FinallyDemo</span> {
+
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="string">String</span>[] args) {
+        <span class="keyword">try</span> {
+            <span class="keyword">int</span> <span class="variable">data</span> = 100 / 0; // Throws an exception
+            System.out.<span class="method">println</span>("This line will not be executed.");
+        } <span class="keyword">catch</span> (<span class="class-name">ArithmeticException</span> e) {
+            System.out.<span class="method">println</span>("Exception caught: " + e.<span class="method">getMessage</span>());
+        } <span class="keyword">finally</span> {
+            System.out.<span class="method">println</span>("The finally block is always executed.");
+        }
+    }
+}</code></pre>
+        </div>
+
+        <h3>Output</h3>
+        <div class="code-block">
+            <pre><code>Exception caught: / by zero
+The finally block is always executed.</code></pre>
+        </div>
+
+        <hr>
+
+        <h2>Basic Java Exception Handling Interview Questions for Freshers</h2>
+        <ul>
+            <li>What is an **Exception** in Java?</li>
+            <li>What's the difference between a **Checked Exception** and an **Unchecked Exception**?</li>
+            <li>What are the 5 keywords used for exception handling in Java?</li>
+            <li>Explain the purpose of the **<code>try</code>**, **<code>catch</code>**, and **<code>finally</code>**
+                blocks.</li>
+            <li>What is the difference between the **<code>throw</code>** and **<code>throws</code>** keywords?</li>
+            <li>Can a **<code>try</code>** block exist without a **<code>catch</code>** or **<code>finally</code>**
+                block?</li>
+            <li>When is the **<code>finally</code>** block not executed?</li>
+            <li>What are some common types of **unchecked exceptions** you have encountered? (e.g.,
+                `NullPointerException`, `ArrayIndexOutOfBoundsException`).</li>
+            <li>What is the purpose of the **`printStackTrace()`** method?</li>
+            <li>Explain the **Java Exception Hierarchy**. </li>
+        </ul>
+    </div>
+
+</body>
+
+</html>

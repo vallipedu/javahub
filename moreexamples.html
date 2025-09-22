@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Packages - A Comprehensive Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-link {
+            display: block;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .back-link a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .back-link a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        h1 {
+            text-align: center;
+            color: #004d99;
+            font-size: 2.5em;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: #007BFF;
+            margin-top: 40px;
+            margin-bottom: 15px;
+        }
+        
+        h3 {
+            font-size: 1.3em;
+            color: #555;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .note {
+            background-color: #e3f2fd;
+            border-left: 5px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-style: italic;
+            color: #0d47a1;
+        }
+
+        .code-block {
+            background: #f4f4f4;
+            color: #444;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            white-space: pre;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            line-height: 1.5;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .code-block span.comment { color: #888; }
+        .code-block span.code-keyword { color: #b02222; font-weight: bold; }
+        .code-block span.code-string { color: #a31515; }
+        .code-block span.code-title { color: #007BFF; }
+        .code-block span.code-variable { color: #008080; }
+        .code-block span.code-output { color: #198754; font-weight: bold; }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 25px;
+        }
+
+        .footer {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+            color: #777;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="packages.html">&lt; Back to Packages</a>
+        </div>
+        
+        <h1>Understanding Java Packages</h1>
+        
+        <p>Java packages are a fundamental mechanism for organizing classes and interfaces into logical groups. This partitioning of the class namespace prevents naming conflicts and provides a way to control access to members. In essence, packages serve a similar purpose to folders in a file system, helping you manage and categorize your code.</p>
+        
+        <h2>User-Defined Packages</h2>
+        <p>Java packages are organized using the <span class="code-keyword">package</span> statement, which is followed by the package name. For example, the following code creates a package named "pkg":</p>
+
+        <div class="code-block">
+            <span class="comment">// File: pkg/Calculator.java</span><br>
+            <span class="code-keyword">package</span> <span class="code-title">pkg</span>;
+            <br><br>
+            <span class="code-keyword">public class</span> <span class="code-title">Calculator</span> {
+                <span class="code-keyword">public int</span> add(<span class="code-keyword">int</span> a, <span class="code-keyword">int</span> b) {
+                    <span class="comment">// Set&lt;Integer&gt; set = new HashSet&lt;&gt;();</span>
+                    <span class="code-keyword">return</span> a + b;
+                }
+                <span class="code-keyword">public double</span> add(<span class="code-keyword">double</span> a, <span class="code-keyword">double</span> b) {
+                    <span class="code-keyword">return</span> a + b;
+                }
+                <span class="code-keyword">public int</span> subtract(<span class="code-keyword">int</span> a, <span class="code-keyword">int</span> b) {
+                    <span class="code-keyword">return</span> a - b;
+                }
+                <span class="code-keyword">public int</span> multiply(<span class="code-keyword">int</span> a, <span class="code-keyword">int</span> b) {
+                    <span class="code-keyword">return</span> a * b;
+                }
+                <span class="code-keyword">public double</span> divide(<span class="code-keyword">int</span> a, <span class="code-keyword">int</span> b) {
+                    <span class="code-keyword">if</span> (b == 0) {
+                        <span class="code-keyword">throw new</span> IllegalArgumentException(<span class="code-string">"Division by zero is not allowed."</span>);
+                    }
+                    <span class="code-keyword">return</span> (<span class="code-keyword">double</span>)a / b;
+                }
+            }
+        </div>
+
+        <div class="code-block">
+            <span class="comment">// File: shapes/Rectangle.java</span><br>
+            <span class="code-keyword">package</span> <span class="code-title">shapes</span>;
+            <br><br>
+            <span class="code-keyword">public class</span> <span class="code-title">Rectangle</span> {
+                <span class="code-keyword">public int</span> area(<span class="code-keyword">int</span> length, <span class="code-keyword">int</span> width) {
+                    <span class="code-keyword">return</span> length * width;
+                }
+                <span class="code-keyword">public int</span> perimeter(<span class="code-keyword">int</span> length, <span class="code-keyword">int</span> width) {
+                    <span class="code-keyword">return</span> 2 * (length + width);
+                }
+            }
+        </div>
+
+        <div class="code-block">
+            <span class="comment">// File: shapes/Square.java</span><br>
+            <span class="code-keyword">package</span> <span class="code-title">shapes</span>;
+            <br><br>
+            <span class="code-keyword">public class</span> <span class="code-title">Square</span> {
+                <span class="code-keyword">public int</span> area(<span class="code-keyword">int</span> side) {
+                    <span class="code-keyword">return</span> side * side;
+                }
+                <span class="code-keyword">public int</span> perimeter(<span class="code-keyword">int</span> side) {
+                    <span class="code-keyword">return</span> 4 * side;
+                }
+            }
+        </div>
+
+        <div class="code-block">
+            <span class="comment">// File: com/example/pkgdemo/PkgDemo.java</span><br>
+            <span class="code-keyword">package</span> <span class="code-title">com.example.pkgdemo</span>;
+            <br><br>
+            <span class="code-keyword">public class</span> <span class="code-title">PkgDemo</span> {
+                <span class="code-keyword">public int</span> add(<span class="code-keyword">int</span> a, <span class="code-keyword">int</span> b) {
+                    <span class="code-keyword">return</span> a + b;
+                }
+            }
+        </div>
+        
+        <h3>Using the Packages</h3>
+        <p>Once your classes are organized into packages, you can import them into other classes using the <span class="code-keyword">import</span> statement. The example below demonstrates how to use classes from the <span class="code-title">pkg</span> and <span class="code-title">shapes</span> packages.</p>
+        
+        <div class="note">
+            <p><strong>Note:</strong> While importing all classes (e.g., <span class="code-keyword">import</span> <span class="code-title">shapes.*</span>) can be convenient, it is generally considered better practice to import only the specific classes you need. This makes your code more readable and can prevent potential naming conflicts if two different packages contain classes with the same name.</p>
+        </div>
+
+        <div class="code-block">
+            <span class="comment">// File: PackageTester.java</span><br>
+            <span class="code-keyword">import</span> <span class="code-title">com.example.pkgdemo.PkgDemo</span>;
+            <span class="code-keyword">import</span> <span class="code-title">pkg.Calculator</span>;
+            <span class="code-keyword">import</span> <span class="code-title">shapes.*</span>;
+            <br><br>
+            <span class="code-keyword">public class</span> <span class="code-title">PackageTester</span> {
+                <span class="code-keyword">public static void</span> main(<span class="code-keyword">String</span>[] args) {
+                    <span class="code-title">Calculator</span> calc = <span class="code-keyword">new</span> <span class="code-title">Calculator</span>();
+                    <span class="code-keyword">System.out.println</span>(<span class="code-string">"Addition of 5 and 3: "</span> + calc.add(<span class="code-variable">5</span>, <span class="code-variable">3</span>));
+                    <span class="code-keyword">System.out.println</span>(<span class="code-string">"Subtraction of 5 and 3: "</span> + calc.subtract(<span class="code-variable">5</span>, <span class="code-variable">3</span>));
+                    <span class="code-keyword">System.out.println</span>(<span class="code-string">"Multiplication of 5 and 3: "</span> + calc.multiply(<span class="code-variable">5</span>, <span class="code-variable">3</span>));
+                    <span class="code-keyword">System.out.println</span>(<span class="code-string">"Division of 5 by 2: "</span> + calc.divide(<span class="code-variable">5</span>, <span class="code-variable">2</span>));
+                    <br><br>
+                    <span class="code-title">Rectangle</span> rect = <span class="code-keyword">new</span> <span class="code-title">Rectangle</span>();
+                    <span class="code-keyword">System.out.println</span>(<span class="code-string">"Area of Rectangle (5x3): "</span> + rect.area(<span class="code-variable">5</span>, <span class="code-variable">3</span>));
+                    <span class="code-keyword">System.out.println</span>(<span class="code-string">"Perimeter of Rectangle (5x3): "</span> + rect.perimeter(<span class="code-variable">5</span>, <span class="code-variable">3</span>));
+                    <br><br>
+                    <span class="code-title">Square</span> square = <span class="code-keyword">new</span> <span class="code-title">Square</span>();
+                    <span class="code-keyword">System.out.println</span>(<span class="code-string">"Area of Square (side 4): "</span> + square.area(<span class="code-variable">4</span>));
+                    <span class="code-keyword">System.out.println</span>(<span class="code-string">"Perimeter of Square (side 4): "</span> + square.perimeter(<span class="code-variable">4</span>));
+                    <br><br>
+                    <span class="code-title">PkgDemo</span> pd = <span class="code-keyword">new</span> <span class="code-title">PkgDemo</span>();
+                    <span class="code-keyword">System.out.println</span>(<span class="code-string">"Addition using PkgDemo of 10 and 20: "</span> + pd.add(<span class="code-variable">10</span>, <span class="code-variable">20</span>));
+                }
+            }
+        </div>
+        
+        <h2>Predefined Packages</h2>
+        <p>The concept of "predefined packages" refers to the extensive set of classes that are included with the Java Development Kit (JDK) and are available for developers to use right out of the box. These packages contain ready-to-use classes for common programming tasks, which saves developers from having to write everything from scratch.
+        <div class="note">
+            <p><strong>Note:</strong> Classes in the <span class="code-title">java.lang</span> package (e.g., <span class="code-title">String</span>, <span class="code-title">System</span>) are automatically imported, so you do not need to explicitly import them.</p>
+        </div>
+
+        <p>In the following file, the lines shown demonstrate the use of predefined packages:</p>
+        
+        <div class="code-block">
+            <span class="code-keyword">import</span> <span class="code-title">java.util.Date</span>;
+            <span class="code-keyword">import</span> <span class="code-title">java.util.Calendar</span>;
+            <span class="code-keyword">import</span> <span class="code-title">java.text.SimpleDateFormat</span>;
+            <br><br>
+            <span class="comment">/**
+             * A Java program to print the current date and time
+             * using the legacy java.util.Date and java.util.Calendar classes.
+             */</span><br>
+            <span class="code-keyword">public class</span> <span class="code-title">LegacyDateTime</span> {
+                <span class="code-keyword">public static void</span> main(<span class="code-keyword">String</span>[] args) {
+                    <span class="code-keyword">System.out.println</span>(<span class="code-string">"Using java.util.Date:"</span>);
+                    <span class="comment">// Create a new Date object to represent the current date and time.</span><br>
+                    <span class="code-title">Date</span> currentDate = <span class="code-keyword">new</span> <span class="code-title">Date</span>();
+                    <span class="code-keyword">System.out.println</span>(<span class="code-string">"Current Date: "</span> + currentDate);
+                    <br><br>
+                    <span class="code-keyword">System.out.println</span>(<span class="code-string">"\nUsing java.util.Calendar:"</span>);
+                    <span class="comment">// Get an instance of Calendar.</span><br>
+                    <span class="code-title">Calendar</span> calendar = <span class="code-title">Calendar.getInstance</span>();
+                    <span class="code-keyword">int</span> year = calendar.<span class="code-variable">get</span>(<span class="code-title">Calendar.YEAR</span>);
+                    <span class="comment">// Calendar month is 0-indexed</span><br>
+                    <span class="code-keyword">int</span> month = calendar.<span class="code-variable">get</span>(<span class="code-title">Calendar.MONTH</span>) + <span class="code-variable">1</span>;
+                    <span class="code-keyword">int</span> day = calendar.<span class="code-variable">get</span>(<span class="code-title">Calendar.DAY_OF_MONTH</span>);
+                    <span class="code-keyword">int</span> hour = calendar.<span class="code-variable">get</span>(<span class="code-title">Calendar.HOUR_OF_DAY</span>);
+                    <span class="code-keyword">int</span> minute = calendar.<span class="code-variable">get</span>(<span class="code-title">Calendar.MINUTE</span>);
+                    <span class="code-keyword">int</span> second = calendar.<span class="code-variable">get</span>(<span class="code-title">Calendar.SECOND</span>);
+                    <br><br>
+                    <span class="code-keyword">System.out.println</span>(<span class="code-string">"Formatted Date: "</span> + year + <span class="code-string">"-"</span> + month + <span class="code-string">"-"</span> + day);
+                    <span class="code-keyword">System.out.println</span>(<span class="code-string">"Formatted Time: "</span> + hour + <span class="code-string">":"</span> + minute + <span class="code-string">":"</span> + second);
+                    <br><br>
+                    <span class="comment">// Use SimpleDateFormat for more complex formatting.</span><br>
+                    <span class="code-title">SimpleDateFormat</span> sdf = <span class="code-keyword">new</span> <span class="code-title">SimpleDateFormat</span>(<span class="code-string">"yyyy-MM-dd HH:mm:ss"</span>);
+                    <span class="code-keyword">String</span> formattedDateTime = sdf.<span class="code-variable">format</span>(calendar.<span class="code-variable">getTime</span>());
+                    <span class="code-keyword">System.out.println</span>(<span class="code-string">"Formatted Date & Time (via SimpleDateFormat): "</span> + formattedDateTime);
+                }
+            }
+        </div>
+
+        <p>The benefit of these predefined packages is that they provide a structured, organized way to access a vast library of reusable code, promoting efficiency and consistency in programming.</p>
+
+        <div class="footer">
+            Java Packages &copy; 2025
+        </div>
+    </div>
+</body>
+</html>
