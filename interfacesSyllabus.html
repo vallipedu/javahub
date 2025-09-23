@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Interfaces</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 85%;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1, h2, h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            margin-top: 25px;
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            border-bottom: 2px solid #3498db;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background: #e9e9e9;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        .example-block {
+            border-left: 4px solid #3498db;
+            background-color: #ecf0f1;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+
+        .topic-title {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+        .intro-text {
+            font-style: italic;
+            color: #555;
+            text-align: justify;
+        }
+        
+        pre code {
+            display: block;
+            background: none;
+            color: #f8f8f2;
+            padding: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+             /* Style for the back button */
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .back-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <a href="interfaces.html" class="back-button">Back to Interfaces MainPage</a>
+    <div class="container">
+        <h1>NBKRIST JAVAHUB - Interfaces: An Overview with Examples</h1>
+        <p class="intro-text">
+            Interfaces in Java are a blueprint of a class. They specify a set of methods that a class must implement. Interfaces are used to achieve abstraction and multiple inheritance in Java. They define a contract, and any class that implements the interface must adhere to that contract by providing concrete implementations for the methods declared in the interface.
+        </p>
+        
+        <div class="section">
+            <h2>1. Declaration of Interface</h2>
+            <p>
+                An interface is declared using the <code>interface</code> keyword. All methods declared in an interface are implicitly <code>public</code> and <code>abstract</code> (before Java 8). Interface variables are implicitly <code>public</code>, <code>static</code>, and <code>final</code>.
+            </p>
+            <div class="example-block">
+                <div class="topic-title">Example:</div>
+                <pre><code>
+interface Animal {
+    void speak();
+    void eat();
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>2. Implementation of Interface</h2>
+            <p>
+                A class uses the <code>implements</code> keyword to implement an interface. It must provide an implementation for all the abstract methods declared in the interface.
+            </p>
+            <div class="example-block">
+                <div class="topic-title">Example:</div>
+                <pre><code>
+class Dog implements Animal {
+    public void speak() {
+        System.out.println("Dog barks.");
+    }
+    public void eat() {
+        System.out.println("Dog eats bones.");
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>3. Multiple Interfaces</h2>
+            <p>
+                Unlike classes, a class can implement multiple interfaces. This is how Java achieves multiple inheritance of type.
+            </p>
+            <div class="example-block">
+                <div class="topic-title">Example:</div>
+                <pre><code>
+interface Swimmer {
+    void swim();
+}
+
+class Duck implements Animal, Swimmer {
+    public void speak() {
+        System.out.println("Duck quacks.");
+    }
+    public void eat() {
+        System.out.println("Duck eats insects.");
+    }
+    public void swim() {
+        System.out.println("Duck swims in water.");
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>4. Nested Interfaces</h2>
+            <p>
+                An interface can be declared inside a class or another interface. It's a static member of the enclosing class or interface.
+            </p>
+            <div class="example-block">
+                <div class="topic-title">Example:</div>
+                <pre><code>
+class MyClass {
+    interface MyNestedInterface {
+        void myMethod();
+    }
+}
+
+class MySubClass implements MyClass.MyNestedInterface {
+    public void myMethod() {
+        System.out.println("Nested interface method implemented.");
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>5. Inheritance of Interfaces</h2>
+            <p>
+                An interface can inherit from another interface using the <code>extends</code> keyword. An interface cannot implement another interface.
+            </p>
+            <div class="example-block">
+                <div class="topic-title">Example:</div>
+                <pre><code>
+interface AquaticAnimal extends Animal {
+    void swim();
+}
+
+class Fish implements AquaticAnimal {
+    public void speak() {
+        System.out.println("Fish doesn't speak.");
+    }
+    public void eat() {
+        System.out.println("Fish eats plankton.");
+    }
+    public void swim() {
+        System.out.println("Fish swims with fins.");
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>6. Default Methods in Interfaces</h2>
+            <p>
+                Introduced in Java 8, default methods allow you to add new methods to an interface without breaking existing implementing classes. They are declared using the <code>default</code> keyword.
+            </p>
+            <div class="example-block">
+                <div class="topic-title">Example:</div>
+                <pre><code>
+interface Greeting {
+    void sayHello();
+    default void sayGoodbye() {
+        System.out.println("Goodbye!");
+    }
+}
+
+class EnglishSpeaker implements Greeting {
+    public void sayHello() {
+        System.out.println("Hello!");
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>7. Static Methods in Interface</h2>
+            <p>
+                Also introduced in Java 8, static methods can be defined in an interface. They are similar to static methods in a class and cannot be overridden. They are called using the interface name.
+            </p>
+            <div class="example-block">
+                <div class="topic-title">Example:</div>
+                <pre><code>
+interface MathOperations {
+    static int add(int a, int b) {
+        return a + b;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        System.out.println("Sum is: " + MathOperations.add(5, 10));
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>8. Functional Interfaces</h2>
+            <p>
+                A functional interface is an interface with exactly one abstract method. They are used to work with Lambda expressions and method references. The <code>@FunctionalInterface</code> annotation is optional but good practice to ensure the interface meets the criteria.
+            </p>
+            <div class="example-block">
+                <div class="topic-title">Example:</div>
+                <pre><code>
+@FunctionalInterface
+interface MyFunctionalInterface {
+    void performAction();
+}
+
+class MyClass2 {
+    public static void main(String[] args) {
+        MyFunctionalInterface action = () -> System.out.println("Performing an action.");
+        action.performAction();
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>9. Annotations</h2>
+            <p>
+                Annotations provide metadata about a program's code without affecting its execution. They are a form of marker or metadata that can be used by compilers, build tools, or runtime libraries. They are not interfaces in the traditional sense, but they are declared using the <code>@interface</code> keyword.
+            </p>
+            <div class="example-block">
+                <div class="topic-title">Example:</div>
+                <pre><code>
+import java.lang.annotation.*;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@interface MyAnnotation {
+    String value() default "Default value";
+}
+
+class AnnotationExample {
+    @MyAnnotation(value = "Custom message")
+    public void myMethod() {
+        System.out.println("Method with annotation.");
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 NBKRIST. All rights reserved.</p>
+        <p><a href="https://www.nbkrist.co.in/index.php" target="_blank">https://www.nbkrist.co.in/index.php</a></p>
+    </footer>
+</body>
+</html>

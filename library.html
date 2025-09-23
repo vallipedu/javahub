@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java SE: Core Packages and Classes</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eef2f7;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+
+        h1, h2, h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+            margin-top: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            font-size: 1.8em;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        p {
+            margin: 10px 0;
+            text-align: justify;
+        }
+
+        pre {
+            background: #212121;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        pre code {
+            color: #f0f0f0;
+            background: transparent;
+        }
+
+        .output-box {
+            background: #f0f0f0;
+            color: #333;
+            padding: 10px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-top: 10px;
+        }
+
+        .example-title {
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+        
+        .output-title {
+            font-weight: bold;
+            color: #28a745;
+            margin-top: 15px;
+        }
+
+        .doc-link {
+            display: block;
+            margin-top: 10px;
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+            border-top: 1px solid #dcdcdc;
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+           /* Style for the back button */
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background-color: #2980b9;
+        }
+
+    </style>
+</head>
+<body>
+        <a href="index.html" class="back-button">← Back to Index</a>
+
+    <div class="container">
+        <h1>Java SE: Core Packages and Classes</h1>
+
+        <div class="section">
+            <h2>Packages in Java SE</h2>
+            <p>
+                A package in Java is a mechanism to group related classes, interfaces, enumerations, and annotations. Packages provide a way to organize code, prevent naming conflicts, and control access to classes.
+            </p>
+            <div class="example-title">Example:</div>
+            <pre><code>
+// Declares a class in the 'com.example.myapp' package
+package com.example.myapp;
+
+import java.util.ArrayList;
+
+public class MyClass {
+    // Class content
+}
+            </code></pre>
+            <a class="doc-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/package-summary.html" target="_blank">View Oracle Documentation for java.lang</a>
+        </div>
+
+        <div class="section">
+            <h2><code>java.lang</code> Package and its Classes</h2>
+            <p>
+                The <code>java.lang</code> package contains fundamental classes and interfaces that are essential to the Java language. It is automatically imported into every Java program. Key classes include <code>Object</code>, <code>String</code>, <code>Math</code>, and the wrapper classes.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Class <code>Object</code></h2>
+            <p>
+                The <code>Object</code> class is the root of the class hierarchy. Every class in Java, implicitly or explicitly, is a direct or indirect subclass of <code>Object</code>. It defines basic methods like <code>equals()</code>, <code>hashCode()</code>, and <code>toString()</code>.
+            </p>
+            <div class="example-title">Example:</div>
+            <pre><code>
+class Person {
+    private String name;
+
+    public Person(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Person [name=" + name + "]";
+    }
+}
+
+public class ObjectDemo {
+    public static void main(String[] args) {
+        Person p = new Person("Alice");
+        System.out.println(p.toString());
+    }
+}
+            </code></pre>
+            <div class="output-title">Output:</div>
+            <div class="output-box">
+Person [name=Alice]
+            </div>
+            <a class="doc-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" target="_blank">View Oracle Documentation for Object</a>
+        </div>
+
+        <div class="section">
+            <h2>Enumeration</h2>
+            <p>
+                An enumeration (<code>enum</code>) is a special data type that represents a fixed set of constants. They are used to create a type-safe collection of constants, making the code more readable and less error-prone.
+            </p>
+            <div class="example-title">Example:</div>
+            <pre><code>
+public enum Day {
+    SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+}
+
+public class EnumDemo {
+    public static void main(String[] args) {
+        Day today = Day.WEDNESDAY;
+        System.out.println("Today is " + today);
+    }
+}
+            </code></pre>
+            <div class="output-title">Output:</div>
+            <div class="output-box">
+Today is WEDNESDAY
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Class <code>Math</code></h2>
+            <p>
+                The <code>Math</code> class contains methods for performing basic numeric operations such as elementary exponential, logarithm, square root, and trigonometric functions. All methods in this class are <code>static</code>.
+            </p>
+            <div class="example-title">Example:</div>
+            <pre><code>
+public class MathDemo {
+    public static void main(String[] args) {
+        double x = 25.0;
+        double sqrtX = Math.sqrt(x);
+        System.out.println("Square root of " + x + " is " + sqrtX);
+
+        int max = Math.max(10, 20);
+        System.out.println("Maximum value is " + max);
+    }
+}
+            </code></pre>
+            <div class="output-title">Output:</div>
+            <div class="output-box">
+Square root of 25.0 is 5.0
+Maximum value is 20
+            </div>
+            <a class="doc-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Math.html" target="_blank">View Oracle Documentation for Math</a>
+        </div>
+
+        <div class="section">
+            <h2>Wrapper Classes</h2>
+            <p>
+                Wrapper classes in Java are used to convert primitive data types (like <code>int</code>, <code>char</code>) into objects. Each primitive type has a corresponding wrapper class, such as <code>Integer</code>, <code>Character</code>, <code>Double</code>, etc.
+            </p>
+            <div class="example-title">Example:</div>
+            <pre><code>
+public class WrapperDemo {
+    public static void main(String[] args) {
+        int primitiveInt = 100;
+        Integer wrapperInt = Integer.valueOf(primitiveInt); // Boxing
+        System.out.println("Wrapper object value: " + wrapperInt);
+
+        double primitiveDouble = 99.99;
+        Double wrapperDouble = Double.valueOf(primitiveDouble);
+        System.out.println("Wrapper object value: " + wrapperDouble);
+    }
+}
+            </code></pre>
+            <div class="output-title">Output:</div>
+            <div class="output-box">
+Wrapper object value: 100
+Wrapper object value: 99.99
+            </div>
+            <a class="doc-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" target="_blank">View Oracle Documentation for Integer (a Wrapper Class)</a>
+        </div>
+
+        <div class="section">
+            <h2>Auto-boxing and Auto-unboxing</h2>
+            <p>
+                Autoboxing is the automatic conversion of a primitive type to its corresponding wrapper class object. Auto-unboxing is the reverse process, where a wrapper class object is automatically converted back to its primitive type.
+            </p>
+            <div class="example-title">Example:</div>
+            <pre><code>
+import java.util.ArrayList;
+
+public class AutoboxingDemo {
+    public static void main(String[] args) {
+        // Autoboxing: int to Integer
+        Integer x = 10;
+        System.out.println("Autoboxing: " + x);
+
+        // Auto-unboxing: Integer to int
+        int y = x;
+        System.out.println("Auto-unboxing: " + y);
+
+        // Autoboxing in a collection
+        ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+        list.add(15);
+        int z = list.get(0);
+        System.out.println("From list: " + z);
+    }
+}
+            </code></pre>
+            <div class="output-title">Output:</div>
+            <div class="output-box">
+Autoboxing: 10
+Auto-unboxing: 10
+From list: 15
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><code>java.util</code> Classes and Interfaces</h2>
+            <p>
+                The <code>java.util</code> package contains the collections framework, date and time facilities, event model, and more. It includes classes like <code>ArrayList</code>, <code>HashMap</code>, <code>Random</code>, and interfaces like <code>List</code> and <code>Map</code>.
+            </p>
+            <a class="doc-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/package-summary.html" target="_blank">View Oracle Documentation for java.util</a>
+        </div>
+
+        <div class="section">
+            <h2><code>Formatter</code> Class</h2>
+            <p>
+                The <code>Formatter</code> class provides support for layout justification and alignment, common formats for numeric, string, and date/time data, and locale-specific output.
+            </p>
+            <div class="example-title">Example:</div>
+            <pre><code>
+import java.util.Formatter;
+
+public class FormatterDemo {
+    public static void main(String[] args) {
+        Formatter f = new Formatter();
+        f.format("The value of pi is %.2f", Math.PI);
+        System.out.println(f.toString());
+        f.close();
+    }
+}
+            </code></pre>
+            <div class="output-title">Output:</div>
+            <div class="output-box">
+The value of pi is 3.14
+            </div>
+            <a class="doc-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Formatter.html" target="_blank">View Oracle Documentation for Formatter</a>
+        </div>
+
+        <div class="section">
+            <h2><code>Random</code> Class</h2>
+            <p>
+                The <code>Random</code> class is used to generate a stream of pseudo-random numbers. It can produce random integers, doubles, and booleans.
+            </p>
+            <div class="example-title">Example:</div>
+            <pre><code>
+import java.util.Random;
+
+public class RandomDemo {
+    public static void main(String[] args) {
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(100);
+        System.out.println("Random number: " + randomNumber);
+    }
+}
+            </code></pre>
+            <div class="output-title">Example Output:</div>
+            <div class="output-box">
+Random number: 42
+            </div>
+            <a class="doc-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Random.html" target="_blank">View Oracle Documentation for Random</a>
+        </div>
+
+        <div class="section">
+            <h2>Time Package (<code>java.time</code>)</h2>
+            <p>
+                Introduced in Java 8, the <code>java.time</code> package provides a new, modern API for date and time manipulation. It is immutable and thread-safe, addressing many shortcomings of the older <code>java.util.Date</code> and <code>Calendar</code> classes.
+            </p>
+            <a class="doc-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/package-summary.html" target="_blank">View Oracle Documentation for java.time</a>
+        </div>
+
+        <div class="section">
+            <h2>Class <code>Instant</code> (<code>java.time.Instant</code>)</h2>
+            <p>
+                An <code>Instant</code> represents a specific point in time on the timeline. It is independent of any time zone and is ideal for marking time-stamps. It represents the number of seconds from the epoch of 1970-01-01T00:00:00Z.
+            </p>
+            <div class="example-title">Example:</div>
+            <pre><code>
+import java.time.Instant;
+
+public class InstantDemo {
+    public static void main(String[] args) {
+        Instant now = Instant.now();
+        System.out.println("Current Instant: " + now);
+    }
+}
+            </code></pre>
+            <div class="output-title">Example Output:</div>
+            <div class="output-box">
+Current Instant: 2025-09-23T17:30:00.123456789Z
+            </div>
+            <a class="doc-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html" target="_blank">View Oracle Documentation for Instant</a>
+        </div>
+
+        <div class="section">
+            <h2>Formatting for Date/Time in Java</h2>
+            <p>
+                The <code>java.time.format.DateTimeFormatter</code> class is used to format and parse date and time objects. It offers a powerful way to convert date/time objects to strings and vice versa, using predefined patterns or custom ones.
+            </p>
+            <div class="example-title">Example:</div>
+            <pre><code>
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class DateTimeFormatterDemo {
+    public static void main(String[] args) {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDateTime = now.format(formatter);
+        System.out.println("Formatted Date/Time: " + formattedDateTime);
+    }
+}
+            </code></pre>
+            <div class="output-title">Example Output:</div>
+            <div class="output-box">
+Formatted Date/Time: 23-09-2025 23:30:00
+            </div>
+            <a class="doc-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/format/DateTimeFormatter.html" target="_blank">View Oracle Documentation for DateTimeFormatter</a>
+        </div>
+
+        <div class="section">
+            <h2><code>TemporalAdjusters</code> Class</h2>
+            <p>
+                The <code>TemporalAdjusters</code> class, part of the <code>java.time.temporal</code> package, provides a rich set of static methods for common date adjustments, such as finding the next day of the week, the last day of the month, or the first day of the year.
+            </p>
+            <div class="example-title">Example:</div>
+            <pre><code>
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+import static java.time.DayOfWeek.FRIDAY;
+
+public class TemporalAdjustersDemo {
+    public static void main(String[] args) {
+        LocalDate date = LocalDate.of(2025, 1, 20);
+        LocalDate nextFriday = date.with(TemporalAdjusters.next(FRIDAY));
+        System.out.println("Next Friday from " + date + " is " + nextFriday);
+    }
+}
+            </code></pre>
+            <div class="output-title">Output:</div>
+            <div class="output-box">
+Next Friday from 2025-01-20 is 2025-01-24
+            </div>
+            <a class="doc-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/temporal/TemporalAdjusters.html" target="_blank">View Oracle Documentation for TemporalAdjusters</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 NBKRIST. All rights reserved.</p>
+        <p><a href="https://www.nbkrist.co.in/index.php" target="_blank">https://www.nbkrist.co.in/index.php</a></p>
+    </footer>
+
+</body>
+</html>
