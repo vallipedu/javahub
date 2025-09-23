@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Exception Handling Examples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        h2 {
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        details {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        summary {
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 15px;
+            cursor: pointer;
+            background-color: #eaf1f8;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        summary:hover {
+            background-color: #dbe7f2;
+        }
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="exphand.html" class="back-button">Back to Exception Handling</a>
+    <h1>Java Exception Handling Programs</h1>
+    <p style="text-align: center; font-style: italic; color: #7f8c8d;">A collection of simple Java programs demonstrating different exception handling concepts.</p>
+    <p style="text-align: center; font-style: italic; color: #7f8c8d;">These exercises demonstrated various aspects of exception handling in Java on 23-09-2024 2nd and 3rd periods.</p>
+
+    <details open>
+        <summary>ExceptionDemo.java</summary>
+        <pre><code>
+import java.util.Scanner;
+
+/**
+ * This is a test class to demonstrate exception handling in Java.
+ * It reads two integers from the user and prints their division.
+ * It also includes a try-catch block to handle exceptions and a finally block
+ * to ensure that resources are properly closed.
+ * The program handles ArithmeticException for division by zero and
+ * InputMismatchException for invalid input.
+ * * @author HariShankar Mutchakalar
+ * Date: 2025-09-23
+ * Version: 1.0
+ * */
+public class ExceptionDemo {
+
+    public static void main(String a[]) {
+        System.out.println("Hello World");
+        // read two numbers from keyboard and print their division
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter two numbers:");
+
+        try {
+            int num1 = sc.nextInt();
+            System.out.println("Enter second number:");
+            int num2 = sc.nextInt();
+            int result = num1 / num2;
+            System.out.println("The division of " + num1 + " and " + num2 + " is: " + result);
+        } catch (ArithmeticException e) {
+            // exception handler for division by zero goes here
+            System.out.println("Error: Division by zero is not allowed.");
+            System.out.println("Exception details: " + e.getMessage());
+        } finally {
+            // safety net
+            sc.close();
+            System.out.println("Finally block executed");
+        }
+        System.out.println("After catch block");
+        System.out.println("End of the program");
+
+    }
+}
+        </code></pre>
+    </details>
+
+    <details>
+        <summary>MultipleCatch.java</summary>
+        <pre><code>
+public class MultipleCatch {
+
+    public static void main(String[] args) {
+        try {
+            int[] numbers = { 1, 2, 3 };
+            System.out.println(numbers[5]);
+            int result = 10 / 0;
+            System.out.println("Result: " + result);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Array index is out of bounds");
+            
+        } catch (ArithmeticException e) {
+            System.out.println("Cannot divide by zero");
+            
+        } catch (Exception e) {
+            System.out.println("An unexpected error occurred");
+          
+        }
+        System.out.println("End of program");
+    }
+}
+        </code></pre>
+    </details>
+
+    <details>
+        <summary>MultipleTryCatchBlocks.java</summary>
+        <pre><code>
+/**
+ * this class demonstrates multiple try-catch blocks.
+ * It handles ArrayIndexOutOfBoundsException and ArithmeticException separately.
+ * Each try block is followed by its own catch block.
+ * This allows for more granular error handling.
+ * The program continues execution after handling each exception.
+ * Author: HariShankar Mutchakalar
+ * Date: 2025-09-23
+ * Version: 1.0
+ * */
+public class MultipleTryCatchBlocks {
+
+    public static void main(String[] args) {
+        try {
+            int[] numbers = { 1, 2, 3 };
+            System.out.println(numbers[5]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Array index is out of bounds");
+        }
+
+        try {
+            int result = 10 / 0;
+            System.out.println("Result: " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Cannot divide by zero");
+        }
+
+        System.out.println("End of program");
+    }
+}
+        </code></pre>
+    </details>
+
+    <details>
+        <summary>ThrowsDemo.java</summary>
+        <pre><code>
+/**
+ * * This class demonstrates throw and throws in Java.
+ * It includes methods that throw exceptions and a main method that handles them.
+ * Author: HariShankar Mutchakalar
+ * Date: 2025-09-23
+ * Version: 1.0
+ * */
+public class ThrowsDemo {
+    public static void main(String[] args) {
+        try {
+            methodA();
+        } catch (Exception e) {
+            System.out.println("Exception caught in main: " + e.getMessage());
+        }
+        System.out.println("End of program");    
+    }
+    static void methodA() throws Exception {
+        methodB();
+    }
+
+    static void methodB() throws Exception {
+        throw new Exception("Exception thrown in methodB");
+    }
+}
+        </code></pre>
+    </details>
+
+    <details>
+        <summary>BlanketCatchDemo.java</summary>
+        <pre><code>
+/**
+ * * * Demonstrates a blanket catch block that catches all exceptions.
+ * It handles both ArrayIndexOutOfBoundsException and ArithmeticException
+ * in a single catch block.
+ * The program continues execution after handling the exception.
+ * Author: HariShankar Mutchakalar
+ * Date: 2025-09-23
+ * Version: 1.0
+ */
+public class BlanketCatchDemo {
+
+    public static void main(String[] args) {
+        try {
+            int[] numbers = { 1, 2, 3 };
+            System.out.println(numbers[5]);
+            int result = 10 / 0;
+            System.out.println("Result: " + result);
+        } catch (Exception e) { // blanket catch block
+            System.out.println("Some exception occurred");
+            System.out.println(e.getMessage());
+        }
+        System.out.println("End of program");
+    }
+}
+        </code></pre>
+    </details>
+
+    <details>
+        <summary>UserDefinedBusinessExceptionDemo.java</summary>
+        <pre><code>
+// UserDefinedBusinessExceptionDemo.java
+// Custom exception class
+//this exception is thrown when a withdrawal amount exceeds the available balance     
+
+class InSufficientFundsException extends Exception {
+
+    public InSufficientFundsException(String message) {
+        super(message);
+    }
+}
+
+/**
+ * this class demonstrates user-defined business exceptions.
+ * It demonstrates how to create custom business exceptions.
+ * In this example, we create a custom exception called
+ * InSufficientFundsException.
+ * It is thrown when a withdrawal amount exceeds the available balance.
+ * The main method calls the withdraw method, which throws this exception if the
+ * balance is insufficient.
+ * The main method catches the exception and prints the error message.
+ * The main method also demonstrates how to handle the exception using a
+ * try-catch block.
+ * The main method demonstrates that the exception is caught and handled
+ * appropriately.
+ * * * @author HariShankar Mutchakalar
+ * Date: 2025-09-23
+ * * Version: 1.0
+ * */
+
+public class UserDefinedBusinessExceptionDemo {
+    public static void main(String[] args) {
+        try {
+            double amount = 5000;
+            double balance = 2000;
+            withdraw(balance, amount);
+        } catch (InSufficientFundsException e) {
+            System.out.println("Exception caught in main: " + e.getMessage());
+        }
+    }
+
+    static void withdraw(double balance, double amount) throws InSufficientFundsException {
+        if (balance - amount < 0) {
+            throw new InSufficientFundsException("Insufficient funds");
+        }
+        balance -= amount; // update balance
+        System.out.println("Withdrawn: " + amount);
+        System.out.println("Remaining balance: " + balance);
+    }
+}
+        </code></pre>
+    </details>
+
+</div>
+
+</body>
+</html>

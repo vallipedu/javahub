@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Exception Handling FAQ</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            font-size: 1.5em;
+        }
+        p, ul, ol {
+            font-size: 1.1em;
+            color: #555;
+        }
+        pre {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #e8e8e8;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+        .answer {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 4px solid #3498db;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #2980b9;
+        }
+        .code-block {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f8f8;
+            border-left: 4px solid #3498db;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="exphand.html" class="back-button">Back to Exception Handling</a>
+
+    <h1>Java Exception Handling FAQ- Assignment For Students</h1>
+
+    <div class="question">
+        <h2>What is an <span class="highlight">Exception</span> in Java?</h2>
+        <div class="answer">
+            <p>An <span class="highlight">Exception</span> is an event that occurs during the execution of a program that disrupts the normal flow of the program's instructions. When an exception occurs, a method can't handle it, and the program's execution is terminated. Exception handling is a mechanism that allows you to manage these runtime errors to maintain the smooth flow of the program.</p>
+        </div>
+    </div>
+
+    <div class="question">
+        <h2>What's the difference between a <span class="highlight">Checked Exception</span> and an <span class="highlight">Unchecked Exception</span>?</h2>
+        <div class="answer">
+            <ul>
+                <li><strong>Checked Exceptions:</strong> These are exceptions that are checked at <span class="highlight">compile time</span>. The compiler forces the programmer to handle these exceptions either by using a <code>try-catch</code> block or by declaring them with the <code>throws</code> keyword. They are usually recoverable errors, such as <code>IOException</code> or <code>SQLException</code>.</li>
+                <li><strong>Unchecked Exceptions:</strong> These are exceptions that are not checked at compile time and occur at <span class="highlight">runtime</span>. The compiler does not force you to handle them. They often indicate a programming logic error, such as trying to access an invalid index in an array (<code>ArrayIndexOutOfBoundsException</code>) or using a null reference (<code>NullPointerException</code>). They are subclasses of <code>RuntimeException</code>.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="question">
+        <h2>What are the 5 keywords used for exception handling in Java?</h2>
+        <div class="answer">
+            <p>The five keywords used for exception handling are:</p>
+            <ol>
+                <li><span class="highlight"><code>try</code></span></li>
+                <li><span class="highlight"><code>catch</code></span></li>
+                <li><span class="highlight"><code>finally</code></span></li>
+                <li><span class="highlight"><code>throw</code></span></li>
+                <li><span class="highlight"><code>throws</code></span></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="question">
+        <h2>Explain the purpose of the <span class="highlight">try</span>, <span class="highlight">catch</span>, and <span class="highlight">finally</span> blocks.</h2>
+        <div class="answer">
+            <ul>
+                <li><strong><span class="highlight"><code>try</code></span> block:</strong> This block contains the code that might throw an exception. If an exception occurs within this block, it is "thrown" and caught by an associated <code>catch</code> block.</li>
+                <li><strong><span class="highlight"><code>catch</code></span> block:</strong> This block handles the exception. It is executed only if the <code>try</code> block throws an exception of the type specified in the <code>catch</code> block's parameter. You can have multiple <code>catch</code> blocks for a single <code>try</code> block to handle different types of exceptions.</li>
+                <li><strong><span class="highlight"><code>finally</code></span> block:</strong> This block contains code that must be executed regardless of whether an exception was thrown or not. It's typically used for cleanup operations, such as closing files or database connections.</li>
+            </ul>
+            <div class="code-block">
+                <pre><code>
+try {
+    // Code that might throw an exception
+} catch (Exception e) {
+    // Code to handle the exception
+} finally {
+    // Cleanup code that always runs
+}
+                </code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="question">
+        <h2>What is the difference between the <span class="highlight">throw</span> and <span class="highlight">throws</span> keywords?</h2>
+        <div class="answer">
+            <ul>
+                <li><strong><span class="highlight"><code>throw</code></span>:</strong> This keyword is used to <span class="highlight">explicitly throw a single exception instance</span> from a method or any block of code. It is followed by an instance of <code>Throwable</code>.</li>
+                <li><strong><span class="highlight"><code>throws</code></span>:</strong> This keyword is used in a method's signature to <span class="highlight">declare which exceptions the method might throw</span>. It is followed by a comma-separated list of exception class names. This is mandatory for checked exceptions.</li>
+            </ul>
+            <div class="code-block">
+                <pre><code>
+// Example of 'throws' in a method signature
+void readFile() throws IOException {
+    // ...
+}
+
+// Example of 'throw' inside a method
+void validateAge(int age) {
+    if (age < 0) {
+        throw new IllegalArgumentException("Age cannot be negative.");
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="question">
+        <h2>Can a <span class="highlight">try</span> block exist without a <span class="highlight">catch</span> or <span class="highlight">finally</span> block?</h2>
+        <div class="answer">
+            <p>No. A <span class="highlight"><code>try</code></span> block must be followed by at least one <span class="highlight"><code>catch</code></span> block or a <span class="highlight"><code>finally</code></span> block. It cannot exist on its own. You can have a <code>try-catch</code>, a <code>try-finally</code>, or a <code>try-catch-finally</code> combination.</p>
+        </div>
+    </div>
+
+    <div class="question">
+        <h2>When is the <span class="highlight">finally</span> block not executed?</h2>
+        <div class="answer">
+            <p>The <span class="highlight"><code>finally</code></span> block is almost always executed. The only scenarios where it might not execute are:</p>
+            <ul>
+                <li>The program exits early (e.g., by calling <code>System.exit(0)</code>).</li>
+                <li>The program is terminated by a fatal error that the JVM cannot handle, such as a stack overflow or out of memory error.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="question">
+        <h2>What are some common types of <span class="highlight">unchecked exceptions</span> you have encountered?</h2>
+        <div class="answer">
+            <p>Common unchecked exceptions include:</p>
+            <ul>
+                <li><strong><span class="highlight"><code>NullPointerException</code>:</strong> Thrown when an application attempts to use <code>null</code> in a case where an object is required.</li>
+                <li><strong><span class="highlight"><code>ArrayIndexOutOfBoundsException</code>:</strong> Thrown to indicate that an array has been accessed with an illegal index.</li>
+                <li><strong><span class="highlight"><code>IllegalArgumentException</code>:</strong> Thrown to indicate that a method has been passed an illegal or inappropriate argument.</li>
+                <li><strong><span class="highlight"><code>ArithmeticException</code>:</strong> Thrown when an exceptional arithmetic condition has occurred, such as division by zero.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="question">
+        <h2>What is the purpose of the <span class="highlight">`printStackTrace()`</span> method?</h2>
+        <div class="answer">
+            <p>The <span class="highlight"><code>e.printStackTrace()</code></span> method is a debugging tool used to print a stack trace to the standard error stream. A stack trace provides a detailed list of methods that were called, in reverse order, leading up to the point where the exception was thrown. It helps developers trace the cause of the exception and identify the line of code where it originated.</p>
+        </div>
+    </div>
+
+    <div class="question">
+        <h2>Explain the <span class="highlight">Java Exception Hierarchy</span>.</h2>
+        <div class="answer">
+            <p>The Java Exception Hierarchy is a class hierarchy rooted at the <span class="highlight"><code>Throwable</code></span> class. This class has two main subclasses:</p>
+            <ul>
+                <li><strong><span class="highlight"><code>Error</code></span>:</strong> Represents serious problems that a reasonable application should not try to catch. These are often due to system-level issues, like <code>VirtualMachineError</code>.</li>
+                <li><strong><span class="highlight"><code>Exception</code></span>:</strong> Represents conditions that a program should handle. The <code>Exception</code> class has a key subclass, <span class="highlight"><code>RuntimeException</code></span>, which is the superclass for all unchecked exceptions. All other exceptions inheriting directly from <code>Exception</code> are checked exceptions.</li>
+            </ul>
+            <div class="code-block">
+                <pre><code>
+            Object
+               |
+           Throwable
+         /         \
+    Error        Exception
+                   |
+             (Checked Exceptions)
+                   |
+            RuntimeException
+                   |
+          (Unchecked Exceptions)
+                </code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="question">
+        <h2>How do you create a <span class="highlight">custom exception</span> in Java?</h2>
+        <div class="answer">
+            <p>To create a custom exception, you simply create a new class that extends either the <code>Exception</code> class (for a checked exception) or the <code>RuntimeException</code> class (for an unchecked exception). It's good practice to provide constructors that call the superclass's constructors to handle the exception message and cause.</p>
+            <div class="code-block">
+                <pre><code>
+public class InvalidAgeException extends Exception {
+
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+
+    public InvalidAgeException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="question">
+        <h2>What is the difference between <span class="highlight">Exception</span> and <span class="highlight">Error</span> in Java?</h2>
+        <div class="answer">
+            <ul>
+                <li><strong><span class="highlight"><code>Exception</code></span>:</strong> Represents a condition that a program should catch and handle. These are recoverable. Examples include <code>IOException</code> and <code>SQLException</code>.</li>
+                <li><strong><span class="highlight"><code>Error</code></span>:</strong> Represents a serious problem that a program shouldn't try to handle. They are typically unrecoverable and indicate a serious system-level issue. Examples include <code>OutOfMemoryError</code> and <code>StackOverflowError</code>.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="question">
+        <h2>What is the difference between <span class="highlight">final</span>, <span class="highlight">finally</span>, and <span class="highlight">finalize()</span>?</h2>
+        <div class="answer">
+            <ul>
+                <li><strong><span class="highlight"><code>final</code></span> (keyword):</strong> A modifier used with classes, methods, and variables. A <code>final</code> class cannot be subclassed, a <code>final</code> method cannot be overridden, and a <code>final</code> variable's value cannot be changed after it's initialized.</li>
+                <li><strong><span class="highlight"><code>finally</code></span> (block):</strong> The block of code in a <code>try-catch-finally</code> construct that is guaranteed to execute, regardless of whether an exception is thrown or caught.</li>
+                <li><strong><span class="highlight"><code>finalize()</code></span> (method):</strong> A method in the <code>Object</code> class that the garbage collector calls just before an object is garbage-collected. This method is deprecated and should not be relied upon for critical cleanup.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="question">
+        <h2>Explain the concept of <span class="highlight">exception propagation</span> in Java.</h2>
+        <div class="answer">
+            <p>Exception propagation is the mechanism by which an exception travels up the call stack if it is not handled in the method where it occurred. When an exception is thrown, the JVM searches for a matching <code>catch</code> block in the current method. If not found, the exception is propagated to the calling method (the one that called the current method). This process continues up the call stack until a suitable <code>catch</code> block is found or the main method is reached. If the exception is not caught even there, the JVM terminates the program and prints the stack trace.</p>
+        </div>
+    </div>
+
+    <div class="question">
+        <h2>Explain about <span class="highlight">Throwable</span> class in Java. What are the two main subclasses of the Throwable class in Java? How does the Throwable class facilitate exception handling in Java? What methods are commonly used from the Throwable class to retrieve exception information?</h2>
+        <div class="answer">
+            <p>The <span class="highlight"><code>Throwable</code></span> class is the root class of the Java exception hierarchy. All exceptions and errors in Java are subclasses of <code>Throwable</code>.</p>
+            <p>The two main subclasses are:</p>
+            <ul>
+                <li><strong><span class="highlight"><code>Error</code></span>:</strong> Represents unrecoverable, serious problems.</li>
+                <li><strong><span class="highlight"><code>Exception</code></span>:</strong> Represents recoverable conditions that a program should handle.</li>
+            </ul>
+            <p>The <code>Throwable</code> class facilitates exception handling by providing a common base for all exceptions and errors, ensuring that they can be caught and processed uniformly. It also provides essential methods for retrieving information about the exception, which is crucial for debugging and error logging.</p>
+            <p>Commonly used methods from the <code>Throwable</code> class include:</p>
+            <ul>
+                <li><strong><span class="highlight"><code>getMessage()</code>:</strong> Returns the detailed message string of this throwable.</li>
+                <li><strong><span class="highlight"><code>toString()</code>:</strong> Returns a short description of the throwable.</li>
+                <li><strong><span class="highlight"><code>printStackTrace()</code>:</strong> Prints the stack trace to the standard error stream.</li>
+                <li><strong><span class="highlight"><code>getCause()</code>:</strong> Returns the cause of this throwable, or <code>null</code> if the cause is nonexistent or unknown.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="question">
+        <h2>Explain Checked and Unchecked Exceptions in Java with examples.</h2>
+        <div class="answer">
+            <p><strong><span class="highlight">Checked Exceptions:</span></strong></p>
+            <p>These are exceptions that the compiler forces you to handle. They are subclasses of the <code>Exception</code> class (but not <code>RuntimeException</code>). They represent external, predictable problems that a program should gracefully recover from. You must either use a <code>try-catch</code> block or declare them with the <code>throws</code> keyword in the method signature.</p>
+            <div class="code-block">
+                <pre><code>
+// Example of a Checked Exception (IOException)
+import java.io.FileReader;
+import java.io.IOException;
+
+public class CheckedExample {
+    public static void main(String[] args) {
+        try {
+            FileReader file = new FileReader("file.txt");
+            // The compiler forces us to handle this
+        } catch (IOException e) {
+            System.out.println("File not found or IO error occurred.");
+            e.printStackTrace();
+        }
+    }
+}
+                </code></pre>
+            </div>
+            
+            <p><strong><span class="highlight">Unchecked Exceptions:</span></strong></p>
+            <p>These exceptions are not checked at compile time and are subclasses of <code>RuntimeException</code>. They typically represent programming errors that should be fixed rather than handled, such as a logical flaw in the code. The compiler does not require you to catch or declare them.</p>
+            <div class="code-block">
+                <pre><code>
+// Example of an Unchecked Exception (ArrayIndexOutOfBoundsException)
+public class UncheckedExample {
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 3};
+        // This will throw an exception at runtime
+        // The compiler doesn't force a try-catch
+        System.out.println(numbers[3]); 
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
