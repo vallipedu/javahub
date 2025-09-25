@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Interfaces and Lambda Expressions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2em;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1, h2 {
+            color: #005a9c;
+            border-bottom: 2px solid #005a9c;
+            padding-bottom: 0.5em;
+        }
+        pre {
+            background-color: #e9e9e9;
+            padding: 1em;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            border: 1px solid #ccc;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Java Programming Examples</h1>
+    <p>This page contains several Java examples demonstrating key concepts like interfaces, inheritance, polymorphism, lambda expressions, and functional interfaces. Each section provides the Java code along with comments explaining its purpose.</p>
+
+    <hr>
+    
+    <h2>1. Basic Interface Implementation and Polymorphism</h2>
+    <p>This example shows how a class implements an interface and how polymorphism allows an object to be referenced by its interface type, restricting access to only the methods defined in the interface.</p>
+    <pre>
+/**
+ *
+ */
+interface Alpha {
+    void foo();
+    void boo();
+}
+
+class AlphaImpl implements Alpha {
+    @Override
+    public void foo() {
+        System.out.println("AlphaImpl foo");
+    }
+
+    @Override
+    public void boo() {
+        System.out.println("AlphaImpl boo");
+    }
+}
+
+interface Beta {
+    int interaceVarible1 = 10; // public, static, final by default
+    double interaceVarible2 = 12.0;
+
+    void foo();
+    void boo();
+}
+
+class BetaImpl implements Beta {
+    public void foo() {
+        System.out.println("BetaImpl foo" + interaceVarible1);
+    }
+
+    public void boo() {
+        System.out.println("BetaImpl boo");
+    }
+
+    public void extra() {
+        System.out.println("BetaImpl extra");
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Alpha a = new AlphaImpl();
+        a.foo();
+        a.boo();
+        BetaImpl b = new BetaImpl();
+        b.foo();
+        b.boo();
+        b.extra();
+        // Using polymorphism to call the overridden methods
+        Beta b2 = new BetaImpl();
+        b2.foo();
+        b2.boo();
+        // b2.extra(); // This line will cause a compile-time error
+    }
+}
+    </pre>
+
+    <hr>
+
+    <h2>2. Interface Inheritance and Polymorphism</h2>
+    <p>This program demonstrates how one interface can extend another, creating a hierarchy of contracts. A class implementing the child interface must fulfill the methods of both the child and its parent.</p>
+    <pre>
+/**
+ *
+ * Demonstrates interface inheritance and polymorphism in Java.
+ * A child interface can extend a parent interface, and a class implementing the child interface
+ * must provide implementations for all methods declared in the parent interface.
+ * This example also shows polymorphism where a parent interface reference points to a child class object.
+ */
+
+// Parent Interface
+interface Vehicle {
+    void start();
+    void stop();
+}
+    
+// Child Interface extending the Parent
+interface Car extends Vehicle {
+    void drive();
+}
+
+// Implementing Class
+class Sedan implements Car {
+    @Override
+    public void start() {
+        System.out.println("Sedan engine started.");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Sedan engine stopped.");
+    }
+
+    @Override
+    public void drive() {
+        System.out.println("Sedan is driving.");
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        Sedan myCar = new Sedan();
+
+        // We can call all methods because Sedan implements Car
+        myCar.start();
+        myCar.drive();
+        myCar.stop();
+
+        System.out.println("\n--- Polymorphism example ---");
+
+        // A Sedan object is also a Vehicle
+        Vehicle anotherVehicle = new Sedan();
+        anotherVehicle.start(); // This works!
+        anotherVehicle.stop();  // This works!
+        // anotherVehicle.drive(); // This would cause a compile-time error
+                                // because the 'Vehicle' reference doesn't know about 'drive()'
+    }
+}
+    </pre>
+
+    <hr>
+
+    <h2>3. Multiple Inheritance via Interfaces</h2>
+    <p>Java does not support multiple inheritance for classes but achieves it through interfaces. The <code>SmartWatch</code> class implements multiple interfaces, gaining all the functionalities they define.</p>
+    <pre>
+/*
+ * SmartWatch class implementing multiple interfaces
+ * Java supports multiple inheritance through interfaces
+ * This allows the SmartWatch to have various functionalities
+ * like health monitoring, music playback, phone capabilities, and GPS
+ * Each interface defines a contract that the SmartWatch must fulfill
+ * by implementing all the methods declared in the interfaces
+ * This design promotes modularity and separation of concerns
+    @author: HariShankar
+    * Date: 25-09-2025
+    * Version: 1.0
+ */
+
+// Defining the interfaces
+interface Music {
+    void play();
+    void pause();
+    void stop();
+}
+
+interface Phone {
+    void call();
+    void message();
+    void receiveCall();
+}
+
+interface GPS {
+    void getGPSLocation();
+}
+
+interface HealthMonitor {
+    void monitorHeartRate();
+    void monitorBloodPressure();
+    void monitorSleepPatterns();
+}
+
+/**
+ * SmartWatch class implementing multiple interfaces
+ * Java supports multiple inheritance through interfaces
+ */
+public class SmartWatch implements HealthMonitor, Music, Phone, GPS {
+    @Override
+    public void monitorHeartRate() {
+        System.out.println("Monitoring heart rate...");
+    }
+
+    @Override
+    public void monitorBloodPressure() {
+        System.out.println("Monitoring blood pressure...");
+    }
+
+    @Override
+    public void monitorSleepPatterns() {
+        System.out.println("Monitoring sleep patterns...");
+    }
+
+    @Override
+    public void play() {
+        System.out.println("Playing music...");
+    }
+
+    @Override
+    public void pause() {
+        System.out.println("Pausing music...");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Stopping music...");
+    }
+
+    @Override
+    public void call() {
+        System.out.println("Making a call...");
+    }
+
+    @Override
+    public void message() {
+        System.out.println("Sending a message...");
+    }
+
+    @Override
+    public void receiveCall() {
+        System.out.println("Receiving a call...");
+    }
+    
+    @Override
+    public void getGPSLocation() {
+        System.out.println("Getting GPS location...");
+    }
+
+    public static void main(String[] args) {
+        SmartWatch appleSmartWatch = new SmartWatch();
+
+        appleSmartWatch.monitorHeartRate();
+        appleSmartWatch.play();
+        appleSmartWatch.call();
+        appleSmartWatch.receiveCall();
+        appleSmartWatch.monitorSleepPatterns();
+        appleSmartWatch.pause();
+        appleSmartWatch.stop();
+        appleSmartWatch.monitorBloodPressure();
+        appleSmartWatch.message();
+        appleSmartWatch.getGPSLocation();
+    }
+}
+    </pre>
+
+    <hr>
+
+    <h2>4. Java 8 and 9 Interface Enhancements</h2>
+    <p>This example highlights new features in Java interfaces since version 8, including <b>default</b>, <b>static</b>, and <b>private</b> methods. Default methods provide a default implementation, static methods belong to the interface itself, and private methods help with code reuse within the interface.</p>
+    <pre>
+/**
+ * java 8 version
+ * an interface can have only unimplemented methods
+ * all methods are by default public and abstract
+ * * after Java8 --> *
+ * interfaces can have default and static methods
+ * default methods can have a body
+ * * after java 9 -->
+ * interfaces can have private methods
+ * */
+
+interface Transaction {
+    void deposit(double amount);
+    void withdraw(double amount);
+    double getBalance();
+
+    default void printStatement() {
+        System.out.println("Printing statement...");
+        logTransaction("INFO", 0);
+    }
+
+    static void bankInfo() {
+        System.out.println("Bank: ABC Bank");
+    }
+
+    private void logTransaction(String type, double amount) {
+        System.out.println("Transaction: " + type + ", Amount: " + amount);
+    }
+}
+
+class SavingsAccount implements Transaction {
+    private double balance;
+
+    public SavingsAccount(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    @Override
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited: " + amount);
+            logTransaction("DEPOSIT", amount);
+        } else {
+            System.out.println("Invalid deposit amount");
+        }
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrew: " + amount);
+            logTransaction("WITHDRAW", amount);
+        } else {
+            System.out.println("Invalid withdraw amount");
+        }
+    }
+
+    @Override
+    public double getBalance() {
+        return balance;
+    }
+
+    // This method is a separate implementation within the class, not the interface's private method.
+    private void logTransaction(String type, double amount) {
+        System.out.println("Transaction: " + type + ", Amount: " + amount);
+    }
+}
+
+class CurrentAccount implements Transaction {
+    private double balance;
+
+    public CurrentAccount(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    @Override
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited: " + amount);
+            logTransaction("DEPOSIT", amount);
+        } else {
+            System.out.println("Invalid deposit amount");
+        }
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrew: " + amount);
+            logTransaction("WITHDRAW", amount);
+        } else {
+            System.out.println("Invalid withdraw amount");
+        }
+    }
+
+    @Override
+    public double getBalance() {
+        return balance;
+    }
+
+    // This method is a separate implementation within the class, not the interface's private method.
+    private void logTransaction(String type, double amount) {
+        System.out.println("Transaction: " + type + ", Amount: " + amount);
+    }
+}
+
+public class Banking {
+    public static void main(String[] args) {
+        Transaction savings = new SavingsAccount(1000);
+        Transaction current = new CurrentAccount(2000);
+
+        savings.deposit(500);
+        savings.withdraw(200);
+        System.out.println("Savings Account Balance: " + savings.getBalance());
+        savings.printStatement();
+
+        current.deposit(1000);
+        current.withdraw(500);
+        System.out.println("Current Account Balance: " + current.getBalance());
+        current.printStatement();
+
+        Transaction.bankInfo();
+    }
+}
+    </pre>
+    
+    <hr>
+
+    <h2>5. Lambda Expressions and Functional Interfaces</h2>
+    <p>This section introduces <b>functional interfaces</b> (interfaces with a single abstract method) and demonstrates how they can be implemented concisely using <b>lambda expressions</b>, a key feature of Java 8.</p>
+    <pre>
+/**
+ * Single abstract method interface
+ * * lambda expressions can be used to implement SAM interfaces
+ * SAM interfaces have only one abstract method
+ * SAM interfaces can't have any default or static methods
+ * what is functional interface?
+ * an interface with exactly one abstract method
+ * */
+
+@FunctionalInterface
+interface SAMInterface {
+    void hello();
+}
+
+@FunctionalInterface
+interface SAMInterface2 {
+    int add(int a, int b);
+}
+
+public class SAMTester {
+    public static void main(String[] args) {
+        // SAMInterface2 obj = (a,b) -> a+b;
+        // System.out.println(obj.add(10, 20));
+        SAMInterface2 adder = (a, b) -> a + b;
+        System.out.println("The sum is: " + adder.add(10, 20));
+
+        SAMInterface greeter = () -> System.out.println("Hello from a lambda expression!");
+        greeter.hello();
+    }
+}
+    </pre>
+
+    <hr>
+    
+    <h2>6. Lambda Expressions with Streams</h2>
+    <p>This final example uses a lambda expression with the Java Stream API to perform a concise, functional-style operation: calculating the sum of squares of odd numbers in a list.</p>
+    <pre>
+/**
+ * For the given list numbers, calculate sum of squares only odd numbers
+ */
+
+import java.util.Arrays;
+import java.util.List;
+
+public class LAMBDADemo {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        int result = numbers.stream()
+                .filter(n -> n % 2 != 0)
+                .map(n -> n * n)
+                .mapToInt(x -> x)
+                .sum();
+        System.out.println("Sum of squares of odd numbers: " + result);
+    }
+}
+    </pre>
+
+</div>
+
+</body>
+</html>
