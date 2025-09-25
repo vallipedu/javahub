@@ -1,0 +1,222 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Statement: Box & Cube (Inheritance)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+        
+        :root {
+            --primary-color: #004d99;
+            --secondary-color: #f0f8ff;
+            --text-color: #343a40;
+            --heading-color: #0056b3;
+            --border-color: #dee2e6;
+            --code-bg: #e9ecef;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            margin: 2rem 0;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 25px;
+            text-decoration: none;
+            color: white;
+            background-color: #6c757d;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            float: left;
+            clear: both;
+        }
+
+        .back-button:hover {
+            background-color: #5a6268;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+            clear: both;
+        }
+
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--heading-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        h3 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--primary-color);
+            margin-top: 1.5rem;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .requirements-list li strong {
+            color: var(--primary-color);
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem 0;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: auto;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>NBKRIST Java Hub</h1>
+</header>
+
+<div class="container">
+    <a href="exampanel.html" class="back-button">← Back to Exam Panel</a>
+
+    <div class="section">
+        <h2>Problem Statement: Boxes with Inheritance</h2>
+        <p>
+            Your task is to create a set of Java classes to model different types of boxes: a generic **Box**, a specialized **Cube**, and a **Weighted Box**. This problem focuses on applying **inheritance** and **encapsulation** to build a class hierarchy.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Functional Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>Box:</strong> Must have dimensions (width, height, depth) and a method to calculate its volume.</li>
+            <li><strong>Cube:</strong> A special type of box where all dimensions are equal. Its constructor should handle this.</li>
+            <li><strong>WeightBox:</strong> A type of box that has an additional property: weight. It must also have a method to return its total weight.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Technical Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>1. Create a <code>Box</code> Class:</strong>
+                <ul>
+                    <li>This will be the parent class. It should have **private** fields for <code>width</code>, <code>height</code>, and <code>depth</code>.</li>
+                    <li>Include a constructor to initialize these dimensions.</li>
+                    <li>Provide a public method `getVolume()` that returns the calculated volume.</li>
+                </ul>
+            </li>
+            <li><strong>2. Create a <code>Cube</code> Class:</strong>
+                <ul>
+                    <li>This class must **extend** the `Box` class.</li>
+                    <li>Its constructor should take a single argument for the side length and pass this value to the parent `Box` class constructor for all three dimensions.</li>
+                </ul>
+            </li>
+            <li><strong>3. Create a <code>WeightBox</code> Class:</strong>
+                <ul>
+                    <li>This class must also **extend** the `Box` class.</li>
+                    <li>It should have an additional **private** field for <code>weight</code>.</li>
+                    <li>Its constructor should accept four arguments: width, height, depth, and weight. It must pass the dimensions to the parent `Box` class constructor.</li>
+                    <li>Add a public method `getWeight()` to return the weight.</li>
+                </ul>
+            </li>
+            <li><strong>4. Demonstrate Polymorphism:</strong>
+                <ul>
+                    <li>In your `main` method, create a <code>List</code> of type <code>Box</code>.</li>
+                    <li>Add objects of each class (`Box`, `Cube`, and `WeightBox`) to this list.</li>
+                    <li>Loop through the list and print the volume of each object. Notice how Java handles the correct calculation for each type.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Testing Requirements</h2>
+        <p>Your <code>main</code> method must demonstrate the program works by testing the following scenarios:</p>
+        <ol class="requirements-list">
+            <li><strong>Individual Object Tests:</strong>
+                <ul>
+                    <li>Create a `Box` object with dimensions 2x3x4. Print its volume (24).</li>
+                    <li>Create a `Cube` object with a side length of 5. Print its volume (125).</li>
+                    <li>Create a `WeightBox` object with dimensions 2x3x4 and a weight of 10. Print its volume (24) and weight (10).</li>
+                </ul>
+            </li>
+            <li><strong>Polymorphism Test:</strong>
+                <ul>
+                    <li>Create a <code>List<Box></code> and add one instance of each class (`Box`, `Cube`, and `WeightBox`) to it.</li>
+                    <li>Write a `for` loop to iterate through the list. Inside the loop, print the volume of each box. The output should show the correct volume for each object, even though they are all treated as `Box` objects in the list.</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2025 NBKRIST Java Hub. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

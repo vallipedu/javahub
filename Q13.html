@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Statement: Figure & Circle</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+        
+        :root {
+            --primary-color: #004d99;
+            --secondary-color: #f0f8ff;
+            --text-color: #343a40;
+            --heading-color: #0056b3;
+            --border-color: #dee2e6;
+            --code-bg: #e9ecef;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            margin: 2rem 0;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 25px;
+            text-decoration: none;
+            color: white;
+            background-color: #6c757d;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            float: left;
+            clear: both;
+        }
+
+        .back-button:hover {
+            background-color: #5a6268;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+            clear: both;
+        }
+
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--heading-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        h3 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--primary-color);
+            margin-top: 1.5rem;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .requirements-list li strong {
+            color: var(--primary-color);
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem 0;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: auto;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>NBKRIST Java Hub</h1>
+</header>
+
+<div class="container">
+    <a href="exampanel.html" class="back-button">← Back to Exam Panel</a>
+
+    <div class="section">
+        <h2>Problem Statement: Figure & Circle</h2>
+        <p>
+            Your task is to model a **Circle** using an **Abstract Class** and an **Interface**. This problem is designed to help you understand how to use **interfaces** to define common behavior and how to use **abstract classes** to provide a common base for related objects.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Functional Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>Common Behavior:</strong> All geometric figures must have methods to calculate their **area** and **perimeter**.</li>
+            <li><strong>Circle:</strong> You must create a class for a **Circle** that has a `radius`. It should correctly calculate its area and perimeter.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Technical Requirements</h2>
+        <p>Follow this class structure for your solution:</p>
+        
+        <ul class="requirements-list">
+            <li><strong>1. Create an Interface:</strong>
+                <ul>
+                    <li>Create an interface named <code>Shape</code> with two methods: <code>double getArea()</code> and <code>double getPerimeter()</code>.</li>
+                </ul>
+            </li>
+            <li><strong>2. Create an Abstract Class:</strong>
+                <ul>
+                    <li>Create an abstract class named <code>Figure</code> that **implements** the <code>Shape</code> interface.</li>
+                    <li>This class will act as a common base for all figures. You can leave the methods from the `Shape` interface as abstract in this class.</li>
+                </ul>
+            </li>
+            <li><strong>3. Create a Concrete Class:</strong>
+                <ul>
+                    <li>Create a concrete class named <code>Circle</code> that **extends** the `Figure` abstract class.</li>
+                    <li>The <code>Circle</code> class must have a field for `radius` and provide concrete implementations for both <code>getArea()</code> and <code>getPerimeter()</code>.</li>
+                </ul>
+            </li>
+            <li><strong>4. Demonstrate Polymorphism:</strong>
+                <ul>
+                    <li>In your <code>main</code> method, create a <code>List</code> of type <code>Shape</code>.</li>
+                    <li>Add your <code>Circle</code> object to this list.</li>
+                    <li>Iterate through the list and call the methods on each object to demonstrate how Java correctly calls the `Circle` class's methods at runtime.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Testing Requirements</h2>
+        <p>Your <code>main</code> method must demonstrate the program works by testing the following scenarios:</p>
+        <ol class="requirements-list">
+            <li><strong>Individual Circle Test:</strong>
+                <ul>
+                    <li>Create a <code>Circle</code> object with a radius of 5.</li>
+                    <li>Print its calculated area (approx. 78.5) and perimeter (approx. 31.4).</li>
+                </ul>
+            </li>
+            <li><strong>Polymorphism Test:</strong>
+                <ul>
+                    <li>Create a <code>List<Shape></code> and add the <code>Circle</code> object to it.</li>
+                    <li>Write a `for` loop to iterate through the list. Inside the loop, print the area and perimeter of the shape. The output should show the correct values, proving that the correct method is called on the object.</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2025 NBKRIST Java Hub. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java I/O API</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eef2f7;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+
+        h1, h2, h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+            margin-top: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            font-size: 1.8em;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        p {
+            margin: 10px 0;
+            text-align: justify;
+        }
+
+        pre {
+            background: #212121;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        pre code {
+            color: #f0f0f0;
+            background: transparent;
+        }
+
+        .output-box {
+            background: #f0f0f0;
+            color: #333;
+            padding: 10px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-top: 10px;
+        }
+
+        .example-title {
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+        
+        .output-title {
+            font-weight: bold;
+            color: #28a745;
+            margin-top: 15px;
+        }
+
+        .doc-link {
+            display: block;
+            margin-top: 10px;
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+            border-top: 1px solid #dcdcdc;
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Style for the back button */
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+       <a href="index.html" class="back-button">← Back to Index</a>
+    <div class="container">
+        <h1>Java I/O API and Streams</h1>
+
+        <div class="section">
+            <h2>Overview of Java I/O</h2>
+            <p>
+                The Java I/O (Input/Output) API is used for handling the input and output of data in an application. It is primarily based on the concept of streams, which represent a sequence of data flowing from a source to a destination.
+            </p>
+            <a class="doc-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/package-summary.html" target="_blank">View Oracle Documentation for java.io</a>
+        </div>
+
+        <div class="section">
+            <h2>Standard I/O Streams</h2>
+            <p>
+                Java provides three standard streams that are automatically created for every program:
+                <ul>
+                    <li><code>System.in</code>: The standard input stream (keyboard).</li>
+                    <li><code>System.out</code>: The standard output stream (console).</li>
+                    <li><code>System.err</code>: The standard error stream (console, for error messages).</li>
+                </ul>
+            </p>
+            <div class="example-title">Example:</div>
+            <pre><code>
+public class StandardIO {
+    public static void main(String[] args) {
+        System.out.println("This is a message sent to standard output.");
+        System.err.println("This is an error message sent to standard error.");
+    }
+}
+            </code></pre>
+            <div class="output-title">Output:</div>
+            <div class="output-box">
+This is a message sent to standard output.
+This is an error message sent to standard error.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Byte Streams</h2>
+            <p>
+                Byte streams are used to perform I/O of 8-bit bytes. They are ideal for handling raw binary data, such as images, audio files, or any non-text data. The two main classes are <code>InputStream</code> and <code>OutputStream</code>.
+            </p>
+            <div class="example-title">Example: File Copy with Byte Streams</div>
+            <pre><code>
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class ByteStreamExample {
+    public static void main(String[] args) {
+        // Assume 'input.dat' contains binary data.
+        // This code copies content from 'input.dat' to 'output.dat'.
+        try (FileInputStream in = new FileInputStream("input.dat");
+             FileOutputStream out = new FileOutputStream("output.dat")) {
+            int byteRead;
+            while ((byteRead = in.read()) != -1) {
+                out.write(byteRead);
+            }
+            System.out.println("File copied successfully using byte streams.");
+        } catch (IOException e) {
+            System.err.println("An I/O error occurred: " + e.getMessage());
+        }
+    }
+}
+            </code></pre>
+            <div class="output-title">Example Output:</div>
+            <div class="output-box">
+File copied successfully using byte streams.
+            </div>
+            <a class="doc-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/InputStream.html" target="_blank">View Oracle Documentation for InputStream</a>
+        </div>
+
+        <div class="section">
+            <h2>Character Streams</h2>
+            <p>
+                Character streams are used to handle I/O of 16-bit Unicode characters. They are best suited for working with text-based data, as they automatically handle character encoding. The main classes are <code>Reader</code> and <code>Writer</code>.
+            </p>
+            <div class="example-title">Example: File Copy with Character Streams</div>
+            <pre><code>
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class CharacterStreamExample {
+    public static void main(String[] args) {
+        // Assume 'input.txt' contains text data.
+        // This code copies content from 'input.txt' to 'output.txt'.
+        try (FileReader in = new FileReader("input.txt");
+             FileWriter out = new FileWriter("output.txt")) {
+            int charRead;
+            while ((charRead = in.read()) != -1) {
+                out.write(charRead);
+            }
+            System.out.println("File copied successfully using character streams.");
+        } catch (IOException e) {
+            System.err.println("An I/O error occurred: " + e.getMessage());
+        }
+    }
+}
+            </code></pre>
+            <div class="output-title">Example Output:</div>
+            <div class="output-box">
+File copied successfully using character streams.
+            </div>
+            <a class="doc-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/Reader.html" target="_blank">View Oracle Documentation for Reader</a>
+        </div>
+
+        <div class="section">
+            <h2><code>Scanner</code> Class</h2>
+            <p>
+                The <code>Scanner</code> class, found in the <code>java.util</code> package, is a simple text scanner that can parse primitive types and strings using regular expressions. It is commonly used for reading input from the console or from a file.
+            </p>
+            <div class="example-title">Example: Reading User Input</div>
+            <pre><code>
+import java.util.Scanner;
+
+public class ScannerExample {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Please enter your name: ");
+        String name = scanner.nextLine();
+        System.out.println("Hello, " + name + "!");
+        scanner.close();
+    }
+}
+            </code></pre>
+            <div class="output-title">Example Output:</div>
+            <div class="output-box">
+Please enter your name: Bob
+Hello, Bob!
+            </div>
+            <a class="doc-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Scanner.html" target="_blank">View Oracle Documentation for Scanner</a>
+        </div>
+
+        <div class="section">
+            <h2><code>Files</code> in Java (<code>java.nio.file.Files</code>)</h2>
+            <p>
+                Introduced in Java 7 as part of the New I/O (NIO.2) API, the <code>java.nio.file.Files</code> class provides static methods for operating on files, directories, and other types of files. It offers a more modern, robust, and efficient way to handle file I/O operations.
+            </p>
+            <div class="example-title">Example: Writing to a File</div>
+            <pre><code>
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+public class FilesExample {
+    public static void main(String[] args) {
+        String content = "Hello, this is content from the Files class!";
+        Path filePath = Path.of("modern_output.txt");
+
+        try {
+            Files.writeString(filePath, content);
+            System.out.println("Content written to file successfully.");
+        } catch (IOException e) {
+            System.err.println("Failed to write to file: " + e.getMessage());
+        }
+    }
+}
+            </code></pre>
+            <div class="output-title">Example Output:</div>
+            <div class="output-box">
+Content written to file successfully.
+            </div>
+            <a class="doc-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Files.html" target="_blank">View Oracle Documentation for Files</a>
+        </div>
+        
+    </div>
+
+    <footer>
+        <p>&copy; 2025 NBKRIST. All rights reserved.</p>
+        <p><a href="https://www.nbkrist.co.in/index.php" target="_blank">https://www.nbkrist.co.in/index.php</a></p>
+    </footer>
+
+</body>
+</html>

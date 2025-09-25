@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBKRIST - Java Lab Exam</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        
+        :root {
+            --primary-color: #004d99; /* A professional, deep blue */
+            --secondary-color: #f0f8ff; /* A light, clean blue-white */
+            --accent-color: #ffc107; /* A contrasting gold for emphasis */
+            --text-color: #343a40;
+            --link-color: #007bff;
+            --hover-bg: #e9f2fa;
+            --border-color: #dee2e6;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            margin: 2rem 0;
+        }
+
+        .instructions {
+            background-color: var(--hover-bg);
+            border-left: 5px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .instructions h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        .instructions p, .instructions ol {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-statements {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .problem-card {
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .problem-card a {
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: block;
+            background-color: var(--primary-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .problem-card a:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem 0;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: auto; /* Pushes the footer to the bottom */
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>NBKRIST - Java Lab Exam</h1>
+</header>
+
+<div class="container">
+    <section class="instructions">
+        <h2>Instructions for the Lab Exam</h2>
+        <p>Dear Students,</p>
+        <p>Welcome to the Java Lab Exam. Your success in this exam depends on your ability to not only write code but also to think like a professional software developer. Follow these steps for your assigned problem:</p>
+        <ol>
+            <li><b>Find Your Assignment:</b> Locate your assigned problem statement below. Click on the corresponding link to view the details.</li>
+            <li><b>Understand the Requirements:</b> Read the problem statement carefully. Pay close attention to the **Technical Requirements**, **Functional Requirements**, and **Testing Requirements**.</li>
+            <li><b>Analyze & Design:</b> Before you start coding, spend time analyzing the problem. Think about the classes, interfaces, and methods you'll need. Sketch out a simple class diagram or a design plan.</li>
+            <li><b>Implement:</b> Write clean, well-commented, and efficient Java code. Adhere to best practices and coding standards.</li>
+            <li><b>Test:</b> Use the provided testing requirements to verify that your solution works as expected. A well-tested solution is a key part of a successful project.</li>
+        </ol>
+        <p>Good luck! 🤞</p>
+    </section>
+
+    <section class="problem-statements">
+        <div class="problem-card">
+            <a href="q2.html">View Problem 1</a>
+        </div>
+        <div class="problem-card">
+            <a href="Q3.html">View Problem 2</a>
+        </div>
+        <div class="problem-card">
+            <a href="Q4.html">View Problem 3</a>
+        </div>
+        <div class="problem-card">
+            <a href="Q5.html">View Problem 4</a>
+        </div>
+        <div class="problem-card">
+            <a href="Q6.html">View Problem 5</a>
+        </div>
+        <div class="problem-card">
+            <a href="Q7.html">View Problem 6</a>
+        </div>
+
+        <div class="problem-card">
+            <a href="Q9.html">View Problem 7</a>
+        </div>
+        <div class="problem-card">
+            <a href="Q10.html">View Problem 8</a>
+        </div>
+        <div class="problem-card">
+            <a href="Q11.html">View Problem 9</a>
+        </div>
+        <div class="problem-card">
+            <a href="Q12.html">View Problem 10</a>
+        </div>
+        <div class="problem-card">
+            <a href="Q13.html">View Problem 11</a>
+        </div>
+        <div class="problem-card">
+            <a href="Q14.html">View Problem 12</a>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <p>&copy; 2025 NBKRIST. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,223 @@
+You're right\! Having the back button directly over the problem statement isn't ideal for readability.
+
+I've adjusted the CSS to properly position the "Back to Exam Panel" button. It will now be aligned to the left within the `container`, above the problem statement title, ensuring it's clearly visible without overlapping content.
+
+-----
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Statement: Bank Account System</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+        
+        :root {
+            --primary-color: #004d99;
+            --secondary-color: #f0f8ff;
+            --text-color: #343a40;
+            --heading-color: #0056b3;
+            --border-color: #dee2e6;
+            --code-bg: #e9ecef;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            margin: 2rem 0;
+            /* Removed `position: relative;` from here */
+        }
+
+        .back-button {
+            display: inline-block; /* Make it respect margin/padding better */
+            margin-bottom: 25px; /* Add some space below the button */
+            text-decoration: none;
+            color: white;
+            background-color: #6c757d;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            float: left; /* Align to the left */
+            clear: both; /* Clear any floats before it */
+        }
+
+        .back-button:hover {
+            background-color: #5a6268;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+            clear: both; /* Ensures sections don't wrap around floated elements */
+        }
+
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--heading-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0; /* Adjusted margin to move it up */
+        }
+
+        h3 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--primary-color);
+            margin-top: 1.5rem;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .requirements-list li strong {
+            color: var(--primary-color);
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem 0;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: auto;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>NBKRIST Java Hub</h1>
+</header>
+
+<div class="container">
+    <a href="exampanel.html" class="back-button">← Back to Exam Panel</a>
+
+    <div class="section">
+        <h2>Problem Statement: Bank Account System</h2>
+        <p>
+            You are tasked with designing and implementing a simplified Bank Account System in Java. This system must demonstrate a solid understanding of object-oriented programming (OOP) principles, including **interfaces**, **inheritance**, and **polymorphism**.
+        </p>
+        <p>
+            The system should be able to manage different types of bank accounts, such as Savings and Current accounts, each with its own specific behavior while sharing a common set of functionalities.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Functional Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>Common Functionality:</strong> All bank accounts must support the following operations:
+                <ul>
+                    <li><code>deposit(double amount)</code>: Adds a specified amount to the account.</li>
+                    <li><code>withdraw(double amount)</code>: Subtracts a specified amount from the account.</li>
+                    <li><code>getBalance()</code>: Returns the current balance of the account.</li>
+                </ul>
+            </li>
+            <li><strong>Savings Account:</strong> This account type should have a minimum balance rule. A withdrawal should not be allowed if it brings the balance below a predefined minimum threshold (e.g., $1000).</li>
+            <li><strong>Current Account:</strong> This account type has a feature to process a limited number of "overdraft" transactions. It can have a negative balance up to a certain limit (e.g., -$500).</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Technical Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>Use an Interface:</strong> Create a Java interface, for example, <code>BankAccount</code>, that declares the common methods: <code>deposit()</code>, <code>withdraw()</code>, and <code>getBalance()</code>.</li>
+            <li><strong>Implement Classes:</strong> Create concrete classes, such as <code>SavingsAccount</code> and <code>CurrentAccount</code>, that **implement** the <code>BankAccount</code> interface.</li>
+            <li><strong>Utilize Inheritance:</strong> You may use a base class (e.g., <code>AbstractBankAccount</code>) to hold common fields like <code>balance</code> and implement the deposit method, which is common to all. The specific withdrawal logic should then be overridden in the subclasses.</li>
+            <li><strong>Demonstrate Polymorphism:</strong> In your main class (e.g., <code>Main</code>), create a variety of account objects (e.g., a <code>SavingsAccount</code> and a <code>CurrentAccount</code>) and store them in an array or a list of type <code>BankAccount</code>.</li>
+            <li><strong>Dynamic Method Dispatch:</strong> Use a loop to iterate through the collection of <code>BankAccount</code> objects and call the <code>withdraw()</code> method on each. Observe how the correct, specific implementation is called at runtime for each object.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Testing Requirements</h2>
+        <p>Your solution must be testable. Write a <code>Main</code> class that performs the following test cases:</p>
+        <ol class="requirements-list">
+            <li><strong>Savings Account Test:</strong>
+                <ul>
+                    <li>Create a <code>SavingsAccount</code> with an initial balance of $1500.</li>
+                    <li>Attempt to withdraw $200. The transaction should succeed.</li>
+                    <li>Attempt to withdraw an amount that would leave the balance below the minimum threshold (e.g., try to withdraw another $400). This transaction should fail, and an appropriate message should be printed.</li>
+                </ul>
+            </li>
+            <li><strong>Current Account Test:</strong>
+                <ul>
+                    <li>Create a <code>CurrentAccount</code> with an initial balance of $300.</li>
+                    <li>Attempt to withdraw $500. The transaction should succeed, resulting in a negative balance.</li>
+                    <li>Attempt to withdraw an amount that would exceed the overdraft limit (e.g., try to withdraw another $200). This transaction should fail, and an appropriate message should be printed.</li>
+                </ul>
+            </li>
+            <li><strong>Polymorphism Test:</strong>
+                <ul>
+                    <li>Create a <code>List<BankAccount></code> and add both a <code>SavingsAccount</code> and a <code>CurrentAccount</code> object to it.</li>
+                    <li>Iterate through the list and try to withdraw a large amount (e.g., $1000) from each account. The output should clearly show how the withdrawal logic differs for each account type.</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2025 NBKRIST Java Hub. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
+```

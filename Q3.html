@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Statement: Account Management</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+        
+        :root {
+            --primary-color: #004d99;
+            --secondary-color: #f0f8ff;
+            --text-color: #343a40;
+            --heading-color: #0056b3;
+            --border-color: #dee2e6;
+            --code-bg: #e9ecef;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            margin: 2rem 0;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 25px;
+            text-decoration: none;
+            color: white;
+            background-color: #6c757d;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            float: left;
+            clear: both;
+        }
+
+        .back-button:hover {
+            background-color: #5a6268;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+            clear: both;
+        }
+
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--heading-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        h3 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--primary-color);
+            margin-top: 1.5rem;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .requirements-list li strong {
+            color: var(--primary-color);
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem 0;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: auto;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>NBKRIST Java Hub</h1>
+</header>
+
+<div class="container">
+    <a href="exampanel.html" class="back-button">← Back to Exam Panel</a>
+
+    <div class="section">
+        <h2>Problem Statement: Account Management System</h2>
+        <p>
+            Your task is to create a very simple banking application using Java. The goal is to manage a single bank account and practice the fundamental concepts of **classes**, **objects**, **encapsulation**, and **exception handling**.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Functional Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>Account Properties:</strong> The system must store an account holder's name and their current balance.</li>
+            <li><strong>Transactions:</strong> The account must support two basic operations: a **deposit** to add money and a **withdrawal** to take money out.</li>
+            <li><strong>Validation:</strong> The system should prevent transactions with negative amounts.</li>
+            <li><strong>Error Handling:</strong> For withdrawals, instead of simply printing a message, the system must use a custom exception to signal that there are not enough funds.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Technical Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>Create an <code>Account</code> Class:</strong> Design a single class named <code>Account</code>.</li>
+            <li><strong>Use Encapsulation:</strong>
+                <ul>
+                    <li>The fields for the account balance and owner's name must be declared as **private**.</li>
+                    <li>Create **public methods** like <code>deposit()</code> and <code>withdraw()</code> to control how the balance is changed.</li>
+                </ul>
+            </li>
+            <li><strong>Methods with Exception Handling:</strong>
+                <ul>
+                    <li>A constructor to create an <code>Account</code> object with an initial balance and owner name.</li>
+                    <li>A <code>deposit(double amount)</code> method that adds the amount to the balance only if the amount is positive.</li>
+                    <li>A <code>withdraw(double amount)</code> method that must **throw** a custom exception if the amount is positive but the balance is insufficient. The method signature will need to declare the exception, e.g., <code>public void withdraw(double amount) throws InsufficientFundsException</code>.</li>
+                </ul>
+            </li>
+            <li><strong>Create a Custom Exception:</strong>
+                <ul>
+                    <li>Create a new class named <code>InsufficientFundsException</code> that **extends** the `Exception` class. This class can have a simple constructor that calls the parent constructor, e.g., <code>super("Insufficient funds for this transaction.")</code>.</li>
+                </ul>
+            </li>
+            <li><strong>Demonstrate in <code>Main</code>:</strong> In your `main` method, create a single `Account` object. When calling the `withdraw` method, you must enclose the call in a **<code>try-catch</code>** block to handle the potential exception.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Testing Requirements</h2>
+        <p>Your <code>main</code> method must demonstrate the program works by testing the following scenarios:</p>
+        <ol class="requirements-list">
+            <li><strong>Initial State:</strong> Create an account with an initial balance of $1000.</li>
+            <li><strong>Successful Deposit:</strong> Make a deposit of $500. Print the balance to confirm it is now $1500.</li>
+            <li><strong>Successful Withdrawal:</strong> Withdraw $200. Print the

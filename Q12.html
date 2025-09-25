@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Statement: Shapes (Interface & Abstract Class)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+        
+        :root {
+            --primary-color: #004d99;
+            --secondary-color: #f0f8ff;
+            --text-color: #343a40;
+            --heading-color: #0056b3;
+            --border-color: #dee2e6;
+            --code-bg: #e9ecef;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            margin: 2rem 0;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 25px;
+            text-decoration: none;
+            color: white;
+            background-color: #6c757d;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            float: left;
+            clear: both;
+        }
+
+        .back-button:hover {
+            background-color: #5a6268;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+            clear: both;
+        }
+
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--heading-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        h3 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--primary-color);
+            margin-top: 1.5rem;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .requirements-list li strong {
+            color: var(--primary-color);
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem 0;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: auto;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>NBKRIST Java Hub</h1>
+</header>
+
+<div class="container">
+    <a href="exampanel.html" class="back-button">← Back to Exam Panel</a>
+
+    <div class="section">
+        <h2>Problem Statement: Geometric Shapes</h2>
+        <p>
+            Your task is to create a set of Java classes to model different 2D shapes (Square, Rectangle, Triangle) and calculate their area and volume. This problem focuses on applying three key OOP concepts: **Interfaces**, **Abstract Classes**, and **Polymorphism**.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Functional Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>Common Behavior:</strong> All shapes must be able to calculate their **area** and **volume**. Since these are 2D shapes, their volume will be 0.</li>
+            <li><strong>Shape Types:</strong> You must create classes for **Square**, **Rectangle**, and **Triangle**.</li>
+            <li><strong>Area Calculation:</strong> Each shape must have its own correct area calculation based on its properties (e.g., side for Square, length/width for Rectangle, base/height for Triangle).</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Technical Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>Use an Interface:</strong>
+                <ul>
+                    <li>Create an interface, e.g., <code>Measurable</code>, with two methods: <code>double getArea()</code> and <code>double getVolume()</code>.</li>
+                </ul>
+            </li>
+            <li><strong>Use an Abstract Class:</strong>
+                <ul>
+                    <li>Create an abstract class, e.g., <code>Shape</code>, that **implements** the <code>Measurable</code> interface.</li>
+                    <li>Inside the <code>Shape</code> class, implement the <code>getVolume()</code> method to simply `return 0.0`. This ensures all 2D shapes have a default volume.</li>
+                    <li>The <code>getArea()</code> method in the `Shape` class must be defined as an **abstract method**, forcing all child classes to provide their own unique implementation.</li>
+                </ul>
+            </li>
+            <li><strong>Concrete Classes (Inheritance):</strong>
+                <ul>
+                    <li>Create three concrete classes: <code>Square</code>, <code>Rectangle</code>, and <code>Triangle</code>.</li>
+                    <li>Each of these classes must **extend** the `Shape` abstract class and implement its abstract method, `getArea()`.</li>
+                </ul>
+            </li>
+            <li><strong>Demonstrate Polymorphism:</strong>
+                <ul>
+                    <li>In your `main` method, create a <code>List</code> of type <code>Shape</code> (or <code>Measurable</code>).</li>
+                    <li>Add one object of each concrete shape (`Square`, `Rectangle`, `Triangle`) to this list.</li>
+                    <li>Loop through the list and call the `getArea()` and `getVolume()` methods for each object. The correct area calculation will be performed for each shape.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Testing Requirements</h2>
+        <p>Your `main` method must demonstrate the program works by testing the following scenarios:</p>
+        <ol class="requirements-list">
+            <li><strong>Individual Shape Test:</strong>
+                <ul>
+                    <li>Create a `Square` object with a side length of 5. Print its calculated area (25) and volume (0).</li>
+                    <li>Create a `Rectangle` object with a length of 4 and a width of 6. Print its calculated area (24) and volume (0).</li>
+                    <li>Create a `Triangle` object with a base of 8 and a height of 5. Print its calculated area (20) and volume (0).</li>
+                </ul>
+            </li>
+            <li><strong>Polymorphism Test:</strong>
+                <ul>
+                    <li>Create a <code>List<Shape></code> and add the three objects you created above.</li>
+                    <li>Write a `for` loop to iterate through the list. Inside the loop, print the area and volume of each shape. The output should show the correct area for each shape in the list, demonstrating dynamic method dispatch.</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2025 NBKRIST Java Hub. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
