@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Is a Path? (And Other File System Facts)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure body takes full height for footer placement */
+        }
+        header {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #007bff;
+            color: white;
+            margin-bottom: 20px;
+        }
+        main {
+            flex-grow: 1; /* Allows main content to take up available space */
+        }
+        h1 {
+            color: #333;
+        }
+        h2 {
+            color: #555;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        .figure-placeholder {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            height: 200px; /* Adjust height as needed */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            color: #888;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        footer {
+            margin-top: 30px;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 0.8em;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>NBKRIST-Java hub</h1>
+    </header>
+        <a href="io.html" class="back-button">Path</a>
+
+    <main>
+        <h1>What Is a Path? (And Other File System Facts)</h1>
+
+        <p>A file system stores and organizes files on some form of media, generally one or more hard drives, in such a way that they can be easily retrieved. Most file systems in use today store the files in a **tree** (or **hierarchical**) structure. At the top of the tree is one (or more) **root nodes**. Under the root node, there are files and **directories** (folders in Microsoft Windows). Each directory can contain files and subdirectories, which in turn can contain files and subdirectories, and so on, potentially to an almost limitless depth.</p>
+
+        <h2>What Is a Path?</h2>
+
+        <p>The following figure shows a sample directory tree containing a single root node. Microsoft Windows supports multiple root nodes. Each root node maps to a volume, such as <code>C:\</code> or <code>D:\</code>. The Solaris OS supports a single root node, which is denoted by the slash character, <code>/</code>.</p>
+
+            <img src="dirstr.png" alt="Sample Directory Tree">
+        
+
+        <p>A file is identified by its **path** through the file system, beginning from the root node. For example, the <code>statusReport</code> file in the previous figure is described by the following notation in the Solaris OS:</p>
+        <p><code>/home/sally/statusReport</code></p>
+        <p>In Microsoft Windows, <code>statusReport</code> is described by the following notation:</p>
+        <p><code>C:\home\sally\statusReport</code></p>
+        <p>The character used to separate the directory names (also called the **delimiter**) is specific to the file system: The Solaris OS uses the forward slash (<code>/</code>), and Microsoft Windows uses the backslash slash (<code>\</code>).</p>
+
+        
+            <img src="dirstr2.gif" alt="Path Delimiter Illustration">
+       
+
+        <h2>Relative or Absolute?</h2>
+
+        <p>A path is either **relative** or **absolute**.</p>
+        <p>An **absolute path** always contains the root element and the complete directory list required to locate the file. For example, <code>/home/sally/statusReport</code> is an absolute path. All of the information needed to locate the file is contained in the path string.</p>
+        <p>A **relative path** needs to be combined with another path in order to access a file. For example, <code>joe/foo</code> is a relative path. Without more information, a program cannot reliably locate the <code>joe/foo</code> directory in the file system.</p>
+    </main>
+
+    <footer>
+        <p>All rights reverved for NBKRIST 2025</p>
+    </footer>
+
+</body>
+</html>
