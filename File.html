@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java java.io.File Class Examples</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .code-block {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .program-card {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            border-top: 5px solid;
+        }
+
+               /* Style for the back button */
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans p-4 sm:p-8">
+   <a href="io.html" class="back-button">Back to IO</a>
+    <!-- Header -->
+    <header class="text-center mb-12">
+        <h1 class="text-4xl font-extrabold text-purple-700 mb-2">Java File System Operations (<code class="font-mono">java.io.File</code>)</h1>
+        <p class="text-xl text-gray-600">Basic programs for checking file properties, listing directories, and deleting files.</p>
+    </header>
+
+    <div class="max-w-4xl mx-auto space-y-12">
+        <div class="p-4 rounded-lg bg-yellow-100 border border-yellow-300 text-yellow-800 mb-8 font-semibold">
+            These programs demonstrate the `File` class, which is used for managing file system entities (paths, directories) rather than reading or writing data.
+        </div>
+
+        <!-- NEW EDUCATIONAL CONTENT SECTION -->
+        <section class="bg-white p-6 sm:p-8 rounded-xl shadow-lg border-t-4 border-indigo-500 space-y-6">
+            <h2 class="text-3xl font-bold text-indigo-700">Understanding Files and Paths</h2>
+            
+            <!-- What is a File? -->
+            <div>
+                <h3 class="text-2xl font-semibold mb-2 text-gray-800 border-b pb-1">What is a File?</h3>
+                <p class="text-gray-700">
+                    A **File** is a named, persistent collection of data (a sequence of bytes) stored on a non-volatile storage device (like a hard drive). In Java's I/O system, it is the primary object representing data storage on the local file system, distinguished by its name and type (extension).
+                </p>
+            </div>
+
+            <!-- What is a Path? -->
+            <div>
+                <h3 class="text-2xl font-semibold mb-2 text-gray-800 border-b pb-1">What is a Path?</h3>
+                <p class="text-gray-700 mb-2">
+                    A **Path** is a string representation that precisely specifies the location of a file or directory within the file system hierarchy. There are two main types:
+                </p>
+                <ul class="list-disc list-inside ml-4 text-gray-600">
+                    <li>**Absolute Path:** The full path starting from the root of the file system (e.g., `C:\Users\Student\report.txt` on Windows).</li>
+                    <li>**Relative Path:** The path defined based on the current working directory where the Java program is executed (e.g., `data\file.csv`).</li>
+                </ul>
+            </div>
+
+            <!-- java.io.File Concepts -->
+            <div>
+                <h3 class="text-2xl font-semibold mb-3 text-gray-800 border-b pb-1">10 Key Concepts for <code class="font-mono">java.io.File</code></h3>
+                <ol class="list-decimal list-inside ml-4 text-gray-700 space-y-1">
+                    <li>**Metadata Only:** A `File` object primarily manages the **path name** and **metadata**; it does not contain the file's actual data content.</li>
+                    <li>**Not for I/O:** You must use streams (<code class="font-mono">FileInputStream</code>, <code class="font-mono">FileReader</code>, etc.) to read or write data to the file represented by the object.</li>
+                    <li>**Existence Check:** Use the <code class="font-mono">exists()</code> method to verify if the file or directory exists on the file system.</li>
+                    <li>**Type Check:** Methods like <code class="font-mono">isFile()</code> and <code class="font-mono">isDirectory()</code> help determine the type of the path represented.</li>
+                    <li>**Platform Independence:** The class internally handles OS-specific path separators and conventions (e.g., it works on Windows, Linux, or macOS).</li>
+                    <li>**Creation:** Use <code class="font-mono">createNewFile()</code> to atomically create a new empty file, or <code class="font-mono">mkdir()</code>/ <code class="font-mono">mkdirs()</code> to create directories.</li>
+                    <li>**Deletion:** The <code class="font-mono">delete()</code> method permanently removes the file or directory (must be empty).</li>
+                    <li>**Immutability:** The path name associated with a `File` object cannot be changed after the object is created.</li>
+                    <li>**Path Retrieval:** Methods like <code class="font-mono">getName()</code>, <code class="font-mono">getAbsolutePath()</code>, and <code class="font-mono">getParent()</code> extract components of the path.</li>
+                    <li>**Last Modified:** The <code class="font-mono">lastModified()</code> method is crucial for tracking when the file was last changed.</li>
+                </ol>
+            </div>
+        </section>
+        <!-- END OF NEW EDUCATIONAL CONTENT SECTION -->
+
+
+        <!-- Program 1: File Information and Creation -->
+        <section class="program-card border-purple-500">
+            <h2 class="text-2xl font-bold mb-4 text-purple-600">1. FileInfo.java: Check Properties and Create File</h2>
+            <p class="text-gray-700 mb-4">
+                This program shows how to check if a file or directory exists and displays important metadata like size, name, and modification time.
+            </p>
+            <h3 class="text-xl font-semibold mb-3 text-gray-800">Source Code:</h3>
+            <pre class="code-block">
+&lt;code&gt;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class FileInfo {
+    public static void main(String[] args) {
+        // 1. Create a File object pointing to the file path
+        File myFile = new File("test_document.txt");
+        
+        // Use SimpleDateFormat for readable date display
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+        if (myFile.exists()) {
+            System.out.println("--- File Properties ---");
+            // 2. Display basic metadata
+            System.out.println("Name: " + myFile.getName());
+            System.out.println("Path: " + myFile.getAbsolutePath());
+            System.out.println("Is Directory? " + myFile.isDirectory());
+            System.out.println("Is File? " + myFile.isFile());
+            // 3. Get size in bytes
+            System.out.println("Size (Bytes): " + myFile.length());
+            // 4. Get last modified time
+            System.out.println("Last Modified: " + sdf.format(new Date(myFile.lastModified())));
+            
+        } else {
+            System.out.println("File does not exist. Attempting to create it...");
+            try {
+                // 5. Create the file if it doesn't exist
+                if (myFile.createNewFile()) {
+                    System.out.println("File created successfully: " + myFile.getName());
+                } else {
+                    System.out.println("File already exists or creation failed.");
+                }
+            } catch (IOException e) {
+                System.out.println("An I/O error occurred during file creation: " + e.getMessage());
+            }
+        }
+    }
+}
+&lt;/code&gt;
+            </pre>
+        </section>
+
+        <!-- Program 2: Directory Listing -->
+        <section class="program-card border-green-500">
+            <h2 class="text-2xl font-bold mb-4 text-green-600">2. DirectoryLister.java: List Directory Contents</h2>
+            <p class="text-gray-700 mb-4">
+                This program demonstrates how to list all files and subdirectories within a specific directory.
+            </p>
+            <h3 class="text-xl font-semibold mb-3 text-gray-800">Source Code:</h3>
+            <pre class="code-block">
+&lt;code&gt;
+import java.io.File;
+
+public class DirectoryLister {
+    public static void main(String[] args) {
+        // NOTE: "." refers to the current working directory where the program is executed
+        File currentDir = new File("."); 
+
+        if (currentDir.isDirectory()) {
+            System.out.println("Listing contents of the current directory:");
+            // 1. Get an array of File objects for all contents
+            File[] files = currentDir.listFiles();
+
+            if (files != null) {
+                // 2. Loop through all items found
+                for (File file : files) {
+                    // 3. Check if the item is a directory or a file
+                    String type = file.isDirectory() ? "[DIR]" : "[FILE]";
+                    System.out.println(type + " " + file.getName());
+                }
+            } else {
+                System.out.println("No contents found or access denied.");
+            }
+        } else {
+            System.out.println("Path specified is not a valid directory.");
+        }
+    }
+}
+&lt;/code&gt;
+            </pre>
+        </section>
+
+        <!-- Program 3: File Deletion -->
+        <section class="program-card border-red-500">
+            <h2 class="text-2xl font-bold mb-4 text-red-600">3. FileDelete.java: Create and Delete a File</h2>
+            <p class="text-gray-700 mb-4">
+                A simple program to demonstrate how to create a file and then delete it from the file system.
+            </p>
+            <h3 class="text-xl font-semibold mb-3 text-gray-800">Source Code:</h3>
+            <pre class="code-block">
+&lt;code&gt;
+import java.io.File;
+import java.io.IOException;
+
+public class FileDelete {
+    public static void main(String[] args) {
+        String fileName = "temp_delete_me.dat";
+        File fileToDelete = new File(fileName);
+
+        try {
+            // 1. Ensure the file exists before attempting to delete
+            if (fileToDelete.createNewFile()) {
+                System.out.println("File created for deletion: " + fileName);
+            } else {
+                System.out.println("File already exists: " + fileName);
+            }
+
+            // 2. Check existence before deleting
+            if (fileToDelete.exists()) {
+                System.out.println("Confirmation: File exists. Proceeding with deletion...");
+
+                // 3. Delete the file
+                if (fileToDelete.delete()) {
+                    System.out.println("SUCCESS: File deleted successfully.");
+                } else {
+                    System.out.println("FAILURE: Could not delete the file. Check permissions.");
+                }
+            } else {
+                System.out.println("File not found or was already deleted.");
+            }
+
+        } catch (IOException e) {
+            System.out.println("An I/O error occurred: " + e.getMessage());
+        }
+    }
+}
+&lt;/code&gt;
+            </pre>
+        </section>
+
+    </div>
+
+    <!-- Footer Note -->
+    <footer class="mt-12 pt-6 border-t border-gray-300 text-center text-gray-500 text-sm">
+        For Windows, using file paths like <code class="text-gray-700">"C:\\mydata\\file.txt"</code> will use the operating system's native file system.
+    </footer>
+</body>
+</html>
