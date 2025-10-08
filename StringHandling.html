@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Strings and StringBuffer Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .code-block {
+            background-color: #2c3e50; /* Darker, professional blue/gray */
+            color: #ecf0f1;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            box-shadow: 0 8px 15px -5px rgba(0, 0, 0, 0.4);
+        }
+        .concept-section {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Smoother shadow */
+            border-left: 6px solid;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .concept-section:hover {
+            transform: translateY(-3px); /* Lift effect on hover */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        /* Syntax Highlighting Colors */
+        .keyword { color: #e74c3c; font-weight: bold; } /* Red for keywords */
+        .type { color: #3498db; } /* Blue for types */
+        .string-literal { color: #f1c40f; } /* Yellow/Gold for strings */
+        .comment { color: #95a5a6; } /* Subtle gray for comments */
+        .method { color: #2ecc71; } /* Emerald green for methods */
+
+        /* Style for the back button */
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans p-4 sm:p-8">
+    <a href="index.html" class="back-button">← Back to Index</a>
+
+    <!-- Header -->
+    <header class="text-center mb-12">
+        <h1 class="text-6xl font-black text-red-700 mb-2 tracking-tighter border-b-4 border-red-400 pb-3 inline-block px-4">NBKRIST Java Hub</h1>
+        <h2 class="text-4xl font-extrabold text-blue-800 mt-4 mb-4">Java String and Buffer Handling</h2>
+        
+        <p class="max-w-4xl mx-auto text-lg text-gray-700 mb-6 p-5 bg-indigo-50 border-l-4 border-indigo-500 rounded-lg shadow-inner">
+            String handling is fundamentally **important** for every Java programmer, especially for future software engineers. Nearly all applications—from reading user **input** and parsing **data files** (like JSON or CSV) to generating web service **responses** and designing **user interfaces**—rely heavily on efficient text manipulation. Mastering classes like **String**, **StringBuffer**, and **StringBuilder** is critical not just for correct functionality, but for writing **high-performance** and **thread-safe** code, which are non-negotiable skills in professional software development.
+        </p>
+
+        <p class="text-xl text-gray-600 font-medium">A structured guide to the core concepts: <code class="font-mono">String</code>, <code class="font-mono">CharSequence</code>, <code class="font-mono">StringBuffer</code>, and their key methods.</p>
+    </header>
+
+    <div class="max-w-4xl mx-auto space-y-10">
+
+        <!-- 1. Introduction -->
+        <section class="concept-section border-blue-600">
+            <h2 class="text-3xl font-bold mb-4 text-blue-700">1. Introduction</h2>
+            <p class="text-gray-700">
+                In Java, a **String** is a sequence of characters, used for representing text. They are fundamental in programming for input/output, networking, and user interfaces. Unlike many other data types, Java Strings are treated as **objects**. The `java.lang` package provides the core classes for handling text: <code class="font-mono">String</code>, <code class="font-mono">StringBuffer</code>, and <code class="font-mono">StringBuilder</code>.
+            </p>
+            <p class="text-gray-700 mt-4 p-3 bg-blue-100/50 rounded-lg font-semibold">
+                **Key Distinction:** The <code class="font-mono text-purple-700">String</code> class creates **immutable** (unchangeable) objects, while <code class="font-mono text-green-700">StringBuffer</code> (thread-safe) and <code class="font-mono text-green-700">StringBuilder</code> (not thread-safe, faster) create **mutable** objects.
+            </p>
+        </section>
+
+        <!-- 2. Interface CharSequence -->
+        <section class="concept-section border-indigo-600">
+            <h2 class="text-3xl font-bold mb-4 text-indigo-700">2. Interface CharSequence</h2>
+            <p class="text-gray-700">
+                The <code class="font-mono text-indigo-700">CharSequence</code> interface represents a readable sequence of characters. It is the common parent interface for all classes that represent sequences of characters, including <code class="font-mono">String</code>, <code class="font-mono">StringBuffer</code>, and <code class="font-mono">StringBuilder</code>. Methods like <code class="font-mono">length()</code>, <code class="font-mono">charAt()</code>, and <code class="font-mono">subSequence()</code> are defined here.
+            </p>
+        </section>
+
+        <!-- 3. Class String -->
+        <section class="concept-section border-purple-600">
+            <h2 class="text-3xl font-bold mb-4 text-purple-700">3. Class String (Immutable)</h2>
+            <p class="text-gray-700">
+                The <code class="font-mono text-purple-700">String</code> class is used to create immutable character sequences. Any operation that appears to "modify" a String actually creates a **new String object** in the Java Heap (often utilizing the String Constant Pool). This immutability ensures thread safety and is crucial for security (e.g., when dealing with passwords).
+            </p>
+        </section>
+
+        <!-- 4. Methods for Extracting Characters -->
+        <section class="concept-section border-pink-600">
+            <h2 class="text-3xl font-bold mb-4 text-pink-700">4. Methods for Extracting Characters from Strings</h2>
+            <p class="text-gray-700">
+                These methods allow you to access individual characters or sub-parts of a String.
+            </p>
+            <h3 class="text-xl font-semibold mb-3 mt-4 text-gray-800">Example: <code class="font-mono">charAt()</code> and <code class="font-mono">substring()</code></h3>
+            <pre class="code-block">
+<span class="type">public class</span> <span class="type">ExtractExample</span> {
+    <span class="type">public static void</span> <span class="method">main</span>(<span class="type">String</span>[] args) {
+        <span class="type">String</span> text = <span class="string-literal">"JavaProgramming"</span>;
+        
+        <span class="comment">// 1. charAt(index): Returns the character at a specific index (0-based)</span>
+        <span class="type">char</span> firstChar = text.<span class="method">charAt</span>(0);
+        <span class="type">char</span> fifthChar = text.<span class="method">charAt</span>(4);
+        
+        <span class="comment">// 2. substring(start, end): Returns a new string from start (inclusive) to end (exclusive)</span>
+        <span class="type">String</span> sub = text.<span class="method">substring</span>(4, 9); <span class="comment">// extracts "Progr"</span>
+
+        <span class="type">System.out</span>.<span class="method">out</span>.<span class="method">println</span>(<span class="string-literal">"First Character: "</span> + firstChar); <span class="comment">// Output: J</span>
+        <span class="type">System.out</span>.<span class="method">out</span>.<span class="method">println</span>(<span class="string-literal">"Substring: "</span> + sub); <span class="comment">// Output: Progr</span>
+    }
+}
+</pre>
+        </section>
+
+        <!-- 5. Comparison -->
+        <section class="concept-section border-red-600">
+            <h2 class="text-3xl font-bold mb-4 text-red-700">5. Comparison Methods</h2>
+            <p class="text-gray-700">
+                Comparing Strings is essential. **Never** use <code class="font-mono">==</code> to compare string content, as it only checks if two references point to the exact same object. Always use content-comparison methods.
+            </p>
+            <h3 class="text-xl font-semibold mb-3 mt-4 text-gray-800">Example: <code class="font-mono">equals()</code> and <code class="font-mono">compareTo()</code></h3>
+            <pre class="code-block">
+<span class="type">public class</span> <span class="type">CompareExample</span> {
+    <span class="type">public static void</span> <span class="method">main</span>(<span class="type">String</span>[] args) {
+        <span class="type">String</span> str1 = <span class="string-literal">"Hello"</span>;
+        <span class="type">String</span> str2 = <span class="string-literal">"hello"</span>;
+        <span class="type">String</span> str3 = <span class="string-literal">"Hello"</span>;
+
+        <span class="comment">// 1. equals(): Checks if content is the same (case-sensitive)</span>
+        <span class="type">boolean</span> eq1 = str1.<span class="method">equals</span>(str2);
+        <span class="type">boolean</span> eq2 = str1.<span class="method">equals</span>(str3);
+        <span class="type">System.out</span>.<span class="method">out</span>.<span class="method">println</span>(<span class="string-literal">"Hello == hello (content): "</span> + eq1); <span class="comment">// Output: false</span>
+        
+        <span class="comment">// 2. compareTo(): Lexicographical comparison (returns 0 if equal, <0 if str1 < str2, >0 otherwise)</span>
+        <span class="type">int</span> comp = str1.<span class="method">compareTo</span>(str2);
+        <span class="type">System.out</span>.<span class="method">out</span>.<span class="method">println</span>(<span class="string-literal">"Hello compared to hello (diff): "</span> + comp); <span class="comment">// Output: A negative number (H comes before h)</span>
+    }
+}
+</pre>
+        </section>
+
+        <!-- 6. Modifying -->
+        <section class="concept-section border-orange-600">
+            <h2 class="text-3xl font-bold mb-4 text-orange-700">6. Modifying Strings (Creates New Objects)</h2>
+            <p class="text-gray-700">
+                Since Strings are immutable, methods like <code class="font-mono">concat()</code>, <code class="font-mono">replace()</code>, <code class="font-mono">toUpperCase()</code>, and <code class="font-mono">trim()</code> always return a **new String object**. The original object remains unchanged.
+            </p>
+            <h3 class="text-xl font-semibold mb-3 mt-4 text-gray-800">Example: Modification</h3>
+            <pre class="code-block">
+<span class="type">public class</span> <span class="type">ModifyExample</span> {
+    <span class="type">public static void</span> <span class="method">main</span>(<span class="type">String</span>[] args) {
+        <span class="type">String</span> original = <span class="string-literal">" Java "</span>;
+        
+        <span class="comment">// 1. trim(): Removes leading/trailing whitespace and returns a NEW string</span>
+        <span class="type">String</span> trimmed = original.<span class="method">trim</span>();
+        
+        <span class="comment">// 2. concat(): Appends another string (often faster to use '+')</span>
+        <span class="type">String</span> newStr = trimmed.<span class="method">concat</span>(<span class="string-literal">" is Fun"</span>);
+        
+        <span class="type">System.out</span>.<span class="method">out</span>.<span class="method">println</span>(<span class="string-literal">"Original: ' "</span> + original + <span class="string-literal">"'"</span>); <span class="comment">// Output: ' Java '</span>
+        <span class="type">System.out</span>.<span class="method">out</span>.<span class="method">println</span>(<span class="string-literal">"Modified: "</span> + newStr); <span class="comment">// Output: Java is Fun</span>
+    }
+}
+</pre>
+        </section>
+
+        <!-- 7. Searching -->
+        <section class="concept-section border-yellow-600">
+            <h2 class="text-3xl font-bold mb-4 text-yellow-700">7. Searching Strings</h2>
+            <p class="text-gray-700">
+                Searching methods help locate characters or substrings within a String.
+            </p>
+            <h3 class="text-xl font-semibold mb-3 mt-4 text-gray-800">Example: <code class="font-mono">indexOf()</code> and <code class="font-mono">contains()</code></h3>
+            <pre class="code-block">
+<span class="type">public class</span> <span class="type">SearchExample</span> {
+    <span class="type">public static void</span> <span class="method">main</span>(<span class="type">String</span>[] args) {
+        <span class="type">String</span> sentence = <span class="string-literal">"Learning Java is important"</span>;
+        
+        <span class="comment">// 1. indexOf(): Finds the index of the first occurrence of a substring/character. Returns -1 if not found.</span>
+        <span class="type">int</span> javaIndex = sentence.<span class="method">indexOf</span>(<span class="string-literal">"Java"</span>);
+        <span class="type">int</span> charIndex = sentence.<span class="method">indexOf</span>('i'); <span class="comment">// first 'i'</span>
+        
+        <span class="comment">// 2. contains(): Returns true if the sequence of characters is found in the string.</span>
+        <span class="type">boolean</span> hasPython = sentence.<span class="method">contains</span>(<span class="string-literal">"Python"</span>);
+
+        <span class="type">System.out</span>.<span class="method">out</span>.<span class="method">println</span>(<span class="string-literal">"Index of 'Java': "</span> + javaIndex); <span class="comment">// Output: 9</span>
+        <span class="type">System.out</span>.<span class="method">out</span>.<span class="method">println</span>(<span class="string-literal">"String contains 'Python': "</span> + hasPython); <span class="comment">// Output: false</span>
+    }
+}
+</pre>
+        </section>
+
+        <!-- 8. Class StringBuffer -->
+        <section class="concept-section border-green-600">
+            <h2 class="text-3xl font-bold mb-4 text-green-700">8. Class StringBuffer (Mutable and Thread-Safe)</h2>
+            <p class="text-gray-700">
+                <code class="font-mono text-green-700">StringBuffer</code> objects are **mutable**, meaning their content can be changed without creating a new object. This makes them highly efficient for heavy string manipulation (like building large strings in a loop). They are also **synchronized** (thread-safe), making them suitable for use in multi-threaded environments, though slightly slower than `StringBuilder`.
+            </p>
+            <h3 class="text-xl font-semibold mb-3 mt-4 text-gray-800">Example: <code class="font-mono">append()</code>, <code class="font-mono">insert()</code>, <code class="font-mono">reverse()</code></h3>
+            <pre class="code-block">
+<span class="type">public class</span> <span class="type">BufferExample</span> {
+    <span class="type">public static void</span> <span class="method">main</span>(<span class="type">String</span>[] args) {
+        <span class="comment">// Create a mutable StringBuffer object</span>
+        <span class="type">StringBuffer</span> buffer = <span class="keyword">new</span> <span class="type">StringBuffer</span>(<span class="string-literal">"World"</span>);
+
+        <span class="comment">// 1. append(): Adds characters to the end (Modifies the existing object)</span>
+        buffer.<span class="method">append</span>(<span class="string-literal">" Class"</span>);
+        <span class="type">System.out</span>.<span class="method">out</span>.<span class="method">println</span>(<span class="string-literal">"After append: "</span> + buffer); <span class="comment">// Output: World Class</span>
+
+        <span class="comment">// 2. insert(): Inserts characters at a specific position</span>
+        buffer.<span class="method">insert</span>(0, <span class="string-literal">"Hello "</span>);
+        <span class="type">System.out</span>.<span class="method">out</span>.<span class="method">println</span>(<span class="string-literal">"After insert: "</span> + buffer); <span class="comment">// Output: Hello World Class</span>
+        
+        <span class="comment">// 3. reverse(): Reverses the sequence of characters</span>
+        buffer.<span class="method">reverse</span>();
+        <span class="type">System.out</span>.<span class="method">out</span>.<span class="method">println</span>(<span class="string-literal">"After reverse: "</span> + buffer); <span class="comment">// Output: ssalC dlroW olleH</span>
+    }
+}
+</pre>
+        </section>
+
+    </div>
+
+    <!-- Footer Note -->
+    <footer class="mt-12 pt-6 border-t-2 border-blue-500 text-center text-gray-700 text-sm font-semibold">
+        <p class="mb-1">For optimal performance in single-threaded applications, use <code class="font-mono text-green-700">StringBuilder</code> (instead of <code class="font-mono">StringBuffer</code>).</p>
+        <p class="text-xs text-gray-500 mt-2">&copy; @NBKRIST all rights reserved</p>
+    </footer>
+</body>
+</html>
