@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Java Multi-threading Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset and Variables */
+        :root {
+            --primary-color: #1a237e;
+            /* Darker Indigo - Professional Blue */
+            --secondary-color: #ff6f00;
+            /* Deep Orange - Accent */
+            --background-light: #f8f9fa;
+            /* Lighter off-white */
+            --text-dark: #343a40;
+            /* Dark gray for body text */
+            --text-light: #6c757d;
+            /* Lighter gray for subtle text */
+            --font-stack: 'Roboto', sans-serif;
+            --code-bg: #e0f2f7;
+            /* Light cyan for code */
+            --code-text: #006064;
+            /* Dark cyan for code text */
+            --border-light: #e9ecef;
+            /* Light gray border */
+        }
+
+        body {
+            font-family: var(--font-stack);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-light);
+        }
+
+        /* Custom Header Styles (Top Bar) */
+        .custom-top-bar {
+            background-color: var(--primary-color);
+            /* Dark Indigo */
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: 500;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            letter-spacing: 0.5px;
+            margin-bottom: -15px;
+            /* Pull closer to the main header below */
+        }
+
+        /* --- Main Content Header Structure --- */
+        header {
+            padding: 25px 0 35px 0;
+            border-bottom: 2px solid var(--border-light);
+            margin-bottom: 30px;
+        }
+
+        .header-top-row {
+            display: flex;
+            justify-content: space-between;
+            /* Pushes content to the edges */
+            align-items: center;
+            /* Centers items vertically */
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            font-size: 2.2em;
+            /* Reduced size to fit next to button */
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            flex-grow: 1;
+            /* Allows title to take up remaining space */
+            text-align: left;
+            /* Align title to the left */
+        }
+
+        .header-subtitle {
+            text-align: left;
+            padding-top: 10px;
+        }
+
+        header p {
+            color: var(--text-light);
+            font-size: 1.1em;
+            margin: 0;
+        }
+
+        /* --- Navigation Button (Back) --- */
+        .back-button {
+            display: inline-block;
+            background-color: #e9ecef;
+            color: var(--text-dark);
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: background-color 0.2s, color 0.2s;
+            border: 1px solid var(--border-light);
+            white-space: nowrap;
+            /* Prevents button text from wrapping */
+        }
+
+        .back-button:hover {
+            background-color: var(--border-light);
+            color: var(--primary-color);
+        }
+
+        /* Section Headings */
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 8px;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            font-size: 2em;
+            font-weight: 500;
+            letter-spacing: -0.3px;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            font-weight: 500;
+        }
+
+        /* Code/Conceptual Examples */
+        pre {
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            padding: 18px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9em;
+            margin: 25px 0;
+            border: 1px solid #b2ebf2;
+        }
+
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background-color: var(--code-bg);
+            padding: 2px 5px;
+            border-radius: 3px;
+            color: var(--code-text);
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.95em;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border-light);
+            padding: 14px;
+            text-align: left;
+        }
+
+        /* Notes/Alerts */
+        .note {
+            background-color: #fff3e0;
+            border-left: 5px solid var(--secondary-color);
+            color: #614200;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 6px;
+        }
+
+        /* Footer Styles (using previous styles for consistency) */
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            font-size: 0.9em;
+            letter-spacing: 0.2px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            .header-top-row {
+                flex-direction: column;
+                /* Stack title and button vertically */
+                align-items: flex-start;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+                margin-bottom: 10px;
+            }
+
+            .header-subtitle {
+                text-align: left;
+                padding-top: 5px;
+            }
+
+            /* Fix button alignment for small screens */
+            .back-button {
+                align-self: flex-end;
+                /* Push button to the right of the stack */
+            }
+
+            /* Table stacking styles remain the same for responsiveness */
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            /* ... rest of responsive table styles ... */
+            tr {
+                margin: 0 0 15px 0;
+                border: 1px solid var(--border-light);
+                border-radius: 8px;
+            }
+
+            td {
+                border: none;
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 12px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+                color: var(--primary-color);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="custom-top-bar">
+        NBKRIST-JAVA HUB
+    </div>
+    <div class="container">
+        <header>
+            <div class="header-top-row">
+                <h1>My Expert Notes on Java Multi-threading</h1>
+                <a href="index.html" class="back-button">← Back to Index</a>
+            </div>
+            <div class="header-subtitle">
+                <p>A detailed guide based on my experience and best practices.</p>
+            </div>
+        </header>
+
+        <p>In my journey, I learned that <strong>Multi-threading</strong> is crucial. It lets my programs handle
+            <strong>multiple tasks at the same time</strong> (or concurrently), which is essential for performance.
+            Every time I create a thread, I'm creating a small, independent unit of work.</p>
+
+        <hr>
+
+        <h2>1. The Two Methods I Use to Create Threads</h2>
+        <p>No matter which method I choose, the actual work always goes inside the <strong><code>run()</code></strong>
+            method. I always start a thread by calling <strong><code>start()</code></strong>, never <code>run()</code>
+            directly.</p>
+
+        <h3>A. Extending the <code>Thread</code> Class</h3>
+        <p>This is the simplest way, but I try to avoid it unless necessary, as it consumes my single inheritance
+            option.</p>
+        <ol>
+            <li>I create a class that <strong>extends</strong> <code>java.lang.Thread</code>.</li>
+            <li>I <strong>override</strong> the <code>public void run()</code> method to put my task logic there.</li>
+            <li>I create an object of my class and call the <strong><code>start()</code></strong> method on it.</li>
+        </ol>
+
+        <pre><code>// My first method to define a thread
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Task 1: Running by extending Thread.");
+    }
+}
+
+// Starting it up
+public class Main {
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread();
+        t1.start(); // Initiates the thread and calls run()
+    }
+}</code></pre>
+
+        <h3>B. Implementing the <code>Runnable</code> Interface <span class="highlight-star">🌟 (My Preferred
+                Method)</span></h3>
+        <p>This is my expert judgment on the <strong>better option</strong>. Since Java doesn't support multiple
+            inheritance, implementing <code>Runnable</code> keeps my class free to <strong>extend another
+                superclass</strong>, which is invaluable for code structure and reuse.</p>
+
+        <ol>
+            <li>I create a class that **implements** the <code>java.lang.Runnable</code> interface.</li>
+            <li>I **override** the <code>public void run()</code> method (the task).</li>
+            <li>I create an object of the <code>Thread</code> class, passing my <code>Runnable</code> object to its
+                constructor.</li>
+            <li>I call the **<code>start()</code>** method on the **<code>Thread</code> object**.</li>
+        </ol>
+
+        <pre><code>// My task, separated from the Thread control
+class MyRunnable implements Runnable {
+    public void run() {
+        System.out.println("Task 2: Running by implementing Runnable.");
+    }
+}
+
+// Starting it up
+public class Main {
+    public static void main(String[] args) {
+        MyRunnable task = new MyRunnable();
+        Thread t2 = new Thread(task); // Thread object given the task
+        t2.start(); // This is what I call to begin execution
+    }
+}</code></pre>
+
+        <hr>
+
+        <h2>2. Understanding the Thread's Lifecycle</h2>
+        <p>I view a thread as a living entity that moves through five distinct states from creation to destruction. I
+            must understand these states to properly manage my programs.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>State</th>
+                    <th>My Action / How it Gets There</th>
+                    <th>What it Means to Me</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="State"><strong>1. New (Born)</strong></td>
+                    <td data-label="My Action / How it gets there">When I use the <code>new</code> keyword (e.g.,
+                        <code>new Thread()</code>).</td>
+                    <td data-label="What it means to me">The thread object is created but is **not active** yet.</td>
+                </tr>
+                <tr>
+                    <td data-label="State"><strong>2. Runnable</strong></td>
+                    <td data-label="My Action / How it gets there">When I call the **<code>start()</code>** method.</td>
+                    <td data-label="What it means to me">The thread is **ready to run** and is waiting for the CPU.</td>
+                </tr>
+                <tr>
+                    <td data-label="State"><strong>3. Running</strong></td>
+                    <td data-label="My Action / How it gets there">The OS scheduler gives the thread CPU time.</td>
+                    <td data-label="What it means to me">The thread is **executing its <code>run()</code> method code**.
+                    </td>
+                </tr>
+                <tr>
+                    <td data-label="State"><strong>4. Blocked/Waiting/Timed Waiting</strong></td>
+                    <td data-label="My Action / How it gets there">When I call <code>sleep()</code>, or the thread is
+                        waiting for a **lock** (synchronized block) or another thread (<code>join()</code>,
+                        <code>wait()</code>).</td>
+                    <td data-label="What it means to me">The thread is **temporarily inactive** and cannot run until its
+                        waiting condition is resolved.</td>
+                </tr>
+                <tr>
+                    <td data-label="State"><strong>5. Terminated (Dead)</strong></td>
+                    <td data-label="My Action / How it gets there">When the thread's **<code>run()</code> method
+                        completes naturally** or an exception is thrown.</td>
+                    <td data-label="What it means to me">The thread is finished. I **cannot restart it**.</td>
+                </tr>
+            </tbody>
+        </table>
+        <img src="lifecycle.png" alt="Thread States"
+            style="width:100%; max-width:600px; display:block; margin: 0 auto 20px auto;">
+        <p>Understanding these states helps me manage thread behavior and avoid common pitfalls like deadlocks or
+            resource contention.</p>
+        <hr>
+
+        <h2>3. How I Manage and Control Threads (Safely)</h2>
+
+        <div class="note">
+            <h4>⚠️ My Critical Safety Rule: Never Use Deprecated Methods!</h4>
+            I **never** use the old, unsafe methods like <code>stop()</code>, <code>suspend()</code>, or
+            <code>resume()</code>. They can crash my application or cause severe deadlocks.
+        </div>
+
+        <ul>
+            <li>**Stopping a Thread:** I don't use <code>stop()</code>. Instead, I use a **flag variable** (a
+                <code>volatile boolean</code>) that the thread checks in its loop. When I want the thread to stop, I set
+                the flag to <code>false</code>, allowing the thread to exit its <code>run()</code> method cleanly.</li>
+            <li>**Pausing/Resuming:** I avoid <code>suspend()</code> and <code>resume()</code>. For controlled
+                communication between threads, I use the safer **inter-thread communication methods** like
+                <code>wait()</code> and <code>notify()</code>/<code>notifyAll()</code>.</li>
+            <li>**One-Time Use:** My experience confirms that a thread is a one-time-use object. Once it hits the
+                **Terminated** state, I must create a **new** <code>Thread</code> object if I need to execute the task
+                again.</li>
+        </ul>
+
+    </div>
+    <footer>
+        All rights reserved for NBKRITS 2025
+    </footer>
+</body>
+
+</html>
