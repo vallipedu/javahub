@@ -183,7 +183,14 @@
         Modern best practices recommend higher-level concurrency utilities such as <code>BlockingQueue</code>, <code>CountDownLatch</code>, or <code>Semaphore</code> for safer, more maintainable designs.
       </div>
     </div>
-
+ <div class="qa">
+      <div class="question">11. What is the significance of Thread.sleep() and join() methods, write about Thread InterruptedException.</div>
+      <div class="answer">
+        <code>Thread.sleep()</code> pauses the current thread for a specified duration, allowing other threads to execute.  
+        <code>Thread.join()</code> waits for a thread to complete its execution before proceeding.  
+        <code>InterruptedException</code> is thrown when a thread is interrupted while waiting or sleeping, allowing for responsive thread management. This is a checked exception and must be handled or declared.
+      </div>
+    </div>
     <div class="bottom-nav">
       <a href="multithreading.html" class="back-btn">← Back to Home</a>
     </div>
@@ -194,3 +201,4 @@
   </footer>
 </body>
 </html>
+
