@@ -5,135 +5,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Threading 101: The Culinary Chaos Edition</title>
-    <!-- Load Tailwind CSS -->
+
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
-        /* Custom styles for professional typography and contrast */
+        /* -------- General Layout & Font -------- */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-            /* Lighter gray background */
+            font-family: 'Inter', Arial, sans-serif;
+            background-color: #f5f6f8;
+            color: #333;
             line-height: 1.6;
+            margin: 0;
+            padding: 0;
         }
 
+        /* -------- Header -------- */
+        header {
+            background-color: #111827;
+            color: white;
+            border-bottom: 4px solid #6366f1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            background: linear-gradient(to right, #6366f1, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* -------- Buttons -------- */
+        .back-button {
+            display: inline-block;
+            margin: 5px;
+            padding: 8px 16px;
+            background-color: #2563eb;
+            color: #fff;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #1e40af;
+        }
+
+        /* -------- Cards -------- */
+        .content-card {
+            background-color: #fff;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        /* -------- Code Blocks -------- */
         .code-block {
             background-color: #1f2937;
-            /* Darker slate-800 background for code */
             color: #f3f4f6;
-            /* Very light gray text for contrast */
-            padding: 1.25rem;
+            padding: 1rem;
             border-radius: 0.75rem;
             overflow-x: auto;
+            font-family: 'Courier New', monospace;
             font-size: 0.9rem;
-            line-height: 1.4;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-            /* Stronger shadow */
+            margin-bottom: 1.5rem;
         }
 
-        /* Style for the main content card */
-        .content-card {
-            background-color: #ffffff;
-            padding: 2.5rem;
-            /* Increased padding */
-            border-radius: 1.5rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            /* Stronger overall shadow */
-            border: 1px solid #e5e7eb;
-            transition: transform 0.3s ease;
-        }
-
-        .content-card:hover {
-            /* Subtle hover effect for polish */
-            transform: translateY(-2px);
-        }
-
-        /* Style for the takeaway sections (now informational banners) */
+        /* -------- Takeaway Boxes -------- */
         .takeaway {
-            border-left: 8px solid;
-            /* Thicker left border */
-            padding: 1.5rem;
-            margin-top: 2.5rem;
-            border-radius: 0.75rem;
+            border-left: 6px solid #6366f1;
+            padding: 1.25rem;
+            background: #eef2ff;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
         }
 
-        /* Custom scrollbar for better visibility */
+        /* -------- Tables -------- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+
+        thead tr {
+            background-color: #4f46e5;
+            color: white;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #ddd;
+            vertical-align: top;
+        }
+
+        tbody tr:hover {
+            background-color: #f9fafb;
+        }
+
+        /* -------- Images -------- */
+        img {
+            width: 100%;
+            max-width: 600px;
+            display: block;
+            margin: 1.5rem auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* -------- Footer -------- */
+        footer {
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+            background: #fafafa;
+            padding: 15px 10px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .author-info {
+            color: #222;
+            font-weight: bold;
+        }
+
+        /* -------- Scrollbar -------- */
         ::-webkit-scrollbar {
-            width: 8px;
             height: 8px;
+            width: 8px;
         }
 
         ::-webkit-scrollbar-thumb {
             background: #9ca3af;
             border-radius: 10px;
         }
-
-        /* Gradient text for the main header (NBKRIST-JAVAHub) */
-        .gradient-text {
-            background-image: linear-gradient(to right, #6366f1, #a855f7);
-            /* Indigo-500 to Purple-500 */
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-        }
-
-        /* Style for the back button */
-        .back-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .back-button:hover {
-            background-color: #2980b9;
-        }
-
-           /* Footer Styling */
-        footer {
-            padding: 15px 0;
-            text-align: center;
-            color: #6c757d;
-            border-top: 1px solid #e9ecef;
-            margin-top: 20px;
-            font-size: 0.9em;
-        }
-        footer p {
-            margin: 5px 0;
-        }
-        .author-info {
-            font-weight: bold;
-            color: #333;
-        }
     </style>
 </head>
 
 <body>
 
-    <!-- Header: Sleek and professional look with darker background and centered title -->
-    <header class="sticky top-0 bg-gray-900 shadow-2xl z-10 py-4 border-b-4 border-indigo-600">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-            <!-- Centered H1 with stylish gradient text -->
-            <div class="flex-grow text-center">
-                <h1 class="gradient-text text-4xl font-black tracking-widest uppercase md:text-5xl drop-shadow-lg">
-                    NBKRIST-JAVAHub - An Introduction to Java Multithreading
-                </h1>
-               
+    <header class="sticky top-0 z-10 py-4">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center px-4">
+            <div class="text-center flex-grow">
+                <h1 class="text-3xl md:text-4xl">NBKRIST-Java Hub-Java Multithreading</h1>
             </div>
-            <a href="index.html" class="back-button">
-                Back to Index
-            </a>
-            <a href="impparallelism.html" class="back-button">Real-Time Usecase</a>
-            <a href="mulnotes.html" class="back-button">MyView</a>
-            <a href="inprogress.html" class="back-button">Class Room Exercises</a>
-            <a href="sync.html" class="back-button">Thread Synchronization</a>
-            <a href="inprogress.html" class="back-button">Interview Questions</a>
-            <!-- Stylish, prominent Back button -->
-            <audio controls>
+            <div class="flex flex-wrap justify-center mt-3">
+                <a href="index.html" class="back-button">Back to Index</a>
+                <a href="impparallelism.html" class="back-button">Real-Time Usecase</a>
+                <a href="mulnotes.html" class="back-button">MyView</a>
+                <a href="inprogress.html" class="back-button">Class Exercises</a>
+                <a href="sync.html" class="back-button">Synchronization</a>
+                <a href="mulfaq.html" class="back-button">Q & A</a>
+            </div>
+            <audio controls class="mt-3">
                 <source src="audio2.m4a" type="audio/mp4">
                 <p>Your browser does not support the audio element.</p>
             </audio>
@@ -142,13 +170,15 @@
 
     <!-- Main Content Area: Enhanced Look and Feel -->
     <main class="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
-        <h1
-            class="text-4xl md:text-5xl font-extrabold text-indigo-900 mb-6 border-b-4 pb-4 border-indigo-500 drop-shadow-sm">
-            Why Go Multi-threaded? (The Professional Edge)
-        </h1>
+  <h2
+                class="text-3xl font-extrabold text-rose-700 mt-12 mb-5 pb-2 border-b-2 border-rose-400 flex items-center">
+                <span class="mr-3 text-4xl">🤔</span>
+            Why Go Multi-threaded? ( Industry Insight)
+        </h2>
         <p class="text-gray-700 mb-10 text-xl font-light">
 
-            During my academic studies, a frequent saying shared by our professors was the traditional warning: "Too many
+            During my academic studies, a frequent saying shared by our professors was the traditional warning: "Too
+            many
             cooks spoil the broth." However, upon studying the architecture of Java Multithreading, I recognized
             that this principle does not always apply to modern software development.
 
@@ -160,21 +190,8 @@
             architecture is mandatory. Multithreading fundamentally allows a single program to execute various tasks
             concurrently, thereby enabling better performance and operational efficiency.
             <br>
-            <I><B style="color: red;">A Note on Applicability</B></I><br>
-           <I> It is crucial to append a humorous, yet essential, disclaimer: the principle of concurrency is applicable
-            exclusively to computing environments. I strongly advise against applying multithreaded techniques to human
-            social interactions—i.e., multitasking a family dinner by engaging in synchronous video consumption or
-            attempting social interaction while absorbed in short-form media. Some activities, unlike processors,
-            require dedicated, single-threaded attention for optimal human performance.</I>
-             <br>
-        <span style="color: rgb(138, 30, 210);"><i>Perhaps, I may wanna share funny joke with you in this Context: </i></span>
-
-        <br>
-        
-        <span style="color: chocolate;">Why did the programmer prefer multithreading?</span>
-        <br>
-        <span style="color: rgb(210, 30, 33);"> "Because it was the only way to 'thread' together a social life and a deadline!"
-        </span>
+  
+     
         <section class="content-card">
             <!-- Main Title - Changed to Indigo-900 for high contrast -->
             <h1
@@ -524,11 +541,10 @@ END: SUNDAE IS SERVED! Total Time: 3.0 Minutes
 
     <!-- Footer: Dark and professional -->
     <footer>
-            <p>All Rights Reserved for NBKRIST</p>
-            <p class="author-info">Authored by: Mutchakala Hari Babu, Professor of Practice @NBKRIST</p>
-        </footer>
+        <p>All Rights Reserved for NBKRIST</p>
+        <p class="author-info">Authored by: Mutchakala Hari Babu, Professor of Practice @NBKRIST</p>
+    </footer>
 
 </body>
 
 </html>
-
