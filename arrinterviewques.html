@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Java Arrays & ArrayList Interview Q&A</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f9fbfd;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(90deg, #e8f0ff, #f4f8ff);
+      color: #002b5b;
+      text-align: center;
+      padding: 1rem;
+      border-bottom: 2px solid #cfdfee;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    header p {
+      margin-top: 0.2rem;
+      color: #555;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    section h2 {
+      color: #d32f2f;
+      font-size: 1.3rem;
+      border-left: 5px solid #ffb3b3;
+      padding-left: 10px;
+      margin-top: 20px;
+    }
+
+    .qa {
+      margin-bottom: 1.5rem;
+    }
+
+    .qa h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: #0056b3;
+    }
+
+    .qa p {
+      margin: 0.3rem 0 0 0;
+      padding-left: 10px;
+    }
+
+    .back-button {
+      display: inline-block;
+      background-color: #005bea;
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+      margin-top: 1.5rem;
+    }
+
+    .back-button:hover {
+      background-color: #003e94;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #eef4fc;
+      padding: 1rem;
+      color: #555;
+      border-top: 1px solid #d6e0f0;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 1.6rem; }
+      main { padding: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>NBKRIST Java Hub - Java Arrays & ArrayList Interview Q&A</h1>
+  <p>Essential Questions for Freshers to Crack Java Interviews</p>
+</header>
+
+<main>
+  <a href="Arrays.html" class="back-button">← Back to Home</a>
+
+  <section id="intro">
+    <h2>Introduction</h2>
+    <p>
+      If you want to crack Java interviews as a fresher, mastering arrays and ArrayList is crucial. 
+      Most IT companies expect you to handle data efficiently, understand memory management, and implement simple algorithms using arrays. 
+      They look for your understanding of built-in Java utilities like <strong>java.util.Arrays</strong> and <strong>ArrayList</strong>. 
+      Being confident in basic sorting, searching, and dynamic array operations can significantly improve your performance in technical interviews.
+    </p>
+  </section>
+
+  <section id="questions">
+    <h2>Frequently Asked Interview Questions</h2>
+
+    <div class="qa">
+      <h3>Q1: What is an array in Java?</h3>
+      <p>A1: An array is a collection of similar data types stored in contiguous memory locations. It allows indexing to access elements efficiently.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Q2: How do you declare and initialize an array?</h3>
+      <p>A2: You can declare an array like <code>int[] arr;</code> and initialize it as <code>arr = new int[5];</code> or <code>int[] arr = {1,2,3,4,5};</code></p>
+    </div>
+
+    <div class="qa">
+      <h3>Q3: What is a 2D array?</h3>
+      <p>A3: A 2D array is an array of arrays, often visualized as rows and columns, useful for tables, matrices, or grids.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Q4: What is a 3D array?</h3>
+      <p>A4: A 3D array is an array of 2D arrays, often used in simulations, graphics, and multi-layered data storage.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Q5: What are some common methods of the Arrays class?</h3>
+      <p>A5: Common methods include <code>Arrays.sort()</code>, <code>Arrays.binarySearch()</code>, <code>Arrays.fill()</code>, and <code>Arrays.toString()</code>.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Q6: How do you sort an array in Java?</h3>
+      <p>A6: Use <strong>Arrays.sort(array)</strong> to sort the array in ascending order.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Q7: How do you search for an element in a sorted array?</h3>
+      <p>A7: Use <strong>Arrays.binarySearch(array, value)</strong> for efficient searching.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Q8: What is ArrayList and why is it used?</h3>
+      <p>A8: ArrayList is a resizable array from <strong>java.util</strong> that allows dynamic addition and removal of elements and provides convenient built-in methods.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Q9: How is ArrayList different from a standard array?</h3>
+      <p>A9: Unlike arrays, ArrayList can dynamically grow or shrink and provides methods like <code>add()</code>, <code>remove()</code>, and <code>get()</code>.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Q10: Can ArrayList store primitive types directly?</h3>
+      <p>A10: No. ArrayList can store only objects. Use wrapper classes like <code>Integer</code>, <code>Double</code>, etc.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Q11: How do you iterate through an ArrayList?</h3>
+      <p>A11: You can use a for loop, enhanced for loop, or an iterator to traverse an ArrayList.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Q12: How do you find the size of an array and an ArrayList?</h3>
+      <p>A12: Use <code>array.length</code> for arrays and <code>arrayList.size()</code> for ArrayList.</p>
+    </div>
+
+
+    <div class="qa">
+      <h3>Q14: What happens if you try to access an array index out of bounds?</h3>
+      <p>A14: Java throws <strong>ArrayIndexOutOfBoundsException</strong> at runtime.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Q15: How can you convert an array to ArrayList?</h3>
+      <p>A15: Use <code>Arrays.asList(array)</code> method to convert an array to a fixed-size List, then create an ArrayList if needed.</p>
+    </div>
+
+    <div class="qa">
+      <h3>Q16: Can an ArrayList contain duplicate elements?</h3>
+      <p>A16: Yes, ArrayList allows duplicate elements.</p>
+    </div>
+
+ 
+
+    <div class="qa">
+      <h3>Q18: What is a jagged array?</h3>
+      <p>A18: A jagged array is a 2D array where rows can have different lengths.</p>
+    </div>
+
+
+    <div class="qa">
+      <h3>Q19: Give a real-world example of using ArrayList over arrays?</h3>
+      <p>A19: ArrayList is ideal for a dynamic list of students in a course, where students may join or leave frequently.</p>
+    </div>
+
+  </section>
+
+  <a href="Arrays.html" class="back-button">← Back to Home</a>
+</main>
+
+    <footer>
+        © 2025 All Rights Reserved for NBKRIST, authored by Hari Babu Mutchakala.
+    </footer>
+
+</body>
+</html>

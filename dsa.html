@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introduction to DSA with Java</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f9fbfd;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(90deg, #e8f0ff, #f4f8ff);
+      color: #002b5b;
+      text-align: center;
+      padding: 1rem;
+      border-bottom: 2px solid #cfdfee;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    header p {
+      margin-top: 0.2rem;
+      color: #555;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    section h2 {
+      color: #d32f2f;
+      font-size: 1.3rem;
+      border-left: 5px solid #ffb3b3;
+      padding-left: 10px;
+      margin-top: 20px;
+    }
+
+    pre {
+      background: #f4f6fb;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      border-left: 3px solid #005bea;
+      font-family: Consolas, monospace;
+    }
+
+    code {
+      color: #0056b3;
+    }
+
+    .back-button {
+      display: inline-block;
+      background-color: #005bea;
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+      margin-top: 1.5rem;
+    }
+
+    .back-button:hover {
+      background-color: #003e94;
+    }
+
+    .tip {
+      background: #fff9e6;
+      border-left: 4px solid #ffcc00;
+      padding: 0.8rem 1rem;
+      border-radius: 6px;
+      margin-top: 0.6rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 1.6rem; }
+      main { padding: 1.2rem; }
+    }
+    footer {
+      text-align: center;
+      background-color: #eef4fc;
+      padding: 1rem;
+      color: #555;
+      border-top: 1px solid #d6e0f0;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1> NBKRIST Java Hub - Data Structures & Algorithms with Java</h1>
+    <p>Beginner-Friendly Guide with Practical Java Examples</p>
+  </header>
+
+  <main>
+    <a href="Arrays.html" class="back-button">← Back to Home</a>
+
+    <section id="expert-intro">
+      <h2>Industry Expert Insight</h2>
+      <p>
+        As an IT professional, I have worked on multiple software projects where understanding **Data Structures and Algorithms (DSA)** was crucial. 
+        Using Java, I built efficient stacks, queues, and implemented sorting and searching algorithms to solve real-world problems such as inventory management, scheduling systems, and data analysis tools.
+      </p>
+      <p>
+        Learning DSA with Java not only teaches you programming logic, but also prepares you for coding interviews, competitive programming, and building scalable software.
+      </p>
+      <div class="tip">💡 Tip: Practice DSA with Java arrays first—they give a clear understanding of how data is stored and manipulated in memory.</div>
+    </section>
+
+    <section id="stack">
+      <h2>Build Stack using Java Arrays</h2>
+      <p>A stack is a LIFO (Last In First Out) data structure. Here’s a simple Java example using arrays:</p>
+      <pre><code>class StackExample {
+    int[] stack = new int[5];
+    int top = -1;
+
+    void push(int value) {
+        if(top &lt; stack.length - 1) {
+            stack[++top] = value;
+            System.out.println(value + " pushed to stack");
+        } else {
+            System.out.println("Stack Overflow");
+        }
+    }
+
+    void pop() {
+        if(top &gt;= 0) {
+            System.out.println(stack[top--] + " popped from stack");
+        } else {
+            System.out.println("Stack Underflow");
+        }
+    }
+
+    public static void main(String[] args) {
+        StackExample s = new StackExample();
+        s.push(10);
+        s.push(20);
+        s.pop();
+    }
+}</code></pre>
+    </section>
+
+    <section id="queue">
+      <h2>Build Queue using Java Arrays</h2>
+      <p>A queue is a FIFO (First In First Out) data structure. Here’s a simple Java example using arrays:</p>
+      <pre><code>class QueueExample {
+    int[] queue = new int[5];
+    int front = 0, rear = -1;
+
+    void enqueue(int value) {
+        if(rear &lt; queue.length - 1) {
+            queue[++rear] = value;
+            System.out.println(value + " added to queue");
+        } else {
+            System.out.println("Queue Full");
+        }
+    }
+
+    void dequeue() {
+        if(front &lt;= rear) {
+            System.out.println(queue[front++] + " removed from queue");
+        } else {
+            System.out.println("Queue Empty");
+        }
+    }
+
+    public static void main(String[] args) {
+        QueueExample q = new QueueExample();
+        q.enqueue(5);
+        q.enqueue(10);
+        q.dequeue();
+    }
+}</code></pre>
+    </section>
+
+    <section id="sorting">
+      <h2>Sorting of Arrays using Simple Algorithm</h2>
+      <p>Sorting is essential to organize data. Here’s an example of **bubble sort** in Java:</p>
+      <pre><code>class BubbleSortExample {
+    public static void main(String[] args) {
+        int[] arr = {5, 2, 9, 1, 3};
+        int n = arr.length;
+        for(int i = 0; i &lt; n-1; i++) {
+            for(int j = 0; j &lt; n-i-1; j++) {
+                if(arr[j] &gt; arr[j+1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        }
+        System.out.println("Sorted Array:");
+        for(int num : arr)
+            System.out.print(num + " ");
+    }
+}</code></pre>
+    </section>
+
+    <section id="searching">
+      <h2>Searching using Binary Search Algorithm</h2>
+      <p>Binary search efficiently finds an element in a **sorted array**. Here’s a Java example:</p>
+      <pre><code>class BinarySearchExample {
+    public static void main(String[] args) {
+        int[] arr = {1, 3, 5, 7, 9};
+        int target = 5;
+        int left = 0, right = arr.length - 1;
+        boolean found = false;
+
+        while(left &lt;= right) {
+            int mid = left + (right - left)/2;
+            if(arr[mid] == target) {
+                found = true;
+                System.out.println(target + " found at index " + mid);
+                break;
+            } else if(arr[mid] &lt; target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        if(!found)
+            System.out.println(target + " not found in array");
+    }
+}</code></pre>
+    </section>
+
+    <a href="Arrays.html" class="back-button">← Back to Home</a>
+  </main>
+   <footer>
+        © 2025 All Rights Reserved for NBKRIST, authored by Hari Babu Mutchakala.
+    </footer>
+</body>
+</html>

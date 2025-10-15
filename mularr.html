@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Multi-Dimensional Arrays Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9fafb;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #d8eefe;
+            color: #1a1a1a;
+            padding: 15px 10px;
+            text-align: center;
+            border-bottom: 2px solid #ccc;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 2em;
+            color: #003366;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h2 {
+            color: red;
+            border-left: 5px solid #007bff;
+            padding-left: 10px;
+            margin-top: 30px;
+        }
+
+        pre {
+            background: #f4f4f4;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+
+        code {
+            color: #000;
+            font-family: Consolas, monospace;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #eef4fc;
+            padding: 1rem;
+            color: #555;
+            border-top: 1px solid #d6e0f0;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.6em;
+            }
+
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>NBKRIST Java Hub - Java Multi-Dimensional Arrays</h1>
+        <p>A Practical Guide for Engineering Students</p>
+    </header>
+
+    <div class="container">
+        <a href="Arrays.html" class="back-button">← Back to Home</a>
+        <h2>Why Should You Learn Multidimensional Arrays?</h2>
+        <p>
+            As someone who has worked in the IT industry for over a decade, I can confidently say that
+            **multidimensional arrays** are a foundation for solving many real-world problems.
+            During my projects, I used them for **matrix operations**, **data storage**, and even **image processing**
+            tasks.
+            Understanding multidimensional arrays helps you visualize data in structured forms like tables, grids, and
+            cubes.
+        </p>
+        <p><strong>Here’s why they matter:</strong></p>
+        <ul>
+            <li>They allow structured storage of complex data (like 2D tables or 3D matrices).</li>
+            <li>Used in **Data Science and AI** for representing datasets, images, and tensors before moving to
+                frameworks like NumPy or TensorFlow.</li>
+            <li>Improve efficiency and clarity when working with tabular or multi-layered data.</li>
+            <li>Commonly used in **games, simulations, and visualization software**.</li>
+        </ul>
+
+        <h2>Two-Dimensional Arrays</h2>
+        <p>
+            A two-dimensional array is an array of arrays, often visualized as a table (rows and columns).
+            You can think of it as a spreadsheet or matrix.
+            Let’s look at a simple example of creating and using a 2D array in Java.
+        </p>
+
+        <pre><code>// Example: 2D Array Declaration and Usage
+public class TwoDArrayExample {
+    public static void main(String[] args) {
+        int[][] table = {
+            {10, 20, 30},
+            {40, 50, 60},
+            {70, 80, 90}
+        };
+
+        System.out.println("Displaying the 2D Table:");
+        for (int i = 0; i < table.length; i++) {
+            for (int j = 0; j < table[i].length; j++) {
+                System.out.print(table[i][j] + "\t");
+            }
+            System.out.println();
+        }
+    }
+}
+</code></pre>
+
+        <h3>💡 Real-time Example: Representing a Student Marks Table</h3>
+        <p>
+            Imagine you’re building a small Student Marks Management System.
+            Each row represents a student, and each column represents their marks in different subjects.
+        </p>
+
+        <pre><code>// Real-time Example: Student Marks Table
+public class StudentMarks {
+    public static void main(String[] args) {
+        int[][] marks = {
+            {85, 90, 95}, // Student 1
+            {78, 82, 89}, // Student 2
+            {92, 88, 84}  // Student 3
+        };
+
+        System.out.println("Student Marks Table:");
+        for (int i = 0; i < marks.length; i++) {
+            System.out.print("Student " + (i+1) + ": ");
+            for (int j = 0; j < marks[i].length; j++) {
+                System.out.print(marks[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+</code></pre>
+
+        <h2>Three-Dimensional Arrays</h2>
+        <p>
+            Three-dimensional arrays are like a cube of data — an array of 2D arrays.
+            They are useful in graphics, scientific simulations, and handling multi-layered data.
+        </p>
+
+        <pre><code>// Example: 3D Array Demonstration
+public class ThreeDArrayExample {
+    public static void main(String[] args) {
+        int[][][] cube = {
+            { {1, 2}, {3, 4} },
+            { {5, 6}, {7, 8} }
+        };
+
+        System.out.println("3D Array Elements:");
+        for (int i = 0; i < cube.length; i++) {
+            for (int j = 0; j < cube[i].length; j++) {
+                for (int k = 0; k < cube[i][j].length; k++) {
+                    System.out.print(cube[i][j][k] + " ");
+                }
+                System.out.println();
+            }
+            System.out.println("-----");
+        }
+    }
+}
+</code></pre>
+
+        <h2>Arrays of Varying Lengths</h2>
+        <p>
+            Java allows you to create multidimensional arrays with varying lengths for each row — also known as **jagged
+            arrays**.
+            They’re useful when data rows are uneven, such as storing different numbers of test scores per student.
+        </p>
+
+        <pre><code>// Example: Jagged Array
+public class JaggedArrayExample {
+    public static void main(String[] args) {
+        int[][] scores = {
+            {90, 80},
+            {85, 88, 92},
+            {78}
+        };
+
+        System.out.println("Displaying Jagged Array:");
+        for (int i = 0; i < scores.length; i++) {
+            for (int j = 0; j < scores[i].length; j++) {
+                System.out.print(scores[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+</code></pre>
+
+        <a href="Arrays.html" class="back-button">⬅ Back to Home</a>
+    </div>
+    <footer>
+        © 2025 All Rights Reserved for NBKRIST, authored by Hari Babu Mutchakala.
+    </footer>
+</body>
+
+</html>
