@@ -164,7 +164,8 @@
                 <li><strong>TIMED_WAITING:</strong> Waiting for a specified time (e.g., <code>sleep()</code> or a timeout on <code>wait()</code>). "I'll wait exactly 5 minutes, then I'm out!"</li>
                 <li><strong>TERMINATED:</strong> Finished execution. The job's done. Time to clean up and go home. 👋</li>
             </ul>
-
+            <img src="lifecycle.png" alt="Threads Life Cycle"
+                style="width:100%; max-width:600px; display:block; margin: 0 auto 20px auto;">
             <div class="tip">
                 <h3>💡 Pro Tip: Never Call a Thread's <code>run()</code> Directly!</h3>
                 <p>Always use <code>start()</code>. Calling <code>run()</code> just executes the code in the **current** thread, defeating the whole purpose of creating a new one! It's like telling an employee to 'start' a task, but then doing it yourself on *your* desk.</p>
@@ -174,7 +175,7 @@
         <hr>
 
         <section>
-            <h2>2. Synchronization (The Bouncer at the Club 🕺)</h2>
+            <h2>2. Synchronization (The Bathroom Key at a Coffee Shop ☕🚪)</h2>
             <div class="sync-detail">
                 <h3>Java Multi-threading Synchronization: The Core Idea</h3>
                 <p>When two or more threads access a shared resource (like a database connection or a counter variable), they need some way to ensure that the resource will be accessed by **only one thread at a time**. The process by which this is achieved is called **synchronization**.</p>
