@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NBKRIST Java Hub - Examples</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+        }
+
+        header, footer {
+            background-color: #34495e;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 15px 10px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        header h2 {
+            margin: 5px 0 0 0;
+            font-size: 1.25em;
+            font-weight: normal;
+            color: #bdc3c7;
+        }
+
+        .tabs {
+            display: flex;
+            background-color: #ecf0f1;
+            overflow-x: auto;
+            border-bottom: 2px solid #bdc3c7;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            color: #2c3e50;
+            flex-shrink: 0;
+            border-bottom: 3px solid transparent;
+            transition: 0.3s;
+        }
+
+        .tab:hover {
+            background-color: #dfe6e9;
+        }
+
+        .tab.active {
+            border-bottom: 3px solid #e74c3c;
+            font-weight: bold;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 22px;
+            background-color: #ffffff;
+            border-top: none;
+            max-height: 80vh;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 1em; /* increased by 1 point */
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        footer {
+            font-size: 0.95em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+                .back-btn {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 8px 16px;
+            background-color: #e74c3c;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>NBKRIST Java Hub</h1>
+        <h2>Class Room Examples</h2>
+    </header>
+<a class="back-btn" href="multithreading.html">← Back to Home</a>
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" data-tab="thread-example">Thread Example</div>
+            <div class="tab" data-tab="multiple-threads">Multiple Threads Demo</div>
+            <div class="tab" data-tab="race-condition">Race Condition</div>
+            <div class="tab" data-tab="synchronized-method">Synchronized Method</div>
+            <div class="tab" data-tab="synchronized-block">Synchronized Block</div>
+            <div class="tab" data-tab="inter-thread-communication">Inter-Thread Communication</div>
+        </div>
+
+        <!-- Thread Example -->
+        <div id="thread-example" class="tab-content active">
+/**
+ * Demonstrates how to create and run threads in Java using both
+ * the Thread class and the Runnable interface.
+ *
+ * Author: Haribabu Mutchakala NBKRIST
+ * Date: 15-10-2025
+ * Version: 1.0
+ */
+class ThreadExample {
+
+    /**
+     * Thread created by extending the Thread class.
+     */
+    static class MyThread extends Thread {
+        private String message;
+        public MyThread(String message) { this.message = message; }
+        @Override
+        public void run() { System.out.println("Thread class: " + message); }
+    }
+
+    /**
+     * Thread created by implementing the Runnable interface.
+     */
+    static class MyRunnable implements Runnable {
+        private String message;
+        public MyRunnable(String message) { this.message = message; }
+        @Override
+        public void run() { System.out.println("Runnable interface: " + message); }
+    }
+
+    public static void main(String[] args) {
+        MyThread thread1 = new MyThread("Hello from MyThread!");
+        thread1.start();
+
+        MyRunnable runnableTask = new MyRunnable("Hello from MyRunnable!");
+        Thread thread2 = new Thread(runnableTask);
+        thread2.start();
+
+        try { thread1.join(); thread2.join(); } catch (InterruptedException e) { e.printStackTrace(); }
+
+        System.out.println("All threads have completed execution.");
+    }
+}
+</pre>
+        </div>
+
+        <!-- Multiple Threads Demo -->
+        <div id="multiple-threads" class="tab-content">
+<pre>
+/**
+ * Demonstration of how multiple threads in Java can execute tasks concurrently
+ * to reduce total execution time.
+ *
+ * Author: Haribabu Mutchakala NBKRIST
+ * Date: 15-10-2025
+ * Version: 1.0
+ */
+class Cook implements Runnable {
+
+    private String name;
+    private long timeToPrepareDish;
+    private String dish;
+
+    public Cook(String name, long timeToPrepareDish, String dish) {
+        this.name = name;
+        this.timeToPrepareDish = timeToPrepareDish;
+        this.dish = dish;
+    }
+
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName() + " is cooking\t" + dish);
+        try { Thread.sleep(timeToPrepareDish); } catch (InterruptedException e) { e.printStackTrace(); }
+        System.out.println(name + " has finished cooking.");
+    }
+}
+
+public class MultipleThreadsDEmo {
+    public static void main(String[] args) {
+        Cook sambarCook = new Cook("Sambar Cook", 5000, "Sambar");
+        Cook riceCook = new Cook("Rice Cook", 8000, "Rice");
+        Cook beansFryCook = new Cook("Beans Fry Cook", 10000, "Chutney");
+        Cook rasamCook = new Cook("Rasam Cook", 9000, "Rasam");
+
+        Thread sambarThread = new Thread(sambarCook);
+        Thread riceThread = new Thread(riceCook);
+        Thread beansFryThread = new Thread(beansFryCook);
+        Thread rasamThread = new Thread(rasamCook);
+
+        sambarThread.start(); riceThread.start(); beansFryThread.start(); rasamThread.start();
+
+        try {
+            sambarThread.join(); riceThread.join(); beansFryThread.join(); rasamThread.join();
+            System.out.println("Meal is ready to be served!");
+        } catch (InterruptedException e) { e.printStackTrace(); }
+    }
+}
+</pre>
+        </div>
+
+        <!-- Race Condition -->
+        <div id="race-condition" class="tab-content">
+<pre>
+/**
+ * Demonstrates the effect of race conditions in a multithreaded environment
+ * when multiple threads access a shared resource without proper synchronization.
+ *
+ * Author: Haribabu Mutchakala NBKRIST
+ * Date: 15-10-2025
+ * Version: 1.0
+ */
+class Printer {
+    public void print(String msg) {
+        System.out.print("[" + msg);
+        try { Thread.sleep(2000); } catch (InterruptedException e) {}
+        System.out.println("]");
+    }
+}
+
+class PrintThread implements Runnable {
+    private Printer printer; private String msg;
+    public PrintThread(Printer printer, String msg) { this.printer = printer; this.msg = msg; }
+    @Override
+    public void run() { printer.print(msg); }
+}
+
+public class RaceCondition {
+    public static void main(String[] args) throws InterruptedException {
+        Printer printer = new Printer();
+        Thread t1 = new Thread(new PrintThread(printer, "Hello"));
+        Thread t2 = new Thread(new PrintThread(printer, "Welcome"));
+        Thread t3 = new Thread(new PrintThread(printer, "To Java"));
+        t1.start(); t2.start(); t3.start();
+        t1.join(); t2.join(); t3.join();
+        System.out.println("All threads have finished execution of Printing.");
+    }
+}
+</pre>
+        </div>
+
+        <!-- Synchronized Method -->
+        <div id="synchronized-method" class="tab-content">
+<pre>
+/**
+ * Demonstrates proper synchronization of multiple threads in Java
+ * using the synchronized method.
+ *
+ * Author: Haribabu Mutchakala NBKRIST
+ * Date: 15-10-2025
+ * Version: 1.0
+ */
+class Printer {
+    public<B style="color: #e74c3c;"> synchronized </B> void print(String msg) {
+        System.out.print("[" + msg);
+        try { Thread.sleep(2000); } catch (InterruptedException e) {}
+        System.out.println("]");
+    }
+}
+
+class PrintThread implements Runnable {
+    private Printer printer; private String msg;
+    public PrintThread(Printer printer, String msg) { this.printer = printer; this.msg = msg; }
+    @Override
+    public void run() { printer.print(msg); }
+}
+
+public class RaceCondition {
+    public static void main(String[] args) throws InterruptedException {
+        Printer printer = new Printer();
+        Thread t1 = new Thread(new PrintThread(printer, "Hello"));
+        Thread t2 = new Thread(new PrintThread(printer, "Welcome"));
+        Thread t3 = new Thread(new PrintThread(printer, "To Java"));
+        t1.start(); t2.start(); t3.start();
+        t1.join(); t2.join(); t3.join();
+        System.out.println("All threads have finished execution of Printing.");
+    }
+}
+</pre>
+        </div>
+         <div id="inter-thread-communication" class="tab-content">
+           purpose: Inter-thread communication using wait, notify, notifyAll, how threads communicate gracefully?
+
+         </div>
+
+        <!-- Synchronized Block -->
+        <div id="synchronized-block" class="tab-content">
+<pre>
+/**
+ * Demonstrates proper synchronization of multiple threads in Java
+ * using a synchronized block.
+ *
+ * Author: Haribabu Mutchakala NBKRIST
+ * Date: 15-10-2025
+ * Version: 1.0
+ */
+class Printer {
+    public void print(String msg) {
+       <B style="color: #e74c3c;"> synchronized(this)</B> {
+            System.out.print("[" + msg);
+            try { Thread.sleep(2000); } catch (InterruptedException e) {}
+            System.out.println("]");
+        }
+    }
+}
+
+class PrintThread implements Runnable {
+    private Printer printer; private String msg;
+    public PrintThread(Printer printer, String msg) { this.printer = printer; this.msg = msg; }
+    @Override
+    public void run() { printer.print(msg); }
+}
+
+public class RaceCondition {
+    public static void main(String[] args) throws InterruptedException {
+        Printer printer = new Printer();
+        Thread t1 = new Thread(new PrintThread(printer, "Hello"));
+        Thread t2 = new Thread(new PrintThread(printer, "Welcome"));
+        Thread t3 = new Thread(new PrintThread(printer, "To Java"));
+        t1.start(); t2.start(); t3.start();
+        t1.join(); t2.join(); t3.join();
+        System.out.println("All threads have finished execution of Printing.");
+    }
+}
+</pre>
+        </div>
+    </div>
+
+    <footer>
+        All rights reserved for NBKRIST and authored by Hari Babu Mutchakala
+    </footer>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
