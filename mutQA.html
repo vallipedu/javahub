@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NBKRIST - Java Hub | Multithreading Q&A</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background-color: #f8f9fb;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(90deg, #002147, #00509e);
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 1.8em;
+      letter-spacing: 1px;
+      font-weight: 600;
+      position: relative;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      color: #00509e;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 6px;
+    }
+
+    .qa {
+      margin-bottom: 25px;
+    }
+
+    .question {
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 8px;
+    }
+
+    .answer {
+      background: #f2f6fa;
+      border-left: 4px solid #00509e;
+      padding: 12px 16px;
+      border-radius: 6px;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #002147;
+      color: #ccc;
+      padding: 12px;
+      font-size: 0.9em;
+      letter-spacing: 0.5px;
+      margin-top: 40px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      background-color: #00509e;
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: 0.3s;
+      margin: 10px 0;
+    }
+
+    .back-btn:hover {
+      background-color: #003f7f;
+    }
+
+    .top-nav, .bottom-nav {
+      text-align: center;
+      margin: 10px 0 20px 0;
+    }
+
+    @media (max-width: 600px) {
+      main { padding: 20px; }
+      header { font-size: 1.4em; }
+    }
+  </style>
+</head>
+<body>
+  <header>NBKRIST - Java Hub</header>
+
+  <div class="top-nav">
+    <a href="multithreading.html" class="back-btn">← Back to Home</a>
+  </div>
+
+  <main>
+    <h2>Java Multithreading Interview Q&A</h2>
+
+    <div class="qa">
+      <div class="question">1. How do you create threads in Java? Explain the recommended approaches and their trade-offs.</div>
+      <div class="answer">
+        Threads can be created in two main ways:  
+        (a) Extending the <code>Thread</code> class and overriding its <code>run()</code> method.  
+        (b) Implementing the <code>Runnable</code> or <code>Callable</code> interface and passing the object to a <code>Thread</code> instance.  
+        <br><br>
+        The preferred approach is using <code>Runnable</code> or <code>Callable</code>, as it allows inheritance from other classes and promotes better code organization.
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="question">2. What are the different states of a thread, and how do state transitions occur from creation to termination?</div>
+      <div class="answer">
+        Thread states include <b>New</b>, <b>Runnable</b>, <b>Blocked</b>, <b>Waiting</b>, <b>Timed Waiting</b>, and <b>Terminated</b>.  
+        Transitions occur as follows: A thread starts in the <i>New</i> state, becomes <i>Runnable</i> after <code>start()</code>, may enter <i>Blocked</i> or <i>Waiting</i> when waiting for resources, and ends in <i>Terminated</i> once <code>run()</code> completes.
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="question">3. Why is synchronization necessary in a Java multithreaded environment?</div>
+      <div class="answer">
+        Synchronization ensures controlled access to shared resources, preventing race conditions and inconsistent data. It guarantees that only one thread can execute a synchronized block or method at a time.
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="question">4. How do you assign thread priority in Java, and what effects (if any) does thread priority have on program behavior?</div>
+      <div class="answer">
+        Thread priority can be set using <code>setPriority(int level)</code> (values from 1 to 10).  
+        While higher priority suggests preferred execution, actual scheduling depends on the JVM and underlying OS, so behavior may vary.
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="question">5. What is a deadlock in a multithreaded Java application, and what are common root causes?</div>
+      <div class="answer">
+        A deadlock occurs when two or more threads are waiting indefinitely for each other’s locks.  
+        Common causes include nested locks, inconsistent lock ordering, and poor synchronization design.
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="question">6. What are the consequences of a deadlock, and how can deadlocks be prevented or mitigated?</div>
+      <div class="answer">
+        Deadlocks freeze program execution, leading to unresponsiveness.  
+        Prevention techniques include acquiring locks in a consistent order, using try-lock mechanisms with timeouts, and minimizing shared resource usage.
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="question">7. What is a race condition, and under what circumstances do race conditions occur?</div>
+      <div class="answer">
+        A race condition occurs when multiple threads access shared data simultaneously and the final outcome depends on the order of execution.  
+        It typically occurs when synchronization is missing or improperly applied.
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="question">8. How can race conditions be prevented or controlled in Java?</div>
+      <div class="answer">
+        Use synchronization constructs like <code>synchronized</code> blocks, <code>ReentrantLock</code>, or atomic classes from <code>java.util.concurrent</code> to ensure thread-safe access to shared resources.
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="question">9. What is inter-thread communication?</div>
+      <div class="answer">
+        Inter-thread communication allows threads to coordinate actions and share information efficiently, typically using methods like <code>wait()</code>, <code>notify()</code>, and <code>notifyAll()</code> within synchronized contexts.
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="question">10. How can threads communicate with each other safely and gracefully? Explain the mechanisms and best practices in detail.</div>
+      <div class="answer">
+        Threads communicate via shared objects using <code>wait()</code> and <code>notify()</code> for coordination.  
+        Modern best practices recommend higher-level concurrency utilities such as <code>BlockingQueue</code>, <code>CountDownLatch</code>, or <code>Semaphore</code> for safer, more maintainable designs.
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <a href="multithreading.html" class="back-btn">← Back to Home</a>
+    </div>
+  </main>
+
+  <footer>
+    All rights reserved for NBKRIST and authored by Hari Babu Mutchakala
+  </footer>
+</body>
+</html>
