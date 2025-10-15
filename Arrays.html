@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -128,10 +129,21 @@
     }
 
     @media (max-width: 768px) {
-      header h1 { font-size: 1.6rem; }
-      nav ul { flex-direction: column; }
-      nav ul li { margin: 0.5rem 0; }
-      main { padding: 1.2rem; }
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      nav ul {
+        flex-direction: column;
+      }
+
+      nav ul li {
+        margin: 0.5rem 0;
+      }
+
+      main {
+        padding: 1.2rem;
+      }
     }
 
     html {
@@ -139,6 +151,7 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <h1>NBKRIST Java Hub - Java Arrays Learning Guide</h1>
@@ -151,7 +164,7 @@
       <li><a href="dsa.html">DSA</a></li>
       <li><a href="utils.html">Arrays Utilities</a></li>
       <li><a href="arrinterviewques.html">Q & A</a></li>
-      </ul>
+    </ul>
   </nav>
 
   <main>
@@ -161,10 +174,17 @@
 
       <h2> Arrays in Java – Industry Insight</h2>
 
-      <p>As a software engineer, I have relied on arrays extensively in real-world IT applications. Arrays provide fast, indexed access to data, making them ideal for performance-critical tasks. I have used arrays in projects for sorting, searching, and managing large datasets efficiently. In enterprise systems, arrays are invaluable for handling buffers, storing transaction data, and implementing algorithms. Even with advanced data structures available, arrays remain the backbone for both static and dynamic data handling. Understanding arrays helps developers write optimized, scalable, and maintainable Java code. Mastery of arrays is a key skill expected by the IT industry for any serious Java programmer.</p>
+      <p>As a software engineer, I have relied on arrays extensively in real-world IT applications. Arrays provide fast,
+        indexed access to data, making them ideal for performance-critical tasks. I have used arrays in projects for
+        sorting, searching, and managing large datasets efficiently. In enterprise systems, arrays are invaluable for
+        handling buffers, storing transaction data, and implementing algorithms. Even with advanced data structures
+        available, arrays remain the backbone for both static and dynamic data handling. Understanding arrays helps
+        developers write optimized, scalable, and maintainable Java code. Mastery of arrays is a key skill expected by
+        the IT industry for any serious Java programmer.</p>
 
       <h2>Introduction</h2>
-      <p>Arrays are containers that hold multiple values of the same type. They help manage data efficiently in Java.</p>
+      <p>Arrays are containers that hold multiple values of the same type. They help manage data efficiently in Java.
+      </p>
       <pre><code>class ArrayIntro {
   public static void main(String[] args) {
     int[] marks = {85, 90, 75};
@@ -186,7 +206,8 @@
     System.out.println("Second Value: " + values[1]);
   }
 }</code></pre>
-      <div class="tip">🧠 Use <code>new</code> keyword for allocating memory, or initialize directly when values are known.</div>
+      <div class="tip">🧠 Use <code>new</code> keyword for allocating memory, or initialize directly when values are
+        known.</div>
     </section>
 
     <section id="storage">
@@ -198,7 +219,8 @@
     System.out.println("Reference of array: " + data);
   }
 }</code></pre>
-      <div class="tip">🧩 The array variable stores the memory address (reference), not the actual values directly.</div>
+      <div class="tip">🧩 The array variable stores the memory address (reference), not the actual values directly.
+      </div>
     </section>
 
     <section id="access">
@@ -243,17 +265,42 @@
 
     <section id="dynamic">
       <h2>Dynamic Change of Array Size</h2>
-      <p>Arrays are fixed in size, but you can create a new larger array using <code>Arrays.copyOf()</code>.</p>
-      <pre><code>import java.util.Arrays;
-class DynamicArray {
-  public static void main(String[] args) {
-    int[] oldArr = {1, 2, 3};
-    int[] newArr = Arrays.copyOf(oldArr, 5);
-    newArr[3] = 4; newArr[4] = 5;
-    System.out.println(Arrays.toString(newArr));
-  }
-}</code></pre>
-      <div class="tip">🚀 To resize, use <code>Arrays.copyOf()</code> or use <code>ArrayList</code> for flexible collections.</div>
+      <p>In Java, core arrays (the ones declared using []) have a fixed size once created.
+You cannot directly change their size dynamically like in some scripting languages (e.g., Python lists).
+However, you can simulate dynamic resizing by creating a new array with a different size and copying the old elements into it — this is what happens internally in classes like ArrayList.</p>
+      <pre><code>public class RawDynamicArray {
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 3};  // initial fixed-size array
+        System.out.println("Original array:");
+        printArray(numbers);
+
+        // Let's "expand" the array to hold one more element
+        int newElement = 4;
+        int[] temp = new int[numbers.length + 1]; // new larger array
+
+        // Copy elements manually (you can also use System.arraycopy)
+        for (int i = 0; i < numbers.length; i++) {
+            temp[i] = numbers[i];
+        }
+
+        // Add new element
+        temp[temp.length - 1] = newElement;
+
+        // Reassign reference
+        numbers = temp;
+
+        System.out.println("After resizing:");
+        printArray(numbers);
+    }
+
+    static void printArray(int[] arr) {
+        for (int n : arr) System.out.print(n + " ");
+        System.out.println();
+    }
+}
+</code></pre>
+      <div class="tip">🚀 To resize, use <code>Arrays.copyOf()</code> or use <code>ArrayList</code> for flexible
+        collections.</div>
     </section>
 
     <section id="vectors">
@@ -268,7 +315,8 @@ class DynamicArray {
     for (int s : sum) System.out.print(s + " ");
   }
 }</code></pre>
-      <div class="tip">📈 Arrays can represent mathematical vectors — useful in graphics, physics, and data analysis.</div>
+      <div class="tip">📈 Arrays can represent mathematical vectors — useful in graphics, physics, and data analysis.
+      </div>
     </section>
   </main>
 
@@ -276,4 +324,5 @@ class DynamicArray {
     © 2025 All Rights Reserved for NBKRIST, authored by Hari Babu Mutchakala.
   </footer>
 </body>
+
 </html>
