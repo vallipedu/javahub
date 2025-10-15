@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -99,8 +100,13 @@
     }
 
     @media (max-width: 768px) {
-      header h1 { font-size: 1.6rem; }
-      main { padding: 1.2rem; }
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      main {
+        padding: 1.2rem;
+      }
     }
 
     html {
@@ -108,6 +114,7 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <h1>NBKRIST Java Hub - Java Arrays & ArrayList</h1>
@@ -120,22 +127,30 @@
     <section id="expert-intro">
       <h2>Industry Expert Insight</h2>
       <p>
-        As an experienced programmer, I have observed that in most cases, developers rely on Java's built-in utilities for handling data structures unless specific performance or design requirements demand custom implementations. 
-        The <strong>java.util</strong> package is particularly important as it provides a wide range of utility classes that simplify data handling. 
+        As an experienced programmer, I have observed that in most cases, developers rely on Java's built-in utilities
+        for handling data structures unless specific performance or design requirements demand custom implementations.
+        The <strong>java.util</strong> package is particularly important as it provides a wide range of utility classes
+        that simplify data handling.
         My recommendation is that every Java programmer should explore and master this package.
       </p>
       <p>
-        This page focuses on two key topics: performing different operations on arrays using the <strong>Arrays</strong> class, and working with dynamic arrays using the <strong>ArrayList</strong> class, which is a widely used subclass of the <strong>List</strong> interface from the <strong>java.util</strong> package. In my experience, <strong>ArrayList</strong> is extensively used in real-world applications, making it essential for your success in Java programming.
+        This page focuses on two key topics: performing different operations on arrays using the <strong>Arrays</strong>
+        class, and working with dynamic arrays using the <strong>ArrayList</strong> class, which is a widely used
+        subclass of the <strong>List</strong> interface from the <strong>java.util</strong> package. In my experience,
+        <strong>ArrayList</strong> is extensively used in real-world applications, making it essential for your success
+        in Java programming.
       </p>
-      <div class="tip">💡 Tip: Understanding java.util and ArrayList early in your learning journey will save time and make your programs more efficient and maintainable.</div>
+      <div class="tip">💡 Tip: Understanding java.util and ArrayList early in your learning journey will save time and
+        make your programs more efficient and maintainable.</div>
     </section>
 
     <section id="class-arrays">
       <h2>Class Arrays</h2>
-      <p>The <strong>Arrays</strong> class in <strong>java.util</strong> provides methods to manipulate arrays such as sorting, searching, and filling.</p>
+      <p>The <strong>Arrays</strong> class in <strong>java.util</strong> provides methods to manipulate arrays such as
+        sorting, searching, and filling.</p>
       <pre><code>import java.util.Arrays;
 
-public class ArraysExample {
+public class ArrayFillExample {
     public static void main(String[] args) {
         int[] numbers = {5, 3, 8, 1};
         System.out.println("Original array: " + Arrays.toString(numbers));
@@ -146,10 +161,25 @@ public class ArraysExample {
     }
 }</code></pre>
     </section>
-
+    <section id="dynamic">
+      <h2>Dynamic Change of Array Size</h2>
+      <p>Arrays are fixed in size, but you can create a new larger array using <code>Arrays.copyOf()</code>.</p>
+      <pre><code>import java.util.Arrays;
+class DynamicArray {
+  public static void main(String[] args) {
+    int[] oldArr = {1, 2, 3};
+    int[] newArr = Arrays.copyOf(oldArr, 5);
+    newArr[3] = 4; newArr[4] = 5;
+    System.out.println(Arrays.toString(newArr));
+  }
+}</code></pre>
+      <div class="tip">🚀 To resize, use <code>Arrays.copyOf()</code> or use <code>ArrayList</code> for flexible
+        collections.</div>
+    </section>
     <section id="sorting">
       <h2>Sorting of Arrays</h2>
-      <p>Sorting arrays is essential for efficient data handling. The <strong>Arrays.sort()</strong> method provides an easy way to sort.</p>
+      <p>Sorting arrays is essential for efficient data handling. The <strong>Arrays.sort()</strong> method provides an
+        easy way to sort.</p>
       <pre><code>import java.util.Arrays;
 
 public class SortExample {
@@ -159,6 +189,18 @@ public class SortExample {
         System.out.println("Sorted array: " + Arrays.toString(numbers));
     }
 }</code></pre>
+    </section>
+
+
+    public static void main(String[] args) {
+    int[] oldArr = {1, 2, 3};
+    int[] newArr = Arrays.copyOf(oldArr, 5);
+    newArr[3] = 4; newArr[4] = 5;
+    System.out.println(Arrays.toString(newArr));
+    }
+    }</code></pre>
+    <div class="tip">🚀 To resize, use <code>Arrays.copyOf()</code> or use <code>ArrayList</code> for flexible
+      collections.</div>
     </section>
 
     <section id="searching">
@@ -178,7 +220,9 @@ public class SearchExample {
     <section id="arraylist">
       <h2>What is ArrayList and Its Usage</h2>
       <p>
-        The <strong>ArrayList</strong> class is a resizable array implementation of the <strong>List</strong> interface. It allows dynamic growth, unlike standard arrays, and provides convenient methods for adding, removing, and accessing elements.
+        The <strong>ArrayList</strong> class is a resizable array implementation of the <strong>List</strong> interface.
+        It allows dynamic growth, unlike standard arrays, and provides convenient methods for adding, removing, and
+        accessing elements.
       </p>
       <pre><code>import java.util.ArrayList;
 
@@ -206,4 +250,5 @@ public class ArrayListExample {
     © 2025 All Rights Reserved for NBKRIST, authored by Hari Babu Mutchakala.
   </footer>
 </body>
+
 </html>
