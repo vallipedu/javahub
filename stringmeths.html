@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java String Methods – Developer Quick Reference</title>
+    <style>
+        /* ---------- GLOBAL STYLES ---------- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #005f73;
+            color: white;
+            text-align: center;
+            padding: 25px 10px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            font-size: 1rem;
+        }
+
+        main {
+            padding: 20px 25px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        h2 {
+            color: #0a9396;
+            border-bottom: 3px solid #94d2bd;
+            padding-bottom: 6px;
+            margin-top: 35px;
+            font-size: 1.4rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+        /* ---------- TABLE STYLES ---------- */
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px 15px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #0a9396;
+            color: white;
+            font-size: 1rem;
+        }
+
+        td {
+            font-size: 0.95rem;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f1f3f5;
+        }
+
+        code {
+            background-color: #f6f8fa;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        .output {
+            background-color: #e9f5ff;
+            color: #005f73;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: #001219;
+            color: #e0fbfc;
+            text-align: center;
+            padding: 18px 10px;
+            margin-top: 50px;
+            font-size: 0.9rem;
+        }
+
+        /* ---------- RESPONSIVE DESIGN ---------- */
+        @media (max-width: 900px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+            header p {
+                font-size: 0.95rem;
+            }
+            main {
+                padding: 15px;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+            th, td {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.3rem;
+            }
+            header p {
+                font-size: 0.9rem;
+            }
+            p, td, th {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ---------- BACK TO TOP BUTTON ---------- */
+        #backToTop {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 25px;
+            z-index: 99;
+            font-size: 16px;
+            background-color: #0a9396;
+            color: white;
+            border: none;
+            outline: none;
+            padding: 12px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+
+        #backToTop:hover {
+            background-color: #005f73;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>NBKRIST Java Hub - Java String Methods – Quick Reference</h1>
+        <p>Essential String operations every Java professional should master for efficient, industry-ready code.</p>
+    </header>
+
+    <main>
+          <a href="StringHandling.html" class="back-button">← Back to Home</a>
+        <h2>Why Master Java String Methods?</h2>
+        <p>
+            Strings are the backbone of most real-world software applications — used in user input validation,
+            API communication, data parsing, and reporting. 
+            Mastering these core String methods helps developers write cleaner, more optimized, and reliable programs.
+            Understanding how to efficiently manipulate and compare strings improves data accuracy and performance
+            in every layer of enterprise software.
+        </p>
+
+        <h2>Core Java String Methods with Examples and Outputs</h2>
+
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                    <th>Example Code</th>
+                    <th>Output</th>
+                </tr>
+
+                <tr>
+                    <td><code>length()</code></td>
+                    <td>Returns the number of characters in the string.</td>
+                    <td><code>System.out.println("Hello".length());</code></td>
+                    <td class="output">5</td>
+                </tr>
+
+                <tr>
+                    <td><code>trim()</code></td>
+                    <td>Removes extra spaces from both ends of the string.</td>
+                    <td><code>System.out.println("  Java  ".trim());</code></td>
+                    <td class="output">Java</td>
+                </tr>
+
+                <tr>
+                    <td><code>substring(int start, int end)</code></td>
+                    <td>Extracts a substring between specified indexes.</td>
+                    <td><code>System.out.println("developer".substring(0, 3));</code></td>
+                    <td class="output">dev</td>
+                </tr>
+
+                <tr>
+                    <td><code>regionMatches()</code></td>
+                    <td>Compares regions of two strings for equality.</td>
+                    <td><code>String a="ApplicationServer";<br>String b="ServerRoom";<br>System.out.println(a.regionMatches(11, b, 0, 6));</code></td>
+                    <td class="output">true</td>
+                </tr>
+
+                <tr>
+                    <td><code>toLowerCase()</code></td>
+                    <td>Converts the string to all lowercase characters.</td>
+                    <td><code>System.out.println("HELLO".toLowerCase());</code></td>
+                    <td class="output">hello</td>
+                </tr>
+
+                <tr>
+                    <td><code>toUpperCase()</code></td>
+                    <td>Converts the string to all uppercase characters.</td>
+                    <td><code>System.out.println("java".toUpperCase());</code></td>
+                    <td class="output">JAVA</td>
+                </tr>
+
+                <tr>
+                    <td><code>indexOf()</code></td>
+                    <td>Returns the position of the first occurrence of a substring.</td>
+                    <td><code>System.out.println("technology".indexOf("nology"));</code></td>
+                    <td class="output">4</td>
+                </tr>
+
+                <tr>
+                    <td><code>charAt()</code></td>
+                    <td>Returns the character at a specified index.</td>
+                    <td><code>System.out.println("Code".charAt(1));</code></td>
+                    <td class="output">o</td>
+                </tr>
+
+                <tr>
+                    <td><code>concat()</code></td>
+                    <td>Joins two strings together.</td>
+                    <td><code>System.out.println("Java".concat("FX"));</code></td>
+                    <td class="output">JavaFX</td>
+                </tr>
+
+                <tr>
+                    <td><code>equals()</code></td>
+                    <td>Checks if two strings are equal (case-sensitive).</td>
+                    <td><code>System.out.println("Java".equals("java"));</code></td>
+                    <td class="output">false</td>
+                </tr>
+
+                <tr>
+                    <td><code>equalsIgnoreCase()</code></td>
+                    <td>Checks equality ignoring case differences.</td>
+                    <td><code>System.out.println("Admin".equalsIgnoreCase("admin"));</code></td>
+                    <td class="output">true</td>
+                </tr>
+
+                <tr>
+                    <td><code>startsWith()</code></td>
+                    <td>Checks if the string starts with the given prefix.</td>
+                    <td><code>System.out.println("welcome".startsWith("wel"));</code></td>
+                    <td class="output">true</td>
+                </tr>
+
+                <tr>
+                    <td><code>endsWith()</code></td>
+                    <td>Checks if the string ends with the given suffix.</td>
+                    <td><code>System.out.println("project.doc".endsWith(".doc"));</code></td>
+                    <td class="output">true</td>
+                </tr>
+
+                <tr>
+                    <td><code>split()</code></td>
+                    <td>Splits a string into an array based on a delimiter.</td>
+                    <td><code>String[] arr="A,B,C".split(",");<br>System.out.println(arr[1]);</code></td>
+                    <td class="output">B</td>
+                </tr>
+
+                <tr>
+                    <td><code>join()</code></td>
+                    <td>Combines multiple strings with a specified separator.</td>
+                    <td><code>System.out.println(String.join("-", "2025", "10", "16"));</code></td>
+                    <td class="output">2025-10-16</td>
+                </tr>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p>© All rights reserved for NBKRIST | authored Hari Shankar Mutchakala</p>
+    </footer>
+
+    <button id="backToTop" title="Go to top">↑</button>
+
+    <script>
+        // Back to Top Button
+        const topButton = document.getElementById("backToTop");
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                topButton.style.display = "block";
+            } else {
+                topButton.style.display = "none";
+            }
+        };
+
+        topButton.onclick = function() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        };
+    </script>
+
+</body>
+</html>
