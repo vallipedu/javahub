@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -53,7 +54,8 @@
     }
 
     h2 {
-      color: rgb(197, 120, 120);;
+      color: rgb(197, 120, 120);
+      ;
       margin-bottom: 10px;
     }
 
@@ -94,22 +96,26 @@
     }
   </style>
 </head>
+
 <body>
   <header>NBKRIST - Java Hub</header>
 
-    
+
 
   <div class="container">
-    <a href="fx.html" class="back-btn">⬅ Back to Index</a>
-
+    <a href="fx.html" class="back-btn">⬅ Back to Home</a>
+    <h2 style="text-align: center; color: green;">JavaFx QA</h2>
     <h2>1. How to handle events in JavaFX?</h2>
     <p>
-      In JavaFX, events are handled through an event-driven model. Event sources (like buttons) generate events, and event handlers respond to them. You can register event handlers using the <code>setOnAction()</code> or <code>addEventHandler()</code> methods.
+      In JavaFX, events are handled through an event-driven model. Event sources (like buttons) generate events, and
+      event handlers respond to them. You can register event handlers using the <code>setOnAction()</code> or
+      <code>addEventHandler()</code> methods.
     </p>
 
     <h2>2. How to handle keyboard and mouse events? Explain with an example.</h2>
     <p>
-      JavaFX provides dedicated event classes such as <code>KeyEvent</code> and <code>MouseEvent</code>. You can register listeners using methods like <code>setOnKeyPressed()</code> or <code>setOnMouseClicked()</code>.
+      JavaFX provides dedicated event classes such as <code>KeyEvent</code> and <code>MouseEvent</code>. You can
+      register listeners using methods like <code>setOnKeyPressed()</code> or <code>setOnMouseClicked()</code>.
     </p>
     <pre>
 TextField tf = new TextField();
@@ -143,33 +149,35 @@ imageView.setPreserveRatio(true);
     <h2>5. What are main components of JavaFX App Window Structure?</h2>
     <p>
       A JavaFX application window consists of three main components:
-      <ul>
-        <li><b>Stage:</b> The top-level container (main window).</li>
-        <li><b>Scene:</b> Holds the visual elements (nodes).</li>
-        <li><b>Nodes:</b> Elements like buttons, labels, images, etc.</li>
-      </ul>
+    <ul>
+      <li><b>Stage:</b> The top-level container (main window).</li>
+      <li><b>Scene:</b> Holds the visual elements (nodes).</li>
+      <li><b>Nodes:</b> Elements like buttons, labels, images, etc.</li>
+    </ul>
     </p>
 
     <h2>6. What are advantages of JavaFX Scene Builder over writing code using packages?</h2>
     <p>
-      Scene Builder provides a visual interface for designing layouts, making development faster and less error-prone. It auto-generates FXML, allowing developers to focus more on logic than manual UI coding.
+      Scene Builder provides a visual interface for designing layouts, making development faster and less error-prone.
+      It auto-generates FXML, allowing developers to focus more on logic than manual UI coding.
     </p>
 
     <h2>7. What is role of layout in JavaFX? List different layouts.</h2>
     <p>
       Layouts define how nodes are arranged in a scene. JavaFX offers several layout panes, such as:
-      <ul>
-        <li>FlowPane</li>
-        <li>BorderPane</li>
-        <li>GridPane</li>
-        <li>VBox and HBox</li>
-        <li>StackPane</li>
-      </ul>
+    <ul>
+      <li>FlowPane</li>
+      <li>BorderPane</li>
+      <li>GridPane</li>
+      <li>VBox and HBox</li>
+      <li>StackPane</li>
+    </ul>
     </p>
 
     <h2>8. Explain GridPane layout. When should we use this layout?</h2>
     <p>
-      <code>GridPane</code> arranges nodes in a flexible grid of rows and columns. It is ideal when you need form-like structures (e.g., login forms, data entry screens).
+      <code>GridPane</code> arranges nodes in a flexible grid of rows and columns. It is ideal when you need form-like
+      structures (e.g., login forms, data entry screens).
     </p>
 
     <h2>9. How do you handle button press event?</h2>
@@ -183,12 +191,217 @@ btn.setOnAction(e -> System.out.println("Button Pressed!"));
 
     <h2>10. How do you lay out nodes in Scene graph?</h2>
     <p>
-      Nodes are added to layout panes, which are part of a hierarchical <b>Scene Graph</b>. Each parent node can contain multiple children nodes, forming a tree structure that JavaFX renders efficiently.
+      Nodes are added to layout panes, which are part of a hierarchical <b>Scene Graph</b>. Each parent node can contain
+      multiple children nodes, forming a tree structure that JavaFX renders efficiently.
     </p>
 
-    <a href="index.html" class="back-btn">⬅ Back to Index</a>
+    <a href="<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaFX - Questions and Answers</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #f9fafc;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(90deg, #e6f2fc, #d3d6da);
+      color: rgb(197, 120, 120);
+      padding: 20px 0;
+      text-align: center;
+      font-size: 1.8em;
+      font-weight: bold;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    nav {
+      background: #e3f2fd;
+      text-align: center;
+      padding: 10px 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a {
+      color: #0078d4;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #005fa3;
+    }
+
+    .container {
+      width: 85%;
+      margin: 40px auto;
+      background: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: rgb(197, 120, 120);
+      ;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    footer {
+      background: #0078d4;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 0.95em;
+      margin-top: 50px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      background: #0078d4;
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      margin-top: 20px;
+      transition: background 0.3s;
+    }
+
+    .back-btn:hover {
+      background: #005fa3;
+    }
+
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <header>NBKRIST - Java Hub</header>
+
+
+
+  <div class="container">
+    <a href="fx.html" class="back-btn">⬅ Back to Home</a>
+    <h2 style="text-align: center; color: green;">JavaFx QA</h2>
+    <h2>1. How to handle events in JavaFX?</h2>
+    <p>
+      In JavaFX, events are handled through an event-driven model. Event sources (like buttons) generate events, and
+      event handlers respond to them. You can register event handlers using the <code>setOnAction()</code> or
+      <code>addEventHandler()</code> methods.
+    </p>
+
+    <h2>2. How to handle keyboard and mouse events? Explain with an example.</h2>
+    <p>
+      JavaFX provides dedicated event classes such as <code>KeyEvent</code> and <code>MouseEvent</code>. You can
+      register listeners using methods like <code>setOnKeyPressed()</code> or <code>setOnMouseClicked()</code>.
+    </p>
+    <pre>
+TextField tf = new TextField();
+tf.setOnKeyPressed(e -> System.out.println("Key Pressed: " + e.getCode()));
+
+Pane pane = new Pane();
+pane.setOnMouseClicked(e -> System.out.println("Mouse Clicked at: " + e.getX() + ", " + e.getY()));
+    </pre>
+
+    <h2>3. How to display text in JavaFX Scene?</h2>
+    <p>
+      The <code>Text</code> class is used to display text in a JavaFX scene. You can specify font, color, and position.
+    </p>
+    <pre>
+Text message = new Text(50, 100, "Welcome to JavaFX!");
+message.setFont(Font.font("Arial", 24));
+message.setFill(Color.BLUE);
+    </pre>
+
+    <h2>4. How to display an image?</h2>
+    <p>
+      The <code>Image</code> and <code>ImageView</code> classes are used to display images.
+    </p>
+    <pre>
+Image img = new Image("file:photo.png");
+ImageView imageView = new ImageView(img);
+imageView.setFitWidth(200);
+imageView.setPreserveRatio(true);
+    </pre>
+
+    <h2>5. What are main components of JavaFX App Window Structure?</h2>
+    <p>
+      A JavaFX application window consists of three main components:
+    <ul>
+      <li><b>Stage:</b> The top-level container (main window).</li>
+      <li><b>Scene:</b> Holds the visual elements (nodes).</li>
+      <li><b>Nodes:</b> Elements like buttons, labels, images, etc.</li>
+    </ul>
+    </p>
+
+    <h2>6. What are advantages of JavaFX Scene Builder over writing code using packages?</h2>
+    <p>
+      Scene Builder provides a visual interface for designing layouts, making development faster and less error-prone.
+      It auto-generates FXML, allowing developers to focus more on logic than manual UI coding.
+    </p>
+
+    <h2>7. What is role of layout in JavaFX? List different layouts.</h2>
+    <p>
+      Layouts define how nodes are arranged in a scene. JavaFX offers several layout panes, such as:
+    <ul>
+      <li>FlowPane</li>
+      <li>BorderPane</li>
+      <li>GridPane</li>
+      <li>VBox and HBox</li>
+      <li>StackPane</li>
+    </ul>
+    </p>
+
+    <h2>8. Explain GridPane layout. When should we use this layout?</h2>
+    <p>
+      <code>GridPane</code> arranges nodes in a flexible grid of rows and columns. It is ideal when you need form-like
+      structures (e.g., login forms, data entry screens).
+    </p>
+
+    <h2>9. How do you handle button press event?</h2>
+    <p>
+      Button press events are handled using <code>setOnAction()</code>.
+    </p>
+    <pre>
+Button btn = new Button("Click Me");
+btn.setOnAction(e -> System.out.println("Button Pressed!"));
+    </pre>
+
+    <h2>10. How do you lay out nodes in Scene graph?</h2>
+    <p>
+      Nodes are added to layout panes, which are part of a hierarchical <b>Scene Graph</b>. Each parent node can contain
+      multiple children nodes, forming a tree structure that JavaFX renders efficiently.
+    </p>
+
+    <a href="fx.html" class="back-btn">⬅ Back to Home</a>
   </div>
 
   <footer>All rights reserved for NBKRIST and authored by Hari Babu Mutchakala</footer>
 </body>
+
+</html>" class="back-btn">⬅ Back to Index</a>
+  </div>
+
+  <footer>All rights reserved for NBKRIST and authored by Hari Babu Mutchakala</footer>
+</body>
+
 </html>
