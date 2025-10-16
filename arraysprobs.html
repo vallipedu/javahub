@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marks Analysis Problems</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header, footer {
+            background-color: #1e3a8a;
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        footer {
+            font-size: 0.9em;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        h2 {
+            color: #1f2937;
+            border-left: 5px solid #3b82f6;
+            padding-left: 10px;
+            margin-top: 40px;
+        }
+
+        .general-heading {
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 20px;
+        }
+
+        .problem-description {
+            background-color: #e0f2fe; /* Professional light blue */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.05);
+            border-left: 5px solid #2563eb;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table, th, td {
+            border: 1px solid #d1d5db;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        td.absent {
+            background-color: #fee2e2;
+        }
+
+        .requirements {
+            background-color: #eef2ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .expected-output {
+            background-color: #dbeafe; /* Professional subtle light blue */
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-family: monospace;
+            white-space: pre-line;
+        }
+
+        ul {
+            margin: 5px 0 15px 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding: 8px 15px;
+            background-color: #3b82f6;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            background-color: #2563eb;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid #d1d5db;
+            margin: 30px 0;
+        }
+
+        .intro-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #374151;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>NBKRIST Java Hub</h1>
+    </header>
+
+    <div class="container">
+
+        <!-- Top Back Button -->
+        <a href="Arrays.html" class="back-link">&larr; Back to Home</a>
+
+        <!-- General Heading -->
+        <div class="general-heading">
+           Strengthen Your Problem-Solving Skills - Using CORE JAVA
+        </div>
+
+        <!-- Introduction -->
+        <div class="problem-description">
+            <h2>Introduction</h2>
+            <p class="intro-text">
+                As a software engineer, understanding how data is processed under the hood is crucial. Many engineers can write code but have limited insight into the mechanics of data handling or algorithmic problem-solving. Solving problems with datasets like RDBMS tables or arrays helps you build a strong foundation for your career. These exercises will boost your confidence as a systems engineer and teach you to think creatively beyond conventional solutions.
+            </p>
+        </div>
+
+        <!-- Student Dataset -->
+        <div class="problem-description">
+            <h2>Scenario: Student Marks Dataset</h2>
+            <p>We have 10 students from Tamil Nadu with marks in 5 subjects: Maths, Java, Python, C, and C++. Some students may have missed subjects, highlighted as <strong>Absent</strong> in red. Marks vary to simulate a realistic classroom scenario.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Maths</th>
+                        <th>Java</th>
+                        <th>Python</th>
+                        <th>C</th>
+                        <th>C++</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Revathi</td><td>85</td><td>90</td><td>88</td><td>76</td><td>92</td></tr>
+                    <tr><td>Diya</td><td>78</td><td>82</td><td class="absent">Absent</td><td>75</td><td class="absent">Absent</td></tr>
+                    <tr><td>Shakthi</td><td>78</td><td>80</td><td>60</td><td>83</td><td class="absent">Absent</td></tr>
+                    <tr><td>Meera</td><td>91</td><td>84</td><td>88</td><td>90</td><td>90</td></tr>
+                    <tr><td>Venkat</td><td>55</td><td>69</td><td>50</td><td>72</td><td>74</td></tr>
+                    <tr><td>Meenakshi</td><td>88</td><td>90</td><td>85</td><td>92</td><td>89</td></tr>
+                    <tr><td>Vikram</td><td>40</td><td>45</td><td class="absent">Absent</td><td>35</td><td class="absent">Absent</td></tr>
+                    <tr><td>Saroja</td><td>80</td><td>82</td><td>84</td><td>81</td><td>83</td></tr>
+                    <tr><td>Aditya</td><td>92</td><td>95</td><td class="absent">Absent</td><td>93</td><td>88</td></tr>
+                    <tr><td>Saravana</td><td>21</td><td class="absent">Absent</td><td>19</td><td>42</td><td class="absent">Absent</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Problem Sections -->
+        <div class="problem-description">
+            <h2>1. Calculate Student Average Marks</h2>
+            <p>
+                Compute the average marks for each student considering only the subjects they attended. Solving this problem teaches how to handle incomplete datasets and ensures accurate calculations, an essential skill for real-world software systems where data may be missing or inconsistent.
+            </p>
+            <div class="expected-output">
+Expected Output Example:
+Aarav: 86.2%
+Diya: 77.5%
+Karan: 73.7%
+Meera: 88.6%
+Rohan: 60.0%
+Sanya: 88.8%
+Vikram: 40.0%
+Isha: 82.0%
+Aditya: 92.0%
+Neha: 79.0%
+Class Average: 76.3%
+            </div>
+        </div>
+
+        <div class="problem-description">
+            <h2>2. Identify Topper and Lowest Scorer</h2>
+            <p>
+                Using the averages from Problem 1, identify the student with the highest and lowest marks. This develops analytical skills and teaches you to extract meaningful insights efficiently—a key skill for evaluating performance metrics in software engineering.
+            </p>
+            <div class="expected-output">
+Expected Output Example:
+Topper: Aditya (92.0%)
+Lowest Scorer: Vikram (40.0%)
+            </div>
+        </div>
+
+        <div class="problem-description">
+            <h2>3. Conditional Selection of Students</h2>
+            <p>
+                Select students based on the number of subjects attended and their average marks. Identify students who attended all subjects, those with at least 4 subjects, and students below 50%. For students below 50%, calculate a running cumulative sum. This problem develops analytical thinking and decision-making skills essential for out-of-the-box problem-solving.
+            </p>
+            <div class="expected-output">
+Expected Output Example:
+All Subjects: Aarav, Meera, Sanya, Isha
+At least 4 Subjects: Aarav, Diya, Karan, Meera, Rohan, Sanya, Isha, Aditya, Neha
+Below 50%: Vikram (Cumulative Sum: 75)
+            </div>
+        </div>
+
+        <div class="problem-description">
+            <h2>4. Grade Distribution Analysis</h2>
+            <p>
+                Group students into grade ranges: 100%-90%, 89%-80%, 79%-70%, 69%-60%, 59%-50%, and below 50%. Display the count and names per range. This exercise enhances skills in summarizing datasets and reporting insights—crucial for software systems engineers.
+            </p>
+            <div class="expected-output">
+Expected Output Example:
+100%-90%: Aditya, Meera
+89%-80%: Aarav, Sanya, Isha
+79%-70%: Karan, Neha
+69%-60%: Rohan
+Below 50%: Vikram, Diya
+            </div>
+        </div>
+
+        <div class="problem-description">
+            <h2>5. Highest and Lowest Marks per Subject</h2>
+            <p>
+                Identify the highest and lowest marks for each subject along with the students who achieved them, ignoring absentees. This teaches mapping arrays to real-world entities and handling missing data—skills vital for professional software development.
+            </p>
+            <div class="expected-output">
+Expected Output Example:
+Maths - Highest: Aditya (92), Lowest: Vikram (40)
+Java - Highest: Aditya (95), Lowest: Vikram (45)
+Python - Highest: Aarav (88), Lowest: Rohan (50)
+C - Highest: Aditya (93), Lowest: Vikram (35)
+C++ - Highest: Aarav (92), Lowest: Rohan (74)
+            </div>
+        </div>
+
+        <hr>
+
+        <a href="Arrays.html" class="back-link">&larr; Back to Home</a>
+
+    </div>
+
+    <footer>
+        All rights reserved for NBKRIST and authored by HariBabu Mutchakala
+    </footer>
+
+</body>
+</html>
