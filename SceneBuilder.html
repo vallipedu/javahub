@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaFX SceneBuilder Overview</title>
+    <style>
+        /* --- Global Styles --- */
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #eef2f7, #dbeafe);
+            color: #1a1a1a;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            /* Remove position: fixed */
+            background: rgba(37, 99, 235, 0.85);
+            backdrop-filter: blur(8px);
+            color: #fff;
+            text-align: center;
+            padding: 15px 10px;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        nav {
+            /* Remove position: fixed */
+            display: flex;
+            justify-content: left;
+            background: rgba(59, 130, 246, 0.7);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 1px;
+            /* space below header */
+            z-index: inherit;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 22px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-radius: 25px;
+            margin: 6px;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        main {
+            max-width: 950px;
+            margin: 30px auto 60px;
+            /* reduced top margin */
+            background: #ffffffcc;
+            padding: 40px 50px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(8px);
+        }
+
+        h2 {
+            color: #1e3a8a;
+            border-bottom: 2px solid #60a5fa;
+            padding-bottom: 2px;
+            margin-top: 10px;
+        }
+
+        p {
+            text-align: justify;
+            margin-bottom: 18px;
+            font-size: 1rem;
+        }
+
+        .highlight {
+            color: #1d4ed8;
+            font-weight: bold;
+        }
+
+        /* --- Images --- */
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: rgba(37, 99, 235, 0.85);
+            color: #fff;
+            text-align: center;
+            padding: 25px 10px;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Buttons / Links --- */
+        a.back {
+            display: inline-block;
+            text-decoration: none;
+            color: #ffffff;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            padding: 10px 22px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+        }
+
+        a.back:hover {
+            background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                font-size: 1.6rem;
+                padding: 20px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+            }
+
+            main {
+                margin: 180px 15px 50px;
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        NBKRIST - Java Hub
+    </header>
+
+    <nav>
+        <a href="fx.html">← Back to Home</a>
+        <h1 style="text-align: right;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JavaFX SceneBuilder Overview</h1>
+    </nav>
+
+    <main>
+        <h2>The SceneBuilder</h2>
+        <p>
+            JavaFX <span class="highlight">SceneBuilder</span> is an intuitive visual design tool that allows developers
+            to create user interfaces without writing FXML manually.
+            You can drag and drop elements like buttons, labels, and text fields, while SceneBuilder generates the FXML
+            layout automatically in the background, making UI design fast and error-free.
+        </p>
+
+        <h2>Learn SceneBuilder</h2>
+        <p>
+            Learning SceneBuilder simplifies the UI development process, enabling developers to focus on the
+            functionality of their applications.
+            It’s particularly helpful for beginners as it makes building dynamic and professional-looking interfaces
+            visual, interactive, and enjoyable.
+        </p>
+        <img src="sb.png" alt="SceneBuilder Interface">
+
+        <h2>The Role of SceneBuilder in GUI Development</h2>
+        <p>
+            SceneBuilder bridges the gap between visual design and functional code by generating FXML files that JavaFX
+            applications can load and render.
+            This separation of design and logic ensures clean, maintainable code and facilitates collaboration between
+            designers and developers.
+        </p>
+
+        <h2>Designing GUI with Drag and Drop</h2>
+        <p>
+            With SceneBuilder, you can visually design your GUI by dragging elements from a library and placing them
+            exactly where you want them.
+            You can set properties like size, color, alignment, and event handlers, and SceneBuilder automatically
+            updates the FXML, making the design process fast, precise, and engaging.
+        </p>
+
+        <h2>Integrating SceneBuilder with Eclipse IDE</h2>
+        <p>
+            Once SceneBuilder is installed, Eclipse can be configured to open FXML files directly in it.
+            This allows seamless UI design and integration into JavaFX projects using <span
+                class="highlight">FXMLLoader</span>, ensuring a smooth workflow from design to code implementation.
+        </p>
+    </main>
+
+    <footer>
+        © 2025 NBKRIST Java Hub| authored by Hari Shankar Mutchakal!!!
+    </footer>
+</body>
+
+</html>
