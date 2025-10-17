@@ -2,551 +2,434 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NBKRIST: Java Threads Demystifying</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBKRIST Java Hub — Java Multithreading</title>
+  <style>
+    /* ===== global reset ===== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    /* ===== variables ===== */
+    :root {
+      --accent-1: #6366f1;
+      --accent-2: #a855f7;
+      --glass-bg: rgba(255, 255, 255, 0.42);
+      --glass-bg-2: rgba(255, 255, 255, 0.30);
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --muted: #6b7280;
+      --text: #0f172a;
+    }
 
-    <style>
-        /* -------- General Layout & Font -------- */
-        body {
-            font-family: 'Inter', Arial, sans-serif;
-            background-color: #f5f6f8;
-            color: #333;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
+    body {
+      font-family: "Segoe UI", "Poppins", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #eef6ff 0%, #f8fbfd 100%);
+      color: var(--text);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-        /* -------- Header -------- */
-        header {
-            background-color: #111827;
-            color: white;
-            border-bottom: 4px solid #6366f1;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
+    /* ===== header ===== */
+    header {
+     
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 14px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.42));
+      backdrop-filter: blur(10px) saturate(120%);
+      box-shadow: 0 6px 22px rgba(15, 23, 42, 0.08);
+      z-index: 1200;
+    }
 
-        header h1 {
-            background: linear-gradient(to right, #6366f1, #a855f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(to right, var(--accent-1), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+      text-align: center;
+      margin-bottom: 8px;
+    }
 
-        /* -------- Buttons -------- */
-        .back-button {
-            display: inline-block;
-            margin: 5px;
-            padding: 8px 16px;
-            background-color: #2563eb;
-            color: #fff;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: background 0.3s;
-        }
+    /* ===== nav ===== */
+    nav {
+      top: 72px;
+      left: 12px;
+      right: 12px;
+      padding: 8px 12px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 12px;
+      background: var(--glass-bg-2);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+      z-index: 1100;
+     
+    }
 
-        .back-button:hover {
-            background-color: #1e40af;
-        }
+    nav a {
+      text-decoration: none;
+      color: var(--accent-2);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-weight: 600;
+      transition: all .22s ease;
+      background: rgba(255, 255, 255, 0.18);
+    }
 
-        /* -------- Cards -------- */
-        .content-card {
-            background-color: #fff;
-            border-radius: 1rem;
-            padding: 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-        }
+    nav a:hover {
+      color: white;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.18);
+      transform: translateY(-2px);
+    }
 
-        /* -------- Code Blocks -------- */
-        .code-block {
-            background-color: #1f2937;
-            color: #f3f4f6;
-            padding: 1rem;
-            border-radius: 0.75rem;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
+    nav audio {
+      margin-top: 6px;
+      border-radius: 8px;
+      padding: 4px;
+    }
 
-        /* -------- Takeaway Boxes -------- */
-        .takeaway {
-            border-left: 6px solid #6366f1;
-            padding: 1.25rem;
-            background: #eef2ff;
-            border-radius: 0.5rem;
-            margin-top: 1.5rem;
-        }
+    /* ===== main card ===== */
+    main {
+      max-width: 980px;
+      margin: 1px auto 72px;
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 28px 32px;
+      box-shadow: 0 20px 50px rgba(8, 16, 40, 0.06);
+      color: var(--text);
+    }
 
-        /* -------- Tables -------- */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 1.5rem;
-        }
+    h2 {
+      color: var(--accent-2);
+      margin-top: 26px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid rgba(96, 165, 250, 0.22);
+      font-size: 1.2rem;
+    }
 
-        thead tr {
-            background-color: #4f46e5;
-            color: white;
-        }
+    h3, h4 {
+      margin-top: 20px;
+      margin-bottom: 12px;
+      color: var(--accent-1);
+    }
 
-        th,
-        td {
-            padding: 0.75rem;
-            border-bottom: 1px solid #ddd;
-            vertical-align: top;
-        }
+    p {
+      margin: 12px 0;
+      text-align: justify;
+    }
 
-        tbody tr:hover {
-            background-color: #f9fafb;
-        }
+    ul, ol {
+      margin: 8px 0 18px 22px;
+    }
 
-        /* -------- Images -------- */
-        img {
-            width: 100%;
-            max-width: 600px;
-            display: block;
-            margin: 1.5rem auto;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+    pre {
+      background: rgba(15, 23, 42, 0.04);
+      padding: 12px 14px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 12px 0;
+      font-family: monospace;
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
 
-        /* -------- Footer -------- */
-        footer {
-            text-align: center;
-            border-top: 1px solid #e5e7eb;
-            background: #fafafa;
-            padding: 15px 10px;
-            font-size: 0.9rem;
-            color: #555;
-        }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+    }
 
-        .author-info {
-            color: #222;
-            font-weight: bold;
-        }
+    thead tr {
+      background-color: var(--accent-1);
+      color: white;
+    }
 
-        /* -------- Scrollbar -------- */
-        ::-webkit-scrollbar {
-            height: 8px;
-            width: 8px;
-        }
+    th,
+    td {
+      padding: 0.75rem;
+      border-bottom: 1px solid #ddd;
+      vertical-align: top;
+    }
 
-        ::-webkit-scrollbar-thumb {
-            background: #9ca3af;
-            border-radius: 10px;
-        }
-    </style>
+    tbody tr:hover {
+      background-color: #f9fafb;
+    }
+
+    img {
+      border-radius: 8px;
+      border: 1px solid #e6e9ef;
+      transition: transform .22s ease, box-shadow .22s ease;
+      display: block;
+      margin: 1.5rem auto;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .takeaway {
+      border-left: 6px solid var(--accent-1);
+      padding: 1.25rem;
+      background: #eef2ff;
+      border-radius: 0.5rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    }
+
+    footer {
+      max-width: 980px;
+      margin: 18px auto 48px;
+      padding: 14px 18px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+      background: transparent;
+    }
+
+    footer .author-info {
+      font-weight: bold;
+      color: #222;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        margin: 160px 18px 72px;
+        padding: 24px;
+      }
+
+      nav {
+        padding: 6px 8px;
+        gap: 6px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.3rem;
+      }
+
+      main {
+        margin-top: 200px;
+        padding: 18px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <header class="sticky top-0 z-10 py-4">
-        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center px-4">
-            <div class="text-center flex-grow">
-                <h1 class="text-3xl md:text-4xl">NBKRIST-Java Hub-Java Multithreading</h1>
-            </div>
-            <div class="flex flex-wrap justify-center mt-3">
-                <a href="index.html" class="back-button">Back to Index</a>
-                <a href="impparallelism.html" class="back-button">Real-Time Usecase</a>
-                <a href="mulnotes.html" class="back-button">MyView</a>
-               <a href="crexamples.html" class="back-button">Class Room Examples</a>
-                <a href="sync.html" class="back-button">Synchronization</a>
-               <a href="threadingQA.html" class="back-button">Q & A</a>
-            </div>
-            <audio controls class="mt-3">
-                <source src="audio2.m4a" type="audio/mp4">
-                <p>Your browser does not support the audio element.</p>
-            </audio>
-        </div>
-    </header>
+  <header>
+    <h1>NBKRIST - Java Hub - Java Multithreading</h1>
+  </header>
 
-    <!-- Main Content Area: Enhanced Look and Feel -->
-    <main class="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
-        <h2 class="text-3xl font-extrabold text-rose-700 mt-12 mb-5 pb-2 border-b-2 border-rose-400 flex items-center">
-            <span class="mr-3 text-4xl">🤔</span>
-            Why Go Multi-threaded? ( Industry Insight)
-        </h2>
-        <p class="text-gray-700 mb-10 text-xl font-light">
+  <nav>
+    <a href="index.html">Back to Index</a>
+    <a href="impparallelism.html">Real-Time Usecase</a>
+    <a href="mulnotes.html">MyView</a>
+    <a href="crexamples.html">Class Room Examples</a>
+    <a href="sync.html">Synchronization</a>
+    <a href="threadingQA.html">Q & A</a>
+    <audio controls>
+      <source src="audio2.m4a" type="audio/mp4">
+      Your browser does not support the audio element.
+    </audio>
+  </nav>
 
-            During my academic studies, a frequent saying shared by our professors was the traditional warning: "Too
-            many
-            cooks spoil the broth." However, upon studying the architecture of Java Multithreading, I recognized
-            that this principle does not always apply to modern software development.
+  <main>
+    <h2>🤔 Why Go Multi-threaded? (Industry Insight)</h2>
+    <p>
+      During my academic studies, a frequent saying shared by our professors was the traditional warning: "Too many cooks spoil the broth." However, upon studying the architecture of Java Multithreading, I recognized that this principle does not always apply to modern software development.
+    </p>
 
-            The realization that parallel execution and non-blocking operations are essential for modern software
-            applications was a critical turning point. In today's competitive IT industry, where effective resource
-            utilization and peak performance are paramount, sluggish applications are quickly rendered useless.
+    <section class="takeaway">
+      <h3>The Takeaway:</h3>
+      <p>Multithreading allows better performance and operational efficiency by enabling tasks to run concurrently.</p>
+    </section>
 
-            To efficiently manage and process multiple client requests simultaneously, embracing a multithreaded
-            architecture is mandatory. Multithreading fundamentally allows a single program to execute various tasks
-            concurrently, thereby enabling better performance and operational efficiency.
-            <br>
+    <h2>Threading - Basic Scenario: The Great Kitchen Juggle</h2>
+    <p>
+      Welcome to the kitchen! We're preparing a delicious South Indian lunch (Rice, Sambar, Rasam, and Beans Fry). This represents a single program. Each task has different time requirements.
+    </p>
+    <img src="na.png" alt="Threads Introduction">
 
+    <div class="overflow-x-auto shadow-2xl rounded-lg border border-gray-200 mb-6">
+      <table>
+        <thead>
+          <tr>
+            <th>Task Component</th>
+            <th>Time Required (Simulated)</th>
+            <th>Chef's Action (Funny Part)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sambar Simmering</td>
+            <td>5.0 Minutes</td>
+            <td>Waiting for lentils to melt.</td>
+          </tr>
+          <tr>
+            <td>Rice Cooking</td>
+            <td>3.0 Minutes</td>
+            <td>Checking on rice cooker.</td>
+          </tr>
+          <tr>
+            <td>Beans Fry</td>
+            <td>2.0 Minutes</td>
+            <td>Frying beans to perfection.</td>
+          </tr>
+          <tr>
+            <td>Rasam Mixing</td>
+            <td>1.0 Minute</td>
+            <td>Tasting and adjusting spice.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-        <section class="content-card">
-            <!-- Main Title - Changed to Indigo-900 for high contrast -->
-            <h2
-                class="text-3xl font-extrabold text-rose-700 mt-12 mb-5 pb-2 border-b-2 border-rose-400 flex items-center">
-                Threading - Basic Scenario: The Great Kitchen Juggle
-            </h2>
-            <p class="text-gray-700 mb-10 text-xl font-light">
-                Welcome to the kitchen! We're preparing a delicious South Indian lunch (Rice, Sambar, Rasam, and Beans
-                Fry). This entire meal represents a single **Program**. To get dinner on the table, we need to run four
-                major tasks, and each takes a different amount of time.
-            </p>
-            <img src="na.png" alt="Threads Introduction"
-                style="width:100%; max-width:600px; display:block; margin: 0 auto 20px auto;">
-            <!-- Lunch Prep Table -->
-            <div class="mb-12 overflow-x-auto shadow-2xl rounded-lg border border-gray-200">
-                <table class="min-w-full text-left border-collapse">
-                    <thead>
-                        <!-- Enhanced table header color -->
-                        <tr
-                            class="bg-indigo-600 text-white uppercase text-xs sm:text-sm font-bold tracking-wider border-b-4 border-indigo-700">
-                            <th class="py-4 px-4 sm:px-6 text-left">Task Component</th>
-                            <th class="py-4 px-4 sm:px-6 text-center">Time Required (Simulated)</th>
-                            <th class="py-4 px-4 sm:px-6 text-left">Chef's Action (The Funny Part)</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-700 text-base divide-y divide-gray-200">
-                        <tr class="hover:bg-indigo-50 transition duration-150">
-                            <td class="py-3 px-4 sm:px-6 font-semibold">**Sambar Simmering**</td>
-                            <td class="py-3 px-4 sm:px-6 text-center">5.0 Minutes (5000ms)</td>
-                            <td class="py-3 px-4 sm:px-6">Waiting for the lentils to melt into submission.</td>
-                        </tr>
-                        <tr class="hover:bg-indigo-50 transition duration-150">
-                            <td class="py-3 px-4 sm:px-6 font-semibold">**Rice Cooking**</td>
-                            <td class="py-3 px-4 sm:px-6 text-center">3.0 Minutes (3000ms)</td>
-                            <td class="py-3 px-4 sm:px-6">Checking on the rice cooker every 10 seconds.</td>
-                        </tr>
-                        <tr class="hover:bg-indigo-50 transition duration-150">
-                            <td class="py-3 px-4 sm:px-6 font-semibold">**Beans Fry**</td>
-                            <td class="py-3 px-4 sm:px-6 text-center">2.0 Minutes (2000ms)</td>
-                            <td class="py-3 px-4 sm:px-6">Frying beans until they give up the crunch.</td>
-                        </tr>
-                        <tr class="hover:bg-indigo-50 transition duration-150">
-                            <td class="py-3 px-4 sm:px-6 font-semibold">**Rasam Mixing**</td>
-                            <td class="py-3 px-4 sm:px-6 text-center">1.0 Minute (1000ms)</td>
-                            <td class="py-3 px-4 sm:px-6">The quick finale, mostly just tasting and adjusting spice
-                                levels.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    <h2>Scenario 1: Sequential Execution (Single Chef)</h2>
+    <pre>
+// Main-Chef (Single Thread)
+START: Timer = 0.0
 
-            <!-- Scenario 1: Sequential -->
-            <h2
-                class="text-3xl font-extrabold text-indigo-800 mt-12 mb-5 pb-2 border-b-2 border-indigo-400 flex items-center">
-                <span class="mr-3 text-4xl">🍕</span> Scenario 1: The Stressed Single Cook (Sequential Execution)
-            </h2>
-            <p class="mb-6 text-gray-700 text-lg">
-                This is how a program runs when you only have **one CPU Core** and do not use threading. Our poor chef,
-                the **Main Thread**, has to finish one task completely before moving on to the next. The work is done on
-                one station (the single core), one step at a time.
-            </p>
+TASK 1: Sambar (5 min)
+Main-Chef: Stir
+Main-Chef: ✅ Done, Timer = 5.0
 
-            <h3 class="text-xl font-bold text-gray-800 mb-3 ml-2">Human-Readable "Code" (Single Chef / 1-Core CPU):</h3>
-            <pre class="code-block"><code>// Main-Chef (The Single Thread) starts the program
-START: Timer = 0.0 Minutes
+TASK 2: Rice (3 min)
+Main-Chef: Stir
+Main-Chef: ✅ Done, Timer = 8.0
 
-// TASK 1: Sambar Simmering (5.0 Minutes)
-Main-Chef: 🏃 Starts stirring the Sambar.
-// Core must WAIT here for 5.0 minutes. Can't do anything else.
-Main-Chef: ✅ Sambar is FINISHED. Timer = 5.0 Minutes.
+TASK 3: Beans (2 min)
+Main-Chef: Fry
+Main-Chef: ✅ Done, Timer = 10.0
 
-// TASK 2: Rice Cooking (3.0 Minutes)
-Main-Chef: 🏃 Starts the Rice cooker and waits.
-// Core must WAIT here for 3.0 minutes, staring blankly.
-Main-Chef: ✅ Rice is FINISHED. Timer = 5.0 + 3.0 = 8.0 Minutes.
+TASK 4: Rasam (1 min)
+Main-Chef: Mix
+Main-Chef: ✅ Done, Timer = 11.0
 
-// TASK 3: Beans Fry (2.0 Minutes)
-Main-Chef: 🏃 Frying the beans.
-Main-Chef: ✅ Beans Fry is FINISHED. Timer = 8.0 + 2.0 = 10.0 Minutes.
+END: Lunch Ready
+</pre>
 
-// TASK 4: Rasam Mixing (1.0 Minute)
-Main-Chef: 🏃 Mixing the quick Rasam.
-Main-Chef: ✅ Rasam is FINISHED. Timer = 10.0 + 1.0 = 11.0 Minutes.
+    <div class="takeaway">
+      <h3>The Takeaway:</h3>
+      <p>Total time = sum of all tasks. Single thread is blocking.</p>
+    </div>
 
-END: LUNCH IS READY! Total Time: 11.0 Minutes
-</code></pre>
+    <h2>Scenario 2: Multithreaded Execution (Kitchen Crew)</h2>
+    <pre>
+// Multiple Threads (8-Core CPU)
+START: Timer = 0.0
+Sambar-Pro, Rice-Maestro, Beans-Specialist, Rasam-Ninja run in parallel
+Sambar-Pro: ✅ Done at 5.0
+Rice-Maestro: ✅ Done at 3.0
+Beans-Specialist: ✅ Done at 2.0
+Rasam-Ninja: ✅ Done at 1.0
+END: Lunch Ready, Total Time: 5.0 Minutes
+</pre>
 
-            <div class="takeaway bg-indigo-50 border-indigo-700 shadow-lg">
-                <h3 class="text-xl font-bold text-indigo-900 mb-2">The Takeaway (Sequential - Blocking):</h3>
-                <p class="text-gray-800">In sequential execution, the total time is the **sum of all task durations**
-                    ($T_{total} = T_1 + T_2 + T_3 + T_4$). The single thread is **blocking**; it's stuck waiting until
-                    the current job is 100% done.</p>
-            </div>
+    <div class="takeaway">
+      <h3>The Takeaway:</h3>
+      <p>Parallelism allows tasks to run simultaneously. Total time = longest single task.</p>
+    </div>
 
+    <img src="seqflow.png" alt="Sequential Flow">
+    <img src="multipleCPUs.png" alt="Multithreaded Flow">
 
-            <!-- Scenario 2: Multithreaded -->
-            <h2
-                class="text-3xl font-extrabold text-emerald-700 mt-12 mb-5 pb-2 border-b-2 border-emerald-400 flex items-center">
-                <span class="mr-3 text-4xl">🚀</span> Scenario 2: The Efficient Kitchen Crew (Multithreaded Execution)
-            </h2>
-            <p class="mb-6 text-gray-700 text-lg">
-                This is the power of **Multithreading** combined with a capable processor. We hire specialized chefs
-                (new **Threads**) and give each their own dedicated workspace (a separate **CPU Core**). With 8 cores
-                available, we have more than enough power to run our 4 tasks simultaneously in true **parallel**
-                fashion.
-            </p>
+    <h2>Scenario 3 & 4: Ice Cream Emergency (6 Tasks)</h2>
+    <p>A busy hotel order shows even more, shorter tasks.</p>
+    <img src="icecream.png" alt="Ice Cream Tasks">
+    <img src="sandwich.png" alt="Sandwich Tasks">
 
-            <h3 class="text-xl font-bold text-gray-800 mb-3 ml-2">Human-Readable "Code" (Specialized Crew / 8-Core CPU):
-            </h3>
-            <pre class="code-block"><code>// Kitchen-Manager (The Main Thread) starts the program
-START: Timer = 0.0 Minutes
-Kitchen-Manager: 📢 GO! Everyone start your stations NOW! (Assigning tasks to 4 separate Cores)
+    <div class="overflow-x-auto shadow-2xl rounded-lg border border-gray-200 mb-6">
+      <table>
+        <thead>
+          <tr>
+            <th>Task Component</th>
+            <th>Time</th>
+            <th>Worker's Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Retrieve Tub</td>
+            <td>1.0 min</td>
+            <td>Searching freezer</td>
+          </tr>
+          <tr>
+            <td>Scooping</td>
+            <td>3.0 min</td>
+            <td>Battling hard ice cream</td>
+          </tr>
+          <tr>
+            <td>Topping/Garnish</td>
+            <td>2.0 min</td>
+            <td>Adding whipped cream & sprinkles</td>
+          </tr>
+          <tr>
+            <td>Wipe Rim</td>
+            <td>0.5 min</td>
+            <td>Prevent sticky edges</td>
+          </tr>
+          <tr>
+            <td>Calculate Bill</td>
+            <td>0.5 min</td>
+            <td>Tap buttons on register</td>
+          </tr>
+          <tr>
+            <td>Deliver</td>
+            <td>1.5 min</td>
+            <td>Walk to table</td>
+          </tr>
+          <tr style="font-weight:bold; background:#fde2e2">
+            <td>Total Sequential Time</td>
+            <td>8.5 min</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-// ----------------------------------------------------
-// ALL TASKS START SIMULTANEOUSLY (Running in Parallel)
-// ----------------------------------------------------
+    <h3>Scenario 3: Lone Server (Sequential)</h3>
+    <pre>
+// Single Thread handles all 6 tasks one by one
+END: Total Time: 8.5 Minutes
+</pre>
 
-// Thread 1: Sambar-Pro (5.0 Minutes) - Runs on Core 1
-Sambar-Pro: 🏃 Starts stirring the Sambar.
-... 1.0 Minute Pass ... (Rasam finishes!)
-... 2.0 Minutes Pass ... (Beans Fry finishes!)
-... 3.0 Minutes Pass ... (Rice finishes!)
-... 5.0 Minutes Pass ...
-Sambar-Pro: ✅ Sambar is FINISHED.
+    <h3>Scenario 4: Ice Cream Dream Team (Multithreaded)</h3>
+    <pre>
+// 6 Threads on 8-Core CPU
+END: Total Time: 3.0 Minutes
+</pre>
 
-// Thread 2: Rice-Maestro (3.0 Minutes) - Runs on Core 2
-Rice-Maestro: 🏃 Puts water on and waits.
-... 3.0 Minutes Pass ...
-Rice-Maestro: ✅ Rice is FINISHED.
+    <h2>Why We Love Multithreading</h2>
+    <div class="takeaway">
+      <ul>
+        <li>Massive performance gain (parallelism reduces total time).</li>
+        <li>UI doesn’t freeze; responsiveness improves.</li>
+        <li>Non-blocking I/O allows CPU to switch tasks efficiently.</li>
+        <li>More fun; using all CPU cores efficiently!</li>
+      </ul>
+    </div>
 
-// Thread 3: Beans-Specialist (2.0 Minutes) - Runs on Core 3
-Beans-Specialist: 🏃 Frying the beans.
-... 2.0 Minutes Pass ...
-Beans-Specialist: ✅ Beans Fry is FINISHED.
+  </main>
 
-// Thread 4: Rasam-Ninja (1.0 Minute) - Runs on Core 4
-Rasam-Ninja: 🏃 Mixing the quick Rasam.
-... 1.0 Minute Pass ...
-Rasam-Ninja: ✅ Rasam is FINISHED.
-
-// ----------------------------------------------------
-
-// Kitchen-Manager uses .join() on the chefs, waiting for them all to finish.
-Kitchen-Manager: ⏳ Waiting for all chefs... (Must wait until the longest task, Sambar, is done).
-
-END: LUNCH IS READY! Total Time: 5.0 Minutes
-</code></pre>
-
-            <div class="takeaway bg-emerald-50 border-emerald-700 shadow-lg">
-                <h3 class="text-xl font-bold text-emerald-900 mb-2">The Takeaway (Multithreaded & CPU Cores):</h3>
-                <ol class="list-decimal list-inside text-gray-800 space-y-2 ml-4">
-                    <li>**Parallelism (8-Core Success):** When the number of available **CPU Cores** is $\geq$ the
-                        number of **Threads** needing work (4 threads on an 8-core CPU), they run at the *exact same
-                        time*. The total time is only determined by the **longest single task** ($T_{total} =
-                        \text{Max}(T_1, T_2, T_3, T_4)$).</li>
-                    <li>**Concurrency (1-Core Limitation):** If you run those 4 threads on a **1-Core CPU**, the total
-                        time is closer to sequential due to the overhead of **Context Switching** (rapidly switching
-                        between tasks).</li>
-                </ol>
-            </div>
-
-
-
-
-
-            <img src="seqflow.png" alt="Threads Introduction"
-                style="width:100%; max-width:600px; display:block; margin: 0 auto 20px auto;">
-            <img src="multipleCPUs.png" alt="Threads Introduction"
-                style="width:100%; max-width:600px; display:block; margin: 0 auto 20px auto;">
-
-
-            <hr class="my-12 border-gray-300">
-
-            <!-- Scenario 3 & 4: Ice Cream -->
-            <h2
-                class="text-3xl font-extrabold text-rose-700 mt-12 mb-5 pb-2 border-b-2 border-rose-400 flex items-center">
-                <span class="mr-3 text-4xl">🍦</span> Scenario 3 & 4: The Ice Cream Emergency (6 Tasks)
-            </h2>
-            <p class="text-gray-700 mb-8 text-lg">
-                A busy hotel gets a huge order for a complicated sundae! This scenario shows what happens when we have
-                even more, shorter tasks.
-            </p>
-
-            <!-- Ice Cream Prep Table -->
-            <img src="icecream.png" alt="Threads Introduction"
-                style="width:100%; max-width:600px; display:block; margin: 0 auto 20px auto;">
-            <img src="sandwich.png" alt="Threads Introduction"
-                style="width:100%; max-width:600px; display:block; margin: 0 auto 20px auto;">
-            <div class="mb-12 overflow-x-auto shadow-2xl rounded-lg border border-gray-200">
-                <table class="min-w-full text-left border-collapse">
-                    <thead>
-                        <!-- Enhanced table header color -->
-                        <tr
-                            class="bg-rose-600 text-white uppercase text-xs sm:text-sm font-bold tracking-wider border-b-4 border-rose-700">
-                            <th class="py-4 px-4 sm:px-6 text-left">Task Component</th>
-                            <th class="py-4 px-4 sm:px-6 text-center">Time Required (Simulated)</th>
-                            <th class="py-4 px-4 sm:px-6 text-left">Worker's Action (The Funny Part)</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-700 text-base divide-y divide-gray-200">
-                        <tr class="hover:bg-rose-50 transition duration-150">
-                            <td class="py-3 px-4 sm:px-6 font-semibold">**Retrieve Tub**</td>
-                            <td class="py-3 px-4 sm:px-6 text-center">1.0 Minute</td>
-                            <td class="py-3 px-4 sm:px-6">Hunting for the Mint Chocolate Chip in the back of the
-                                freezer.</td>
-                        </tr>
-                        <tr class="hover:bg-rose-50 transition duration-150">
-                            <td class="py-3 px-4 sm:px-6 font-semibold">**Scooping**</td>
-                            <td class="py-3 px-4 sm:px-6 text-center">3.0 Minutes</td>
-                            <td class="py-3 px-4 sm:px-6">The true physical labor: battling rock-hard ice cream.
-                                **(Longest Task)**</td>
-                        </tr>
-                        <tr class="hover:bg-rose-50 transition duration-150">
-                            <td class="py-3 px-4 sm:px-6 font-semibold">**Topping/Garnish**</td>
-                            <td class="py-3 px-4 sm:px-6 text-center">2.0 Minutes</td>
-                            <td class="py-3 px-4 sm:px-6">Carefully adding excessive whipped cream and sprinkles.</td>
-                        </tr>
-                        <tr class="hover:bg-rose-50 transition duration-150">
-                            <td class="py-3 px-4 sm:px-6 font-semibold">**Wipe Rim**</td>
-                            <td class="py-3 px-4 sm:px-6 text-center">0.5 Minutes</td>
-                            <td class="py-3 px-4 sm:px-6">The delicate art of preventing sticky edges.</td>
-                        </tr>
-                        <tr class="hover:bg-rose-50 transition duration-150">
-                            <td class="py-3 px-4 sm:px-6 font-semibold">**Calculate Bill**</td>
-                            <td class="py-3 px-4 sm:px-6 text-center">0.5 Minutes</td>
-                            <td class="py-3 px-4 sm:px-6">Tapping the "Large Sundae" button on the glitchy register.
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-rose-50 transition duration-150">
-                            <td class="py-3 px-4 sm:px-6 font-semibold">**Deliver**</td>
-                            <td class="py-3 px-4 sm:px-6 text-center">1.5 Minutes</td>
-                            <td class="py-3 px-4 sm:px-6">The slow, careful walk to the table.</td>
-                        </tr>
-                        <tr class="border-t-2 border-rose-500 bg-rose-200 font-bold text-gray-900">
-                            <td class="py-3 px-4 sm:px-6">**Total Sequential Time:**</td>
-                            <td class="py-3 px-4 sm:px-6 text-center">**8.5 Minutes**</td>
-                            <td class="py-3 px-4 sm:px-6"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Scenario 3: Lone Server -->
-            <h3 class="text-2xl font-bold text-rose-700 mt-6 mb-4 ml-2 flex items-center">
-                <span class="mr-2 text-3xl">😩</span> Scenario 3: The Lone Server (Sequential Execution)
-            </h3>
-            <p class="mb-4 text-gray-700 text-lg">
-                The single worker (Thread) must complete all 6 steps for the order before starting the next order.
-            </p>
-
-            <h4 class="text-xl font-semibold text-gray-800 mb-3 ml-4">Human-Readable "Code" (Lone Server / 1-Core CPU):
-            </h4>
-            <pre class="code-block"><code>// Lone-Server (The Single Thread) starts the order
-START: Timer = 0.0 Minutes
-
-// Tasks run one after the other:
-Lone-Server: 🏃 Retrieves Tub (1.0 min). ✅ Timer = 1.0.
-Lone-Server: 🏃 Scooping (3.0 min). ✅ Timer = 4.0.
-Lone-Server: 🏃 Topping/Garnish (2.0 min). ✅ Timer = 6.0.
-Lone-Server: 🏃 Wipe Rim (0.5 min). ✅ Timer = 6.5.
-Lone-Server: 🏃 Calculate Bill (0.5 min). ✅ Timer = 7.0.
-Lone-Server: 🏃 Deliver (1.5 min). ✅ Timer = 8.5.
-
-END: SUNDAE IS SERVED! Total Time: 8.5 Minutes
-</code></pre>
-
-            <!-- Scenario 4: Dream Team -->
-            <h3 class="text-2xl font-bold text-purple-700 mt-10 mb-4 ml-2 flex items-center">
-                <span class="mr-2 text-3xl">🥳</span> Scenario 4: The Ice Cream Dream Team (Multithreaded Execution on
-                an 8-Core CPU)
-            </h3>
-            <p class="mb-4 text-gray-700 text-lg">
-                We have a dedicated 6-person team (6 Threads) with an 8-Core CPU—plenty of power! The total time is
-                dramatically reduced because everything happens simultaneously, limited only by the *Scooping* task.
-            </p>
-
-            <h4 class="text-xl font-semibold text-gray-800 mb-3 ml-4">Human-Readable "Code" (Dream Team / 8-Core CPU):
-            </h4>
-            <pre class="code-block"><code>// Team-Lead (The Main Thread) starts the program
-START: Timer = 0.0 Minutes
-Team-Lead: 📢 GO! All 6 stations, GO! (Assigning 6 tasks to 6 separate Cores)
-
-// ----------------------------------------------------
-// ALL 6 TASKS START SIMULTANEOUSLY (Running in Parallel)
-// ----------------------------------------------------
-
-// Core 1: Scooping-Champ (3.0 Minutes) -> LONGEST TASK!
-// Core 2: Topping-Master (2.0 Minutes)
-// Core 3: Delivery-Runner (1.5 Minutes)
-// Core 4: Tub-Hunter (1.0 Minute)
-// Core 5: Rimming-Wiper (0.5 Minute)
-// Core 6: Cashier-Bot (0.5 Minute)
-
-// Manager uses .join() on the team, waiting for them all to finish.
-Team-Lead: ⏳ Waiting for everyone... (Must wait until the hardest task, Scooping is done).
-
-... 3.0 Minutes Pass ...
-Scooping-Champ: ✅ FINISHED! All other tasks finished before me.
-
-END: SUNDAE IS SERVED! Total Time: 3.0 Minutes
-</code></pre>
-
-            <!-- Fun Section: Why We Love Multithreading -->
-            <hr class="my-12 border-gray-300">
-            <h2
-                class="text-3xl font-extrabold text-fuchsia-700 mt-12 mb-5 pb-2 border-b-2 border-fuchsia-400 flex items-center">
-                <span class="mr-3 text-4xl">💜</span> Why We Love Multithreading: A Chef's Confession
-            </h2>
-            <p class="text-gray-700 mb-6 text-xl font-light">
-                If the scenarios above didn't convince you, think of threading as your program finally learning the
-                magic word: **"Delegation."** Here's why you should embrace the chaos of the concurrent kitchen:
-            </p>
-
-            <div class="takeaway bg-fuchsia-50 border-fuchsia-700 shadow-lg">
-                <h3 class="text-xl font-bold text-fuchsia-900 mb-2">The Real World Improvement (The "Aha!" Moment):</h3>
-                <ul class="list-disc list-outside text-gray-800 space-y-3 ml-6">
-                    <li>
-                        **Massive Performance Gain (Max Time vs. Sum Time):** As seen in our scenarios, we went from
-                        11.0 minutes down to **5.0 minutes** for lunch, and 8.5 minutes down to **3.0 minutes** for
-                        dessert! Multithreading allows you to complete the entire job in the time it takes to finish the
-                        single *longest* task. This is the definition of **parallelism**—doing more with your CPU cores.
-                    </li>
-                    <li>
-                        **The UI Doesn't Freeze (A Happy User is a Paying User):** Imagine the Main Chef (your **UI
-                        Thread**) is stuck waiting for the Sambar to simmer (5.0 minutes). Your application would
-                        freeze! By offloading the simmering to a background thread, the Main Chef is free to happily
-                        deliver the already-finished Rasam (1.0 minute) or answer customer questions. This is called
-                        **Responsiveness**.
-                    </li>
-                    <li>
-                        **Non-Blocking I/O: The Art of Waiting Wisely:** Many tasks, like stirring Sambar or fetching
-                        data from a network, involve a lot of **waiting** (I/O operations). A single thread *blocks*
-                        itself during the wait. Multithreading lets the CPU quickly switch to another thread during that
-                        wait time. It's like having your phone screen stay responsive while a massive file downloads in
-                        the background—the CPU never takes a coffee break!
-                    </li>
-                    <li>
-                        **The Funny Note:** Loving multithreading means you stop watching the
-                        `System.out.println("Processing...")` line crawl and start using all those expensive CPU cores
-                        you paid for. Don't let your 8-core machine cook like a single-core microwave!
-                    </li>
-                </ul>
-            </div>
-
-        </section>
-    </main>
-
-    <!-- Footer: Dark and professional -->
-    <footer>
-        <p>All Rights Reserved for NBKRIST</p>
-        <p class="author-info">Authored by: Mutchakala Hari Babu, Professor of Practice @NBKRIST</p>
-    </footer>
+  <footer>
+    <p>All Rights Reserved for NBKRIST</p>
+    <p class="author-info">Authored by: Mutchakala Hari Babu, Professor of Practice @NBKRIST</p>
+  </footer>
 
 </body>
 
 </html>
-
-
-
