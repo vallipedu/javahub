@@ -1,268 +1,409 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NBKRIST Java Hub — JavaFX Syllabus Overview</title>
+  <title>NBKRIST Java Hub — JavaFX Overview</title>
   <style>
-    body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f9fbfd;
-      color: #1a1a1a;
+    /* ===== global reset ===== */
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      line-height: 1.0;
     }
-    header, footer {
-      background-color: #8a93ab;
-      color: #ffffff;
-      text-align: center;
-      padding: 15px 10px;
+
+    /* ===== page base ===== */
+    :root {
+      --accent-1: #2563eb;
+      --accent-2: #1e40af;
+      --glass-bg: rgba(255, 255, 255, 0.42);
+      --glass-bg-2: rgba(255, 255, 255, 0.30);
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --muted: #6b7280;
+      --text: #0f172a;
     }
-    header h1 {
-      margin: 0;
-      font-size: 1.8rem;
-      letter-spacing: 0.5px;
+
+    body {
+      font-family: "Segoe UI", "Poppins", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #eef6ff 0%, #f8fbfd 100%);
+      color: var(--text);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-    main {
-      max-width: 950px;
-      margin: 30px auto;
-      background: #ffffff;
-      padding: 30px 40px;
-      border-radius: 10px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-    }
-    h2 {
-      color: #1e40af;
-      border-bottom: 2px solid #93c5fd;
-      padding-bottom: 5px;
-    }
-    p {
-      text-align: justify;
-      margin-bottom: 10px;
-    }
-    ul {
-      margin-top: 0;
-      margin-bottom: 20px;
-      padding-left: 20px;
-    }
-    a.back {
-      display: inline-block;
-      margin-bottom: 20px;
-      text-decoration: none;
-      color: #ffffff;
-      background: #2563eb;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-weight: 600;
-      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
-    }
-    a.back:hover {
-      background: #1d4ed8;
-    }
-    footer {
-      font-size: 0.95rem;
-    }
-nav {
-      background-color: #c7c8cb;
+
+    /* ===== header ===== */
+    header {
+     
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 96px;
+      /* explicit height so nav can be positioned relative to it */
+      padding: 18px 22px;
       display: flex;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.42));
+      backdrop-filter: blur(10px) saturate(120%);
+      box-shadow: 0 6px 22px rgba(15, 23, 42, 0.08);
+      z-index: 1200;
+    }
+
+    header h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: rgb(124, 80, 80);
+      letter-spacing: 0.6px;
+      margin-bottom: 4px;
+    }
+
+    header h3 {
+      font-size: 0.98rem;
+      font-weight: 500;
+      color: var(--accent-2);
+      margin: 0;
+    }
+
+    /* ===== nav (fixed, below header) ===== */
+    nav {
+    
+      top: 106px;
+      /* moved down to avoid overlap with header */
+      left: 12px;
+      right: 12px;
+      height: auto;
+      padding: 1px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 12px;
+      background: var(--glass-bg-2);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+      z-index: 1100;
     }
 
     nav a {
-      color: #ffffff;
       text-decoration: none;
-      padding: 12px 20px;
-      font-weight: 500;
-      transition: background 0.3s;
+      color: var(--accent-2);
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      transition: all .22s ease;
+      background: rgba(255, 255, 255, 0.18);
     }
 
     nav a:hover {
-      background-color: #454a57;
+      color: white;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.18);
+      transform: translateY(-3px);
     }
 
-    
-        .img-small {
-            width: 150px;
-            height: auto;
-        }
+    nav audio {
+      margin-left: 6px;
+      border-radius: 8px;
+      padding: 4px;
+    }
 
-        .img-medium {
-            width: 300px;
-            height: auto;
-        }
+    /* ===== main card ===== */
+ main {
+  max-width: 980px;
+  margin: 5px auto 22px; /* smaller top margin */
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 34px 42px;
+  box-shadow: 0 20px 50px rgba(8, 16, 40, 0.06);
+  color: var(--text);
+}
 
-        .img-large {
-            width: 600px;
-            height: auto;
-        }
+    h2 {
+      color: var(--accent-2);
+      margin-top: 26px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid rgba(96, 165, 250, 0.22);
+      font-size: 1.15rem;
+    }
+
+    p {
+      margin: 12px 0;
+      text-align: justify;
+    }
+
+    ul {
+      margin: 8px 0 18px 22px;
+    }
+
+    code {
+      background: rgba(15, 23, 42, 0.04);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-family: monospace;
+    }
+
+    pre {
+      background: rgba(15, 23, 42, 0.04);
+      padding: 12px 14px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 12px 0;
+      font-family: monospace;
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+
+    /* images sizes retained by original classes */
+    .img-small {
+      width: 150px;
+      height: auto;
+    }
+
+    .img-medium {
+      width: 300px;
+      height: auto;
+    }
+
+    .img-large {
+      width: 600px;
+      height: auto;
+    }
+
+    /* keep existing inline-image styles while adding subtle polish */
+    img {
+      border-radius: 8px;
+      border: 1px solid #e6e9ef;
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+
+    img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 30px rgba(12, 22, 50, 0.06);
+    }
+
+    /* back link */
+    a.back {
+      display: inline-block;
+      margin-bottom: 6px;
+      text-decoration: none;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.18);
+    }
+
+    a.back:hover {
+      transform: translateY(-3px);
+    }
+
+    /* footer */
+    footer {
+      max-width: 980px;
+      margin: 18px auto 48px;
+      padding: 14px 18px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+      background: transparent;
+    }
+
+    footer a.back {
+      margin-top: 8px;
+      display: inline-block;
+    }
+
+    /* responsive tweaks */
+    @media (max-width: 900px) {
+      nav {
+        left: 10px;
+        right: 10px;
+        padding: 10px;
+        gap: 8px;
+      }
+
+      main {
+        margin: 260px 18px 72px;
+        padding: 26px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        height: auto;
+        padding: 14px 14px;
+      }
+
+      nav {
+        top: 118px;
+        flex-wrap: wrap;
+        gap: 6px;
+        padding: 10px;
+      }
+
+      main {
+        margin-top: 300px;
+        padding: 20px;
+      }
+
+      header h1 {
+        font-size: 1.3rem;
+      }
+    }
+
+    a.underline-animate {
+      color: #1e3a8a;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+    }
+
+    a.underline-animate::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      bottom: -4px;
+      left: 0;
+      background-color: #2563eb;
+      transition: width 0.3s ease;
+    }
+
+    a.underline-animate:hover::after {
+      width: 100%;
+    }
   </style>
 </head>
+
 <body>
   <header>
     <h1>NBKRIST - Java Hub</h1>
-    <p><h3>JavaFX Overview</h3></p>
-   
+
   </header>
+
   <nav>
-     <a href="index.html">← Back to Home</a>
-    <a href="inprogress.html">GUI building </a>
-    <a href="inprogress2.html">Examples</a>
-    <a href="fxqa.html">Q & A</a>
-        <audio controls class="mt-3">
+    <p
+      style="color: rgb(108, 11, 204); font-size: 40px; font-weight: 200;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+      JAVA FX </p><a href="index.html">← Back to Home</a> <a href="SceneBuilder.html">GUI Builder </a> <a
+      href="eventhandling.html">Event Handling</a> <a href="fxqa.html">Q & A</a> <audio controls class="mt-3">
       <source src="javafx.m4a" type="audio/mp4">
-     </audio>
+      <p>Your browser does not support the audio element.</p>
+    </audio>
   </nav>
+
   <main>
     <h2>💡 Introduction to JavaFX – A Creative Analogy</h2>
-    <p>
-
-      While teaching, I often relate concepts to real-world examples to make learning intuitive and engaging. For
+    <p> While teaching, I often relate concepts to real-world examples to make learning intuitive and engaging. For
       JavaFX, I drew inspiration from a familiar cultural practice: the South Indian Muggu—known as Rangoli in English—a
       decorative design traditionally drawn on the floor during festivals.
-    <p>
-      To make the concept tangible, I asked one of my students, Yasaswi, to draw a Rangoli on black-board. She first
+    <p> To make the concept tangible, I asked one of my students, Yasaswi (II CSE A NBKRIST), to draw a Rangoli on
+      black-board. She first
       prepared the background and border, laying out the base design. On top of this, she carefully drew intricate
-      patterns and placed small decorative elements, like a figurine of a cow, on the Rangoli.
-    <p>
-      This exercise beautifully illustrates the structure of a JavaFX application:
-      <br>
-    <ul>
-      <li>The base of the Rangoli represents the Scene in JavaFX.</li>
-
-      <li>The layout and arrangement of the Rangoli grid correspond to GridPane or other layout containers that organize
-        UI elements.</li>
-
-      <li>The Stage, or platform for the Scene, is like the floor on which the Rangoli is displayed.
-
-      <li>The decorative figurines and designs are analogous to JavaFX controls—buttons, labels, images—that are added
-        on top of the layout.</li>
-
-      <li>Event handling was explained through the figurines: just as a figurine can “react” when interacted with in the
-        Rangoli setup, JavaFX controls respond to user actions through listeners and handlers, allowing the interface to
-        respond dynamically.</li>
-    </ul>
-    <img src="muggu.jpeg" alt="Rongoli" class="img-medium">
-
-    Through this analogy, students can visually grasp how JavaFX components come together to form a complete,
-    interactive interface. Just as every element in a Rangoli contributes to the overall aesthetic, each JavaFX
-    component plays a role in creating a functional and visually appealing application.</li>
-    
+      patterns and placed small decorative doll like elements on some grids on the Rangoli.
+    <p> This exercise beautifully illustrates the structure of a JavaFX application: <br>
+    <div style="display: flex; align-items: center; gap: 20px;"> <img src="muggu.jpeg" alt="Rongoli" class="img-medium">
+      <div style="max-width: 500px;">
+        <ul>
+          <li>The base of the Rangoli represents the Scene in JavaFX.</li>
+          <li>The layout and arrangement of the Rangoli grid correspond to GridPane or other layout containers that
+            organize UI elements.</li>
+          <li>The Stage, or platform for the Scene, is like the floor on which the Rangoli is displayed.
+          <li>The decorative dolls and designs are analogous to JavaFX controls—buttons, labels, images—that are
+            added on top of the layout.</li>
+          <li>Event handling was explained through the figurines: just as a figurine can “react” when interacted with in
+            the Rangoli setup, JavaFX controls respond to user actions through listeners and handlers, allowing the
+            interface to respond dynamically.</li>
+        </ul> Through this analogy, students can visually grasp how JavaFX components come together to form a complete,
+        interactive interface. Just as every element in a Rangoli contributes to the overall aesthetic, each JavaFX
+        component plays a role in creating a functional and visually appealing application.
+      </div>
+    </div>
     <h2>💡 Why GUI Development Matters in Modern Software Engineering</h2>
-    <p>
-      As someone who has spent years building and deploying software solutions across different platforms, I can confidently say that Graphical User Interface (GUI) development is not just a skill — it’s an essential craft in software engineering. No matter how powerful or efficient the backend logic is, the success of an application ultimately depends on how intuitively users can interact with it.
-  
-<p>  In today’s world, users expect clarity, responsiveness, and visual feedback from the applications they use — whether it’s a desktop tool for data visualization, a control dashboard in a manufacturing system, or a web-based analytics portal. That’s why understanding GUI development is fundamental for every aspiring developer.</p>
-<p>Just as HTML, CSS, and JavaScript form the backbone of web-based interfaces, JavaFX has emerged as the de facto standard for building rich, standalone desktop applications in Java. It provides a powerful framework that combines visual design with robust backend logic — enabling developers to create interactive, dynamic, and visually appealing UIs with ease.</p>
-<p>Learning GUI development also nurtures a deeper understanding of event-driven programming, user experience design, and modular architecture — skills that are transferable to virtually any technology stack. In an industry where usability defines adoption, mastering GUI development empowers engineers to bridge the gap between functionality and user experience — turning great code into software people actually love to use.</p>
-      <img src="login1.png" alt="the login screen" style="max-width:100%;height:auto;margin-top:15px;border:1px solid #ccc;padding:5px;border-radius:5px;">
-
-
-<h2>1. JavaFX Scene Builder</h2>
-    <p>
-      JavaFX Scene Builder is a visual design tool that allows developers to create user interfaces
-      (UIs) for JavaFX applications without writing FXML code manually. It provides a drag-and-drop environment
-      to add UI elements such as buttons, labels, text fields, and images directly onto the layout pane.
-    </p>
-    <p>
-      Once designed, Scene Builder automatically generates the corresponding <strong>FXML file</strong>,
-      which can be connected to a <strong>Java Controller class</strong> to handle application logic.
-      It helps developers separate UI design from backend logic, improving productivity and maintainability.
-
-    </p>
-
-    <h2>2. JavaFX Application Window Structure</h2>
-    <p>
-      Every JavaFX application begins with a class that extends the <code>Application</code> class.
-      The application window is structured around three main components:
-    </p>
+    <p> Having built and deployed software across platforms, I see GUI development as an essential craft, not just a
+      skill. No matter how strong the backend, an application's success depends on intuitive user interaction. Modern
+      users expect clarity, responsiveness, and visual feedback from every application. This applies to desktop tools,
+      dashboards, or web-based analytics portals alike. Understanding GUI development is therefore fundamental for every
+      aspiring developer. HTML, CSS, and JavaScript power web interfaces, while JavaFX leads in rich desktop
+      applications. JavaFX blends visual design with robust backend logic for interactive and dynamic UIs. GUI
+      development deepens knowledge of event-driven programming and modular architecture. It teaches user experience
+      design, a skill transferable across technologies. Mastering GUI bridges functionality and usability, turning great
+      code into software people love. <img src="login1.png" alt="the login screen"
+        style="max-width:100%;height:auto;margin-top:15px;border:1px solid #ccc;padding:5px;border-radius:5px;">
+    <h2>1. JavaFX Application Window Structure</h2>
+    <p> Every JavaFX application begins with a class that extends the <code>Application</code> class. The application
+      window is structured around three main components: </p>
     <ul>
       <li><strong>Stage:</strong> The top-level container representing the main window.</li>
       <li><strong>Scene:</strong> Holds the visual contents (nodes) displayed inside the stage.</li>
       <li><strong>Nodes:</strong> The actual UI elements such as buttons, text fields, and layouts.</li>
     </ul>
-    <p>
-      The lifecycle of a JavaFX application involves <code>init()</code>, <code>start()</code>, and
+    <p> The lifecycle of a JavaFX application involves <code>init()</code>, <code>start()</code>, and
       <code>stop()</code> methods, allowing initialization, display, and cleanup tasks respectively.
-    </p>
-<img src="fx2.png" alt="JavaFX Application Structure" style="max-width:100%;height:auto;margin-top:15px;border:1px solid #ccc;padding:5px;border-radius:5px;">
-
-    <h2>3. Displaying Text and Images</h2>
-    <p>
-      JavaFX provides several classes to display text and images elegantly. Text can be displayed using
-      <code>Label</code> or <code>Text</code> classes, and images can be loaded with
-      <code>Image</code> and displayed using <code>ImageView</code>.
+    </p> <img src="fx2.png" alt="JavaFX Application Structure"
+      style="max-width:100%;height:auto;margin-top:15px;border:1px solid #ccc;padding:5px;border-radius:5px;">
+    <h2>2. Displaying Text and Images</h2>
+    <p> JavaFX provides several classes to display text and images elegantly. Text can be displayed using
+      <code>Label</code> or <code>Text</code> classes, and images can be loaded with <code>Image</code> and displayed
+      using <code>ImageView</code>.
     </p>
     <ul>
       <li><code>Label</code> — to display simple text or icons.</li>
       <li><code>Text</code> — allows customization like color, font, and alignment.</li>
       <li><code>ImageView</code> — supports scaling, rotation, and effects for images.</li>
     </ul>
-    <p>
-      These components can also be styled using CSS for a more appealing interface, making it easy to
-      display multimedia content efficiently in JavaFX applications.
-    </p>
-
-    <h2>4. Event Handling</h2>
-    <p>
-      Event handling in JavaFX is a mechanism to respond to user interactions such as mouse clicks,
-      key presses, or window actions. Each node in the scene graph can generate and listen to events.
-    </p>
-    <p>
-      Events can be handled using:
-    </p>
+    <p> These components can also be styled using CSS for a more appealing interface, making it easy to display
+      multimedia content efficiently in JavaFX applications. </p>
+    <h2>3. Event Handling</h2>
+    <p> Event handling in JavaFX is a mechanism to respond to user interactions such as mouse clicks, key presses, or
+      window actions. Each node in the scene graph can generate and listen to events. </p>
+    <p> Events can be handled using: </p>
     <ul>
       <li><strong>Event Handlers:</strong> Implementing the <code>EventHandler</code> interface or using lambdas.</li>
       <li><strong>Anonymous Classes:</strong> Useful for inline event logic.</li>
-      <li><strong>FXML Controllers:</strong> Linking event methods through FXML for button clicks and other actions.</li>
+      <li><strong>FXML Controllers:</strong> Linking event methods through FXML for button clicks and other actions.
+      </li>
     </ul>
-    <p>
-      Example: responding to a button click with <code>setOnAction()</code> method to trigger a specific task.
-    </p>
-
-    <h2>5. Laying Out Nodes in Scene Graph</h2>
-    <p>
-      JavaFX organizes UI components in a hierarchical structure called the <strong>Scene Graph</strong>.
-      The root node contains layout containers and controls arranged to form the complete interface.
-    </p>
-    <p>
-      Common layout containers include:
-    </p>
+    <p> Example: responding to a button click with <code>setOnAction()</code> method to trigger a specific task. </p>
+    <h2>4. Laying Out Nodes in Scene Graph</h2>
+    <p> JavaFX organizes UI components in a hierarchical structure called the <strong>Scene Graph</strong>. The root
+      node contains layout containers and controls arranged to form the complete interface. </p>
+    <p> Common layout containers include: </p>
     <ul>
       <li><strong>VBox:</strong> Arranges elements vertically.</li>
       <li><strong>HBox:</strong> Arranges elements horizontally.</li>
       <li><strong>GridPane:</strong> Places elements in a grid-like structure.</li>
       <li><strong>BorderPane:</strong> Divides the layout into top, bottom, left, right, and center sections.</li>
     </ul>
-    <p>
-      Using appropriate layout managers ensures that the UI remains responsive and well-structured across different screen sizes.
-    </p>
-
-    <h2>6. Mouse Events</h2>
-    <p>
-      JavaFX supports various mouse-based interactions such as clicking, dragging, hovering, and scrolling.
-      The <code>MouseEvent</code> class captures these actions and allows developers to define responses for each event.
+    <p> Using appropriate layout managers ensures that the UI remains responsive and well-structured across different
+      screen sizes. </p>
+    <h2>5. Mouse Events</h2>
+    <p> JavaFX supports various mouse-based interactions such as clicking, dragging, hovering, and scrolling. The
+      <code>MouseEvent</code> class captures these actions and allows developers to define responses for each event.
     </p>
     <ul>
       <li><strong>onMouseClicked</strong> — triggered when a node is clicked.</li>
       <li><strong>onMouseEntered</strong> — activated when the cursor enters a node’s area.</li>
       <li><strong>onMouseDragged</strong> — detects drag operations for interactive UIs.</li>
     </ul>
-    <p>
-      For example, in an image editing app, you can implement drag-to-move or click-to-zoom functionalities using these mouse events.
-      Handling mouse events is crucial for building engaging, interactive JavaFX applications.
+    <p> For example, in an image editing app, you can implement drag-to-move or click-to-zoom functionalities using
+      these mouse events. Handling mouse events is crucial for building engaging, interactive JavaFX applications. </p>
+    <h2>6. JavaFX Scene Builder</h2>
+    <p> JavaFX Scene Builder is a visual design tool that allows developers to create user interfaces (UIs) for JavaFX
+      applications without writing FXML code manually. It provides a drag-and-drop environment to add UI elements such
+      as buttons, labels, text fields, and images directly onto the layout pane. </p>
+    <p> Once designed, Scene Builder automatically generates the corresponding <strong>FXML file</strong>, which can be
+      connected to a <strong>Java Controller class</strong> to handle application logic. It helps developers separate UI
+      design from backend logic, improving productivity and maintainability. <a href="SceneBuilder.html"
+        class="underline-animate">About JavaFX SceneBuilder</a>
+
     </p>
   </main>
-
-  <footer>
-    All rights reserved for NBKRIST and authored by Hari Babu Mutchakala
-    <br />
-    <a class="back" href="index.html">← Back to Home</a>
+  <footer> All rights reserved for NBKRIST and authored by Hari Babu Mutchakala!!!!!
   </footer>
 </body>
+
 </html>
-
-
-
