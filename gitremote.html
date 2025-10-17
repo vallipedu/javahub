@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Working with Remote Repositories in NBKRIST</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        background: #f9fafc;
+        color: #333;
+        line-height: 1.7;
+    }
+    header {
+        background: linear-gradient(90deg, #0078d7, #00b4d8);
+        color: white;
+        text-align: center;
+        padding: 1.5rem 0;
+        font-size: 1.8rem;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    nav {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        background: #ffffff;
+        padding: 0.8rem 0;
+        border-bottom: 2px solid #e3f2fd;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    nav a {
+        text-decoration: none;
+        color: #0078d7;
+        background: #e8f3ff;
+        padding: 0.6rem 1.2rem;
+        margin: 0.3rem;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    nav a:hover {
+        background: #0078d7;
+        color: white;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    main {
+        padding: 2rem 10%;
+    }
+    section {
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    }
+    section h2 {
+        color: #005b96;
+        border-bottom: 3px solid #e3f2fd;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    section img {
+        width: 100%;
+        max-width: 900px;
+        height: auto;
+        border-radius: 8px;
+        display: block;
+        margin: 1rem auto;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    footer {
+        text-align: center;
+        background: #f1f3f6;
+        color: #555;
+        font-size: 0.9rem;
+        padding: 1rem;
+        border-top: 2px solid #0078d7;
+    }
+    .back-btn {
+        display: inline-block;
+        text-decoration: none;
+        background: #00b4d8;
+        color: #fff;
+        padding: 0.6rem 1rem;
+        border-radius: 6px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        margin-bottom: 1.5rem;
+    }
+    .back-btn:hover {
+        background: #0078d7;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    }
+    @media (max-width: 768px) {
+        main {
+            padding: 1rem 5%;
+        }
+        header {
+            font-size: 1.5rem;
+        }
+        nav a {
+            padding: 0.5rem 1rem;
+            font-size: 0.95rem;
+        }
+    }
+</style>
+</head>
+<body>
+
+<header>Working with Remote Repositories in NBKRIST</header>
+
+<nav>
+    <a href="Git.html">⬅ Back to Home</a>
+    <a href="inprogress.html">Push & Pull</a>
+    <a href="inprogress.html">Integration</a>
+</nav>
+
+<main>
+        <section>
+        <h2>1. What is a Remote Repository?</h2>
+        <p>
+            A remote repository is a version of your project that’s hosted on the internet or network. 
+            It acts as a shared space where developers can push, pull, and collaborate on code together.
+        </p>
+        <p>
+            In NBKRIST projects, remote repositories ensure that student teams can access, review, and merge work efficiently.
+        </p>
+        <img src="https://via.placeholder.com/900x400.png?text=Remote+Repository+Concept" alt="Remote Repository Concept">
+    </section>
+
+    <section>
+        <h2>2. Creating a Remote Repository (New)</h2>
+        <p>
+            On GitHub, you can create a new remote repository by clicking the <strong>“New”</strong> button, 
+            naming your repository (e.g., <code>nbkristrepo</code>), and choosing its visibility (public or private).
+        </p>
+        <p>
+            This is the starting point for connecting your local work to the global GitHub network.
+        </p>
+        <img src="https://via.placeholder.com/900x400.png?text=Creating+a+Remote+Repository" alt="Creating Remote Repository">
+    </section>
+
+    <section>
+        <h2>3. Adding a Remote Repository to Local</h2>
+        <p>
+            After creating a remote repository, connect it to your local Git project using the 
+            <code>git remote add origin</code> command.
+        </p>
+        <p>
+            Example for NBKRIST students:
+        </p>
+        <pre><code>git remote add origin https://github.com/nbkriststudent/nbkristrepo.git</code></pre>
+        <img src="https://via.placeholder.com/900x400.png?text=Adding+Remote+Repository+to+Local" alt="Add Remote Repo">
+    </section>
+
+    <section>
+        <h2>4. Pushing Local Repository to Remote</h2>
+        <p>
+            Once connected, push your local commits to the remote repository using the push command.  
+            This uploads your work to GitHub for others to view and collaborate.
+        </p>
+        <pre><code>git push -u origin main</code></pre>
+        <img src="https://via.placeholder.com/900x400.png?text=Pushing+Local+Repo+to+Remote" alt="Pushing to Remote Repo">
+    </section>
+
+    <section>
+        <h2>5. Push Tags</h2>
+        <p>
+            Git tags are used to mark specific points in history, often for releases or milestones.  
+            To share them with your team, you can push tags to the remote repository.
+        </p>
+        <pre><code>git push origin --tags</code></pre>
+        <img src="https://via.placeholder.com/900x400.png?text=Push+Tags+to+Remote" alt="Push Tags Example">
+    </section>
+
+    <section>
+        <h2>6. Working on Remote Repository</h2>
+        <p>
+            Files can be created, edited, and committed locally before being pushed to the remote repository.  
+            This ensures all changes are validated before syncing with the remote version.
+        </p>
+        <p>
+            NBKRIST developers practice disciplined workflows — commit locally, then push remotely for safety and traceability.
+        </p>
+        <img src="https://via.placeholder.com/900x400.png?text=Working+on+Remote+Repository" alt="Working with Remote Files">
+    </section>
+
+    <section>
+        <h2>7. Fetch Command</h2>
+        <p>
+            The <code>git fetch</code> command downloads updates from the remote repository without merging them.  
+            It helps you stay informed about what others have committed.
+        </p>
+        <pre><code>git fetch origin</code></pre>
+        <img src="https://via.placeholder.com/900x400.png?text=Git+Fetch+Command" alt="Git Fetch Command Example">
+    </section>
+
+    <section>
+        <h2>8. Pull Command</h2>
+        <p>
+            The <code>git pull</code> command combines fetching and merging.  
+            It updates your local branch with the latest commits from the remote repository.
+        </p>
+        <pre><code>git pull origin main</code></pre>
+        <img src="https://via.placeholder.com/900x400.png?text=Git+Pull+Command" alt="Git Pull Command Example">
+    </section>
+
+    <section>
+        <h2>9. Git Local Repo to GitHub Remote Repo Integration</h2>
+        <p>
+            Integrating your local repository with GitHub ensures a seamless workflow between local development 
+            and remote collaboration. This connection enables developers to push, pull, and manage versions easily.
+        </p>
+        <p>
+            NBKRIST encourages students to practice this integration as part of their DevOps learning process.
+        </p>
+        <pre><code>git remote add origin https://github.com/nbkriststudent/nbkristrepo.git
+git branch -M main
+git push -u origin main</code></pre>
+        <img src="https://via.placeholder.com/900x400.png?text=Local+Repo+Integration+with+GitHub" alt="Git Local and Remote Integration">
+    </section>
+</main>
+
+<footer>
+    All rights Reserved for NBKRIST | Authored by <strong>Hari Babu Mutchakala</strong>
+</footer>
+
+</body>
+</html>

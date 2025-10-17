@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setting Up Git in VS Code & Pushing Java Project (NBKRIST)</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f9fafc;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(90deg, #0078d7, #00b4d8);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 0;
+      font-size: 1.8rem;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #ffffff;
+      padding: 0.8rem 0;
+      border-bottom: 2px solid #e3f2fd;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    nav a {
+      text-decoration: none;
+      color: #0078d7;
+      background: #e8f3ff;
+      padding: 0.6rem 1.2rem;
+      margin: 0 0.4rem;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    nav a:hover {
+      background: #0078d7;
+      color: white;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    main {
+      padding: 2rem 10%;
+    }
+    section {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    }
+    section h2 {
+      color: #005b96;
+      border-bottom: 3px solid #e3f2fd;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    section img {
+      width: 100%;
+      max-width: 900px;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 1rem auto;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    pre {
+      background: #f4f8fb;
+      padding: 0.7rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      border-left: 3px solid #0078d7;
+    }
+    footer {
+      text-align: center;
+      background: #f1f3f6;
+      color: #555;
+      font-size: 0.9rem;
+      padding: 1rem;
+      border-top: 2px solid #0078d7;
+    }
+    .back-btn {
+      display: inline-block;
+      text-decoration: none;
+      background: #00b4d8;
+      color: #fff;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin-bottom: 1.5rem;
+    }
+    .back-btn:hover {
+      background: #0078d7;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    }
+    @media (max-width: 768px) {
+      main {
+        padding: 1rem 5%;
+      }
+      header {
+        font-size: 1.5rem;
+      }
+      nav a {
+        padding: 0.5rem 1rem;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>Setting Up Git in VS Code & Pushing Java Project (NBKRIST)</header>
+
+  <nav>
+    <a href="Git.html">⬅ Back to Home</a>
+    <a href="inprogress.html">Push Workflow</a>
+    <a href="inprogress.html">Clone & Pull</a>
+  </nav>
+
+  <main>
+      <section>
+      <h2>1. Setting Up Git in Visual Studio Code</h2>
+      <p>
+        VS Code has built-in Git integration. First, install and configure Git on your system.
+        Then open your Java project folder in VS Code, and the Source Control view (icon on left) will detect the repo.
+      </p>
+      <p>
+        In VS Code's bottom status bar you will see branch names, sync icons, and option to publish if it's not yet linked to remote.
+      </p>
+      <img src="https://via.placeholder.com/900x400.png?text=VS+Code+Git+Integration" alt="VS Code Git Integration">
+    </section>
+
+    <section>
+      <h2>2. Creating a New Java Project Locally</h2>
+      <p>
+        In your local folder, create a standard Java project structure: `src/`, `bin/`, `pom.xml` or `build.gradle` (if using Maven/Gradle).
+        Open the folder in VS Code and start writing Java code (e.g. `Main.java`).
+      </p>
+      <p>
+        Use extensions like “Java Extension Pack” for VS Code to get IntelliSense, compilation, and debugging support.
+      </p>
+      <img src="https://via.placeholder.com/900x400.png?text=Java+Project+in+VS+Code" alt="Java Project in VS Code">
+    </section>
+
+    <section>
+      <h2>3. Git Commands: init / add / commit / reset / push</h2>
+      <p>
+        Once your project is ready, you initialize Git, stage files, commit changes, and push to remote.  
+        If needed, you can reset changes to previous state.
+      </p>
+      <pre><code>git init
+git add .
+git commit -m "Initial commit from NBKRIST student"
+git log
+# Reset (soft or mixed)
+git reset --soft HEAD~1
+git reset --hard HEAD~1
+</code></pre>
+      <p>
+        After initialization and committing locally, configure remote and push your code.
+      </p>
+    </section>
+
+    <section>
+      <h2>4. Linking Remote Repository & Pushing to GitHub (nbkristrepo)</h2>
+      <p>
+        Connect your local repository to GitHub’s remote repo (for example: `nbkristrepo`) and push your commits.
+      </p>
+      <pre><code>git remote add origin https://github.com/nbkriststudent/nbkristrepo.git
+git branch -M main
+git push -u origin main
+# Later pushes
+git push origin main
+</code></pre>
+      <p>
+        After the first push, you can simply use `git push` to send new commits to GitHub.
+      </p>
+      <img src="https://via.placeholder.com/900x400.png?text=Pushing+to+GitHub" alt="Push to GitHub">
+    </section>
+
+    <section>
+      <h2>5. Cloning Remote Repository Locally</h2>
+      <p>
+        If you or another team member wants to work on the remote project, clone it locally using Git.
+      </p>
+      <pre><code>git clone https://github.com/nbkriststudent/nbkristrepo.git
+cd nbkristrepo
+</code></pre>
+      <p>
+        After cloning, open the folder in VS Code and work as usual.
+      </p>
+      <img src="https://via.placeholder.com/900x400.png?text=Cloning+Repository" alt="Clone Remote Repo">
+    </section>
+
+    <section>
+      <h2>6. Pull, Add, Commit, Push in a Remote Workflow</h2>
+      <p>
+        Regularly update your local copy with remote changes, then stage new changes, commit them, and push back.
+      </p>
+      <pre><code>git pull origin main
+# make changes in files...
+git add .
+git commit -m "Updated some feature"
+git push origin main
+</code></pre>
+      <p>
+        This ensures your code stays in sync with team and remote.
+      </p>
+      <img src="https://via.placeholder.com/900x400.png?text=Pull+Add+Commit+Push" alt="Pull, Add, Commit, Push">
+    </section>
+
+  </main>
+
+  <footer>
+    All rights Reserved for NBKRIST | Authored by <strong>Hari Babu Mutchakala</strong>
+  </footer>
+</body>
+</html>

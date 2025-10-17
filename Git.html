@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working with Git in NBKRIST</title>
+    <style>
+        /* Base Styling */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f9fafc;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background-color: #e0f2f7;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: contain;
+            background-color: #e0f2f7;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0078d7;
+            margin: 0;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            background-color: #ffffff;
+            padding: 0.6rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #0078d7;
+            background-color: #e8f3ff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #0078d7;
+            color: #fff;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1rem 2%;
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #00b4d8;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .back-btn:hover {
+            background: #0078d7;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Sections */
+        section {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+            text-align: left;
+        }
+
+        section h2 {
+            color: #005b96;
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            border-bottom: 2px solid #e3f2fd;
+            padding-bottom: 0.3rem;
+        }
+
+        /* Images inside sections */
+        section img {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin: 1rem auto;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            border: 1px solid #d0e3ff;
+        }
+
+        th,
+        td {
+            border: 1px solid #d0e3ff;
+            padding: 0.6rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0078d7;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f5f9ff;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            background: #f1f3f6;
+            color: #555;
+            font-size: 0.9rem;
+            padding: 1rem;
+            border-top: 2px solid #0078d7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            header h1 {
+                font-size: 1.4rem;
+                text-align: center;
+            }
+
+            header img {
+                width: 40px;
+                height: 40px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                font-size: 0.95rem;
+            }
+
+            main {
+                padding: 1rem 5%;
+            }
+
+            section h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        .img-small-very {
+            width: 75px;
+            height: auto;
+        }
+
+        .img-small {
+            width: 150px;
+            height: auto;
+        }
+
+        .img-medium {
+            width: 300px;
+            height: auto;
+        }
+
+        .img-large {
+            width: 600px;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="git2.png" alt="Git Logo">
+        <h1>NBKRIST Java Hub - Git</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="GitAndGitHub.html">Git-GitHub Basics</a>
+        <a href="gitbranching.html">Git - Branching</a>
+        <a href="gitremote.html">Git - Remote Repo</a>
+        <a href="gitcollabAndForking.html">Git - Collaboration & Forking</a>
+        <a href="GitJava.html">Git - Java</a>
+         <a href="gitcicd.html">DevOps & CI/CD</a>
+   
+
+
+
+    </nav>
+
+    <main>
+        <section>
+            <h2>1. Why We Need Version Control?</h2>
+            <p>Version control is essential for tracking changes in software projects. It allows developers to
+                experiment, collaborate, and safely roll back to previous versions if something goes wrong.</p>
+            <p>In the fast-paced environment of Software projects, version control ensures every change is accounted for
+                and managed systematically.</p>
+            <img src="why.png" alt="Version Control" class="img-small">
+        </section>
+
+        <section>
+            <h2>2. Issues Without Version Control</h2>
+            <p>Without version control, teams risk overwriting code, losing progress, and struggling with multiple file
+                versions. Collaboration becomes chaotic, and tracking bugs or feature history becomes nearly impossible.
+            </p>
+            <img src="issues.png" alt="Version Control" class="img-small">
+        </section>
+
+        <section>
+            <h2>3. What is Version Control? Why Git?</h2>
+            <p>Version control manages changes to source code over time. Git is a distributed version control system
+                designed for speed, flexibility, and reliability.</p>
+            <p>Git allows Software developers to work offline, branch easily, and integrate their changes smoothly. It’s
+                the backbone of modern software development.</p>
+            <img src="whyGit.png" alt="Version Control" class="img-large">
+        </section>
+
+        <section>
+            <h2>4. The Git File Workflow</h2>
+            <p>Git workflow: create files, add them to staging, commit them, and push to remote repositories. This
+                ensures clarity, control, and collaboration for every project.</p>
+            <img src="workflow.png" alt="Version Control" class="img-medium">
+        </section>
+
+        <section>
+            <h2>5. Git Command Developer References</h2>
+            <p>Quick reference for commonly used Git commands that every NBKRIST student should know:</p>
+            <table>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>git init</code></td>
+                    <td>Initialize a new Git repository in your local directory.</td>
+                </tr>
+                <tr>
+                    <td><code>git add .</code></td>
+                    <td>Add all modified and new files to staging.</td>
+                </tr>
+                <tr>
+                    <td><code>git commit -m "message"</code></td>
+                    <td>Commit staged changes with a message.</td>
+                </tr>
+                <tr>
+                    <td><code>git status</code></td>
+                    <td>Show current state of working directory and staging area.</td>
+                </tr>
+                <tr>
+                    <td><code>git log</code></td>
+                    <td>Display the commit history of the repository.</td>
+                </tr>
+                <tr>
+                    <td><code>git branch</code></td>
+                    <td>List, create, or delete branches.</td>
+                </tr>
+                <tr>
+                    <td><code>git merge branchname</code></td>
+                    <td>Merge a branch into the current branch.</td>
+                </tr>
+                <tr>
+                    <td><code>git remote add origin &lt;url&gt;</code></td>
+                    <td>Link your local repo to a remote repository.</td>
+                </tr>
+                <tr>
+                    <td><code>git push -u origin main</code></td>
+                    <td>Push committed changes to GitHub.</td>
+                </tr>
+            </table>
+            <img src="gitcmds.png" alt="Version Control" class="img-medium">
+        </section>
+    </main>
+
+    <footer>
+        All rights Reserved for NBKRIST | Authored by <strong>Hari Babu Mutchakala</strong>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Branching and Merging in Git (NBKRIST)</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        background: #f9fafc;
+        color: #333;
+        line-height: 1.7;
+    }
+    header {
+        background: linear-gradient(90deg, #0078d7, #00b4d8);
+        color: white;
+        text-align: center;
+        padding: 1.5rem 0;
+        font-size: 1.8rem;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    nav {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        background: #ffffff;
+        padding: 0.8rem 0;
+        border-bottom: 2px solid #e3f2fd;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    nav a {
+        text-decoration: none;
+        color: #0078d7;
+        background: #e8f3ff;
+        padding: 0.6rem 1.2rem;
+        margin: 0.3rem;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    nav a:hover {
+        background: #0078d7;
+        color: white;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    main {
+        padding: 2rem 10%;
+    }
+    section {
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    }
+    section h2 {
+        color: #005b96;
+        border-bottom: 3px solid #e3f2fd;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    section img {
+        width: 100%;
+        max-width: 900px;
+        height: auto;
+        border-radius: 8px;
+        display: block;
+        margin: 1rem auto;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    footer {
+        text-align: center;
+        background: #f1f3f6;
+        color: #555;
+        font-size: 0.9rem;
+        padding: 1rem;
+        border-top: 2px solid #0078d7;
+    }
+    .back-btn {
+        display: inline-block;
+        text-decoration: none;
+        background: #00b4d8;
+        color: #fff;
+        padding: 0.6rem 1rem;
+        border-radius: 6px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        margin-bottom: 1.5rem;
+    }
+    .back-btn:hover {
+        background: #0078d7;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    }
+    pre {
+        background: #f4f8fb;
+        padding: 0.7rem;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-size: 0.95rem;
+        border-left: 3px solid #0078d7;
+    }
+    @media (max-width: 768px) {
+        main {
+            padding: 1rem 5%;
+        }
+        header {
+            font-size: 1.5rem;
+        }
+        nav a {
+            padding: 0.5rem 1rem;
+            font-size: 0.95rem;
+        }
+    }
+</style>
+</head>
+<body>
+
+<header>Branching and Merging in Git (NBKRIST)</header>
+
+<nav>
+    <a href="Git.html">⬅ Back to Home</a>
+    <a href="inprogress.html">Merge Operations</a>
+    <a href="inprogress.html">Conflict Handling</a>
+</nav>
+
+<main>
+    <section>
+        <h2>1. Why Branching is Important in Real-Time Projects</h2>
+        <p>
+            In real-world Agile development, multiple features or bug fixes are often worked on simultaneously.
+            Branching allows developers to create isolated environments for each task without disturbing the main codebase.
+        </p>
+        <p>
+            A  software engineer uses branches to manage parallel work — feature, hotfix, and release branches.
+            It supports better team collaboration and ensures controlled integration through pull requests and merges.
+        </p>
+        <p>
+            Branches can be easily created, switched, merged, or deleted — forming a simple yet powerful workflow model for modern software development.
+        </p>
+        <img src="https://via.placeholder.com/900x400.png?text=Why+Branching+Matters+in+Projects" alt="Branching Importance in Agile">
+    </section>
+
+    <section>
+        <h2>2. What is a Branch in Git?</h2>
+        <p>
+            A branch represents an independent line of development in Git. It allows you to work on new features or bug fixes
+            without affecting the main project.
+        </p>
+        <p>
+            The default branch is usually called <code>main</code> or <code>master</code>, and developers can create multiple branches as needed.
+        </p>
+        <img src="https://via.placeholder.com/900x400.png?text=Git+Branch+Concept" alt="Git Branch Structure">
+    </section>
+
+    <section>
+        <h2>3. Creating a New Branch</h2>
+        <p>
+            Use the following command to create a new branch and switch to it:
+        </p>
+        <pre><code>git checkout -b feature-login</code></pre>
+        <p>
+            This creates a new branch named <strong>feature-login</strong> and prepares your workspace for development.
+        </p>
+        <img src="https://via.placeholder.com/900x400.png?text=Creating+a+New+Branch" alt="Creating New Branch">
+    </section>
+
+    <section>
+        <h2>4. Switching Between Branches</h2>
+        <p>
+            You can easily move between branches using the checkout command.  
+            This helps you maintain different development paths in parallel.
+        </p>
+        <pre><code>git checkout main</code></pre>
+        <p>
+            In NBKRIST development tasks, this ensures students can test or integrate specific modules independently.
+        </p>
+        <img src="https://via.placeholder.com/900x400.png?text=Switching+Branches" alt="Switching Between Branches">
+    </section>
+
+    <section>
+        <h2>5. Merging Branches</h2>
+        <p>
+            Merging brings changes from one branch into another. Typically, developers merge feature branches back into the main branch once tested.
+        </p>
+        <pre><code>git checkout main
+git merge feature-login</code></pre>
+        <p>
+            This keeps the project codebase unified and up to date with all enhancements.
+        </p>
+        <img src="https://via.placeholder.com/900x400.png?text=Merging+Branches" alt="Merging Branches Example">
+    </section>
+
+    <section>
+        <h2>6. Handling Merge Conflicts</h2>
+        <p>
+            When two developers modify the same part of a file, a merge conflict occurs.  
+            Git flags the conflict for manual resolution to preserve code integrity.
+        </p>
+        <p>
+            Resolving conflicts is part of every professional Git workflow — it builds collaboration discipline and clarity.
+        </p>
+        <img src="https://via.placeholder.com/900x400.png?text=Merge+Conflicts+Resolution" alt="Merge Conflict Resolution">
+    </section>
+
+    <section>
+        <h2>7. Deleting a Branch</h2>
+        <p>
+            Once a branch’s changes are merged and no longer needed, it’s best practice to delete it to keep the repository clean.
+        </p>
+        <pre><code>git branch -d feature-login</code></pre>
+        <p>
+            At NBKRIST, students are encouraged to maintain organized repositories to reflect industry-grade project standards.
+        </p>
+        <img src="https://via.placeholder.com/900x400.png?text=Deleting+a+Branch" alt="Deleting Branch">
+    </section>
+
+    <section>
+        <h2>8. Simple Software Workflow Example</h2>
+        <p>
+            Here’s a typical workflow: create a feature branch, commit changes, merge them to the main branch, and delete the feature branch.
+        </p>
+        <pre><code>git checkout -b feature-ui
+# Make code changes
+git add .
+git commit -m "Added new UI feature"
+git checkout main
+git merge feature-ui
+git branch -d feature-ui</code></pre>
+        <p>
+            This streamlined process ensures continuous delivery and controlled integration — essential for agile project success at NBKRIST.
+        </p>
+        <img src="https://via.placeholder.com/900x400.png?text=Software+Branching+Workflow" alt="Git Workflow Example">
+    </section>
+</main>
+
+<footer>
+    All rights Reserved for NBKRIST | Authored by <strong>Hari Babu Mutchakala</strong>
+</footer>
+
+</body>
+</html>
