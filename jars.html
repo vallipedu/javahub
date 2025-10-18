@@ -1,192 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java JARs: A Comprehensive Guide</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-            color: #374151;
-        }
-        .header-bg {
-            background-image: linear-gradient(135deg, #1f2937, #374151);
-        }
-        .content-card {
-            background-color: white;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-        .code-block {
-            background-color: #1f2937;
-            color: #f9fafb;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            font-family: monospace;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-        }
-        .list-circle li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .list-circle li::before {
-            content: "•";
-            color: #2563eb;
-            font-size: 1.25rem;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NBKRIST – Java Hub | Java Archive (JAR) Files</title>
+<style>
+:root {
+  --primary: #0078ff;
+  --accent: #00bfff;
+  --header: #004d99;
+  --glass: rgba(255,255,255,0.9);
+  --text: #222;
+  --light-bg: rgba(245,248,255,0.8);
+  --bg-gradient: linear-gradient(135deg, #f5faff, #ffffff);
+}
+
+body.dark {
+  --primary: #66b3ff;
+  --accent: #3399ff;
+  --header: #cce5ff;
+  --glass: rgba(25,25,25,0.9);
+  --text: #f0f0f0;
+  --light-bg: rgba(40,40,40,0.85);
+  --bg-gradient: linear-gradient(135deg, #0f172a, #1e293b);
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 25px 10px;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  font-weight: bold;
+  font-size: 1.8em;
+  color: var(--header);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  position: relative;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: var(--light-bg);
+  border: none;
+  color: var(--primary);
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.theme-toggle:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* Back button */
+.back-link {
+  text-align: right;
+  margin-bottom: 20px;
+}
+.back-link a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 6px 14px;
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  transition: 0.3s;
+}
+.back-link a:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* Container */
+.container {
+  max-width: 950px;
+  margin: 30px auto 40px auto;
+  background: var(--glass);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition: background 0.4s ease;
+}
+
+/* Section design */
+.subsection {
+  position: relative;
+  background: rgba(240,248,255,0.45);
+  margin: 25px 0;
+  padding: 18px 20px 18px 30px;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.3s ease;
+}
+body.dark .subsection {
+  background: rgba(45,55,72,0.6);
+}
+.subsection::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 4px;
+  background: linear-gradient(180deg, #0099ff, #0066cc);
+  border-radius: 3px;
+}
+.subsection::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 15px;
+  height: 6px;
+  background: #0099ff;
+  border-radius: 0 5px 5px 0;
+  box-shadow: 0 calc(100% - 6px) 0 0 #0099ff;
+}
+.subsection:hover {
+  background: rgba(220,240,255,0.7);
+}
+body.dark .subsection:hover {
+  background: rgba(65,85,115,0.8);
+}
+
+/* Code blocks */
+.code-block {
+  background: var(--light-bg);
+  border-left: 3px solid var(--primary);
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-family: Consolas, monospace;
+  font-size: 0.9em;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  margin: 10px 0;
+  transition: 0.3s ease;
+}
+
+/* Notes */
+.note {
+  background: rgba(230,245,255,0.9);
+  border-left: 5px solid var(--primary);
+  padding: 15px;
+  border-radius: 8px;
+  color: #0d47a1;
+  margin: 15px 0;
+  font-style: italic;
+}
+body.dark .note {
+  background: rgba(60,80,100,0.6);
+  color: #cde6ff;
+}
+
+/* Practice Q&A */
+.qa-section {
+  margin-top: 30px;
+  background: rgba(240,247,255,0.6);
+  border-radius: 12px;
+  padding: 20px;
+}
+body.dark .qa-section {
+  background: rgba(40,50,70,0.7);
+}
+.qa-item {
+  position: relative;
+  background: rgba(255,255,255,0.8);
+  border-left: 4px solid var(--primary);
+  margin: 10px 0;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+body.dark .qa-item {
+  background: rgba(55,65,85,0.8);
+  color: #e0eaff;
+}
+.qa-item:hover {
+  background: rgba(230,243,255,0.9);
+}
+body.dark .qa-item:hover {
+  background: rgba(70,85,110,0.9);
+}
+.qa-item .answer {
+  position: absolute;
+  left: 105%;
+  top: 0;
+  width: 280px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  padding: 8px 12px;
+  font-size: 0.9em;
+  color: #000;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+.qa-item:hover .answer {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+  z-index: 50;
+}
+
+/* Summary */
+.key-takeaways {
+  margin-top: 30px;
+  background: rgba(230,245,255,0.8);
+  border-left: 4px solid var(--primary);
+  padding: 20px;
+  border-radius: 12px;
+}
+body.dark .key-takeaways {
+  background: rgba(55,70,90,0.7);
+  color: #e0ecff;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  width: 90%;
+  margin: 40px auto 10px auto;
+  font-size: 0.9em;
+}
+</style>
 </head>
-<body class="min-h-screen flex flex-col">
 
-    <!-- Header -->
-    <header class="header-bg text-white shadow-md py-6 px-6 sm:px-10">
-        <div class="container mx-auto">
-            <h1 class="text-4xl font-bold text-center">Java JAR Files: A Comprehensive Guide</h1>
-            <p class="text-center mt-2 text-gray-300 text-lg">A professional overview for students and developers.</p>
-        </div>
-    </header>
+<body>
+<header>
+  NBKRIST – Java Hub
+  <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+</header>
 
-    <!-- Main Content -->
-    <main class="flex-1 p-6 md:p-10">
-        <div class="container mx-auto max-w-4xl">
-            <!-- Back Button -->
-            <a href="index.html" class="inline-block bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors duration-200 mb-6">
-                &larr; Back to Home
-            </a>
+<div class="container">
+  <div class="back-link">
+    <a href="packages.html">← Back to Packages</a>
+  </div>
 
-            <!-- Introduction Section -->
-            <section class="content-card">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">A Practical Overview</h2>
-                <p class="text-gray-600 mb-4">
-                    This guide provides a practical overview of **Java JAR (Java Archive) files**. It covers what JAR files are, their purpose, how to create and use them, and some common use cases. It is designed to equip you with the knowledge to effectively utilize JAR files in your Java development workflow.
-                </p>
-                <p class="text-gray-600">
-                    A JAR file is a package file format based on the **ZIP file format**. Think of it as a container that bundles all the necessary components of a Java application or library into a single, manageable unit for distribution.
-                </p>
-            </section>
+  <h1>Java Archive (JAR) Files</h1>
 
-            <!-- Purpose of JAR Files -->
-            <section class="content-card">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Purpose of JAR Files</h2>
-                <p class="text-gray-600 mb-6">
-                    JAR files serve several important purposes in Java development, promoting efficient and organized project management.
-                </p>
-                <ul class="list-circle">
-                    <li>
-                        <strong class="text-gray-800">Packaging and Distribution:</strong> They provide a convenient way to package all components of a Java application or library into a single file for easy distribution.
-                    </li>
-                    <li>
-                        <strong class="text-gray-800">Code Reusability:</strong> JAR files allow developers to create reusable components (libraries) that can be easily incorporated into other Java projects, reducing development time.
-                    </li>
-                    <li>
-                        <strong class="text-gray-800">Version Control and Dependencies:</strong> They can be versioned, allowing you to track changes and manage dependencies effectively.
-                    </li>
-                    <li>
-                        <strong class="text-gray-800">Compression:</strong> Using ZIP compression, JAR files reduce the size of the packaged files, making them easier to store and transfer.
-                    </li>
-                    <li>
-                        <strong class="text-gray-800">Metadata:</strong> JAR files can contain a manifest file (`MANIFEST.MF`) with important metadata about the application, such as the main class and version.
-                    </li>
-                </ul>
-            </section>
+  <div class="subsection">
+    <h2>Expert View</h2>
+    <p>As a software engineer, I often rely on <b>JAR files</b> to bundle and distribute my Java applications efficiently. JARs (Java Archives) act as portable containers that hold compiled classes, metadata, resources, and libraries — making deployment simple and modular. They help achieve reusability and scalability across multiple projects.</p>
+    <p>Though the topic of JARs is not included in the syllabus, I thought it’s better to give a brief introduction about this. Understanding JAR files builds a bridge between your knowledge of <b>packages</b> and the real-world deployment of Java software.</p>
+  </div>
 
-            <!-- Creating JAR Files -->
-            <section class="content-card">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Creating JAR Files</h2>
-                <p class="text-gray-600 mb-4">
-                    The most common way to create a JAR file is by using the `jar` command-line tool included with the Java Development Kit (JDK).
-                </p>
-                <h3 class="text-xl font-bold text-gray-700 mt-6 mb-2">Using the `jar` Command</h3>
-                <p class="text-gray-600 mb-2">
-                    Here is a basic example to create a JAR file containing all class files in the current directory:
-                </p>
-                <div class="code-block">
-                    jar cf myapp.jar *.class
-                </div>
-                <ul class="mt-4 list-disc pl-6 text-gray-600">
-                    <li>`jar`: Invokes the JAR tool.</li>
-                    <li>`c`: Specifies that you want to create a new JAR file.</li>
-                    <li>`f`: Specifies the name of the JAR file to be created.</li>
-                </ul>
+  <div class="subsection">
+    <h2>Introduction to JAR Files</h2>
+    <p>A <b>JAR (Java Archive)</b> file is a compressed file (similar to ZIP) that aggregates multiple <code>.class</code> files, package directories, and resources like images, configuration files, and metadata (<code>MANIFEST.MF</code>). JARs make distribution and reuse of Java programs much easier.</p>
+  </div>
 
-                <h3 class="text-xl font-bold text-gray-700 mt-6 mb-2">Including a Manifest File</h3>
-                <p class="text-gray-600 mb-2">
-                    A manifest file is a special file that contains metadata. You can create one to specify the main class of your application.
-                </p>
-                <div class="code-block">
-                    Manifest-Version: 1.0<br>
-                    Main-Class: com.example.MyApp<br>
-                    Created-By: Your Name
-                </div>
-                <p class="text-gray-600 mt-4 mb-2">
-                    To include this manifest file when creating the JAR:
-                </p>
-                <div class="code-block">
-                    jar cfm myapp.jar manifest.txt *.class
-                </div>
-            </section>
-            
-            <!-- Using JAR Files -->
-            <section class="content-card">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Using JAR Files</h2>
-                <p class="text-gray-600 mb-4">
-                    To use a JAR file, you must add it to the classpath. The classpath is a list of directories and JARs that the JVM searches for class files.
-                </p>
-                <h3 class="text-xl font-bold text-gray-700 mt-6 mb-2">As an Executable JAR</h3>
-                <p class="text-gray-600 mb-2">
-                    If the JAR file is configured with a main class in its manifest, you can run it directly from the command line:
-                </p>
-                <div class="code-block">
-                    java -jar myapp.jar
-                </div>
-                
-                <h3 class="text-xl font-bold text-gray-700 mt-6 mb-2">As a Library Dependency</h3>
-                <p class="text-gray-600 mb-2">
-                    You can add a JAR file to your project's classpath using the `-classpath` or `-cp` option:
-                </p>
-                <div class="code-block">
-                    java -cp mylib.jar:myapp.jar com.example.MyApp
-                </div>
-                <p class="text-gray-600 mt-4">
-                    For modern projects, it is highly recommended to use build tools like **Maven** or **Gradle** to manage dependencies. These tools automatically download and manage JAR files, simplifying the process.
-                </p>
-            </section>
+  <div class="subsection">
+    <h2>Relation Between Packages and JARs</h2>
+    <p>Packages provide the logical organization of Java classes, while JAR files provide the physical packaging for distribution. You can think of a JAR as a “portable folder” containing your entire package structure, enabling seamless code sharing and reuse.</p>
+  </div>
 
-            <!-- Related Topics Section -->
-            <section class="content-card">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Related Topics</h2>
-                <p class="text-gray-600 mb-2">
-                    For a deeper understanding of how Java organizes code, explore Java packages.
-                </p>
-                <a href="packages.html" class="text-blue-600 hover:text-blue-800 font-medium">Learn more about Java Packages</a>
-            </section>
-        </div>
-    </main>
+  <div class="subsection">
+    <h2>Creating and Exporting JAR Files</h2>
+    <p>To create a JAR file, use the <code>jar</code> tool:</p>
+    <div class="code-block">
+<pre>jar cf MyLibrary.jar com/nbkrist/cse/*.class</pre>
+    </div>
+    <ul>
+      <li><b>c</b> – create a new archive</li>
+      <li><b>f</b> – specify the output filename</li>
+      <li><b>MyLibrary.jar</b> – the final archive</li>
+      <li><b>com/nbkrist/cse/*.class</b> – your compiled class files</li>
+    </ul>
+  </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white text-center py-4 mt-auto w-full">
-        <p class="text-sm">&copy; 2025 NBKRIST Java Hub</p>
-        <p class="text-xs mt-1">
-            <a href="https://www.nbkrist.co.in/index.php" class="text-blue-400 hover:underline">www.nbkrist.co.in</a>
-            <span class="mx-2">|</span>
-            <a href="packages.html" class="text-blue-400 hover:underline">Java Packages</a>
-        </p>
-    </footer>
+  <div class="subsection">
+    <h2>Importing and Using JAR Files</h2>
+    <p>After creating a JAR, it can be added to your project or executed with the <code>-cp</code> (classpath) option:</p>
+    <div class="code-block">
+<pre>java -cp .;MyLibrary.jar com.nbkrist.cse.MainApp</pre>
+    </div>
+    <p>In IDEs like Eclipse or IntelliJ, add JARs via “Project Properties → Libraries → Add External JARs”.</p>
+  </div>
 
+  <div class="subsection">
+    <h2>Setting JAR Files in the Classpath</h2>
+    <p>Set the classpath so the JVM can locate your JARs automatically:</p>
+    <div class="code-block">
+<pre>set CLASSPATH=C:\MyJavaLibs\MyLibrary.jar;%CLASSPATH%</pre>
+    </div>
+  </div>
+
+  <div class="qa-section">
+    <h2>Practice Questions</h2>
+    <div class="qa-item">What is a JAR file in Java?
+      <div class="answer">A JAR is a package file that bundles compiled classes and resources into one archive for easy deployment.</div>
+    </div>
+    <div class="qa-item">How are packages and JARs related?
+      <div class="answer">Packages organize classes logically, while JARs physically bundle them for sharing and reuse.</div>
+    </div>
+  </div>
+
+  <div class="key-takeaways">
+    <h2>Summary</h2>
+    <ul>
+      <li>JARs simplify Java software packaging and distribution.</li>
+      <li>They encapsulate compiled classes, packages, and metadata.</li>
+      <li>Use <code>jar cf</code> to create and <code>java -cp</code> to execute them.</li>
+      <li>JARs connect conceptual learning of packages with professional software deployment.</li>
+    </ul>
+  </div>
+</div>
+
+<footer>NBKRIST © 2025 | Authored by Hari Babu Mutchakala</footer>
+
+<script>
+const toggleBtn = document.getElementById('themeToggle');
+toggleBtn.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+  toggleBtn.textContent = document.body.classList.contains('dark') ? '☀️ Light' : '🌙 Dark';
+});
+</script>
 </body>
 </html>
