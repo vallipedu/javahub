@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NBKRIST - Java Hub | Exception Handling Examples</title>
+<title>NBKRIST - Java Hub | Exception Handling FAQ & Assignment</title>
 <style>
 :root {
   --primary:#0078ff;
@@ -97,68 +97,38 @@ header {
 }
 h1{text-align:center;color:var(--header);}
 h2{color:var(--primary);}
-.subsection {
-  position:relative;
-  background:rgba(240,248,255,0.45);
-  margin:25px 0;
-  padding:18px 22px 18px 30px;
-  border-radius:10px;
-}
-.subsection::before {
-  content:"";
-  position:absolute;
-  left:0;
-  top:8px;
-  bottom:8px;
-  width:4px;
-  background:linear-gradient(180deg,#0099ff,#0066cc);
-  border-radius:3px;
-}
 details {
   border:1px solid rgba(0,0,0,0.1);
   border-radius:10px;
   margin:15px 0;
-  overflow:hidden;
   background:var(--light-bg);
+  overflow:hidden;
 }
 summary {
-  padding:12px 16px;
+  padding:14px 18px;
   font-weight:600;
   cursor:pointer;
   background:rgba(230,243,255,0.7);
   color:var(--header);
   transition:all 0.3s ease;
+  font-size:1.1em;
 }
 summary:hover {background:rgba(200,230,255,0.9);}
+.answer {
+  padding:16px 20px;
+  border-top:1px solid rgba(0,0,0,0.1);
+  font-size:0.97em;
+}
 pre {
-  margin:0;
-  padding:12px;
   background:var(--glass);
+  border-left:3px solid var(--primary);
+  padding:10px;
+  border-radius:8px;
   font-family:Consolas,monospace;
   font-size:0.9em;
-  border-top:1px solid rgba(0,0,0,0.1);
   white-space:pre-wrap;
-  border-radius:0 0 10px 10px;
-  position:relative;
 }
-pre .popup {
-  position:absolute;
-  left:calc(100% + 10px);
-  top:0;
-  background:rgba(255,255,255,0.95);
-  color:#000;
-  border-radius:10px;
-  padding:8px 12px;
-  width:260px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.15);
-  opacity:0;
-  transform:translateX(10px);
-  transition:all 0.25s ease;
-  pointer-events:none;
-  font-size:0.9em;
-}
-pre:hover .popup {opacity:1;transform:translateX(0);pointer-events:auto;}
-.summary {
+.summary-section {
   background:rgba(224,247,255,0.7);
   border-left:5px solid var(--primary);
   padding:15px 20px;
@@ -178,7 +148,6 @@ footer {
 }
 @media(max-width:880px){
   .navbar{flex-direction:column;width:95%;}
-  pre .popup{left:0;top:calc(100% + 10px);width:95%;}
 }
 </style>
 </head>
@@ -191,159 +160,151 @@ footer {
 
 <nav class="navbar">
   <a href="exphand.html">🏠 Home</a>
-
 </nav>
 
 <div class="container">
-  <h1>Java Exception Handling Programs</h1>
-  <p style="text-align:center;font-style:italic;">Collection of practical programs discussed in class for understanding Java Exception Handling (NBKRIST – CSE Dept).</p>
+  <h1>Java Exception Handling FAQ & Assignment</h1>
 
   <div class="subsection">
     <h2>Expert View</h2>
-    <p>While teaching Exception Handling, I’ve noticed students grasp the concept best through code experimentation. Each of these examples demonstrates not just error catching but structured thinking. Real-world projects depend on reliable exception flow — ensuring the system never fails silently but informs and recovers gracefully.</p>
+    <p>As a software engineer, I believe that real learning begins when students start asking *why*. The FAQ below addresses not just definitions, but also the reasoning behind Java’s design. Understanding these ensures you can handle errors like a professional developer, not just a student.</p>
   </div>
 
   <details open>
-    <summary>ExceptionDemo.java</summary>
-    <pre>
-import java.util.*;
-public class ExceptionDemo {
-  public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-    System.out.println("Enter two numbers:");
-    try {
-      int a = sc.nextInt(), b = sc.nextInt();
-      System.out.println("Result: " + (a / b));
-    } catch (ArithmeticException e) {
-      System.out.println("Division by zero not allowed");
-    } finally {
-      sc.close();
-      System.out.println("Scanner closed.");
-    }
-  }
-}
-    <div class="popup"><b>Output:</b><br>Division by zero not allowed<br>Scanner closed.</div>
-    </pre>
+    <summary>What is an Exception in Java?</summary>
+    <div class="answer">
+      <p>An <strong>Exception</strong> is an event that disrupts the normal execution flow of a program. Exception handling allows developers to catch and handle such runtime events gracefully, maintaining application stability.</p>
+    </div>
   </details>
 
   <details>
-    <summary>MultipleCatch.java</summary>
-    <pre>
-public class MultipleCatch {
-  public static void main(String[] args) {
-    try {
-      int[] arr = {1, 2, 3};
-      System.out.println(arr[5]);
-      int x = 10 / 0;
-    } catch (ArrayIndexOutOfBoundsException e) {
-      System.out.println("Array index invalid");
-    } catch (ArithmeticException e) {
-      System.out.println("Division by zero");
-    } catch (Exception e) {
-      System.out.println("Unexpected error");
-    }
-  }
+    <summary>Difference between Checked and Unchecked Exceptions</summary>
+    <div class="answer">
+      <ul>
+        <li><b>Checked:</b> Verified at compile-time (e.g. <code>IOException</code>).</li>
+        <li><b>Unchecked:</b> Detected at runtime (e.g. <code>NullPointerException</code>).</li>
+      </ul>
+      <pre>
+// Example
+try {
+  FileReader fr = new FileReader("file.txt");
+} catch(IOException e) {
+  System.out.println("Checked exception handled.");
 }
-    <div class="popup"><b>Output:</b><br>Array index invalid</div>
-    </pre>
+      </pre>
+    </div>
   </details>
 
   <details>
-    <summary>MultipleTryCatchBlocks.java</summary>
-    <pre>
-public class MultipleTryCatchBlocks {
-  public static void main(String[] args) {
-    try {
-      int[] numbers = {1, 2, 3};
-      System.out.println(numbers[5]);
-    } catch (ArrayIndexOutOfBoundsException e) {
-      System.out.println("Index out of bounds");
-    }
-
-    try {
-      int result = 10 / 0;
-    } catch (ArithmeticException e) {
-      System.out.println("Divide by zero error");
-    }
-  }
-}
-    <div class="popup"><b>Output:</b><br>Index out of bounds<br>Divide by zero error</div>
-    </pre>
+    <summary>What are the 5 keywords used in Exception Handling?</summary>
+    <div class="answer">
+      <ol>
+        <li><code>try</code> — Monitor risky code</li>
+        <li><code>catch</code> — Handle the exception</li>
+        <li><code>finally</code> — Execute cleanup code</li>
+        <li><code>throw</code> — Manually raise exception</li>
+        <li><code>throws</code> — Declare exception propagation</li>
+      </ol>
+    </div>
   </details>
 
   <details>
-    <summary>ThrowsDemo.java</summary>
-    <pre>
-public class ThrowsDemo {
-  static void methodA() throws Exception {
-    methodB();
-  }
-  static void methodB() throws Exception {
-    throw new Exception("Thrown from methodB");
-  }
-  public static void main(String[] args) {
-    try {
-      methodA();
-    } catch (Exception e) {
-      System.out.println("Caught in main: " + e.getMessage());
-    }
-  }
+    <summary>Purpose of try, catch, and finally Blocks</summary>
+    <div class="answer">
+      <pre>
+try {
+   int num = 10 / 0;
+} catch (ArithmeticException e) {
+   System.out.println("Division by zero!");
+} finally {
+   System.out.println("Cleanup code runs here.");
 }
-    <div class="popup"><b>Output:</b><br>Caught in main: Thrown from methodB</div>
-    </pre>
+      </pre>
+    </div>
   </details>
 
   <details>
-    <summary>BlanketCatchDemo.java</summary>
-    <pre>
-public class BlanketCatchDemo {
-  public static void main(String[] args) {
-    try {
-      int[] arr = {1, 2, 3};
-      System.out.println(arr[5]);
-      int result = 10 / 0;
-    } catch (Exception e) {
-      System.out.println("Exception occurred: " + e.getMessage());
-    }
-  }
+    <summary>Difference between throw and throws Keywords</summary>
+    <div class="answer">
+      <ul>
+        <li><code>throw</code> — Used to raise a specific exception instance.</li>
+        <li><code>throws</code> — Declares possible exceptions for a method.</li>
+      </ul>
+      <pre>
+void validate(int age) throws Exception {
+  if(age < 18)
+    throw new Exception("Underage");
 }
-    <div class="popup"><b>Output:</b><br>Exception occurred: Index 5 out of bounds for length 3</div>
-    </pre>
+      </pre>
+    </div>
   </details>
 
   <details>
-    <summary>UserDefinedBusinessExceptionDemo.java</summary>
-    <pre>
-class InSufficientFundsException extends Exception {
-  InSufficientFundsException(String msg) { super(msg); }
-}
-public class UserDefinedBusinessExceptionDemo {
-  static void withdraw(double bal, double amt) throws InSufficientFundsException {
-    if (amt > bal) throw new InSufficientFundsException("Insufficient Funds");
-    System.out.println("Withdrawal Successful!");
-  }
-  public static void main(String[] args) {
-    try {
-      withdraw(2000, 5000);
-    } catch (InSufficientFundsException e) {
-      System.out.println("Error: " + e.getMessage());
-    }
-  }
-}
-    <div class="popup"><b>Output:</b><br>Error: Insufficient Funds</div>
-    </pre>
+    <summary>Can a try block exist without catch or finally?</summary>
+    <div class="answer">
+      <p>No. A <code>try</code> must be followed by either <code>catch</code> or <code>finally</code> (or both).</p>
+    </div>
   </details>
 
-  <div class="summary">
+  <details>
+    <summary>When is finally block not executed?</summary>
+    <div class="answer">
+      <ul>
+        <li>When <code>System.exit()</code> is invoked.</li>
+        <li>When JVM crashes or power failure occurs.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Explain Java Exception Hierarchy</summary>
+    <div class="answer">
+      <pre>
+Throwable
+├── Error
+│   ├── OutOfMemoryError
+│   └── StackOverflowError
+└── Exception
+    ├── IOException (Checked)
+    ├── SQLException (Checked)
+    └── RuntimeException (Unchecked)
+      ├── NullPointerException
+      ├── ArithmeticException
+      └── ArrayIndexOutOfBoundsException
+      </pre>
+    </div>
+  </details>
+
+  <details>
+    <summary>How to Create Custom Exceptions?</summary>
+    <div class="answer">
+      <pre>
+class InvalidAgeException extends Exception {
+  InvalidAgeException(String msg) {
+    super(msg);
+  }
+}
+      </pre>
+    </div>
+  </details>
+
+  <details>
+    <summary>Explain Exception Propagation</summary>
+    <div class="answer">
+      <p>When an exception is not handled in one method, it propagates to the calling method. This continues until caught or until the JVM terminates the program.</p>
+    </div>
+  </details>
+
+  <div class="summary-section">
     <h2>🔑 Key Summary</h2>
     <ul>
-      <li>Each example demonstrates core exception mechanisms: <code>try</code>, <code>catch</code>, <code>finally</code>, <code>throw</code>, and <code>throws</code>.</li>
-      <li>Multiple catches allow precise error handling for various exception types.</li>
-      <li>Blanket catches should be used cautiously — specific exceptions provide clarity.</li>
-      <li>User-defined exceptions make code more expressive for business logic.</li>
-      <li>Every exception handling example ensures program stability and continuity.</li>
+      <li>All exceptions derive from <code>Throwable</code>.</li>
+      <li><code>throw</code> is for raising, <code>throws</code> for declaring exceptions.</li>
+      <li>Checked = external predictable issues, Unchecked = logic/runtime errors.</li>
+      <li>Finally ensures cleanup tasks always execute.</li>
+      <li>Exception propagation continues until handled.</li>
     </ul>
-    <p>By mastering these patterns, students can handle real-world failures gracefully and design resilient Java applications.</p>
+    <p>By mastering these fundamentals, you can confidently handle any exception scenario in professional Java applications.</p>
   </div>
 </div>
 
