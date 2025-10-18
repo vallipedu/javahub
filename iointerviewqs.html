@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NBKRIST JavaHub - Basic Java I/O Interview Questions</title>
+<style>
+/* ===== Base Layout ===== */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #f6f9fc 0%, #eef3f9 100%);
+  color: #333;
+  line-height: 1.7;
+  scroll-behavior: smooth;
+}
+
+/* ===== Header ===== */
+header {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  padding: 35px 20px;
+  color: #0b2a5c;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+header h1 {
+  margin: 0;
+  font-size: 2.4em;
+  font-weight: 700;
+}
+header p {
+  font-size: 1.1em;
+  opacity: 0.9;
+}
+
+/* ===== Navigation ===== */
+nav {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+nav a {
+  text-decoration: none;
+  color: #0b2a5c;
+  font-weight: 600;
+  margin: 0 15px;
+  padding: 10px 18px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+nav a:hover {
+  background: rgba(13, 59, 102, 0.1);
+  box-shadow: 0 4px 10px rgba(13, 59, 102, 0.15);
+}
+
+/* ===== Container ===== */
+.container {
+  max-width: 950px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== Questions ===== */
+.question {
+  background: #f9fbfd;
+  border-left: 5px solid #3498db;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 12px 0;
+  position: relative;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+.question:hover {
+  background: #eef6ff;
+}
+.question:hover::after {
+  content: attr(data-answer);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background: #0b2a5c;
+  color: #fff;
+  width: 100%;
+  padding: 10px;
+  border-radius: 0 0 10px 10px;
+  font-size: 0.95em;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  white-space: pre-wrap;
+}
+
+/* ===== Expert Intro ===== */
+.expert-view {
+  background: linear-gradient(135deg, #fff8e1, #fff3cd);
+  border-left: 6px solid #f39c12;
+  padding: 20px;
+  border-radius: 10px;
+  color: #7a4e0f;
+  font-style: italic;
+  margin-bottom: 30px;
+  box-shadow: 0 6px 15px rgba(243, 156, 18, 0.1);
+}
+
+/* ===== Arrows ===== */
+.arrow {
+  position: fixed;
+  right: 25px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #0b2a5c;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.arrow:hover {
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+#upArrow {
+  bottom: 80px;
+  display: none;
+}
+#downArrow {
+  bottom: 30px;
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.6);
+  color: #555;
+  border-top: 1px solid #ddd;
+  font-size: 0.9em;
+}
+footer a {
+  color: #0b2a5c;
+  text-decoration: none;
+  font-weight: 600;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+<header>
+  <h1>NBKRIST JavaHub</h1>
+  <p><em>Basic Java I/O Interview Questions (Streams & File Handling)</em></p>
+</header>
+
+<nav>
+  <a href="io.html">🏠 Home</a>
+</nav>
+
+<div class="container">
+  <div class="expert-view">
+    <strong>Expert View 💬</strong><br>
+    These questions are designed to strengthen the understanding of how Java handles input and output through 
+    streams and files. In interviews at TCS, Infosys, or Wipro, fundamental I/O concepts are often tested to 
+    gauge how comfortable a candidate is with real-world data handling and resource management.
+  </div>
+
+  <h2>Top 20 Basic Java I/O Interview Questions (Hover to See Answers)</h2>
+
+  <div class="question" data-answer="Input/Output in Java refers to reading data from sources (like files, keyboard) and writing data to destinations (like console or files).">1. What is meant by Java I/O?</div>
+
+  <div class="question" data-answer="A Stream represents a sequence of data. InputStream reads bytes, OutputStream writes bytes.">2. What is a Stream in Java?</div>
+
+  <div class="question" data-answer="Byte streams (InputStream, OutputStream) handle binary data. Character streams (Reader, Writer) handle textual (Unicode) data.">3. Differentiate between Byte Stream and Character Stream.</div>
+
+  <div class="question" data-answer="InputStream and OutputStream are abstract classes for reading/writing bytes. Reader and Writer are their character-based equivalents.">4. What are InputStream and OutputStream used for?</div>
+
+  <div class="question" data-answer="FileInputStream reads raw bytes from files; FileOutputStream writes bytes to files.">5. What are FileInputStream and FileOutputStream?</div>
+
+  <div class="question" data-answer="FileReader and FileWriter are used for reading and writing text data (characters).">6. What are FileReader and FileWriter used for?</div>
+
+  <div class="question" data-answer="BufferedReader and BufferedWriter improve performance by reducing I/O operations via internal buffers.">7. Explain the use of BufferedReader and BufferedWriter.</div>
+
+  <div class="question" data-answer="The File class represents file and directory paths in the filesystem. It can check, create, or delete files/directories.">8. What is the purpose of the File class?</div>
+
+  <div class="question" data-answer="File.createNewFile() creates a new file. File.delete() or Files.delete() removes it.">9. How do you create and delete a file in Java?</div>
+
+  <div class="question" data-answer="DataInputStream and DataOutputStream read/write primitive data types in binary form.">10. What are DataInputStream and DataOutputStream?</div>
+
+  <div class="question" data-answer="BufferedInputStream and BufferedOutputStream wrap base streams to buffer data, improving speed.">11. What are BufferedInputStream and BufferedOutputStream used for?</div>
+
+  <div class="question" data-answer="The flush() method forces any buffered output bytes to be written immediately.">12. What is the use of the flush() method in OutputStream?</div>
+
+  <div class="question" data-answer="ObjectInputStream and ObjectOutputStream enable reading and writing entire objects through serialization.">13. What are ObjectInputStream and ObjectOutputStream used for?</div>
+
+  <div class="question" data-answer="IOException is thrown for general I/O errors; FileNotFoundException occurs when a file cannot be located.">14. Differentiate between IOException and FileNotFoundException.</div>
+
+  <div class="question" data-answer="Try-with-resources (ARM) automatically closes resources (streams) after use, introduced in Java 7.">15. What is Automatic Resource Management (ARM) in Java?</div>
+
+  <div class="question" data-answer="Use try-with-resources: try(FileReader fr = new FileReader('abc.txt')) { } – stream closes automatically.">16. Give an example of ARM in Java.</div>
+
+  <div class="question" data-answer="Closing streams releases file handles and prevents resource leaks. Always close streams when done.">17. Why is closing a stream important?</div>
+
+  <div class="question" data-answer="The Scanner class from java.util reads input easily from console or files.">18. How can you read console input in Java using Scanner?</div>
+
+  <div class="question" data-answer="PrintWriter supports formatted text output and can write to files or console easily using println().">19. What is the PrintWriter class used for?</div>
+
+  <div class="question" data-answer="NIO.2 (java.nio.file) introduced Path and Files classes for more flexible and safe file handling.">20. What is the purpose of Path and Files in Java NIO.2?</div>
+</div>
+
+<!-- Navigation Arrows -->
+<div id="upArrow" class="arrow">⬆</div>
+<div id="downArrow" class="arrow">⬇</div>
+
+<footer>
+  &copy; 2025 NBKRIST JavaHub | All Rights Reserved |
+  <a href="https://www.nbkrist.co.in/index.php" target="_blank">NBKRIST</a>
+</footer>
+
+<script>
+const upArrow = document.getElementById("upArrow");
+const downArrow = document.getElementById("downArrow");
+window.onscroll = function() {
+  if (window.scrollY > 300) upArrow.style.display = "flex";
+  else upArrow.style.display = "none";
+};
+upArrow.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+downArrow.onclick = () => window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+</script>
+</body>
+</html>
