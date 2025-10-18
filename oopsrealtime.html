@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBKRIST - Java Hub | OOP Design Interview Questions</title>
+    <style>
+        :root {
+            --primary: #0078ff;
+            --accent: #00bfff;
+            --header: #004d99;
+            --glass: rgba(255, 255, 255, 0.9);
+            --text: #222;
+            --light-bg: rgba(245, 248, 255, 0.85);
+            --bg-gradient: linear-gradient(135deg, #f5faff, #ffffff);
+        }
+
+        body.dark {
+            --primary: #66b3ff;
+            --accent: #3399ff;
+            --header: #cce5ff;
+            --glass: rgba(25, 25, 25, 0.9);
+            --text: #f0f0f0;
+            --light-bg: rgba(40, 40, 40, 0.85);
+            --bg-gradient: linear-gradient(135deg, #0f172a, #1e293b);
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text);
+            transition: background .4s, color .4s;
+            line-height: 1.6;
+        }
+
+        header {
+            position: relative;
+            text-align: center;
+            padding: 25px 10px 10px;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            font-weight: bold;
+            font-size: 1.8em;
+            color: var(--header);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .theme-toggle {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: var(--light-bg);
+            border: none;
+            color: var(--primary);
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 6px 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary);
+            color: #fff
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 12px 10px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            margin: 8px auto 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 5px 10px;
+            position: relative;
+        }
+
+        .navbar a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: var(--accent);
+        }
+
+        .navbar a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 20px auto 40px;
+            background: var(--glass);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .subsection {
+            position: relative;
+            background: rgba(240, 248, 255, 0.45);
+            margin: 25px 0;
+            padding: 18px 22px 18px 30px;
+            border-radius: 10px;
+        }
+
+        .subsection::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 4px;
+            background: linear-gradient(180deg, #0099ff, #0066cc);
+            border-radius: 3px;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--header);
+        }
+
+        h2 {
+            color: var(--primary);
+        }
+
+        .problem {
+            background: rgba(255, 255, 255, 0.85);
+            border-left: 4px solid var(--primary);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .problem:hover {
+            background: rgba(240, 248, 255, 0.7);
+            transition: 0.3s;
+        }
+
+        .hint {
+            background: rgba(255, 250, 205, 0.8);
+            border-left: 4px solid #ffb400;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 0.95em;
+        }
+
+        .focus-box {
+            background: rgba(224, 247, 255, 0.8);
+            border-left: 5px solid var(--accent);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            width: 90%;
+            margin: 40px auto 10px;
+            font-size: 0.9em;
+        }
+
+        @media(max-width:880px) {
+            .navbar {
+                flex-direction: column;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        NBKRIST – Java Hub
+        <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+    </header>
+
+    <nav class="navbar">
+    
+        <a href="inheritance.html">🚗 Home</a>
+    
+    </nav>
+
+    <div class="container">
+        <h1>Industry-Level OOP Design Interview Questions</h1>
+
+        <div class="subsection">
+            <h2>Expert View</h2>
+            <p>From my experience interacting with interviewers from top companies like Infosys and Google, I learned
+                that they don’t just look for how well you code — they look for how well you <b>design</b>.
+                Many times, you’re given a real-world problem and expected to apply <b>Object-Oriented Analysis and
+                    Design (OOAD)</b> using Java.
+                <br><br>
+                The best candidates translate vague requirements into clear class structures — identifying
+                relationships, behaviors, and abstractions.
+                <b>That’s real engineering thinking.</b>
+                These questions mirror real industry challenges — where analysis, design, implementation, and testing
+                work hand in hand. 🧠
+            </p>
+        </div>
+
+        <!-- Domain Problems -->
+        <div class="subsection">
+            <h2>1️⃣ Banking Domain – Account Management System</h2>
+            <div class="problem">
+                <p>Design a system for <b>NBKRIST Bank</b> that handles multiple account types: Savings, Current, and
+                    Loan Accounts.</p>
+                <ul>
+                    <li>Abstract class <code>Account</code> with fields: accountNo, holderName, balance.</li>
+                    <li>Subclasses override <code>withdraw()</code> with specific rules.</li>
+                    <li>Polymorphism for interest calculation.</li>
+                    <li>Include validation for insufficient balance.</li>
+                </ul>
+                <div class="hint">💡 <b>Hint:</b> Identify “is-a” hierarchy and override interest computation. Implement
+                    <code>toString()</code> for reporting.</div>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h2>2️⃣ Medical Domain – Hospital Management</h2>
+            <div class="problem">
+                <p>Develop a <b>Hospital Management System</b> that manages Patients, Doctors, and Appointments.</p>
+                <ul>
+                    <li>Abstract class <code>Person</code> → subclasses <code>Doctor</code> & <code>Patient</code>.</li>
+                    <li>Class <code>Appointment</code> connects Doctor ↔ Patient.</li>
+                    <li>Use aggregation and encapsulation effectively.</li>
+                </ul>
+                <div class="hint">💡 <b>Hint:</b> Represent “Doctor has-many Patients” using composition. Implement
+                    appointment scheduling and cancellation methods.</div>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h2>3️⃣ Manufacturing Domain – Vehicle Assembly</h2>
+            <div class="problem">
+                <p>Create a system for <b>NBKRIST Motors</b> to assemble vehicles (Car, Bus, Truck).</p>
+                <ul>
+                    <li>Use <code>interface Assemble</code> and <code>abstract class Vehicle</code>.</li>
+                    <li>Each subclass implements <code>assemble()</code> differently.</li>
+                    <li>Show polymorphism and composition (“Vehicle has Engine”).</li>
+                </ul>
+                <div class="hint">💡 <b>Hint:</b> Think of UML “composition” — Vehicle owns Engine. Use dependency
+                    injection for flexible testing.</div>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h2>4️⃣ College Domain – Student Management</h2>
+            <div class="problem">
+                <p>Develop a <b>Student Management System</b> for NBKRIST to manage Students, Courses, and Enrollments.
+                </p>
+                <ul>
+                    <li>Classes: <code>Student</code>, <code>Course</code>, <code>Enrollment</code>.</li>
+                    <li>Each student can enroll in multiple courses.</li>
+                    <li>Store enrollments using Collections API.</li>
+                </ul>
+                <div class="hint">💡 <b>Hint:</b> Use aggregation: Student “has-many” Courses. Model it as a one-to-many
+                    relationship using ArrayList.</div>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h2>5️⃣ Employee Domain – Payroll System</h2>
+            <div class="problem">
+                <p>Design an <b>Employee Payroll System</b> with full-time and contract employees.</p>
+                <ul>
+                    <li>Abstract class <code>Employee</code> with id, name, baseSalary.</li>
+                    <li>Override <code>calculatePay()</code> for each employee type.</li>
+                    <li>Use <code>interface Payable</code> to ensure all employees get paid.</li>
+                </ul>
+                <div class="hint">💡 <b>Hint:</b> Show method overriding and runtime polymorphism. Add validation for
+                    minimum wage check.</div>
+            </div>
+        </div>
+
+        <!-- Key Summary -->
+        <div class="subsection">
+            <h2>💎 Key Summary – OOP Analysis and Design using Java</h2>
+            <p>Object-Oriented Programming (OOP) is not just about writing code — it’s about **designing reusable,
+                maintainable, and scalable systems**.
+                In real-world projects, analysis and design precede implementation. Engineers use <b>UML (Unified
+                    Modeling Language)</b> to visualize these designs before coding.</p>
+            <P> When designing any system using Object-Oriented Programming principles, the core pillars of OOP operate together in harmony to achieve effective modeling.</P>
+            <ul>
+                <li><b>Encapsulation</b></li>
+                <li><b>Polymorphism</b></li>
+                <li><b>Inheritance</b></li>
+                <li><b>Abstraction</b></li>
+            </ul>
+            <p> According to my expereince, As a Java developer, one should be well-equipped with these fundamental concepts to design robust and efficient systems</p>
+            <ul>
+                <li> Specialization : In Java, specialization means creating a subclass that adds more specific behavior
+                    or properties to a general superclass — representing an “is-a” relationship.</li>
+                <pre> class Vehicle { void move() { System.out.println("Vehicle is moving"); } }
+class Car extends Vehicle { void openDoor() { System.out.println("Car door opened"); } }
+</pre>
+                Here, Car is a specialization of Vehicle — it inherits general movement behavior and adds car-specific
+                features.
+                <li> Generalization : In Java, generalization is the process of extracting common features from multiple
+                    subclasses into a shared superclass to promote reusability and reduce redundancy.</li>
+                <li>Aggregation: Aggregation represents a “has-a” relationship where one class contains a reference to
+                    another class, but both can exist independently — it’s a weaker form of association</li>
+                <li> Composition: Composition represents a strong “has-a” relationship, where one class cannot exist
+                    without the other. If the container object is destroyed, its contained objects are also destroyed.
+                </li>
+            </ul>
+
+            <div class="focus-box">
+                💡 <b>Tip from Industry:</b> Before coding in Java, design your model class diagram as a draft plan. It
+                gives clarity, minimizes rework, and impresses interviewers who expect “design-first” thinking.
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h2>🚀 Final Thought</h2>
+            <div class="focus-box">
+                The power of OOP lies in how you <b>model reality</b> — classes, relationships, behaviors — before you
+                code.
+                Once you start visualizing your design modeling, you begin thinking like a software architect, not just
+                a programmer.
+                That’s the mindset Infosys, Google, and other innovators seek — and it starts here at <b>NBKRIST Java
+                    Hub</b>.
+            </div>
+        </div>
+    </div>
+
+    <footer>NBKRIST © 2025 | Authored by Hari Babu Mutchakala</footer>
+
+    <script>
+        const toggle = document.getElementById("themeToggle");
+        toggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark");
+            toggle.textContent = document.body.classList.contains("dark") ? "☀️ Light" : "🌙 Dark";
+        });
+    </script>
+</body>
+
+</html>

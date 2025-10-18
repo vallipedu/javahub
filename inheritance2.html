@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NBKRIST - Java Hub | Advanced Concepts in Inheritance</title>
+<style>
+:root {
+  --primary:#0078ff;
+  --accent:#00bfff;
+  --header:#004d99;
+  --glass:rgba(255,255,255,0.9);
+  --text:#222;
+  --light-bg:rgba(245,248,255,0.85);
+  --bg-gradient:linear-gradient(135deg,#f5faff,#ffffff);
+}
+body.dark {
+  --primary:#66b3ff;
+  --accent:#3399ff;
+  --header:#cce5ff;
+  --glass:rgba(25,25,25,0.9);
+  --text:#f0f0f0;
+  --light-bg:rgba(40,40,40,0.85);
+  --bg-gradient:linear-gradient(135deg,#0f172a,#1e293b);
+}
+body {
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Verdana,sans-serif;
+  background:var(--bg-gradient);
+  color:var(--text);
+  transition:background .4s,color .4s;
+  line-height:1.6;
+}
+header {
+  position:relative;
+  text-align:center;
+  padding:25px 10px 10px;
+  background:var(--glass);
+  backdrop-filter:blur(12px);
+  font-weight:bold;
+  font-size:1.8em;
+  color:var(--header);
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+}
+.theme-toggle {
+  position:absolute;
+  right:20px;
+  top:20px;
+  background:var(--light-bg);
+  border:none;
+  color:var(--primary);
+  font-weight:600;
+  border-radius:8px;
+  padding:6px 12px;
+  cursor:pointer;
+  transition:0.3s;
+}
+.theme-toggle:hover{background:var(--primary);color:#fff}
+.navbar {
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  padding:12px 10px;
+  background:rgba(255,255,255,0.3);
+  backdrop-filter:blur(10px);
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  width:90%;
+  margin:8px auto 20px;
+}
+.navbar a {
+  text-decoration:none;
+  color:var(--primary);
+  font-weight:600;
+  padding:5px 10px;
+  position:relative;
+}
+.navbar a::after {
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0%;
+  height:2px;
+  background:var(--primary);
+  transition:width 0.3s ease;
+}
+.navbar a:hover {color:var(--accent);}
+.navbar a:hover::after {width:100%;}
+.container {
+  max-width:950px;
+  margin:20px auto 40px;
+  background:var(--glass);
+  border-radius:16px;
+  padding:30px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+}
+.subsection {
+  position:relative;
+  background:rgba(240,248,255,0.45);
+  margin:25px 0;
+  padding:18px 22px 18px 30px;
+  border-radius:10px;
+}
+.subsection::before {
+  content:"";
+  position:absolute;
+  left:0;
+  top:8px;
+  bottom:8px;
+  width:4px;
+  background:linear-gradient(180deg,#0099ff,#0066cc);
+  border-radius:3px;
+}
+h1{text-align:center;color:var(--header);}
+h2{color:var(--primary);}
+.code-block {
+  position:relative;
+  background:var(--light-bg);
+  border-left:3px solid var(--primary);
+  padding:10px 12px;
+  border-radius:8px;
+  font-family:Consolas,monospace;
+  font-size:0.9em;
+  white-space:pre-wrap;
+  margin:10px 0;
+}
+.code-block .popup {
+  position:absolute;
+  left:calc(100% + 10px);
+  top:0;
+  background:rgba(255,255,255,0.97);
+  color:#000;
+  border-radius:10px;
+  padding:8px 12px;
+  width:260px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+  opacity:0;
+  transform:translateX(10px);
+  transition:all 0.25s ease;
+  pointer-events:none;
+  font-size:0.9em;
+}
+.code-block:hover .popup {opacity:1;transform:translateX(0);}
+.tip {
+  background:rgba(224,247,255,0.7);
+  border-left:4px solid var(--accent);
+  padding:10px 14px;
+  border-radius:8px;
+  font-style:italic;
+  margin-top:10px;
+}
+.focus-box {
+  background:rgba(255,250,205,0.7);
+  border-left:5px solid #ffb400;
+  padding:12px 16px;
+  border-radius:8px;
+  margin:15px 0;
+}
+.practice-question {
+  position:relative;
+  margin:10px 0;
+  background:rgba(240,248,255,0.5);
+  padding:8px 10px;
+  border-left:4px solid var(--primary);
+  border-radius:6px;
+  cursor:pointer;
+}
+.practice-question .answer {
+  position:absolute;
+  left:calc(100% + 10px);
+  top:0;
+  width:260px;
+  background:#fff;
+  border:1px solid #ccc;
+  border-radius:8px;
+  padding:8px 12px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.15);
+  opacity:0;
+  transform:translateX(10px);
+  transition:all 0.25s ease;
+  pointer-events:none;
+  font-size:0.9em;
+  color:#000;
+}
+.practice-question:hover .answer {opacity:1;transform:translateX(0);}
+.summary {
+  background:rgba(224,247,255,0.7);
+  border-left:5px solid var(--primary);
+  padding:15px 20px;
+  border-radius:10px;
+  margin-top:30px;
+  font-style:italic;
+}
+footer {
+  text-align:center;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  color:#fff;
+  padding:15px;
+  border-radius:10px;
+  width:90%;
+  margin:40px auto 10px;
+  font-size:0.9em;
+}
+@media(max-width:880px){
+  .navbar{flex-direction:column;width:95%;}
+  .code-block .popup,.practice-question .answer{left:0;top:calc(100% + 10px);width:95%;}
+}
+</style>
+</head>
+
+<body>
+<header>
+  NBKRIST – Java Hub
+  <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+</header>
+
+<nav class="navbar">
+  
+  <a href="inheritance.html">🚗 Home </a>
+ 
+</nav>
+
+<div class="container">
+  <h1>Advanced Concepts in Java Inheritance</h1>
+
+  <div class="subsection">
+    <h2>1. Access Control and Inheritance</h2>
+    <p>Access control in Java determines how class members (fields, methods, constructors) are inherited and visible across packages and subclasses.</p>
+    <p><strong>Notes:</strong></p>
+    <ul>
+      <li><b>private:</b> Not inherited directly. Accessible only within the same class. Use getters/setters to make it visible.</li>
+      <li><b>default (package-private):</b> Accessible only within the same package. Not visible to subclasses in other packages.</li>
+      <li><b>protected:</b> Accessible in the same package and by subclasses even in other packages.</li>
+      <li><b>public:</b> Accessible everywhere and fully inherited.</li>
+    </ul>
+
+    <div class="code-block">
+class Vehicle {
+  private int chassisNumber = 101;
+  protected String brand = "NBKRIST Motors";
+  public void show() {
+    System.out.println("Brand: " + brand);
+  }
+}
+class Car extends Vehicle {
+  void display() {
+    System.out.println("Manufactured by: " + brand);
+  }
+}
+public class AccessDemo {
+  public static void main(String[] args) {
+    Car c = new Car();
+    c.show();
+    c.display();
+  }
+}
+      <div class="popup"><b>Output:</b><br>Brand: NBKRIST Motors<br>Manufactured by: NBKRIST Motors</div>
+    </div>
+    <div class="tip">🔐 <strong>Pro Tip:</strong> Combine protected and encapsulation (getters/setters) to design safe and flexible inheritance structures.</div>
+  </div>
+
+  <div class="subsection">
+    <h2>2. Application of Keyword <code>super</code></h2>
+    <p>The <code>super</code> keyword bridges subclass and superclass, enabling constructor chaining and parent method access.</p>
+
+    <div class="focus-box">
+      <b>💡 Focus:</b> 
+      <p>Using <code>super</code> we can access hidden members, invoke parent constructors, or call overridden methods.  
+      Although private members are not directly accessible, we can initialize or read them using <code>super</code>-invoked public or protected methods of the superclass.</p>
+    </div>
+
+    <div class="code-block">
+class Vehicle {
+  private int chassisNumber;
+  Vehicle(int num){ this.chassisNumber = num; }
+  protected void showInfo() {
+    System.out.println("Chassis Number: " + chassisNumber);
+  }
+}
+class Bus extends Vehicle {
+  Bus(int n){
+    super(n); // initializes private member through superclass constructor
+  }
+  void display(){ super.showInfo(); }
+}
+public class SuperKeywordDemo {
+  public static void main(String[] args){
+    Bus b = new Bus(501);
+    b.display();
+  }
+}
+      <div class="popup"><b>Output:</b><br>Chassis Number: 501</div>
+    </div>
+    <div class="tip">⚙️ <strong>Pro Tip:</strong> Always use <code>super()</code> as the first statement in subclass constructors — it ensures parent class initialization first.</div>
+  </div>
+
+  <div class="subsection">
+    <h2>3. Method Overriding and Dynamic Dispatch</h2>
+    <p>Overriding redefines a superclass method in the subclass. When called via a superclass reference pointing to a subclass object, Java dynamically binds the appropriate method at runtime — this is known as <strong>Dynamic Method Dispatch</strong>.</p>
+    <div class="code-block">
+class Vehicle {
+  void run(){ System.out.println("NBKRIST Vehicle running..."); }
+}
+class Car extends Vehicle {
+  void run(){ System.out.println("Car cruising..."); }
+}
+class Bus extends Vehicle {
+  void run(){ System.out.println("Bus moving..."); }
+}
+public class DispatchDemo {
+  public static void main(String[] args){
+    Vehicle v;
+    v = new Car(); v.run();
+    v = new Bus(); v.run();
+  }
+}
+      <div class="popup"><b>Output:</b><br>Car cruising...<br>Bus moving...</div>
+    </div>
+    <div class="tip">🚀 <strong>Pro Tip:</strong> Dynamic method dispatch enables scalable and extensible design — ideal for plug-in architectures.</div>
+  </div>
+
+  <div class="summary">
+    <h2>📝 Practice Questions</h2>
+    <div class="practice-question">
+      Q1. What is the difference between private and protected access in inheritance?
+      <div class="answer"><b>Answer:</b> Private is not accessible outside the class. Protected allows access within subclasses (even in other packages).</div>
+    </div>
+    <div class="practice-question">
+      Q2. How can you access a private member of the superclass?
+      <div class="answer"><b>Answer:</b> Indirectly via public/protected getter or through <code>super()</code> constructor initialization.</div>
+    </div>
+    <div class="practice-question">
+      Q3. What is the purpose of using <code>super</code> in constructors?
+      <div class="answer"><b>Answer:</b> To call the parent constructor and initialize inherited properties before executing subclass initialization.</div>
+    </div>
+    <div class="practice-question">
+      Q4. Define Dynamic Method Dispatch.
+      <div class="answer"><b>Answer:</b> It is Java’s mechanism to decide which overridden method to execute at runtime based on the actual object type.</div>
+    </div>
+  </div>
+
+  <div class="summary">
+    <h2>🔑 Key Takeaways</h2>
+    <ul>
+      <li>Access modifiers define visibility and inheritance scope.</li>
+      <li><code>super</code> ensures proper superclass initialization and controlled access.</li>
+      <li>Dynamic method dispatch brings runtime flexibility and polymorphism.</li>
+      <li>Encapsulation + inheritance = strong OOP design.</li>
+    </ul>
+  </div>
+</div>
+
+<footer>NBKRIST © 2025 | Authored by Hari Babu Mutchakala</footer>
+
+<script>
+const toggle=document.getElementById("themeToggle");
+toggle.addEventListener("click",()=>{
+  document.body.classList.toggle("dark");
+  toggle.textContent=document.body.classList.contains("dark")?"☀️ Light":"🌙 Dark";
+});
+</script>
+</body>
+</html>
