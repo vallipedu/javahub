@@ -1,275 +1,369 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java File I/O Program Examples</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .code-block {
-            background-color: #1e1e1e;
-            color: #d4d4d4;
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            overflow-x: auto;
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        .doc-comment {
-            background-color: #f3f4f6;
-            border-left: 4px solid #3b82f6;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            font-size: 0.875rem;
-            color: #4b5563;
-            margin-bottom: 1rem;
-            white-space: pre-wrap; /* Preserve formatting for Javadoc */
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NBKRIST JavaHub - File I/O Program Examples</title>
+<style>
+/* ===== Base Styling ===== */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom right, #f6f9fc, #eef3f9);
+  color: #333;
+  line-height: 1.7;
+  scroll-behavior: smooth;
+}
 
-          /* Style for the back button */
-        .back-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
+/* ===== Header ===== */
+header {
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  text-align: center;
+  padding: 30px 10px 20px;
+  color: #0b2a5c;
+}
+header h1 {
+  font-size: 2.4em;
+  margin: 0;
+  font-weight: 700;
+}
+header p {
+  font-size: 1.1em;
+  color: #2c3e50;
+  opacity: 0.9;
+  margin-top: 6px;
+}
 
-        .back-button:hover {
-            background-color: #2980b9;
-        }
-    </style>
+/* ===== Navigation ===== */
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255,255,255,0.3);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+nav a {
+  text-decoration: none;
+  color: #0b2a5c;
+  font-weight: 600;
+  margin: 10px 18px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+nav a:hover {
+  background: rgba(13,59,102,0.1);
+  box-shadow: 0 0 10px rgba(13,59,102,0.15);
+}
+
+/* ===== Container ===== */
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+/* ===== Section Headings ===== */
+h2 {
+  color: #0b2a5c;
+  border-left: 5px solid #2c82c9;
+  padding-left: 10px;
+  margin-top: 40px;
+}
+p {
+  text-align: justify;
+  margin: 15px 0;
+}
+
+/* ===== Code Blocks ===== */
+pre {
+  background: linear-gradient(to right, #f9fbfe, #eef3fb);
+  color: #1a1a1a;
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid #dce6f2;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
+  overflow-x: auto;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.95em;
+  margin-top: 10px;
+}
+.doc-comment {
+  background: #f3f4f6;
+  border-left: 5px solid #3498db;
+  padding: 15px;
+  border-radius: 8px;
+  font-family: monospace;
+  white-space: pre-wrap;
+  color: #444;
+  font-size: 0.9em;
+  margin-bottom: 15px;
+}
+
+/* ===== Tips and Expert View ===== */
+.tip {
+  background: #e3f2fd;
+  border-left: 5px solid #1e88e5;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-style: italic;
+  color: #0d47a1;
+  margin: 20px 0;
+}
+.expert-view {
+  background: linear-gradient(135deg, #fff8e1, #fff3cd);
+  border-left: 6px solid #f39c12;
+  padding: 20px;
+  border-radius: 10px;
+  font-style: italic;
+  color: #7a4e0f;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 12px rgba(243,156,18,0.15);
+}
+
+/* ===== Practice Questions ===== */
+.practice {
+  margin-top: 40px;
+}
+.practice h3 {
+  color: #0b2a5c;
+}
+.question {
+  background: #f9fbfd;
+  border-left: 4px solid #3498db;
+  padding: 12px;
+  border-radius: 5px;
+  margin: 10px 0;
+  position: relative;
+  transition: background 0.3s ease;
+}
+.question:hover {
+  background: #eef6ff;
+}
+.question:hover::after {
+  content: attr(data-answer);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #0b2a5c;
+  color: white;
+  padding: 10px;
+  border-radius: 0 0 8px 8px;
+  font-size: 0.9em;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+
+/* ===== Arrows ===== */
+.arrow {
+  position: fixed;
+  right: 25px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #0b2a5c;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.arrow:hover {
+  background: rgba(255,255,255,0.6);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+#upArrow {
+  bottom: 80px;
+  display: none;
+}
+#downArrow {
+  bottom: 30px;
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  background: rgba(255,255,255,0.6);
+  color: #555;
+  border-top: 1px solid #ddd;
+  font-size: 0.9em;
+  backdrop-filter: blur(6px);
+}
+footer a {
+  color: #0b2a5c;
+  text-decoration: none;
+  font-weight: 600;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+</style>
 </head>
-<body class="bg-gray-50 font-sans p-4 sm:p-8">
-        <a href="io.html" class="back-button">Back to IO</a>
 
-    <!-- Header -->
-    <header class="text-center mb-12">
-                <h1 class="text-4xl font-extrabold text-blue-800 mb-2">JavaHub:NBKRIST</h1>
+<body>
+<header>
+  <h1>NBKRIST JavaHub</h1>
 
-        <h1 class="text-4xl font-extrabold text-blue-800 mb-2">Sequential Listing of Java I/O Programs</h1>
-        <p class="text-xl text-gray-600">Demonstrations of Byte Streams, Character Streams, and Buffered Streams- <B>II YEAR CSE A Section </B></p>
-            <p class="text-xl text-gray-600"><i>Examples Discussed in Class</i></p>
+</header>
 
-    </header>
+<nav>
+    <b style="color: red;">Sequential Listing of Java I/O Programs</b>
+  <a href="io.html">🏠 Home</a>
+</nav>
 
-    <div class="max-w-4xl mx-auto space-y-12">
+<div class="container">
+  <div class="expert-view">
+    <strong>Expert View 💡</strong><br>
+    In real-world software, handling files efficiently is key. 
+    During my experience developing enterprise systems, I used Java File I/O APIs to transfer logs, manage reports, and backup files. 
+    Understanding byte, character, and buffered streams helps you choose the right approach for speed, memory, and reliability.
+  </div>
 
-        <!-- Program 1: FileCopy (Byte Stream) -->
-        <section class="bg-white p-6 sm:p-8 rounded-xl shadow-lg border-t-4 border-red-500">
-            <h2 class="text-3xl font-bold mb-4 text-red-600">1. FileCopy.java (Byte Stream)</h2>
-            <p class="text-gray-700 mb-4">
-                This program uses raw **byte streams** (<code class="font-semibold">FileInputStream</code> and <code class="font-semibold">FileOutputStream</code>) to copy data byte-by-byte, suitable for all file types (binary or text).
-            </p>
-            <div class="doc-comment">
-                &lt;!-- Javadoc Comment --&gt;
-                <pre>
+  <h2>1. FileCopy.java (Byte Stream)</h2>
+  <p>This program demonstrates copying data byte-by-byte using <code>FileInputStream</code> and <code>FileOutputStream</code>.</p>
+  <div class="doc-comment">
 /**
- * The FileCopy class demonstrates a basic file-to-file content transfer
- * using byte streams (FileInputStream and FileOutputStream).
- *
- * It reads data byte-by-byte from a source file and writes it to a destination file.
- * Proper exception handling and resource closure are implemented.
- *
- * @author HARI BABU MUTCHAKALA
- * @version 1.0
- * @since 2025-10-07
- */</pre>
-            </div>
-            <h3 class="text-xl font-semibold mb-3 text-gray-800">Source Code:</h3>
-            <pre class="code-block">
-&lt;code&gt;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+ * Demonstrates a basic file-to-file copy using byte streams.
+ * Reads bytes from source and writes to destination file.
+ * Ideal for binary files like images or PDFs.
+ */
+  </div>
+  <pre><code>
+import java.io.*;
 
 public class FileCopy {
-    public static void main(String[] args) {
-        // Declare streams outside try-block for access in finally
-        FileInputStream fis = null;
-        FileOutputStream fos = null;
-        int ch;
-
-        try {
-            // 1. Open streams for byte-level reading and writing
-            fis = new FileInputStream("MyView.txt.txt");
-            fos = new FileOutputStream("ASectionCSE.txt");
-
-            do {
-                // 2. Read one raw byte (8-bit) as an integer
-                ch = fis.read();
-                if (ch != -1) {
-                    // 3. Write one raw byte to the output file
-                    fos.write(ch);
-                }
-            } while (ch != -1); // Loop until End Of File (-1) is reached
-
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found" + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("IO Exception" + e.getMessage());
-        } finally {
-            // 4. Critical: Ensure resources are closed in the finally block
-            try {
-                if (fis != null) {
-                    fis.close();
-                }
-                if (fos != null) {
-                    fos.close();
-                }
-            } catch (IOException e) {
-                System.out.println("IO Exception during close: " + e.getMessage());
-            }
-        }
+  public static void main(String[] args) {
+    FileInputStream fis = null;
+    FileOutputStream fos = null;
+    int ch;
+    try {
+      fis = new FileInputStream("MyView.txt");
+      fos = new FileOutputStream("ASectionCSE.txt");
+      while ((ch = fis.read()) != -1) fos.write(ch);
+      System.out.println("NBKRIST: File copied successfully!");
+    } catch (IOException e) {
+      System.err.println(e.getMessage());
+    } finally {
+      try {
+        if (fis != null) fis.close();
+        if (fos != null) fos.close();
+      } catch (IOException e) { System.err.println(e.getMessage()); }
     }
+  }
 }
-&lt;/code&gt;
-            </pre>
-        </section>
+  </code></pre>
+  <div class="tip">💡 Tip: Byte streams are preferred for copying any non-text file format.</div>
 
-        <!-- Program 2: ReaderWriter (Character Stream) -->
-        <section class="bg-white p-6 sm:p-8 rounded-xl shadow-lg border-t-4 border-yellow-500">
-            <h2 class="text-3xl font-bold mb-4 text-yellow-600">2. ReaderWriter.java (Character Stream)</h2>
-            <p class="text-gray-700 mb-4">
-                This program uses **character streams** (<code class="font-semibold">FileReader</code> and <code class="font-semibold">FileWriter</code>) which are designed to handle text and encoding conversions, reading/writing one character (16-bit) at a time.
-            </p>
-            <div class="doc-comment">
-                &lt;!-- Javadoc Comment --&gt;
-                <pre>
+  <h2>2. ReaderWriter.java (Character Stream)</h2>
+  <p>Character streams handle text data, automatically managing Unicode encoding.</p>
+  <div class="doc-comment">
 /**
- * ReaderWriter.java
- *
- * This class demonstrates basic character-stream file handling in Java
- * using FileReader and FileWriter. It reads content from a file named
- * "a.txt" character by character and writes that same content to a file
- * named "b.txt" until the end of the input file is reached (-1).
- *
- * The program includes basic exception handling for file-related issues
- * such as FileNotFoundException and general IOException.
- *
- * @author HARI BABU MUTCHAKALA
- * @version 1.0
- * @since 2025-10-08
- */</pre>
-            </div>
-            <h3 class="text-xl font-semibold mb-3 text-gray-800">Source Code:</h3>
-            <pre class="code-block">
-&lt;code&gt;
-import java.io.FileReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.FileWriter;
+ * Demonstrates FileReader and FileWriter for text-based I/O.
+ * Reads characters from 'a.txt' and writes to 'b.txt'.
+ */
+  </div>
+  <pre><code>
+import java.io.*;
 
 public class ReaderWriter {
-    public static void main (String adasd[]){
-        // FileReader and FileWriter are base character streams
-        try {
-            FileReader freader= new FileReader("a.txt");
-            FileWriter fwriter = new FileWriter("b.txt");
-            int data;
-            
-            do {
-                // 1. Read one character (16-bit Unicode)
-                data = freader.read();
-                // 2. Write one character
-                fwriter.write(data);
-            } while(data != -1); // Loop until End Of File (-1)
-
-            // 3. Close resources explicitly
-            freader.close();
-            fwriter.close();
-
-        } catch(FileNotFoundException fe){
-            System.out.println("Catching exception: Input file 'a.txt' not found.");
-        } catch(IOException fe){
-            System.out.println("Catching exception: An I/O error occurred during file operations.");
-        }
+  public static void main(String[] args) {
+    try {
+      FileReader fr = new FileReader("a.txt");
+      FileWriter fw = new FileWriter("b.txt");
+      int data;
+      while ((data = fr.read()) != -1) fw.write(data);
+      fr.close();
+      fw.close();
+      System.out.println("NBKRIST: Character stream copy done!");
+    } catch (IOException e) {
+      System.err.println(e.getMessage());
     }
+  }
 }
-&lt;/code&gt;
-            </pre>
-        </section>
+  </code></pre>
+  <div class="tip">💡 Tip: Character streams should be used for text to avoid encoding issues.</div>
 
-        <!-- Program 3: Buffering (Buffered Stream) -->
-        <section class="bg-white p-6 sm:p-8 rounded-xl shadow-lg border-t-4 border-green-500">
-            <h2 class="text-3xl font-bold mb-4 text-green-600">3. Buffering.java (Buffered Stream)</h2>
-            <p class="text-gray-700 mb-4">
-                This is the most efficient method for text, using **buffered streams** (<code class="font-semibold">BufferedReader</code> and <code class="font-semibold">PrintWriter</code>) to read and write large blocks of data at once.
-            </p>
-            <div class="doc-comment">
-                &lt;!-- Javadoc Comment --&gt;
-                <pre>
+  <h2>3. Buffering.java (Buffered Stream)</h2>
+  <p>Buffered streams improve efficiency by reducing physical disk access.</p>
+  <div class="doc-comment">
 /**
- * Buffering.java
- *
- * This class demonstrates efficient character-stream file handling using
- * BufferedReader and PrintWriter. It reads content line by line from
- * "a.txt" and writes the content line by line to "kk.txt", leveraging
- * buffering for better performance than direct character-by-character I/O.
- *
- * @author HARI BABU MUTCHAKALA
- * @version 1.0
- * @since 2025-10-08
- */</pre>
-            </div>
-            <h3 class="text-xl font-semibold mb-3 text-gray-800">Source Code:</h3>
-            <pre class="code-block">
-&lt;code&gt;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+ * Demonstrates buffered reading/writing.
+ * Uses BufferedReader and PrintWriter for efficient line-based file operations.
+ */
+  </div>
+  <pre><code>
+import java.io.*;
 
 public class Buffering {
-    public static void main (String adasd[]){
-        try {
-            // 1. Base stream for reading
-            FileReader fr = new FileReader("a.txt");
-            // 2. Wrapper stream for buffering (adds readLine() capability)
-            BufferedReader reader = new BufferedReader(fr); 
-            // 3. Base stream for writing
-            FileWriter fw = new FileWriter("kk.txt");
-            // 4. Wrapper stream for convenient writing (e.g., auto-flush, println)
-            PrintWriter out = new PrintWriter(fw, true); 
-            
-            String data;
-
-            // 5. Read lines using the efficient buffer (readLine() is very efficient)
-            while((data = reader.readLine()) != null){
-                // 6. Write line followed by a platform-specific newline
-                out.println(data); 
-            }
-
-            // 7. Close the wrapper streams (which implicitly closes the underlying streams)
-            reader.close();
-            out.close();
-
-        } catch(FileNotFoundException fe){
-            System.out.println("Catching exception: Input file 'a.txt' not found.");
-        } catch(IOException fe){
-            System.out.println("Catching exception: An I/O error occurred during file operations.");
-        }
+  public static void main(String[] args) {
+    try {
+      BufferedReader reader = new BufferedReader(new FileReader("a.txt"));
+      PrintWriter writer = new PrintWriter(new FileWriter("kk.txt"), true);
+      String line;
+      while ((line = reader.readLine()) != null) writer.println(line);
+      reader.close();
+      writer.close();
+      System.out.println("NBKRIST: Buffered stream success!");
+    } catch (IOException e) {
+      System.err.println(e.getMessage());
     }
+  }
 }
-&lt;/code&gt;
-            </pre>
-        </section>
+  </code></pre>
+  <div class="tip">💡 Tip: Always use buffered streams for larger files to enhance performance.</div>
 
-    </div>
+  <div class="practice">
+    <h3>Practice Questions 🧠</h3>
+    <div class="question" data-answer="FileInputStream and FileOutputStream.">1. Which classes are used for byte stream operations?</div>
+    <div class="question" data-answer="Character streams convert bytes to Unicode automatically.">2. How do character streams differ from byte streams?</div>
+    <div class="question" data-answer="BufferedReader and PrintWriter improve speed via buffering.">3. Why use buffered streams?</div>
+  </div>
 
-    <!-- Footer Note -->
-    <footer class="mt-12 pt-6 border-t border-gray-300 text-center text-gray-500 text-sm">
-        Best practice for Java I/O often involves using Buffered Streams (<code class="text-gray-700">BufferedReader</code>) combined with the try-with-resources statement (Java 7+) to ensure automatic resource cleanup.
-    </footer>
+  <h2>Key Summary 📘</h2>
+  <ul>
+    <li>Byte streams = binary data.</li>
+    <li>Character streams = text data.</li>
+    <li>Buffered streams = faster I/O.</li>
+    <li>Always close streams or use try-with-resources for safety.</li>
+  </ul>
+</div>
+
+<!-- Arrows -->
+<div id="upArrow" class="arrow">⬆</div>
+<div id="downArrow" class="arrow">⬇</div>
+
+<footer>
+  &copy; 2025 NBKRIST JavaHub | All Rights Reserved |
+  Authored by Hari Babu Mutchakala
+</footer>
+
+<script>
+const upArrow = document.getElementById("upArrow");
+const downArrow = document.getElementById("downArrow");
+window.onscroll = function() {
+  if (window.scrollY > 300) upArrow.style.display = "flex";
+  else upArrow.style.display = "none";
+};
+upArrow.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+downArrow.onclick = () => window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+</script>
 </body>
 </html>
-
