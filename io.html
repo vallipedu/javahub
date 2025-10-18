@@ -4,341 +4,453 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java I/O API</title>
+    <title>NBKRIST JavaHub - Java I/O API and Streams</title>
     <style>
+        /* ===== Base Styling ===== */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #eef2f7;
-            color: #333;
-            line-height: 1.6;
             margin: 0;
             padding: 0;
+            background: linear-gradient(to bottom right, #f6f9fc, #eef3f9);
+            color: #333;
+            line-height: 1.7;
+            scroll-behavior: smooth;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            background: #ffffff;
-            padding: 30px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-        }
-
-        h1,
-        h2,
-        h3 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 8px;
-            margin-top: 30px;
-        }
-
-        h1 {
+        /* ===== Glassy Header ===== */
+        header {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 15px;
-            font-size: 2.5em;
+            padding: 30px 10px 20px;
+            color: #0b2a5c;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 2.6em;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: #2c3e50;
+            opacity: 0.9;
+            margin-top: 6px;
+        }
+
+        /* ===== Sleek Navigation ===== */
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #0b2a5c;
+            font-weight: 600;
+            margin: 10px 18px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: rgba(13, 59, 102, 0.1);
+            color: #0b2a5c;
+            box-shadow: 0 0 10px rgba(13, 59, 102, 0.15);
+        }
+
+        /* ===== Main Container ===== */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
         }
 
         h2 {
-            font-size: 1.8em;
-        }
-
-        .section {
-            margin-bottom: 40px;
+            color: #0b2a5c;
+            border-left: 5px solid #2c82c9;
+            padding-left: 10px;
+            margin-top: 40px;
         }
 
         p {
-            margin: 10px 0;
             text-align: justify;
+            margin: 15px 0;
         }
 
+        /* ===== Code Blocks (Light Gradient) ===== */
         pre {
-            background: #212121;
-            padding: 20px;
-            border-radius: 8px;
+            background: linear-gradient(to right, #f9fbfe, #eef3fb);
+            color: #1a1a1a;
+            padding: 18px;
+            border-radius: 10px;
+            border: 1px solid #dce6f2;
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
             overflow-x: auto;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9em;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-
-        pre code {
-            color: #f0f0f0;
-            background: transparent;
-        }
-
-        .output-box {
-            background: #f0f0f0;
-            color: #333;
-            padding: 10px;
-            border-radius: 8px;
-            font-family: 'Courier New', Courier, monospace;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            word-wrap: break-word;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.95em;
             margin-top: 10px;
         }
 
         .example-title {
-            font-weight: bold;
             color: #e74c3c;
-            margin-bottom: 10px;
-        }
-
-        .output-title {
             font-weight: bold;
-            color: #28a745;
+        }
+
+        .output-box {
+            background: linear-gradient(to right, #f3f8fc, #edf5ff);
+            border-left: 4px solid #2ecc71;
+            padding: 10px;
+            border-radius: 6px;
+            font-family: monospace;
+        }
+
+        .tip {
+            background: #e3f2fd;
+            border-left: 5px solid #1e88e5;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-style: italic;
+            color: #0d47a1;
+            margin: 20px 0;
+        }
+
+        .expert-view {
+            background: linear-gradient(135deg, #fff8e1, #fff3cd);
+            border-left: 6px solid #f39c12;
+            padding: 20px;
+            border-radius: 10px;
+            font-style: italic;
+            color: #7a4e0f;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(243, 156, 18, 0.15);
+        }
+
+        img {
+            width: 100%;
+            border-radius: 10px;
             margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .doc-link {
-            display: block;
-            margin-top: 10px;
-            color: #3498db;
-            text-decoration: none;
+        /* ===== Practice Questions ===== */
+        .practice {
+            margin-top: 40px;
+        }
+
+        .practice h3 {
+            color: #0b2a5c;
+        }
+
+        .question {
+            background: #f9fbfd;
+            border-left: 4px solid #3498db;
+            padding: 12px;
+            border-radius: 5px;
+            margin: 10px 0;
+            position: relative;
+            transition: background 0.3s ease;
+        }
+
+        .question:hover {
+            background: #eef6ff;
+        }
+
+        .question:hover::after {
+            content: attr(data-answer);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: #0b2a5c;
+            color: white;
+            padding: 10px;
+            border-radius: 0 0 8px 8px;
             font-size: 0.9em;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 10;
         }
 
+        /* ===== Glassy Scroll Arrows ===== */
+        .arrow {
+            position: fixed;
+            right: 25px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #0b2a5c;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .arrow:hover {
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        #upArrow {
+            bottom: 80px;
+            display: none;
+        }
+
+        #downArrow {
+            bottom: 30px;
+        }
+
+        /* ===== Footer ===== */
         footer {
             text-align: center;
-            padding: 20px 0;
-            margin-top: 50px;
-            border-top: 1px solid #dcdcdc;
-            color: #777;
+            padding: 20px;
+            margin-top: 40px;
+            background: rgba(255, 255, 255, 0.6);
+            color: #555;
+            border-top: 1px solid #ddd;
             font-size: 0.9em;
+            backdrop-filter: blur(6px);
         }
 
         footer a {
-            color: #3498db;
+            color: #0b2a5c;
             text-decoration: none;
+            font-weight: 600;
         }
 
         footer a:hover {
             text-decoration: underline;
         }
-
-        /* Style for the back button */
-        .back-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .back-button:hover {
-            background-color: #2980b9;
-        }
     </style>
 </head>
 
 <body>
-    <a href="index.html" class="back-button">← Back to Index</a>
+    <header>
+        <h1>NBKRIST JavaHub</h1>
+
+    </header>
+
+    <nav>
+        <p style="color: red;"><B>Java I/O API and Stream Processing Essentials</B></p>
+        <a href="index.html">🏠 Home</a>
+        <a href="filesInjava.html">🏠 Files in Java</a>
+        <a href="ioinclass.html">💻 In-Class Examples</a>
+        <a href="practiceio.html">🧠 Practice Questions</a>
+    </nav>
+
     <div class="container">
-        <h1>Java I/O API and Streams</h1>
-        <a href="path.html" class="back-button">Path</a>
-        <a href="ioinclass.html" class="back-button">InClassExamples</a>
-        <a href="File.html" class="back-button">Java Files</a>
-        <div class="section">
-            <h2>Overview of Java I/O</h2>
-            <p>
-                The Java I/O (Input/Output) API is used for handling the input and output of data in an application. It
-                is primarily based on the concept of streams, which represent a sequence of data flowing from a source
-                to a destination.
-            </p>
-            <img src="iodia4.png" alt="Java I/O Streams" width="100%" height=50%
-                style="border-radius: 8px; margin-top: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
-            <a class="doc-link"
-                href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/package-summary.html"
-                target="_blank">View Oracle Documentation for java.io</a>
+        <div class="expert-view">
+            <strong>Expert View 💡</strong><br>
+            During my experience as a software engineer, I realized how mastering Java’s I/O API is essential for any
+            real-time application.
+            From banking transactions to industrial automation, efficient input/output handling ensures reliability and
+            scalability.
+            Once students understand this concept, they can confidently build robust, file-driven and network-based
+            applications.
         </div>
 
-        <div class="section">
-            <h2>Standard I/O Streams</h2>
-            <p>
-                Java provides three standard streams that are automatically created for every program:
-            <ul>
-                <li><code>System.in</code>: The standard input stream (keyboard).</li>
-                <li><code>System.out</code>: The standard output stream (console).</li>
-                <li><code>System.err</code>: The standard error stream (console, for error messages).</li>
-            </ul>
-            </p>
-            <div class="example-title">Example:</div>
-            <pre><code>
+        <h2>Introduction</h2>
+        <p>
+            The Java I/O API is a powerful system for handling the input and output of data in applications.
+            It revolves around the concept of <strong>streams</strong>, representing a flow of data between a source and
+            destination.
+        </p>
+        <img src="iodia4.png" alt="Java I/O Stream Architecture">
+        <div class="tip">💡 Tip: Think of streams as pipelines through which Java moves data from sources like files or
+            networks to destinations efficiently.</div>
+
+        <h2>Standard I/O Streams</h2>
+        <ul>
+            <li><code>System.in</code> – Standard input stream (keyboard).</li>
+            <li><code>System.out</code> – Standard output stream (console).</li>
+            <li><code>System.err</code> – Standard error stream (for error messages).</li>
+        </ul>
+        <div class="example-title">Example:</div>
+        <pre><code>
 public class StandardIO {
     public static void main(String[] args) {
-        System.out.println("This is a message sent to standard output.");
-        System.err.println("This is an error message sent to standard error.");
+        System.out.println("NBKRIST: Standard Output Message");
+        System.err.println("NBKRIST: Error Message Example");
     }
 }
-            </code></pre>
-            <div class="output-title">Output:</div>
-            <div class="output-box">
-                This is a message sent to standard output.
-                This is an error message sent to standard error.
-            </div>
+        </code></pre>
+
+        <div class="tip">💡 Tip: Use <code>System.err</code> for logging critical errors to keep console output clean.
         </div>
 
-        <div class="section">
-            <h2>Byte Streams</h2>
-            <p>
-                Byte streams are used to perform I/O of 8-bit bytes. They are ideal for handling raw binary data, such
-                as images, audio files, or any non-text data. The two main classes are <code>InputStream</code> and
-                <code>OutputStream</code>.
-            </p>
-            <div class="example-title">Example: File Copy with Byte Streams</div>
-            <pre><code>
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+        <h2>Byte Streams</h2>
+        <p>
+            Byte streams handle 8-bit raw data, ideal for binary files such as images or audio. They use
+            <code>InputStream</code> and <code>OutputStream</code> classes.
+        </p>
+        <pre><code>
+import java.io.*;
 
 public class ByteStreamExample {
     public static void main(String[] args) {
-        // Assume 'input.dat' contains binary data.
-        // This code copies content from 'input.dat' to 'output.dat'.
         try (FileInputStream in = new FileInputStream("input.dat");
              FileOutputStream out = new FileOutputStream("output.dat")) {
-            int byteRead;
-            while ((byteRead = in.read()) != -1) {
-                out.write(byteRead);
+            int b;
+            while ((b = in.read()) != -1) {
+                out.write(b);
             }
-            System.out.println("File copied successfully using byte streams.");
+            System.out.println("NBKRIST: File copied successfully using byte streams.");
         } catch (IOException e) {
-            System.err.println("An I/O error occurred: " + e.getMessage());
+            System.err.println("I/O Error: " + e.getMessage());
         }
     }
 }
-            </code></pre>
-            <div class="output-title">Example Output:</div>
-            <div class="output-box">
-                File copied successfully using byte streams.
-            </div>
-            <a class="doc-link"
-                href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/InputStream.html"
-                target="_blank">View Oracle Documentation for InputStream</a>
+        </code></pre>
+        <div class="output-box">
+            NBKRIST: File copied successfully using byte streams.
+        </div>
+        <div class="tip">💡 Tip: Use byte streams for any file containing binary content such as PDFs, images, or audio.
         </div>
 
-        <div class="section">
-            <h2>Character Streams</h2>
-            <img src="iodia5.png" alt="Java I/O Streams" width="100%" height=50%
-                style="border-radius: 8px; margin-top: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
-
-            <p>
-                Character streams are used to handle I/O of 16-bit Unicode characters. They are best suited for working
-                with text-based data, as they automatically handle character encoding. The main classes are
-                <code>Reader</code> and <code>Writer</code>.
-            </p>
-            <div class="example-title">Example: File Copy with Character Streams</div>
-            <pre><code>
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+        <h2>Character Streams</h2>
+        <p>
+            Character streams process 16-bit Unicode characters. They are best for text files, automatically managing
+            character encoding.
+        </p>
+        <img src="iodia5.png" alt="Character Streams in Java">
+        <pre><code>
+import java.io.*;
 
 public class CharacterStreamExample {
     public static void main(String[] args) {
-        // Assume 'input.txt' contains text data.
-        // This code copies content from 'input.txt' to 'output.txt'.
-        try (FileReader in = new FileReader("input.txt");
-             FileWriter out = new FileWriter("output.txt")) {
-            int charRead;
-            while ((charRead = in.read()) != -1) {
-                out.write(charRead);
+        try (FileReader fr = new FileReader("input.txt");
+             FileWriter fw = new FileWriter("output.txt")) {
+            int c;
+            while ((c = fr.read()) != -1) {
+                fw.write(c);
             }
-            System.out.println("File copied successfully using character streams.");
+            System.out.println("NBKRIST: Character Stream Success!");
         } catch (IOException e) {
-            System.err.println("An I/O error occurred: " + e.getMessage());
+            System.err.println("I/O Error: " + e.getMessage());
         }
     }
 }
-            </code></pre>
-            <div class="output-title">Example Output:</div>
-            <div class="output-box">
-                File copied successfully using character streams.
-            </div>
-            <a class="doc-link" href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/Reader.html"
-                target="_blank">View Oracle Documentation for Reader</a>
+        </code></pre>
+        <div class="output-box">
+            NBKRIST: Character Stream Success!
         </div>
+        <div class="tip">💡 Tip: Character streams automatically handle text encoding, avoiding data loss in
+            multilingual applications.</div>
 
-        <div class="section">
-            <h2><code>Scanner</code> Class</h2>
-            <p>
-                The <code>Scanner</code> class, found in the <code>java.util</code> package, is a simple text scanner
-                that can parse primitive types and strings using regular expressions. It is commonly used for reading
-                input from the console or from a file.
-            </p>
-            <div class="example-title">Example: Reading User Input</div>
-            <pre><code>
+        <h2>Scanner Class</h2>
+        <p>
+            The <code>Scanner</code> class (from <code>java.util</code>) reads input easily from the keyboard or text
+            files.
+        </p>
+        <pre><code>
 import java.util.Scanner;
 
 public class ScannerExample {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Please enter your name: ");
-        String name = scanner.nextLine();
-        System.out.println("Hello, " + name + "!");
-        scanner.close();
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter your name: ");
+        String name = sc.nextLine();
+        System.out.println("Welcome to NBKRIST, " + name + "!");
+        sc.close();
     }
 }
-            </code></pre>
-            <div class="output-title">Example Output:</div>
-            <div class="output-box">
-                Please enter your name: Bob
-                Hello, Bob!
-            </div>
-            <a class="doc-link"
-                href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Scanner.html"
-                target="_blank">View Oracle Documentation for Scanner</a>
+        </code></pre>
+        <div class="output-box">
+            Enter your name: Hari<br>
+            Welcome to NBKRIST, Hari!
+        </div>
+        <div class="tip">💡 Tip: Scanner is excellent for small input tasks but not optimal for large file processing.
         </div>
 
-        <div class="section">
-            <h2><code>Files</code> in Java (<code>java.nio.file.Files</code>)</h2>
-            <p>
-                Introduced in Java 7 as part of the New I/O (NIO.2) API, the <code>java.nio.file.Files</code> class
-                provides static methods for operating on files, directories, and other types of files. It offers a more
-                modern, robust, and efficient way to handle file I/O operations.
-            </p>
-            <div class="example-title">Example: Writing to a File</div>
-            <pre><code>
+        <h2>Files API (java.nio.file.Files)</h2>
+        <p>
+            Introduced in Java 7, the <code>java.nio.file.Files</code> class provides static methods for file and
+            directory operations — modern, efficient, and easy to use.
+        </p>
+        <pre><code>
+import java.nio.file.*;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class FilesExample {
     public static void main(String[] args) {
-        String content = "Hello, this is content from the Files class!";
-        Path filePath = Path.of("modern_output.txt");
-
+        String content = "NBKRIST - JavaHub Modern File I/O Example";
+        Path filePath = Path.of("nio_output.txt");
         try {
             Files.writeString(filePath, content);
-            System.out.println("Content written to file successfully.");
+            System.out.println("Content written successfully using Files API!");
         } catch (IOException e) {
-            System.err.println("Failed to write to file: " + e.getMessage());
+            System.err.println("Error: " + e.getMessage());
         }
     }
 }
-            </code></pre>
-            <div class="output-title">Example Output:</div>
-            <div class="output-box">
-                Content written to file successfully.
-            </div>
-            <a class="doc-link"
-                href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Files.html"
-                target="_blank">View Oracle Documentation for Files</a>
+        </code></pre>
+        <div class="output-box">
+            Content written successfully using Files API!
+        </div>
+        <div class="tip">💡 Tip: Prefer the Files API for modern Java development — it simplifies file reading/writing
+            with fewer lines of code.</div>
+
+        <div class="practice">
+            <h3>Practice Questions 🧠</h3>
+            <div class="question" data-answer="System.in, System.out, and System.err">1. What are the three standard I/O
+                streams in Java?</div>
+            <div class="question" data-answer="Byte streams handle binary data; character streams handle text.">2.
+                What’s the key difference between byte and character streams?</div>
+            <div class="question" data-answer="Scanner simplifies text input and Files API simplifies modern I/O.">3.
+                Why are Scanner and Files API important in Java?</div>
         </div>
 
+        <h2>Key Summary 📘</h2>
+        <ul>
+            <li>Streams are the backbone of Java I/O operations.</li>
+            <li>Byte streams handle binary data, character streams manage text.</li>
+            <li>Scanner simplifies console input for small programs.</li>
+            <li>Files API provides a robust modern approach to file handling.</li>
+            <li>Understanding I/O operations is essential for real-world software development.</li>
+        </ul>
     </div>
 
+    <!-- Glassy Scroll Arrows -->
+    <div id="upArrow" class="arrow">⬆</div>
+    <div id="downArrow" class="arrow">⬇</div>
+
     <footer>
-        <p>&copy; 2025 NBKRIST. All rights reserved.</p>
-        <p><a href="https://www.nbkrist.co.in/index.php" target="_blank">https://www.nbkrist.co.in/index.php</a></p>
+        &copy; 2025 NBKRIST JavaHub | All Rights Reserved |Authored by Hari Babu Mutchakala!!
+
     </footer>
 
+    <script>
+        const upArrow = document.getElementById("upArrow");
+        const downArrow = document.getElementById("downArrow");
+
+        window.onscroll = function () {
+            if (window.scrollY > 300) upArrow.style.display = "flex";
+            else upArrow.style.display = "none";
+        };
+
+        upArrow.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+        downArrow.onclick = () => window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+    </script>
 </body>
 
 </html>
