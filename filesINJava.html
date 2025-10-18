@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NBKRIST JavaHub - Files in Java</title>
+<style>
+/* ===== Base Styling ===== */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom right, #f6f9fc, #eef3f9);
+  color: #333;
+  line-height: 1.7;
+  scroll-behavior: smooth;
+}
+
+/* ===== Header ===== */
+header {
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  text-align: center;
+  padding: 30px 10px 20px;
+  color: #0b2a5c;
+}
+header h1 {
+  font-size: 2.4em;
+  margin: 0;
+  font-weight: 700;
+}
+header p {
+  font-size: 1.1em;
+  color: #2c3e50;
+  opacity: 0.9;
+  margin-top: 6px;
+}
+
+/* ===== Navigation ===== */
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255,255,255,0.3);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+nav a {
+  text-decoration: none;
+  color: #0b2a5c;
+  font-weight: 600;
+  margin: 10px 18px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+nav a:hover {
+  background: rgba(13,59,102,0.1);
+  box-shadow: 0 0 10px rgba(13,59,102,0.15);
+}
+
+/* ===== Container ===== */
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+/* ===== Code Blocks ===== */
+pre {
+  background: linear-gradient(to right, #f9fbfe, #eef3fb);
+  color: #1a1a1a;
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid #dce6f2;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
+  overflow-x: auto;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.95em;
+  margin-top: 10px;
+}
+
+.output-popup {
+  display: inline-block;
+  position: relative;
+  color: #0b2a5c;
+  cursor: pointer;
+  font-weight: bold;
+}
+.output-popup:hover::after {
+  content: attr(data-output);
+  position: absolute;
+  left: 0;
+  top: 120%;
+  width: max-content;
+  max-width: 90%;
+  background: #0b2a5c;
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+
+/* ===== Tips & Expert View ===== */
+.tip {
+  background: #e3f2fd;
+  border-left: 5px solid #1e88e5;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-style: italic;
+  color: #0d47a1;
+  margin: 20px 0;
+}
+.expert-view {
+  background: linear-gradient(135deg, #fff8e1, #fff3cd);
+  border-left: 6px solid #f39c12;
+  padding: 20px;
+  border-radius: 10px;
+  font-style: italic;
+  color: #7a4e0f;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 12px rgba(243,156,18,0.15);
+}
+
+/* ===== Practice Questions ===== */
+.practice {
+  margin-top: 40px;
+}
+.practice h3 {
+  color: #0b2a5c;
+}
+.question {
+  background: #f9fbfd;
+  border-left: 4px solid #3498db;
+  padding: 12px;
+  border-radius: 5px;
+  margin: 10px 0;
+  position: relative;
+  transition: background 0.3s ease;
+}
+.question:hover {
+  background: #eef6ff;
+}
+.question:hover::after {
+  content: attr(data-answer);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #0b2a5c;
+  color: white;
+  padding: 10px;
+  border-radius: 0 0 8px 8px;
+  font-size: 0.9em;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+
+/* ===== Arrows ===== */
+.arrow {
+  position: fixed;
+  right: 25px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #0b2a5c;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.arrow:hover {
+  background: rgba(255,255,255,0.6);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+#upArrow {
+  bottom: 80px;
+  display: none;
+}
+#downArrow {
+  bottom: 30px;
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  background: rgba(255,255,255,0.6);
+  color: #555;
+  border-top: 1px solid #ddd;
+  font-size: 0.9em;
+  backdrop-filter: blur(6px);
+}
+footer a {
+  color: #0b2a5c;
+  text-decoration: none;
+  font-weight: 600;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+<header>
+  <h1>NBKRIST JavaHub</h1>
+  <p><em>Understanding Files and Directories in Java</em></p>
+</header>
+
+<nav>
+  <a href="io.html">🏠 Back to Home</a>
+  <a href="nio2.html">💡 NIO.2 Insights</a>
+</nav>
+
+<div class="container">
+  <div class="expert-view">
+    <strong>Expert View 💡</strong><br>
+    From my experience, file handling in Java is one of the most fundamental skills a developer must have.
+    Whether it’s logs, reports, configuration, or data exchange — files are the heart of persistence. 
+    Java’s evolution from <code>java.io.File</code> to <code>java.nio.file</code> reflects how file I/O became faster, safer, and more modern.
+  </div>
+
+  <h2>What is a File and Directory in Java?</h2>
+  <p>
+    In Java, a file represents a data storage entity (text, image, binary, etc.), while a directory is a folder that can contain files or subdirectories.
+    The <code>java.io.File</code> class allows us to interact with the file system easily.
+  </p>
+  <div class="tip">💡 Tip: Always check whether a path points to a file or directory using <code>isFile()</code> or <code>isDirectory()</code>.</div>
+
+  <h2>Example: Checking File or Directory</h2>
+  <pre><code>
+import java.io.File;
+
+public class FileCheck {
+  public static void main(String[] args) {
+    File f = new File("sample.txt");
+    if (f.isFile()) System.out.println("It is a file.");
+    else if (f.isDirectory()) System.out.println("It is a directory.");
+    else System.out.println("Path does not exist.");
+  }
+}
+  </code></pre>
+  <span class="output-popup" data-output="It is a file.">👉 Hover to view output</span>
+
+  <h2>Creating and Deleting Files</h2>
+  <pre><code>
+import java.io.File;
+import java.io.IOException;
+
+public class FileCreateDelete {
+  public static void main(String[] args) {
+    try {
+      File file = new File("demo.txt");
+      if (file.createNewFile())
+        System.out.println("File created: " + file.getName());
+      else
+        System.out.println("File already exists.");
+      if (file.delete())
+        System.out.println("File deleted successfully.");
+    } catch (IOException e) {
+      System.out.println("An error occurred.");
+    }
+  }
+}
+  </code></pre>
+  <span class="output-popup" data-output="File created: demo.txt
+File deleted successfully.">👉 Hover to view output</span>
+
+  <h2>Listing Directory Contents</h2>
+  <pre><code>
+import java.io.File;
+
+public class DirectoryList {
+  public static void main(String[] args) {
+    File dir = new File(".");
+    String[] files = dir.list();
+    for (String name : files)
+      System.out.println(name);
+  }
+}
+  </code></pre>
+  <span class="output-popup" data-output="Displays all files and folders in current directory.">👉 Hover to view output</span>
+
+  <h2>Reading and Writing Files</h2>
+  <pre><code>
+import java.io.*;
+
+public class FileReadWrite {
+  public static void main(String[] args) {
+    try {
+      FileWriter fw = new FileWriter("hello.txt");
+      fw.write("Welcome to NBKRIST JavaHub!");
+      fw.close();
+      BufferedReader br = new BufferedReader(new FileReader("hello.txt"));
+      System.out.println(br.readLine());
+      br.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+}
+  </code></pre>
+  <span class="output-popup" data-output="Welcome to NBKRIST JavaHub!">👉 Hover to view output</span>
+
+  <h2>Modern Approach: java.nio.file (NIO.2)</h2>
+  <p>
+    Introduced in Java 7, the <code>java.nio.file</code> package modernizes file handling with <code>Path</code> and <code>Files</code> classes.
+    It provides methods for reading, writing, copying, moving, and deleting files efficiently.
+  </p>
+  <pre><code>
+import java.nio.file.*;
+import java.io.IOException;
+
+public class NIOExample {
+  public static void main(String[] args) throws IOException {
+    Path p = Path.of("nbkrist.txt");
+    Files.writeString(p, "NBKRIST: JavaHub Rocks!");
+    String content = Files.readString(p);
+    System.out.println(content);
+  }
+}
+  </code></pre>
+  <span class="output-popup" data-output="NBKRIST: JavaHub Rocks!">👉 Hover to view output</span>
+
+  <div class="tip">💡 Tip: Use <code>Files</code> and <code>Path</code> for better readability, performance, and modern file operations.</div>
+
+  <div class="practice">
+    <h3>Practice Questions 🧠</h3>
+    <div class="question" data-answer="Use isFile() and isDirectory() methods of File class.">1. How can you check if a path is a file or directory?</div>
+    <div class="question" data-answer="Using File.createNewFile() or Files.createFile() methods.">2. How to create a new file in Java?</div>
+    <div class="question" data-answer="Files and Path from java.nio.file provide more methods and better error handling.">3. What are advantages of NIO.2 over java.io.File?</div>
+  </div>
+
+  <h2>Key Takeaways 📘</h2>
+  <ul>
+    <li><code>java.io.File</code> helps create, read, and manage files.</li>
+    <li><code>isFile()</code> and <code>isDirectory()</code> differentiate file types.</li>
+    <li>NIO.2 introduced <code>Files</code> and <code>Path</code> for powerful file handling.</li>
+    <li>Use try-with-resources for automatic stream closing.</li>
+    <li>File handling is essential in data-driven applications.</li>
+  </ul>
+</div>
+
+<!-- Arrows -->
+<div id="upArrow" class="arrow">⬆</div>
+<div id="downArrow" class="arrow">⬇</div>
+
+<footer>
+  &copy; 2025 NBKRIST JavaHub | All Rights Reserved |
+  <a href="https://www.nbkrist.co.in/index.php" target="_blank">Visit NBKRIST</a>
+</footer>
+
+<script>
+const upArrow = document.getElementById("upArrow");
+const downArrow = document.getElementById("downArrow");
+window.onscroll = function() {
+  if (window.scrollY > 300) upArrow.style.display = "flex";
+  else upArrow.style.display = "none";
+};
+upArrow.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+downArrow.onclick = () => window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+</script>
+</body>
+</html>
