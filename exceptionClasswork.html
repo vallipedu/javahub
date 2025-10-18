@@ -1,302 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java Exception Handling Examples</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 900px;
-            margin: auto;
-            background: #fff;
-            padding: 20px 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2 {
-            text-align: center;
-            color: #2c3e50;
-        }
-        h2 {
-            border-bottom: 2px solid #ecf0f1;
-            padding-bottom: 10px;
-            margin-top: 30px;
-        }
-        details {
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        summary {
-            font-size: 1.2em;
-            font-weight: bold;
-            padding: 15px;
-            cursor: pointer;
-            background-color: #eaf1f8;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        summary:hover {
-            background-color: #dbe7f2;
-        }
-        pre {
-            background-color: #2d2d2d;
-            color: #f8f8f2;
-            padding: 15px;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
-            overflow-x: auto;
-        }
-        code {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9em;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NBKRIST - Java Hub | Exception Handling Examples</title>
+<style>
+:root {
+  --primary:#0078ff;
+  --accent:#00bfff;
+  --header:#004d99;
+  --glass:rgba(255,255,255,0.9);
+  --text:#222;
+  --light-bg:rgba(245,248,255,0.85);
+  --bg-gradient:linear-gradient(135deg,#f5faff,#ffffff);
+}
+body.dark {
+  --primary:#66b3ff;
+  --accent:#3399ff;
+  --header:#cce5ff;
+  --glass:rgba(25,25,25,0.9);
+  --text:#f0f0f0;
+  --light-bg:rgba(40,40,40,0.85);
+  --bg-gradient:linear-gradient(135deg,#0f172a,#1e293b);
+}
+body {
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Verdana,sans-serif;
+  background:var(--bg-gradient);
+  color:var(--text);
+  transition:background .4s,color .4s;
+  line-height:1.6;
+}
+header {
+  position:relative;
+  text-align:center;
+  padding:25px 10px 10px;
+  background:var(--glass);
+  backdrop-filter:blur(12px);
+  font-weight:bold;
+  font-size:1.8em;
+  color:var(--header);
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+}
+.theme-toggle {
+  position:absolute;
+  right:20px;
+  top:20px;
+  background:var(--light-bg);
+  border:none;
+  color:var(--primary);
+  font-weight:600;
+  border-radius:8px;
+  padding:6px 12px;
+  cursor:pointer;
+  transition:0.3s;
+}
+.theme-toggle:hover{background:var(--primary);color:#fff}
+.navbar {
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  padding:12px 10px;
+  background:rgba(255,255,255,0.3);
+  backdrop-filter:blur(10px);
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  width:90%;
+  margin:8px auto 20px;
+}
+.navbar a {
+  text-decoration:none;
+  color:var(--primary);
+  font-weight:600;
+  padding:5px 10px;
+  position:relative;
+}
+.navbar a::after {
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0%;
+  height:2px;
+  background:var(--primary);
+  transition:width 0.3s ease;
+}
+.navbar a:hover {color:var(--accent);}
+.navbar a:hover::after {width:100%;}
+.container {
+  max-width:950px;
+  margin:20px auto 40px;
+  background:var(--glass);
+  border-radius:16px;
+  padding:30px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+}
+h1{text-align:center;color:var(--header);}
+h2{color:var(--primary);}
+.subsection {
+  position:relative;
+  background:rgba(240,248,255,0.45);
+  margin:25px 0;
+  padding:18px 22px 18px 30px;
+  border-radius:10px;
+}
+.subsection::before {
+  content:"";
+  position:absolute;
+  left:0;
+  top:8px;
+  bottom:8px;
+  width:4px;
+  background:linear-gradient(180deg,#0099ff,#0066cc);
+  border-radius:3px;
+}
+details {
+  border:1px solid rgba(0,0,0,0.1);
+  border-radius:10px;
+  margin:15px 0;
+  overflow:hidden;
+  background:var(--light-bg);
+}
+summary {
+  padding:12px 16px;
+  font-weight:600;
+  cursor:pointer;
+  background:rgba(230,243,255,0.7);
+  color:var(--header);
+  transition:all 0.3s ease;
+}
+summary:hover {background:rgba(200,230,255,0.9);}
+pre {
+  margin:0;
+  padding:12px;
+  background:var(--glass);
+  font-family:Consolas,monospace;
+  font-size:0.9em;
+  border-top:1px solid rgba(0,0,0,0.1);
+  white-space:pre-wrap;
+  border-radius:0 0 10px 10px;
+  position:relative;
+}
+pre .popup {
+  position:absolute;
+  left:calc(100% + 10px);
+  top:0;
+  background:rgba(255,255,255,0.95);
+  color:#000;
+  border-radius:10px;
+  padding:8px 12px;
+  width:260px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+  opacity:0;
+  transform:translateX(10px);
+  transition:all 0.25s ease;
+  pointer-events:none;
+  font-size:0.9em;
+}
+pre:hover .popup {opacity:1;transform:translateX(0);pointer-events:auto;}
+.summary {
+  background:rgba(224,247,255,0.7);
+  border-left:5px solid var(--primary);
+  padding:15px 20px;
+  border-radius:10px;
+  margin-top:30px;
+  font-style:italic;
+}
+footer {
+  text-align:center;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  color:#fff;
+  padding:15px;
+  border-radius:10px;
+  width:90%;
+  margin:40px auto 10px;
+  font-size:0.9em;
+}
+@media(max-width:880px){
+  .navbar{flex-direction:column;width:95%;}
+  pre .popup{left:0;top:calc(100% + 10px);width:95%;}
+}
+</style>
 </head>
+
 <body>
+<header>
+  NBKRIST – Java Hub
+  <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+</header>
+
+<nav class="navbar">
+  <a href="exphand.html">🏠 Home</a>
+
+</nav>
 
 <div class="container">
-    <a href="exphand.html" class="back-button">Back to Exception Handling</a>
-    <h1>Java Exception Handling Programs</h1>
-    <p style="text-align: center; font-style: italic; color: #7f8c8d;">A collection of simple Java programs demonstrating different exception handling concepts.</p>
-    <p style="text-align: center; font-style: italic; color: #7f8c8d;">These exercises demonstrated various aspects of exception handling in Java on 23-09-2024 2nd and 3rd periods.</p>
+  <h1>Java Exception Handling Programs</h1>
+  <p style="text-align:center;font-style:italic;">Collection of practical programs discussed in class for understanding Java Exception Handling (NBKRIST – CSE Dept).</p>
 
-    <details open>
-        <summary>ExceptionDemo.java</summary>
-        <pre><code>
-import java.util.Scanner;
+  <div class="subsection">
+    <h2>Expert View</h2>
+    <p>While teaching Exception Handling, I’ve noticed students grasp the concept best through code experimentation. Each of these examples demonstrates not just error catching but structured thinking. Real-world projects depend on reliable exception flow — ensuring the system never fails silently but informs and recovers gracefully.</p>
+  </div>
 
-/**
- * This is a test class to demonstrate exception handling in Java.
- * It reads two integers from the user and prints their division.
- * It also includes a try-catch block to handle exceptions and a finally block
- * to ensure that resources are properly closed.
- * The program handles ArithmeticException for division by zero and
- * InputMismatchException for invalid input.
- * * @author HariShankar Mutchakala
- * Date: 2025-09-23
- * Version: 1.0
- * */
+  <details open>
+    <summary>ExceptionDemo.java</summary>
+    <pre>
+import java.util.*;
 public class ExceptionDemo {
-
-    public static void main(String a[]) {
-        System.out.println("Hello World");
-        // read two numbers from keyboard and print their division
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Enter two numbers:");
-
-        try {
-            int num1 = sc.nextInt();
-            System.out.println("Enter second number:");
-            int num2 = sc.nextInt();
-            int result = num1 / num2;
-            System.out.println("The division of " + num1 + " and " + num2 + " is: " + result);
-        } catch (ArithmeticException e) {
-            // exception handler for division by zero goes here
-            System.out.println("Error: Division by zero is not allowed.");
-            System.out.println("Exception details: " + e.getMessage());
-        } finally {
-            // safety net
-            sc.close();
-            System.out.println("Finally block executed");
-        }
-        System.out.println("After catch block");
-        System.out.println("End of the program");
-
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Enter two numbers:");
+    try {
+      int a = sc.nextInt(), b = sc.nextInt();
+      System.out.println("Result: " + (a / b));
+    } catch (ArithmeticException e) {
+      System.out.println("Division by zero not allowed");
+    } finally {
+      sc.close();
+      System.out.println("Scanner closed.");
     }
+  }
 }
-        </code></pre>
-    </details>
+    <div class="popup"><b>Output:</b><br>Division by zero not allowed<br>Scanner closed.</div>
+    </pre>
+  </details>
 
-    <details>
-        <summary>MultipleCatch.java</summary>
-        <pre><code>
+  <details>
+    <summary>MultipleCatch.java</summary>
+    <pre>
 public class MultipleCatch {
-
-    public static void main(String[] args) {
-        try {
-            int[] numbers = { 1, 2, 3 };
-            System.out.println(numbers[5]);
-            int result = 10 / 0;
-            System.out.println("Result: " + result);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Array index is out of bounds");
-            
-        } catch (ArithmeticException e) {
-            System.out.println("Cannot divide by zero");
-            
-        } catch (Exception e) {
-            System.out.println("An unexpected error occurred");
-          
-        }
-        System.out.println("End of program");
+  public static void main(String[] args) {
+    try {
+      int[] arr = {1, 2, 3};
+      System.out.println(arr[5]);
+      int x = 10 / 0;
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("Array index invalid");
+    } catch (ArithmeticException e) {
+      System.out.println("Division by zero");
+    } catch (Exception e) {
+      System.out.println("Unexpected error");
     }
+  }
 }
-        </code></pre>
-    </details>
+    <div class="popup"><b>Output:</b><br>Array index invalid</div>
+    </pre>
+  </details>
 
-    <details>
-        <summary>MultipleTryCatchBlocks.java</summary>
-        <pre><code>
-/**
- * this class demonstrates multiple try-catch blocks.
- * It handles ArrayIndexOutOfBoundsException and ArithmeticException separately.
- * Each try block is followed by its own catch block.
- * This allows for more granular error handling.
- * The program continues execution after handling each exception.
- * Author: HariShankar Mutchakala
- * Date: 2025-09-23
- * Version: 1.0
- * */
+  <details>
+    <summary>MultipleTryCatchBlocks.java</summary>
+    <pre>
 public class MultipleTryCatchBlocks {
-
-    public static void main(String[] args) {
-        try {
-            int[] numbers = { 1, 2, 3 };
-            System.out.println(numbers[5]);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Array index is out of bounds");
-        }
-
-        try {
-            int result = 10 / 0;
-            System.out.println("Result: " + result);
-        } catch (ArithmeticException e) {
-            System.out.println("Cannot divide by zero");
-        }
-
-        System.out.println("End of program");
+  public static void main(String[] args) {
+    try {
+      int[] numbers = {1, 2, 3};
+      System.out.println(numbers[5]);
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("Index out of bounds");
     }
-}
-        </code></pre>
-    </details>
 
-    <details>
-        <summary>ThrowsDemo.java</summary>
-        <pre><code>
-/**
- * * This class demonstrates throw and throws in Java.
- * It includes methods that throw exceptions and a main method that handles them.
- * Author: HariShankar Mutchakalar
- * Date: 2025-09-23
- * Version: 1.0
- * */
+    try {
+      int result = 10 / 0;
+    } catch (ArithmeticException e) {
+      System.out.println("Divide by zero error");
+    }
+  }
+}
+    <div class="popup"><b>Output:</b><br>Index out of bounds<br>Divide by zero error</div>
+    </pre>
+  </details>
+
+  <details>
+    <summary>ThrowsDemo.java</summary>
+    <pre>
 public class ThrowsDemo {
-    public static void main(String[] args) {
-        try {
-            methodA();
-        } catch (Exception e) {
-            System.out.println("Exception caught in main: " + e.getMessage());
-        }
-        System.out.println("End of program");    
+  static void methodA() throws Exception {
+    methodB();
+  }
+  static void methodB() throws Exception {
+    throw new Exception("Thrown from methodB");
+  }
+  public static void main(String[] args) {
+    try {
+      methodA();
+    } catch (Exception e) {
+      System.out.println("Caught in main: " + e.getMessage());
     }
-    static void methodA() throws Exception {
-        methodB();
-    }
-
-    static void methodB() throws Exception {
-        throw new Exception("Exception thrown in methodB");
-    }
+  }
 }
-        </code></pre>
-    </details>
+    <div class="popup"><b>Output:</b><br>Caught in main: Thrown from methodB</div>
+    </pre>
+  </details>
 
-    <details>
-        <summary>BlanketCatchDemo.java</summary>
-        <pre><code>
-/**
- * * * Demonstrates a blanket catch block that catches all exceptions.
- * It handles both ArrayIndexOutOfBoundsException and ArithmeticException
- * in a single catch block.
- * The program continues execution after handling the exception.
- * Author: HariShankar Mutchakala
- * Date: 2025-09-23
- * Version: 1.0
- */
+  <details>
+    <summary>BlanketCatchDemo.java</summary>
+    <pre>
 public class BlanketCatchDemo {
-
-    public static void main(String[] args) {
-        try {
-            int[] numbers = { 1, 2, 3 };
-            System.out.println(numbers[5]);
-            int result = 10 / 0;
-            System.out.println("Result: " + result);
-        } catch (Exception e) { // blanket catch block
-            System.out.println("Some exception occurred");
-            System.out.println(e.getMessage());
-        }
-        System.out.println("End of program");
+  public static void main(String[] args) {
+    try {
+      int[] arr = {1, 2, 3};
+      System.out.println(arr[5]);
+      int result = 10 / 0;
+    } catch (Exception e) {
+      System.out.println("Exception occurred: " + e.getMessage());
     }
+  }
 }
-        </code></pre>
-    </details>
+    <div class="popup"><b>Output:</b><br>Exception occurred: Index 5 out of bounds for length 3</div>
+    </pre>
+  </details>
 
-    <details>
-        <summary>UserDefinedBusinessExceptionDemo.java</summary>
-        <pre><code>
-// UserDefinedBusinessExceptionDemo.java
-// Custom exception class
-//this exception is thrown when a withdrawal amount exceeds the available balance     
-
+  <details>
+    <summary>UserDefinedBusinessExceptionDemo.java</summary>
+    <pre>
 class InSufficientFundsException extends Exception {
-
-    public InSufficientFundsException(String message) {
-        super(message);
-    }
+  InSufficientFundsException(String msg) { super(msg); }
 }
-
-/**
- * this class demonstrates user-defined business exceptions.
- * It demonstrates how to create custom business exceptions.
- * In this example, we create a custom exception called
- * InSufficientFundsException.
- * It is thrown when a withdrawal amount exceeds the available balance.
- * The main method calls the withdraw method, which throws this exception if the
- * balance is insufficient.
- * The main method catches the exception and prints the error message.
- * The main method also demonstrates how to handle the exception using a
- * try-catch block.
- * The main method demonstrates that the exception is caught and handled
- * appropriately.
- * * * @author HariShankar Mutchakala
- * Date: 2025-09-23
- * * Version: 1.0
- * */
-
 public class UserDefinedBusinessExceptionDemo {
-    public static void main(String[] args) {
-        try {
-            double amount = 5000;
-            double balance = 2000;
-            withdraw(balance, amount);
-        } catch (InSufficientFundsException e) {
-            System.out.println("Exception caught in main: " + e.getMessage());
-        }
+  static void withdraw(double bal, double amt) throws InSufficientFundsException {
+    if (amt > bal) throw new InSufficientFundsException("Insufficient Funds");
+    System.out.println("Withdrawal Successful!");
+  }
+  public static void main(String[] args) {
+    try {
+      withdraw(2000, 5000);
+    } catch (InSufficientFundsException e) {
+      System.out.println("Error: " + e.getMessage());
     }
-
-    static void withdraw(double balance, double amount) throws InSufficientFundsException {
-        if (balance - amount < 0) {
-            throw new InSufficientFundsException("Insufficient funds");
-        }
-        balance -= amount; // update balance
-        System.out.println("Withdrawn: " + amount);
-        System.out.println("Remaining balance: " + balance);
-    }
+  }
 }
-        </code></pre>
-    </details>
+    <div class="popup"><b>Output:</b><br>Error: Insufficient Funds</div>
+    </pre>
+  </details>
 
+  <div class="summary">
+    <h2>🔑 Key Summary</h2>
+    <ul>
+      <li>Each example demonstrates core exception mechanisms: <code>try</code>, <code>catch</code>, <code>finally</code>, <code>throw</code>, and <code>throws</code>.</li>
+      <li>Multiple catches allow precise error handling for various exception types.</li>
+      <li>Blanket catches should be used cautiously — specific exceptions provide clarity.</li>
+      <li>User-defined exceptions make code more expressive for business logic.</li>
+      <li>Every exception handling example ensures program stability and continuity.</li>
+    </ul>
+    <p>By mastering these patterns, students can handle real-world failures gracefully and design resilient Java applications.</p>
+  </div>
 </div>
 
-</body>
+<footer>NBKRIST © 2025 | Authored by Hari Babu Mutchakala</footer>
 
+<script>
+const toggle=document.getElementById("themeToggle");
+toggle.addEventListener("click",()=>{
+  document.body.classList.toggle("dark");
+  toggle.textContent=document.body.classList.contains("dark")?"☀️ Light":"🌙 Dark";
+});
+</script>
+</body>
 </html>
