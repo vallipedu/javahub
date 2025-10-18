@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NBKRIST - Java Hub | Core Exception Handling Concepts</title>
+<style>
+:root {
+  --primary:#0078ff;
+  --accent:#00bfff;
+  --header:#004d99;
+  --glass:rgba(255,255,255,0.9);
+  --text:#222;
+  --light-bg:rgba(245,248,255,0.85);
+  --bg-gradient:linear-gradient(135deg,#f5faff,#ffffff);
+}
+body.dark {
+  --primary:#66b3ff;
+  --accent:#3399ff;
+  --header:#cce5ff;
+  --glass:rgba(25,25,25,0.9);
+  --text:#f0f0f0;
+  --light-bg:rgba(40,40,40,0.85);
+  --bg-gradient:linear-gradient(135deg,#0f172a,#1e293b);
+}
+body {
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Verdana,sans-serif;
+  background:var(--bg-gradient);
+  color:var(--text);
+  transition:background .4s,color .4s;
+  line-height:1.6;
+}
+header {
+  position:relative;
+  text-align:center;
+  padding:25px 10px 10px;
+  background:var(--glass);
+  backdrop-filter:blur(12px);
+  font-weight:bold;
+  font-size:1.8em;
+  color:var(--header);
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+}
+.theme-toggle {
+  position:absolute;
+  right:20px;
+  top:20px;
+  background:var(--light-bg);
+  border:none;
+  color:var(--primary);
+  font-weight:600;
+  border-radius:8px;
+  padding:6px 12px;
+  cursor:pointer;
+  transition:0.3s;
+}
+.theme-toggle:hover{background:var(--primary);color:#fff}
+.navbar {
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  padding:12px 10px;
+  background:rgba(255,255,255,0.3);
+  backdrop-filter:blur(10px);
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  width:90%;
+  margin:8px auto 20px;
+}
+.navbar a {
+  text-decoration:none;
+  color:var(--primary);
+  font-weight:600;
+  padding:5px 10px;
+  position:relative;
+}
+.navbar a::after {
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0%;
+  height:2px;
+  background:var(--primary);
+  transition:width 0.3s ease;
+}
+.navbar a:hover {color:var(--accent);}
+.navbar a:hover::after {width:100%;}
+.container {
+  max-width:950px;
+  margin:20px auto 40px;
+  background:var(--glass);
+  border-radius:16px;
+  padding:30px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+}
+.subsection {
+  position:relative;
+  background:rgba(240,248,255,0.45);
+  margin:25px 0;
+  padding:18px 22px 18px 30px;
+  border-radius:10px;
+}
+.subsection::before {
+  content:"";
+  position:absolute;
+  left:0;
+  top:8px;
+  bottom:8px;
+  width:4px;
+  background:linear-gradient(180deg,#0099ff,#0066cc);
+  border-radius:3px;
+}
+h1{text-align:center;color:var(--header);}
+h2{color:var(--primary);}
+.code-block {
+  position:relative;
+  background:var(--light-bg);
+  border-left:3px solid var(--primary);
+  padding:10px 12px;
+  border-radius:8px;
+  font-family:Consolas,monospace;
+  font-size:0.9em;
+  white-space:pre-wrap;
+  margin:10px 0;
+}
+.code-block .popup {
+  position:absolute;
+  left:calc(100% + 10px);
+  top:0;
+  background:rgba(255,255,255,0.97);
+  color:#000;
+  border-radius:10px;
+  padding:8px 12px;
+  width:260px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+  opacity:0;
+  transform:translateX(10px);
+  transition:all 0.25s ease;
+  pointer-events:none;
+  font-size:0.9em;
+}
+.code-block:hover .popup {opacity:1;transform:translateX(0);}
+.summary {
+  background:rgba(224,247,255,0.7);
+  border-left:5px solid var(--primary);
+  padding:15px 20px;
+  border-radius:10px;
+  margin-top:30px;
+  font-style:italic;
+}
+footer {
+  text-align:center;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  color:#fff;
+  padding:15px;
+  border-radius:10px;
+  width:90%;
+  margin:40px auto 10px;
+  font-size:0.9em;
+}
+@media(max-width:880px){
+  .navbar{flex-direction:column;width:95%;}
+  .code-block .popup{left:0;top:calc(100% + 10px);width:95%;}
+}
+</style>
+</head>
+
+<body>
+<header>
+  NBKRIST – Java Hub
+  <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+</header>
+
+<nav class="navbar">
+  <a href="exphand.html">🏠 Home</a>
+
+</nav>
+
+<div class="container">
+  <h1>Core Java Exception Handling Concepts</h1>
+
+  <div class="subsection">
+    <h2>Expert View</h2>
+    <p>In real-world software development, understanding the difference between <strong>throw</strong>, <strong>throws</strong>, and structured blocks like <strong>try-catch-finally</strong> is fundamental. As a software engineer, I’ve seen systems fail due to improper error flow. When these are used effectively, your code becomes reliable, predictable, and easy to maintain.</p>
+  </div>
+
+  <div class="subsection">
+    <h2>1. The <code>try</code>, <code>catch</code>, and <code>finally</code> Blocks</h2>
+    <p>These are the backbone of Java’s exception handling mechanism:</p>
+    <ul>
+      <li><strong>try</strong> — encloses code that might throw exceptions.</li>
+      <li><strong>catch</strong> — handles exceptions of specific types.</li>
+      <li><strong>finally</strong> — executes cleanup code, whether an exception occurs or not.</li>
+    </ul>
+    <div class="code-block">
+public class TryCatchExample {
+  public static void main(String[] args) {
+    try {
+      int num = 10 / 0;
+    } catch (ArithmeticException e) {
+      System.out.println("Error: " + e.getMessage());
+    } finally {
+      System.out.println("Finally always executes!");
+    }
+  }
+}
+      <div class="popup"><b>Output:</b><br>Error: / by zero<br>Finally always executes!</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2>2. The <code>throw</code> and <code>throws</code> Keywords</h2>
+    <p><strong>throw</strong> is used to manually raise an exception, while <strong>throws</strong> declares that a method may pass exceptions to its caller.</p>
+    <div class="code-block">
+class ThrowsExample {
+  static void validateAge(int age) throws ArithmeticException {
+    if(age < 18)
+      throw new ArithmeticException("Underage! Not eligible.");
+    else
+      System.out.println("Access granted!");
+  }
+  public static void main(String[] args) {
+    try {
+      validateAge(16);
+    } catch (ArithmeticException e) {
+      System.out.println("Caught: " + e.getMessage());
+    }
+  }
+}
+      <div class="popup"><b>Output:</b><br>Caught: Underage! Not eligible.</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2>3. Multiple Catch Clauses</h2>
+    <p>Java allows multiple <code>catch</code> blocks to handle different exception types separately. Each block should handle a specific scenario.</p>
+    <div class="code-block">
+public class MultiCatch {
+  public static void main(String[] args) {
+    try {
+      int[] arr = {1, 2, 3};
+      System.out.println(arr[5]);
+      int x = 10 / 0;
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("Array index out of range!");
+    } catch (ArithmeticException e) {
+      System.out.println("Cannot divide by zero!");
+    } catch (Exception e) {
+      System.out.println("General Exception caught!");
+    }
+  }
+}
+      <div class="popup"><b>Output:</b><br>Array index out of range!</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2>4. The <code>Throwable</code> Class</h2>
+    <p>All exceptions in Java derive from the <strong>Throwable</strong> class, which provides useful methods:</p>
+    <ul>
+      <li><code>getMessage()</code> – returns the error message.</li>
+      <li><code>printStackTrace()</code> – prints the execution trace.</li>
+      <li><code>toString()</code> – returns exception class and message.</li>
+    </ul>
+    <div class="code-block">
+public class ThrowableDemo {
+  public static void main(String[] args) {
+    try {
+      int res = 5 / 0;
+    } catch (Exception e) {
+      System.out.println("Message: " + e.getMessage());
+      e.printStackTrace();
+    }
+  }
+}
+      <div class="popup"><b>Output:</b><br>Message: / by zero<br>Stack trace printed to console</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2>5. Unchecked Exceptions</h2>
+    <p>Unchecked exceptions (RuntimeExceptions) occur due to logic errors during execution and are not verified at compile time.</p>
+    <div class="code-block">
+class UncheckedDemo {
+  public static void main(String[] args) {
+    String str = null;
+    System.out.println(str.length()); // Causes NullPointerException
+  }
+}
+      <div class="popup"><b>Output:</b><br>java.lang.NullPointerException</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2>6. Checked Exceptions</h2>
+    <p>Checked exceptions occur due to external factors and must be either handled or declared using <code>throws</code>.</p>
+    <div class="code-block">
+import java.io.*;
+class CheckedDemo {
+  public static void main(String[] args) {
+    try {
+      FileReader fr = new FileReader("data.txt");
+    } catch (IOException e) {
+      System.out.println("Checked Exception: " + e.getMessage());
+    }
+  }
+}
+      <div class="popup"><b>Output:</b><br>Checked Exception: data.txt (No such file or directory)</div>
+    </div>
+  </div>
+
+  <div class="subsection summary">
+    <h2>🔑 Key Summary</h2>
+    <ul>
+      <li><code>try-catch-finally</code> ensures controlled handling of runtime errors.</li>
+      <li><code>throw</code> raises exceptions manually, while <code>throws</code> declares them.</li>
+      <li>Multiple catch blocks allow handling of various exceptions individually.</li>
+      <li>All exception classes stem from <code>Throwable</code>.</li>
+      <li>Unchecked exceptions indicate coding errors, while checked ones relate to external operations.</li>
+      <li>Mastering these makes your Java code clean, predictable, and robust.</li>
+    </ul>
+  </div>
+</div>
+
+<footer>NBKRIST © 2025 | Authored by Hari Babu Mutchakala</footer>
+
+<script>
+const toggle=document.getElementById("themeToggle");
+toggle.addEventListener("click",()=>{
+  document.body.classList.toggle("dark");
+  toggle.textContent=document.body.classList.contains("dark")?"☀️ Light":"🌙 Dark";
+});
+</script>
+</body>
+</html>
