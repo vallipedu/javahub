@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NBKRIST: Java Hub - Java util and Time API Packages</title>
+<style>
+:root {
+  --primary: #0078ff;
+  --accent: #00bfff;
+  --header: #004d99;
+  --glass: rgba(255,255,255,0.85);
+  --text: #222;
+  --light-bg: rgba(245,248,255,0.8);
+}
+
+/* Global Layout */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f3f9ff, #ffffff);
+  color: var(--text);
+  line-height: 1.6;
+}
+header {
+  text-align: center;
+  padding: 25px 10px;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  font-weight: bold;
+  font-size: 1.8em;
+  color: var(--header);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  position: relative;
+}
+nav {
+  text-align: center;
+  padding: 10px;
+  background: linear-gradient(90deg, rgba(0,119,255,0.12), rgba(0,180,255,0.12));
+  border-radius: 12px;
+  margin: 10px auto;
+  width: 90%;
+}
+nav a {
+  color: var(--header);
+  text-decoration: none;
+  margin: 0 14px;
+  font-weight: 500;
+}
+nav a:hover { color: var(--primary); }
+
+.container {
+  max-width: 940px;
+  margin: 15px auto 40px auto;
+  background: var(--glass);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  backdrop-filter: blur(8px);
+}
+h1 {
+  text-align: center;
+  color: var(--header);
+  border-bottom: 2px solid rgba(0,120,255,0.2);
+  padding-bottom: 10px;
+}
+h2.section-heading {
+  color: var(--primary);
+  font-size: 1.3em;
+  border-bottom: 2px solid rgba(0,120,255,0.2);
+  padding-bottom: 5px;
+}
+p { text-align: justify; margin-bottom: 12px; }
+
+/* Blue covering line (single) */
+.subsection {
+  position: relative;
+  background: rgba(240, 248, 255, 0.45);
+  margin: 25px 0;
+  padding: 18px 20px 18px 30px;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.3s ease;
+}
+.subsection::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 4px;
+  background: linear-gradient(180deg, #0099ff, #0066cc);
+  border-radius: 3px;
+}
+.subsection::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 15px;
+  height: 6px;
+  background: #0099ff;
+  border-radius: 0 5px 5px 0;
+  box-shadow: 0 calc(100% - 6px) 0 0 #0099ff;
+}
+.subsection:hover {
+  background: rgba(220, 240, 255, 0.7);
+}
+
+/* Compact code block */
+.code-block {
+  position: relative;
+  background: var(--light-bg);
+  border-left: 3px solid var(--primary);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: Consolas, monospace;
+  font-size: 0.9em;
+  line-height: 1.3;
+  white-space: pre-wrap;
+  display: inline-block;
+  margin: 8px 0;
+  width: auto;
+  transition: 0.3s ease;
+}
+.code-block:hover { background: rgba(230,243,255,0.95); }
+.code-block .popup {
+  position: absolute;
+  left: 105%;
+  top: 0;
+  width: 280px;
+  background: rgba(255,255,255,0.96);
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  padding: 8px 10px;
+  font-size: 0.88em;
+  color: #000;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+.code-block:hover .popup {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+  z-index: 100;
+}
+
+/* Section title divider */
+.section-divider {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.4em;
+  color: transparent;
+  background: linear-gradient(90deg, #007bff, #00bfff);
+  -webkit-background-clip: text;
+  margin: 40px 0 20px 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Practice Q&A */
+.qa-section {
+  margin-top: 30px;
+  background: rgba(240,247,255,0.6);
+  border-radius: 12px;
+  padding: 20px;
+}
+.qa-item {
+  position: relative;
+  background: rgba(255,255,255,0.7);
+  border-left: 4px solid var(--primary);
+  margin: 10px 0;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+.qa-item:hover { background: rgba(230,243,255,0.9); }
+.qa-item .answer {
+  position: absolute;
+  left: 105%;
+  top: 0;
+  width: 280px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  padding: 8px 12px;
+  font-size: 0.9em;
+  color: #000;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+.qa-item:hover .answer {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+  z-index: 50;
+}
+
+/* Summary / Key Takeaways */
+.key-takeaways {
+  margin-top: 30px;
+  background: rgba(230,245,255,0.8);
+  border-left: 4px solid var(--primary);
+  padding: 20px;
+  border-radius: 12px;
+}
+footer {
+  text-align: center;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  width: 90%;
+  margin: 20px auto 40px auto;
+  font-size: 0.9em;
+}
+</style>
+</head>
+<body>
+<header>NBKRIST – Java Hub</header>
+<nav>
+  <a href="packages.html">Back to Home</a>
+</nav>
+
+<div class="container">
+  <h1>Java util and Time API Packages</h1>
+
+  <div class="subsection">
+    <h2 class="section-heading">Expert View</h2>
+    <p>As a software engineer, I’ve used <b>java.util</b> and <b>java.time</b> extensively in enterprise-grade projects. These packages form the functional backbone of modern Java applications — handling data, managing randomness, and ensuring precise time operations. Without them, achieving reliability, scalability, and temporal accuracy in real-time systems would be nearly impossible.</p>
+  </div>
+
+  <div class="subsection">
+    <h2 class="section-heading">Introduction</h2>
+    <p>The <b>java.util</b> and <b>java.time</b> packages are foundational to Java Standard Edition (SE). They provide the tools necessary for building efficient, structured, and time-aware applications. From dynamic data manipulation to precise time computation, they empower developers to create robust and reusable components.</p>
+  </div>
+
+  <div class="section-divider">JAVA.UTIL PACKAGE</div>
+
+  <div class="subsection">
+    <h2 class="section-heading">Understanding java.util Package</h2>
+    <p>The <b>java.util</b> package is one of the most frequently used and versatile parts of the Java API. It includes essential utilities like collections, data structures, randomization, text formatting, and scanners. These utilities help build real-world enterprise solutions — from e-commerce inventory systems to banking data models — enabling scalable data management.</p>
+    <p>It is the heart of Java’s data handling capabilities, ensuring reusability, flexibility, and performance. Most frameworks, including Spring and Hibernate, rely heavily on <b>java.util</b> collections and utilities internally.</p>
+  </div>
+
+  <div class="subsection">
+    <h2 class="section-heading">Formatter Class</h2>
+    <p>The <b>Formatter</b> class formats data into readable strings — ideal for logs, reports, and clean console outputs.</p>
+    <div class="code-block">
+<pre>import java.util.Formatter;
+public class FormatterDemo {
+  public static void main(String[] args) {
+    Formatter fmt = new Formatter();
+    fmt.format("Name: %s, Age: %d", "Hari", 25);
+    System.out.println(fmt);
+    fmt.close();
+  }
+}</pre>
+      <div class="popup"><b>Output:</b> Name: Hari, Age: 25</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2 class="section-heading">Random Class</h2>
+    <p>The <b>Random</b> class generates pseudo-random numbers, commonly used in games, simulations, and testing scenarios.</p>
+    <div class="code-block">
+<pre>import java.util.Random;
+public class RandomDemo {
+  public static void main(String[] args) {
+    Random rand = new Random();
+    System.out.println("Random int: " + rand.nextInt(100));
+    System.out.println("Random double: " + rand.nextDouble());
+  }
+}</pre>
+      <div class="popup"><b>Output:</b> Random int: 42<br>Random double: 0.6784</div>
+    </div>
+  </div>
+
+  <div class="section-divider">JAVA.TIME PACKAGE</div>
+
+  <div class="subsection">
+    <h2 class="section-heading">Introduction to java.time Package</h2>
+    <p>Before Java 8, developers used <code>java.util.Date</code> and <code>Calendar</code>, which were mutable, confusing, and not thread-safe. The <b>java.time</b> package replaced these with immutable, clear, and precise APIs inspired by the ISO-8601 calendar system. This package supports time zones, durations, and complex temporal calculations effortlessly.</p>
+    <p><b>java.time</b> ensures accuracy and consistency across distributed systems, making it invaluable for banking, scheduling, and real-time analytics applications.</p>
+  </div>
+
+  <div class="subsection">
+    <h2 class="section-heading">Instant Class</h2>
+    <p>The <b>Instant</b> class captures a precise timestamp in UTC. It’s perfect for logging, auditing, or tracking distributed transactions.</p>
+    <div class="code-block">
+<pre>import java.time.Instant;
+public class InstantExample {
+  public static void main(String[] args) {
+    Instant now = Instant.now();
+    System.out.println("Current Instant: " + now);
+  }
+}</pre>
+      <div class="popup"><b>Output:</b> Current Instant: 2025-10-18T10:30:20Z</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2 class="section-heading">DateTimeFormatter Class</h2>
+    <p>The <b>DateTimeFormatter</b> class converts time objects to formatted text with pattern-based flexibility.</p>
+    <div class="code-block">
+<pre>import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+public class DateTimeFormatDemo {
+  public static void main(String[] args) {
+    LocalDateTime now = LocalDateTime.now();
+    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    System.out.println("Formatted: " + now.format(fmt));
+  }
+}</pre>
+      <div class="popup"><b>Output:</b> Formatted: 18-10-2025 15:30:45</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2 class="section-heading">TemporalAdjusters Class</h2>
+    <p><b>TemporalAdjusters</b> helps perform date manipulations like finding the next Monday or first day of the month.</p>
+    <div class="code-block">
+<pre>import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+import java.time.DayOfWeek;
+public class TemporalAdjustersDemo {
+  public static void main(String[] args) {
+    LocalDate today = LocalDate.now();
+    LocalDate nextMonday = today.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+    System.out.println("Next Monday: " + nextMonday);
+  }
+}</pre>
+      <div class="popup"><b>Output:</b> Next Monday: 2025-10-20</div>
+    </div>
+  </div>
+
+  <div class="qa-section">
+    <h2 class="section-heading">Practice Questions</h2>
+    <div class="qa-item">What is the main purpose of java.util?
+      <div class="answer">It offers core utilities like collections, randomization, and data formatting for enterprise systems.</div>
+    </div>
+    <div class="qa-item">Why was java.time introduced?
+      <div class="answer">To replace old, mutable date APIs with modern, immutable, and thread-safe alternatives.</div>
+    </div>
+    <div class="qa-item">What is Instant used for?
+      <div class="answer">Capturing timestamps with nanosecond precision in UTC.</div>
+    </div>
+  </div>
+
+  <div class="key-takeaways">
+    <h2 class="section-heading">Summary</h2>
+    <ul>
+      <li><b>java.util</b> powers collections, data manipulation, and random generation in core Java.</li>
+      <li><b>java.time</b> modernizes time handling with accuracy, immutability, and global compatibility.</li>
+      <li>Together, these packages enhance productivity and maintainability in professional Java systems.</li>
+      <li>Understanding them is essential for mastering Java SE and enterprise development.</li>
+    </ul>
+  </div>
+</div>
+
+<footer>NBKRIST © 2025 | Authored by Hari Babu Mutchakala</footer>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NBKRIST: Java Hub - Packages in Java SE</title>
+  <style>
+    :root {
+      --primary-blue: #0078ff;
+      --secondary-blue: #00bfff;
+      --header-color: #004d99;
+      --text-color: #333;
+      --background: linear-gradient(135deg, #e3f2fd, #ffffff);
+      --box-bg: rgba(255, 255, 255, 0.9);
+      --highlight-bg: rgba(240, 248, 255, 0.85);
+      --header-glass: rgba(255, 255, 255, 0.25);
+      --underline-glass: linear-gradient(90deg, rgba(0, 123, 255, 0.3), rgba(0, 180, 255, 0.2));
+    }
+
+    body.dark {
+      --primary-blue: #3399ff;
+      --secondary-blue: #005bbb;
+      --header-color: #cfe8ff;
+      --text-color: #f1f1f1;
+      --background: linear-gradient(135deg, #0d1117, #161b22);
+      --box-bg: rgba(30, 30, 30, 0.8);
+      --highlight-bg: rgba(45, 50, 60, 0.85);
+      --header-glass: rgba(255, 255, 255, 0.08);
+      --underline-glass: linear-gradient(90deg, rgba(0, 150, 255, 0.25), rgba(255, 255, 255, 0.05));
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--background);
+      color: var(--text-color);
+      line-height: 1.6;
+      transition: background 0.6s ease, color 0.6s ease;
+    }
+
+    header {
+      position: relative;
+      text-align: center;
+      padding: 25px 10px;
+      background: var(--header-glass);
+      backdrop-filter: blur(14px);
+      color: var(--header-color);
+      font-size: 2em;
+      font-weight: bold;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .toggle-btn {
+      position: absolute;
+      right: 20px;
+      top: 22px;
+      background: rgba(255, 255, 255, 0.3);
+      color: var(--header-color);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 30px;
+      padding: 6px 12px;
+      font-size: 0.85em;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.45);
+      transform: scale(1.05);
+    }
+
+    nav {
+      width: 90%;
+      margin: 0 auto 1px auto;
+      text-align: center;
+      background: linear-gradient(90deg, rgba(0, 119, 255, 0.18), rgba(0, 180, 255, 0.2));
+      border-radius: 14px;
+      padding: 10px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    nav a {
+      color: var(--header-color);
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: 500;
+      font-size: 1em;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--primary-blue);
+      text-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+      transform: scale(1.1);
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 1px auto 30px auto;
+      background: var(--box-bg);
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .container.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--header-color);
+      font-size: 2em;
+      border-bottom: 2px solid rgba(0, 120, 255, 0.2);
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+    }
+
+    h2.section-heading {
+      color: var(--primary-blue);
+      text-align: left;
+      font-size: 1.6em;
+      margin-top: 40px;
+      position: relative;
+      padding-bottom: 6px;
+    }
+
+    h2.section-heading::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 100%;
+      background: var(--underline-glass);
+      border-radius: 2px;
+    }
+
+    p {
+      text-align: justify;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 30px 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      border: 1px solid #e0e0e0;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(248, 250, 255, 0.5);
+    }
+
+    code {
+      background: rgba(0, 0, 0, 0.05);
+      padding: 3px 6px;
+      border-radius: 5px;
+      font-family: "Consolas", monospace;
+    }
+
+    pre {
+      background: #1e1e1e;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 10px;
+      overflow-x: auto;
+      line-height: 1.5;
+      font-family: "Consolas", monospace;
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      background: linear-gradient(90deg, rgba(0, 120, 255, 0.9), rgba(0, 180, 255, 0.85));
+      color: white;
+      font-size: 0.9em;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .footer a {
+      color: #fff;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    .footer a:hover {
+      color: #e0f7fa;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    NBKRIST – Java Hub
+    <button class="toggle-btn" id="modeToggle">🌙</button>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="packages.html">Packages</a>
+    <a href="accessexample.html">Access Demo</a>
+    <a href="jars.html">JARs</a>
+  </nav>
+
+  <div class="container">
+    <h1>Packages in Java SE (Standard Edition)</h1>
+
+    <h2 class="section-heading">Expert View on Java SE Packages</h2>
+    <p>As a software engineer working extensively with Java SE, I’ve realized that packages are more than just folders — they’re the DNA of every Java application. They organize, protect, and modularize the logic that powers enterprise software. Without packages, Java applications would be chaotic and unmanageable.</p>
+    <p>In Java SE, packages are not only for organizing code but also for enabling maintainable and secure systems. They define how classes communicate, how functionality is exposed, and how encapsulation safeguards sensitive logic. Understanding Java SE packages deeply helps developers build reusable and scalable components that align perfectly with modern software engineering practices.</p>
+
+    <h2 class="section-heading">Overview</h2>
+    <p>Packages in Java SE (Standard Edition) are a fundamental mechanism for <b>organizing classes and interfaces</b> into a logical structure, providing <b>access protection</b> and <b>namespace management</b>. They are essentially Java's way of grouping related types.</p>
+
+    <h2 class="section-heading">Key Purposes of Java Packages</h2>
+    <ul>
+      <li><b>Namespace Management:</b> They prevent naming conflicts by allowing classes with the same name to exist in different packages. The package name acts as a unique qualifier.<br>
+      <i>Example:</i> You can have a <code>Date</code> class in both <code>java.util</code> and <code>java.sql</code>, using their fully qualified names (<code>java.util.Date</code> and <code>java.sql.Date</code>).</li>
+      <li><b>Access Control:</b> They control visibility of classes, interfaces, and members. Members with <b>package-private</b> or <b>protected</b> access are accessible only within the same package.</li>
+      <li><b>Organization and Modularity:</b> They make it easier to organize, locate, and reuse related classes efficiently.</li>
+    </ul>
+
+    <h2 class="section-heading">Types of Packages in Java SE</h2>
+    <h3>1. Built-in Packages (Java API)</h3>
+    <p>These packages are part of the JDK and form the standard Java Class Library, typically rooted in <code>java.</code> or <code>javax.</code> namespaces.</p>
+
+    <table>
+      <tr><th>Package Name</th><th>Core Functionality</th><th>Example Classes</th></tr>
+      <tr><td><b>java.lang</b></td><td>Core classes fundamental to Java. Auto-imported.</td><td><code>String</code>, <code>Math</code>, <code>Thread</code></td></tr>
+      <tr><td><b>java.util</b></td><td>Collections, utilities, and date/time classes.</td><td><code>ArrayList</code>, <code>HashMap</code>, <code>Scanner</code></td></tr>
+      <tr><td><b>java.io</b></td><td>File and stream handling.</td><td><code>File</code>, <code>BufferedReader</code></td></tr>
+      <tr><td><b>java.net</b></td><td>Networking and URL communication.</td><td><code>Socket</code>, <code>URL</code></td></tr>
+      <tr><td><b>java.sql</b></td><td>Database connectivity via JDBC.</td><td><code>Connection</code>, <code>ResultSet</code></td></tr>
+      <tr><td><b>java.time</b></td><td>Date/time API introduced in Java 8.</td><td><code>LocalDate</code>, <code>Duration</code></td></tr>
+      <tr><td><b>java.awt</b> / <b>javax.swing</b></td><td>GUI development APIs.</td><td><code>Frame</code>, <code>JButton</code></td></tr>
+    </table>
+
+    <h3>2. User-Defined Packages</h3>
+    <p>These are packages created by developers to group related classes. They follow reversed domain naming conventions (e.g., <code>com.mycompany.project.module</code>).</p>
+
+    <h2 class="section-heading">Using Packages in Java</h2>
+
+    <h3>1. Declaring a Package</h3>
+    <pre><code>package com.mycompany.app; // Package declaration
+
+public class MyClass {
+    // class content
+}</code></pre>
+
+    <h3>2. Importing Classes</h3>
+    <ul>
+      <li><b>Importing a specific class:</b>
+        <pre><code>import java.util.ArrayList;
+ArrayList&lt;String&gt; list = new ArrayList&lt;&gt;();</code></pre></li>
+      <li><b>Importing all classes (wildcard):</b>
+        <pre><code>import java.util.*;
+Scanner sc = new Scanner(System.in);</code></pre></li>
+      <li><b>Using fully qualified names:</b>
+        <pre><code>java.util.ArrayList&lt;String&gt; list = new java.util.ArrayList&lt;&gt;();</code></pre></li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <a href="https://www.nbkrist.co.in/index.php" target="_blank">
+      NBKRIST &copy; 2025 | Authored by Hari Babu Mutchakala
+    </a>
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('modeToggle');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      toggleBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    });
+
+    const container = document.querySelector('.container');
+    const reveal = () => {
+      const rect = container.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 50) container.classList.add('visible');
+    };
+    window.addEventListener('scroll', reveal);
+    window.addEventListener('load', reveal);
+  </script>
+</body>
+</html>

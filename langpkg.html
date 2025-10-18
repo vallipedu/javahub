@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NBKRIST: Java Hub - java.lang Package and its Classes</title>
+  <style>
+    :root {
+      --primary-blue: #0078ff;
+      --secondary-blue: #00bfff;
+      --header-color: #004d99;
+      --text-color: #333;
+      --background: linear-gradient(135deg, #e3f2fd, #ffffff);
+      --box-bg: rgba(255, 255, 255, 0.9);
+      --highlight-bg: rgba(240, 248, 255, 0.85);
+      --header-glass: rgba(255, 255, 255, 0.25);
+      --underline-glass: linear-gradient(90deg, rgba(0, 123, 255, 0.3), rgba(0, 180, 255, 0.2));
+    }
+
+    body.dark {
+      --primary-blue: #3399ff;
+      --secondary-blue: #005bbb;
+      --header-color: #cfe8ff;
+      --text-color: #f1f1f1;
+      --background: linear-gradient(135deg, #0d1117, #161b22);
+      --box-bg: rgba(30, 30, 30, 0.8);
+      --highlight-bg: rgba(45, 50, 60, 0.85);
+      --header-glass: rgba(255, 255, 255, 0.08);
+      --underline-glass: linear-gradient(90deg, rgba(0, 150, 255, 0.25), rgba(255, 255, 255, 0.05));
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--background);
+      color: var(--text-color);
+      line-height: 1.6;
+      transition: background 0.6s ease, color 0.6s ease;
+    }
+
+    header {
+      position: relative;
+      text-align: center;
+      padding: 25px 10px;
+      background: var(--header-glass);
+      backdrop-filter: blur(14px);
+      color: var(--header-color);
+      font-size: 2em;
+      font-weight: bold;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .toggle-btn {
+      position: absolute;
+      right: 20px;
+      top: 22px;
+      background: rgba(255, 255, 255, 0.3);
+      color: var(--header-color);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 30px;
+      padding: 6px 12px;
+      font-size: 0.85em;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.45);
+      transform: scale(1.05);
+    }
+
+    nav {
+      width: 90%;
+      margin: 0 auto 1px auto;
+      text-align: center;
+      background: linear-gradient(90deg, rgba(0, 119, 255, 0.18), rgba(0, 180, 255, 0.2));
+      border-radius: 14px;
+      padding: 10px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    nav a {
+      color: var(--header-color);
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: 500;
+      font-size: 1em;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--primary-blue);
+      text-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+      transform: scale(1.1);
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 1px auto 30px auto;
+      background: var(--box-bg);
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .container.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--header-color);
+      font-size: 2em;
+      border-bottom: 2px solid rgba(0, 120, 255, 0.2);
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+    }
+
+    h2.section-heading {
+      color: var(--primary-blue);
+      text-align: left;
+      font-size: 1.6em;
+      margin-top: 40px;
+      position: relative;
+      padding-bottom: 6px;
+    }
+
+    h2.section-heading::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 100%;
+      background: var(--underline-glass);
+      border-radius: 2px;
+    }
+
+    p {
+      text-align: justify;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    code {
+      background: rgba(0, 0, 0, 0.05);
+      padding: 3px 6px;
+      border-radius: 5px;
+      font-family: "Consolas", monospace;
+    }
+
+    pre {
+      background: #1e1e1e;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 10px;
+      overflow-x: auto;
+      line-height: 1.5;
+      font-family: "Consolas", monospace;
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .highlight-box {
+      background: var(--highlight-bg);
+      border-left: 5px solid var(--primary-blue);
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      background: linear-gradient(90deg, rgba(0, 120, 255, 0.9), rgba(0, 180, 255, 0.85));
+      color: white;
+      font-size: 0.9em;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .footer a {
+      color: #fff;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    .footer a:hover {
+      color: #e0f7fa;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    NBKRIST – Java Hub
+    <button class="toggle-btn" id="modeToggle">🌙</button>
+  </header>
+
+  <nav>
+ 
+    <a href="packages.html">Back to Home</a>
+ 
+ 
+  </nav>
+
+  <div class="container">
+    <h1>Java.lang Package and its Classes</h1>
+
+    <h2 class="section-heading">Expert View on java.lang Package</h2>
+    <p>As a software engineer working extensively with Java SE, I use the <b>java.lang</b> package most of the time to access the fundamental building blocks of the Java language. This package provides the core functionality that every Java program depends on — from basic data types to multithreading and error handling.</p>
+    <p>Since <b>java.lang</b> is the <i>default package</i> in Java, it doesn’t need to be imported explicitly. It contains system-level classes such as <code>Object</code>, <code>String</code>, <code>Math</code>, <code>Thread</code>, and <code>System</code>, which are automatically available in every Java program. Understanding and mastering the classes within this package is essential for writing efficient, reliable, and high-performing applications in Java.</p>
+    <p>From my experience, I can confidently say that the <b>java.lang</b> package forms the core of Java’s identity — providing abstraction, computation, exception handling, and type management features that are critical for any real-world Java project.</p>
+
+    <h2 class="section-heading">Overview</h2>
+    <p>The <code>java.lang</code> package is automatically imported into every Java program. It provides classes that are fundamental to Java programming and essential for language features such as object manipulation, type conversion, multithreading, and mathematical operations.</p>
+
+    <h2 class="section-heading">Major Classes in java.lang</h2>
+    <ul>
+      <li><b>Object:</b> The superclass of all classes in Java. It provides methods like <code>equals()</code>, <code>toString()</code>, <code>hashCode()</code>, and <code>clone()</code>.</li>
+      <li><b>Class:</b> Represents the runtime class of an object. It is used in reflection to inspect methods and fields of a class.</li>
+      <li><b>Math:</b> Provides mathematical functions such as <code>sqrt()</code>, <code>pow()</code>, <code>abs()</code>, and constants like <code>PI</code>.</li>
+      <li><b>System:</b> Provides access to system-level resources like input/output streams and environment variables.</li>
+      <li><b>Thread:</b> Represents a thread of execution in Java and provides methods for managing concurrent tasks.</li>
+      <li><b>Throwable, Exception, and Error:</b> Base classes for Java’s exception handling mechanism.</li>
+    </ul>
+
+    <h2 class="section-heading">Enumeration Class</h2>
+    <p>The <code>Enum</code> class in <code>java.lang</code> provides support for defining enumerated constants — a fixed set of named values. Enumerations help make the code more readable and type-safe.</p>
+    <pre><code>enum Direction { NORTH, SOUTH, EAST, WEST }
+
+public class TestEnum {
+    public static void main(String[] args) {
+        Direction d = Direction.NORTH;
+        System.out.println("Selected Direction: " + d);
+    }
+}</code></pre>
+
+    <h2 class="section-heading">Wrapper Classes and Autoboxing</h2>
+    <p>Wrapper classes provide a way to use primitive data types (int, float, char, etc.) as objects. They are essential when working with frameworks like Collections or Generics, which operate only on objects.</p>
+    <ul>
+      <li><b>Examples:</b> <code>Integer</code>, <code>Double</code>, <code>Character</code>, <code>Boolean</code></li>
+      <li><b>Autoboxing:</b> Automatic conversion of a primitive type to its corresponding wrapper class.</li>
+      <li><b>Unboxing:</b> Reverse of autoboxing — converting a wrapper object back to a primitive.</li>
+    </ul>
+    <pre><code>public class AutoBoxingDemo {
+    public static void main(String[] args) {
+        Integer num = 10; // Autoboxing
+        int val = num;    // Unboxing
+        System.out.println("Value: " + val);
+    }
+}</code></pre>
+
+    <h2 class="section-heading">Math Class Example</h2>
+    <pre><code>public class MathExample {
+    public static void main(String[] args) {
+        System.out.println("Square Root of 16: " + Math.sqrt(16));
+        System.out.println("Power 2^5: " + Math.pow(2, 5));
+        System.out.println("Absolute of -10: " + Math.abs(-10));
+    }
+}</code></pre>
+
+  </div>
+
+  <div class="footer">
+    <a href="https://www.nbkrist.co.in/index.php" target="_blank">
+      NBKRIST &copy; 2025 | Authored by Hari Babu Mutchakala
+    </a>
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('modeToggle');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      toggleBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    });
+
+    const container = document.querySelector('.container');
+    const reveal = () => {
+      const rect = container.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 50) container.classList.add('visible');
+    };
+    window.addEventListener('scroll', reveal);
+    window.addEventListener('load', reveal);
+  </script>
+</body>
+</html>

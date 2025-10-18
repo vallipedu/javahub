@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>NBKRIST – Java Hub | Java Interview Q&A</title>
+<style>
+:root{
+  --primary:#0078ff;
+  --accent:#00bfff;
+  --header:#004d99;
+  --glass:rgba(255,255,255,0.92);
+  --text:#222;
+  --light-bg:rgba(245,248,255,0.9);
+  --bg-gradient:linear-gradient(135deg,#f5faff,#ffffff);
+}
+body.dark{
+  --primary:#66b3ff;
+  --accent:#3399ff;
+  --header:#cce5ff;
+  --glass:rgba(20,24,30,0.88);
+  --text:#eef6ff;
+  --light-bg:rgba(35,40,55,0.86);
+  --bg-gradient:linear-gradient(135deg,#071028,#16202b);
+}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+  background:var(--bg-gradient);
+  color:var(--text);
+  line-height:1.6;
+  transition:background .35s ease,color .35s ease;
+}
+
+/* Header + toggle */
+header{
+  position:relative;
+  text-align:center;
+  padding:22px 12px;
+  background:var(--glass);
+  backdrop-filter:blur(8px);
+  box-shadow:0 4px 18px rgba(0,0,0,.06);
+  color:var(--header);
+  font-weight:700;
+  font-size:1.2rem;
+}
+.theme-toggle{
+  position:absolute;
+  right:16px;
+  top:14px;
+  background:var(--light-bg);
+  border:0;
+  color:var(--primary);
+  padding:6px 10px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+}
+.theme-toggle:hover{ transform:translateY(-1px); }
+
+/* container */
+.container{
+  max-width:960px;
+  margin:26px auto 48px;
+  background:var(--glass);
+  border-radius:14px;
+  padding:26px;
+  box-shadow:0 8px 30px rgba(0,0,0,.07);
+}
+
+/* back link */
+.back-link{ text-align:right; margin-bottom:14px; }
+.back-link a{
+  display:inline-block;
+  text-decoration:none;
+  color:var(--primary);
+  border:1px solid var(--primary);
+  padding:7px 12px;
+  border-radius:8px;
+  font-weight:600;
+}
+.back-link a:hover{ background:var(--primary); color:#fff }
+
+/* headings */
+h1{ text-align:center; margin:0 0 14px; color:var(--header); border-bottom:2px solid rgba(0,120,255,.12); padding-bottom:12px; }
+h2{ color:var(--primary); margin:20px 0 8px; }
+
+/* subsection with single blue covering line */
+.subsection{
+  position:relative;
+  background:rgba(240,248,255,0.45);
+  margin:20px 0;
+  padding:16px 18px 16px 28px;
+  border-radius:10px;
+  overflow:hidden;
+  transition:background .2s ease;
+}
+body.dark .subsection{ background:rgba(35,45,65,0.6); }
+.subsection::before{
+  content:"";
+  position:absolute;
+  left:0; top:8px; bottom:8px;
+  width:4px;
+  background:linear-gradient(180deg,#0099ff,#0066cc);
+  border-radius:3px;
+}
+.subsection::after{
+  content:"";
+  position:absolute;
+  left:0; top:0;
+  width:16px; height:6px;
+  background:#0099ff;
+  border-radius:0 6px 6px 0;
+  box-shadow:0 calc(100% - 6px) 0 0 #0099ff;
+}
+.subsection:hover{ background:rgba(220,240,255,0.75); }
+body.dark .subsection:hover{ background:rgba(55,75,100,0.6); }
+
+/* code block that fits content + popup inside */
+.code-block{
+  position:relative;
+  display:inline-block; /* fits content width */
+  max-width:100%;
+  background:var(--light-bg);
+  border-left:3px solid var(--primary);
+  padding:8px 12px;
+  border-radius:8px;
+  font-family:Consolas,monospace;
+  font-size:.9rem;
+  line-height:1.35;
+  white-space:pre-wrap;
+  margin:10px 0;
+  transition:transform .12s ease,background .12s ease;
+  vertical-align:top;
+}
+.code-block:hover{ transform:translateY(-2px); background:rgba(230,243,255,0.98); }
+
+/* popup — INSIDE .code-block for reliable hover */
+.code-block .popup{
+  position:absolute;
+  left:calc(100% + 12px);
+  top:0;
+  min-width:260px;
+  max-width:340px;
+  background:rgba(255,255,255,0.98);
+  color:#000;
+  border-radius:10px;
+  padding:10px 12px;
+  box-shadow:0 8px 26px rgba(0,0,0,.12);
+  opacity:0;
+  transform:translateX(8px) scale(.99);
+  transition:opacity .18s ease,transform .18s ease;
+  pointer-events:none;
+  z-index:1200;
+  font-size:.92rem;
+  line-height:1.3;
+  white-space:pre-wrap;
+}
+body.dark .code-block .popup{ background:rgba(20,24,30,0.96); color:#eaf6ff; box-shadow:0 8px 30px rgba(0,0,0,.6); }
+
+/* show on hover of parent */
+.code-block:hover .popup{
+  opacity:1;
+  transform:translateX(0) scale(1);
+  pointer-events:auto;
+}
+
+/* small QA items */
+.qa-item{
+  background:rgba(255,255,255,0.9);
+  border-left:4px solid var(--primary);
+  margin:12px 0;
+  padding:12px 14px;
+  border-radius:8px;
+}
+body.dark .qa-item{ background:rgba(40,50,70,0.9); color:var(--text); }
+.qa-item:hover{ background:rgba(235,245,255,0.95); }
+
+/* answer visible on hover */
+.qa-item .answer{ display:none; margin-top:8px; font-size:.95rem; }
+.qa-item:hover .answer{ display:block; }
+
+/* real-world usage note */
+.realuse{ display:block; margin-top:8px; font-style:italic; color:#0d47a1; font-size:.92rem; }
+body.dark .realuse{ color:#9ed7ff; }
+
+/* summary */
+.key-takeaways{
+  margin-top:18px;
+  background:rgba(230,245,255,0.9);
+  border-left:4px solid var(--primary);
+  padding:14px;
+  border-radius:8px;
+}
+body.dark .key-takeaways{ background:rgba(35,50,70,0.7); color:var(--text); }
+
+/* footer */
+footer{
+  margin-top:18px;
+  text-align:center;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  color:#fff;
+  padding:12px;
+  border-radius:10px;
+  width:92%;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* responsive adjustments */
+@media(max-width:880px){
+  .code-block .popup{ left:0; top:calc(100% + 10px); transform:translateY(8px) scale(.99); }
+  .code-block:hover .popup{ transform:translateY(0) scale(1); }
+}
+</style>
+</head>
+<body>
+<header>
+  NBKRIST – Java Hub
+  <button id="themeToggle" class="theme-toggle">🌙 Dark</button>
+</header>
+
+<div class="container">
+  <div class="back-link"><a href="packages.html">← Back to Packages</a></div>
+
+  <h1>Java Packages & Core Interview Q&A</h1>
+
+  <!-- Expert view -->
+  <div class="subsection">
+    <h2>Expert View</h2>
+    <p>As a software engineer, I thought I would share some questions that will be useful for students who plan to face industry interviews as freshers. From my experience, interviewers commonly ask these fundamental questions. If students are confident with these topics, they will handle many entry-level technical rounds more comfortably. These questions test core understanding and practical thinking — both important in real interviews.</p>
+  </div>
+
+  <!-- Examples with working hover popups -->
+  <div class="subsection">
+    <h2>Example: Packages & Import (hover the code to see output)</h2>
+
+    <div class="code-block" title="Hover to view output">
+package nbkrist.demo;
+
+public class Greeting {
+  public void sayHello() {
+    System.out.println("Hello NBKRIST Students!");
+  }
+}
+
+// In another file:
+import nbkrist.demo.Greeting;
+public class Test {
+  public static void main(String[] args) {
+    new Greeting().sayHello();
+  }
+}
+      <div class="popup"><strong>Output:</strong>\nHello NBKRIST Students!</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2>Example: java.lang – String & Math</h2>
+
+    <div class="code-block" title="Hover to view output">
+public class LangDemo {
+  public static void main(String[] args) {
+    String s = "JavaFX";
+    System.out.println(s.toLowerCase());
+    System.out.println("Square root of 25: " + Math.sqrt(25));
+  }
+}
+      <div class="popup"><strong>Output:</strong>\njavafx\nSquare root of 25: 5.0</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2>Example: java.util – Random & Formatter</h2>
+
+    <div class="code-block" title="Hover to view output">
+import java.util.*;
+public class UtilDemo {
+  public static void main(String[] args) {
+    Random rand = new Random();
+    System.out.println("Random number: " + rand.nextInt(10));
+    Formatter fmt = new Formatter();
+    fmt.format("Value of PI: %.2f", Math.PI);
+    System.out.println(fmt);
+  }
+}
+      <div class="popup"><strong>Output (example):</strong>\nRandom number: 7\nValue of PI: 3.14</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2>Example: java.time – Date & Time</h2>
+
+    <div class="code-block" title="Hover to view output">
+import java.time.*;
+public class TimeDemo {
+  public static void main(String[] args) {
+    LocalDate today = LocalDate.now();
+    LocalTime now = LocalTime.now();
+    System.out.println("Date: " + today);
+    System.out.println("Time: " + now);
+  }
+}
+      <div class="popup"><strong>Output (example):</strong>\nDate: 2025-10-18\nTime: 14:42:25.104</div>
+    </div>
+  </div>
+
+  <!-- Full 20 Q&A -->
+  <div class="subsection">
+    <h2>Interview Questions</h2>
+
+    <div class="qa-item">
+      <strong>1. What is a package in Java?</strong>
+      <div class="answer">A package groups related classes and interfaces to organize code and avoid naming conflicts.
+        <span class="realuse">Used to structure enterprise projects into logical modules.</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>2. How do you import a class from another package?</strong>
+      <div class="answer">Use <code>import packageName.ClassName;</code> (or wildcard <code>import packageName.*;</code>).
+        <span class="realuse">Used to reuse utilities across different modules in a project.</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>3. Which package is imported automatically in every Java program?</strong>
+      <div class="answer">The <b>java.lang</b> package is imported by default.
+        <span class="realuse">Contains core classes like String, Math, and Object used everywhere.</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>4. How can you use a class without importing it?</strong>
+      <div class="answer">Use its fully qualified name, e.g. <code>java.util.Random</code>.
+        <span class="realuse">Helps avoid name conflicts when two classes share the same simple name.</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>5. What does the String class represent?</strong>
+      <div class="answer">A sequence of characters with many utility methods for manipulation.
+        <span class="realuse">Used for user input, messages, and data interchange formats (JSON/XML).</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>6. Why are Strings immutable?</strong>
+      <div class="answer">Immutability provides thread-safety, caching, and secure usage (e.g., as keys).
+        <span class="realuse">Important in multi-threaded servers and as keys in HashMap.</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>7. What does the Math class provide?</strong>
+      <div class="answer">Static mathematical utilities such as sqrt(), pow(), abs(), round().
+        <span class="realuse">Used for calculations in finance, physics, and statistics.</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>8. What is the Object class?</strong>
+      <div class="answer">Root of the class hierarchy; defines methods like equals(), hashCode(), toString().
+        <span class="realuse">Used for polymorphism and general-purpose APIs.</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>9. What are Wrapper Classes?</strong>
+      <div class="answer">Object representations of primitives (Integer, Double, Character, etc.).
+        <span class="realuse">Required when primitives must be used in Collections (which accept objects).</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>10. What is Autoboxing and Unboxing?</strong>
+      <div class="answer">Autoboxing converts primitives to wrappers automatically; unboxing converts back.
+        <span class="realuse">Simplifies code when using primitives with collections and APIs.</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>11. What is java.util used for?</strong>
+      <div class="answer">Provides collections, date/time utilities, random generation, and helper classes.
+        <span class="realuse">Used across virtually all applications for data handling.</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>12. What does Date represent?</strong>
+      <div class="answer">An instant in time (legacy class, millisecond precision).
+        <span class="realuse">Used in older APIs for timestamps and logging.</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>13. Why prefer java.time over Date?</strong>
+      <div class="answer">java.time offers immutable, thread-safe, clearer APIs (LocalDate, Instant).
+        <span class="realuse">Used in modern scheduling, financial systems and distributed apps.</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>14. What is the Formatter class for?</strong>
+      <div class="answer">Formatting strings, numbers, and dates using specifiers similar to printf.
+        <span class="realuse">Useful in report generation and formatted logs.</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>15. What does Random do?</strong>
+      <div class="answer">Generates pseudo-random numbers, optionally with a seed for reproducibility.
+        <span class="realuse">Used in tests, games, and randomized sampling.</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>16. What is Scanner used for?</strong>
+      <div class="answer">Reading input from console, files or streams (part of java.util).
+        <span class="realuse">Used for simple CLI tools and student programs.</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>17. What is java.util.List?</strong>
+      <div class="answer">An ordered collection interface allowing duplicates (e.g., ArrayList).
+        <span class="realuse">Used for ordered datasets like UI lists and result sets.</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>18. What is java.util.Map?</strong>
+      <div class="answer">A key-value mapping interface (e.g., HashMap, TreeMap).
+        <span class="realuse">Used for lookups, caches, and configuration data.</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>19. What are TemporalAdjusters?</strong>
+      <div class="answer">Helpers in java.time to compute relative dates (next Monday, first day).
+        <span class="realuse">Used for scheduling and payroll date calculations.</span>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <strong>20. How do imports help in large projects?</strong>
+      <div class="answer">Imports allow reusing classes across packages and keep source code readable.
+        <span class="realuse">Essential to maintain modular, team-developed codebases.</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Summary -->
+  <div class="key-takeaways">
+    <h2>Summary</h2>
+    <ul style="margin:8px 0 0 18px">
+      <li>Packages organize code and prevent naming conflicts in large systems.</li>
+      <li><b>java.lang</b> provides core language essentials (String, Math, Object, wrappers).</li>
+      <li><b>java.util</b> and <b>java.time</b> are essential for data handling and robust time management.</li>
+      <li>Practice these basics and the example snippets; interviewers often test both concept and practical usage.</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>NBKRIST © 2025 | Authored by Hari Babu Mutchakala</footer>
+
+<script>
+(function(){
+  // theme toggle
+  const btn = document.getElementById('themeToggle');
+  function updateBtnText(){ btn.textContent = document.body.classList.contains('dark') ? '☀️ Light' : '🌙 Dark'; }
+  btn.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    updateBtnText();
+    // optional: persist choice in localStorage
+    try { localStorage.setItem('nbkrist-theme', document.body.classList.contains('dark') ? 'dark' : 'light'); } catch(e){}
+  });
+  // restore theme
+  try{
+    const saved = localStorage.getItem('nbkrist-theme');
+    if(saved === 'dark') { document.body.classList.add('dark'); }
+  }catch(e){}
+  updateBtnText();
+})();
+</script>
+</body>
+</html>
