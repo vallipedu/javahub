@@ -1,368 +1,533 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NBKRIST - Java Hub | Inheritance in Java</title>
-<style>
-:root {
-  --primary:#0078ff;
-  --accent:#00bfff;
-  --header:#004d99;
-  --glass:rgba(255,255,255,0.9);
-  --text:#222;
-  --light-bg:rgba(245,248,255,0.85);
-  --bg-gradient:linear-gradient(135deg,#f5faff,#ffffff);
-}
-body.dark {
-  --primary:#66b3ff;
-  --accent:#3399ff;
-  --header:#cce5ff;
-  --glass:rgba(25,25,25,0.9);
-  --text:#f0f0f0;
-  --light-bg:rgba(40,40,40,0.85);
-  --bg-gradient:linear-gradient(135deg,#0f172a,#1e293b);
-}
-body {
-  margin:0;
-  font-family:"Segoe UI",Tahoma,Verdana,sans-serif;
-  background:var(--bg-gradient);
-  color:var(--text);
-  transition:background .4s,color .4s;
-  line-height:1.6;
-}
-header {
-  position:relative;
-  text-align:center;
-  padding:25px 10px 10px;
-  background:var(--glass);
-  backdrop-filter:blur(12px);
-  font-weight:bold;
-  font-size:1.8em;
-  color:var(--header);
-  box-shadow:0 4px 20px rgba(0,0,0,0.08);
-}
-.theme-toggle {
-  position:absolute;
-  right:20px;
-  top:20px;
-  background:var(--light-bg);
-  border:none;
-  color:var(--primary);
-  font-weight:600;
-  border-radius:8px;
-  padding:6px 12px;
-  cursor:pointer;
-  transition:0.3s;
-}
-.theme-toggle:hover{background:var(--primary);color:#fff}
-.navbar {
-  display:flex;
-  justify-content:center;
-  gap:30px;
-  padding:12px 10px;
-  background:rgba(255,255,255,0.3);
-  backdrop-filter:blur(10px);
-  border-radius:10px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.1);
-  width:90%;
-  margin:8px auto 20px;
-}
-.navbar a {
-  text-decoration:none;
-  color:var(--primary);
-  font-weight:600;
-  padding:5px 10px;
-  position:relative;
-}
-.navbar a::after {
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:0;
-  width:0%;
-  height:2px;
-  background:var(--primary);
-  transition:width 0.3s ease;
-}
-.navbar a:hover {color:var(--accent);}
-.navbar a:hover::after {width:100%;}
-.container {
-  max-width:950px;
-  margin:20px auto 40px;
-  background:var(--glass);
-  border-radius:16px;
-  padding:30px;
-  box-shadow:0 6px 20px rgba(0,0,0,0.08);
-}
-.subsection {
-  position:relative;
-  background:rgba(240,248,255,0.45);
-  margin:25px 0;
-  padding:18px 22px 18px 30px;
-  border-radius:10px;
-}
-.subsection::before {
-  content:"";
-  position:absolute;
-  left:0;
-  top:8px;
-  bottom:8px;
-  width:4px;
-  background:linear-gradient(180deg,#0099ff,#0066cc);
-  border-radius:3px;
-}
-h1{text-align:center;color:var(--header);}
-h2{color:var(--primary);}
-.code-block {
-  position:relative;
-  background:var(--light-bg);
-  border-left:3px solid var(--primary);
-  padding:10px 12px;
-  border-radius:8px;
-  font-family:Consolas,monospace;
-  font-size:0.9em;
-  white-space:pre-wrap;
-  margin:10px 0;
-}
-.code-block .popup {
-  position:absolute;
-  left:calc(100% + 10px);
-  top:0;
-  background:rgba(255,255,255,0.97);
-  color:#000;
-  border-radius:10px;
-  padding:8px 12px;
-  width:260px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.15);
-  opacity:0;
-  transform:translateX(10px);
-  transition:all 0.25s ease;
-  pointer-events:none;
-  font-size:0.9em;
-}
-.code-block:hover .popup {opacity:1;transform:translateX(0);}
-.tip {
-  background:rgba(224,247,255,0.7);
-  border-left:4px solid var(--accent);
-  padding:10px 14px;
-  border-radius:8px;
-  font-style:italic;
-  margin-top:10px;
-}
-.summary {
-  background:rgba(224,247,255,0.7);
-  border-left:5px solid var(--primary);
-  padding:15px 20px;
-  border-radius:10px;
-  margin-top:30px;
-  font-style:italic;
-}
-footer {
-  text-align:center;
-  background:linear-gradient(90deg,var(--primary),var(--accent));
-  color:#fff;
-  padding:15px;
-  border-radius:10px;
-  width:90%;
-  margin:40px auto 10px;
-  font-size:0.9em;
-}
-@media(max-width:880px){
-  .navbar{flex-direction:column;width:95%;}
-  .code-block .popup{left:0;top:calc(100% + 10px);width:95%;}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBKRIST - Java Hub | Inheritance in Java</title>
+  <style>
+    :root {
+      --primary: #0078ff;
+      --accent: #00bfff;
+      --header: #004d99;
+      --glass: rgba(255, 255, 255, 0.9);
+      --text: #222;
+      --light-bg: rgba(245, 248, 255, 0.85);
+      --bg-gradient: linear-gradient(135deg, #f5faff, #ffffff);
+    }
+
+    body.dark {
+      --primary: #66b3ff;
+      --accent: #3399ff;
+      --header: #cce5ff;
+      --glass: rgba(25, 25, 25, 0.9);
+      --text: #f0f0f0;
+      --light-bg: rgba(40, 40, 40, 0.85);
+      --bg-gradient: linear-gradient(135deg, #0f172a, #1e293b);
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text);
+      transition: background .4s, color .4s;
+      line-height: 1.6;
+    }
+
+    header {
+      position: relative;
+      text-align: center;
+      padding: 25px 10px 10px;
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      font-weight: bold;
+      font-size: 1.8em;
+      color: var(--header);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .theme-toggle {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      background: var(--light-bg);
+      border: none;
+      color: var(--primary);
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .theme-toggle:hover {
+      background: var(--primary);
+      color: #fff
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 12px 10px;
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      margin: 8px auto 20px;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 600;
+      padding: 5px 10px;
+      position: relative;
+    }
+
+    .navbar a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .navbar a:hover {
+      color: var(--accent);
+    }
+
+    .navbar a:hover::after {
+      width: 100%;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 2px auto 20px;
+      background: var(--glass);
+      border-radius: 16px;
+      padding: 2px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .subsection {
+      position: relative;
+      background: rgba(240, 248, 255, 0.45);
+      margin: 20px 0;
+      padding: 18px 22px 18px 30px;
+      border-radius: 10px;
+    }
+
+    .subsection::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 4px;
+      background: linear-gradient(180deg, #0099ff, #0066cc);
+      border-radius: 3px;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--header);
+    }
+
+    h2 {
+      color: var(--primary);
+    }
+
+    .code-block {
+      position: relative;
+      background: var(--light-bg);
+      border-left: 3px solid var(--primary);
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-family: Consolas, monospace;
+      font-size: 0.9em;
+      white-space: pre-wrap;
+      margin: 10px 0;
+      overflow: visible;
+    }
+
+    /* Output popup (RIGHT SIDE) */
+    .code-block .popup {
+      position: absolute;
+      right: calc(100% + 10px);
+      top: 0;
+      background: rgba(255, 255, 255, 0.97);
+      color: #000;
+      border-radius: 10px;
+      padding: 8px 12px;
+      width: 260px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.25s ease;
+      pointer-events: none;
+      font-size: 0.9em;
+    }
+
+    .code-block:hover .popup {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Image popup (LEFT SIDE) */
+    .code-block .popup-img {
+      position: absolute;
+      top: 10px;
+      left: calc(100% + 20px);
+      width: 220px;
+      border-radius: 10px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      display: none;
+      background: #fff;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .code-block:hover .popup-img {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tip {
+      background: rgba(224, 247, 255, 0.7);
+      border-left: 4px solid var(--accent);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-style: italic;
+      margin-top: 10px;
+    }
+
+    /* Popup image 
+    .code-block .popup-img {
+      position: absolute;
+      top: 10px;
+      left: calc(100% + 20px);
+      width: 220px;
+      border-radius: 10px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      display: none;
+      background: #fff;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .code-block:hover .popup-img {
+      display: block;
+      animation: slideIn 0.3s ease forwards;
+    }
+*/
+    .summary {
+      background: rgba(224, 247, 255, 0.7);
+      border-left: 5px solid var(--primary);
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin-top: 30px;
+      font-style: italic;
+    }
+
+    footer {
+      text-align: center;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      width: 90%;
+      margin: 40px auto 10px;
+      font-size: 0.9em;
+    }
+
+    @media(max-width:880px) {
+      .navbar {
+        flex-direction: column;
+        width: 95%;
+      }
+
+      .code-block .popup {
+        left: 0;
+        top: calc(100% + 10px);
+        width: 95%;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<header>
-  NBKRIST – Java Hub
-  <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
-</header>
+  <header>
+    NBKRIST – Java Hub
+    <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+  </header>
 
-<nav class="navbar">
-  <a href="index.html">🏠 Home</a>
-  <a href="inheritance2.html">💡 Inheritance - Beyond Basics</a>
+  <nav class="navbar">
+    <a href="index.html">🏠 Home</a>
+    <a href="inheritance2.html">💡 Inheritance - Beyond Basics</a>
     <a href="inheritance3.html">💡 Inheritance - insights</a>
 
-  <a href="oopsrealtime.html">🧩 Q&A - Assignment</a>
-</nav>
+    <a href="oopsrealtime.html">🧩 Q&A - Assignment</a>
+  </nav>
 
-<div class="container">
-  <h1>Inheritance in Java </h1>
+  <div class="container">
+    <h1>Inheritance in Java</h1>
 
-  <div class="subsection">
-    <h2>Expert View</h2>
-    <p>According to my experience, <strong>inheritance</strong> is not just a concept — it's the <em>blueprint of design thinking</em> in Object-Oriented Programming.  
-    Think of building a modern manufacturing system: you don’t rebuild every vehicle from scratch — you start with a <strong>Vehicle</strong> base class and then specialize into <strong>Car</strong>, <strong>Bus</strong>, or <strong>Truck</strong>.  
-    This principle of <strong>specialization and generalization</strong> forms the foundation of scalable software and real-world factories alike.  
-    <br><br>
-    Inheritance drives <strong>reusability, consistency,</strong> and <strong>runtime polymorphism</strong> — the three pillars of robust design.  
-    My advice to every student: *Experiment, visualize, and build mini hierarchies in Java.* Watch how a simple class structure can model complex manufacturing lines at NBKRIST’s Innovation Labs we have in our college. 🚀</p>
-  </div>
+    <div class="subsection">
+      <h2>Expert View</h2>
+      <p>According to my experience, <strong>inheritance</strong> is not just a concept — it's the <em>blueprint of
+          design thinking</em> in Object-Oriented Programming.
+        Think of building a modern manufacturing system: you don’t rebuild every vehicle from scratch — you start with a
+        <strong>Vehicle</strong> base class and then specialize into <strong>Car</strong>, <strong>Bus</strong>, or
+        <strong>Truck</strong>.
+        This principle of <strong>specialization and generalization</strong> forms the foundation of scalable software
+        and real-world factories alike.
+        <br><br>
+        Inheritance drives <strong>reusability, consistency,</strong> and <strong>runtime polymorphism</strong> — the
+        three pillars of robust design.
+        My advice to every student: *Experiment, visualize, and build mini hierarchies in Java.* Watch how a simple
+        class structure can model complex manufacturing lines at NBKRIST’s Innovation Labs we have in our college. 🚀
+      </p>
+      <img src="inhedesign.png" alt="Large Image"
+        style="width:380px; height:250px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.15); margin:10px; transition:transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.25)';"
+        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.15)';">
+
+    </div>
     <div class="tip">💡To illustrate the concepts of Inheritance as outlined in your syllabus, I have selected the
       vehicle manufacturing domain. This domain provides clear and relatable entities that effectively map to each
       concept. Having worked as a Software Engineer with international clients such as Ford and General Motors, I find
       this domain both familiar and well-suited for conveying these ideas with practical clarity.!</div>
-  <div class="subsection">
-    <h2>1. Introduction</h2>
-    <p>Inheritance allows a new class to derive properties and behavior from an existing class. It’s like how every new vehicle model inherits standard safety and design features from its parent blueprint in an automotive factory.</p>
-    <div class="code-block">
-class Vehicle {
-  void start() { System.out.println("NBKRIST Vehicle starting..."); }
-}
-class Car extends Vehicle {
-  void drive() { System.out.println("Car driving smoothly..."); }
-}
-public class Main {
-  public static void main(String[] args) {
-    Car c = new Car();
-    c.start();
-    c.drive();
-  }
-}
-      <div class="popup"><b>Output:</b><br>NBKRIST Vehicle starting...<br>Car driving smoothly...</div>
+
+    <div class="subsection">
+      <h2>1. Introduction</h2>
+      <p>Inheritance allows a new class to derive properties and behavior from an existing class. It’s like how every
+        new vehicle model inherits standard safety and design features from its parent blueprint in an automotive
+        factory.</p>
+      <div class="code-block">
+        class Vehicle {
+        void start() { System.out.println("NBKRIST Vehicle starting..."); }
+        }
+        class Car extends Vehicle {
+        void drive() { System.out.println("Car driving smoothly..."); }
+        }
+        public class Main {
+        public static void main(String[] args) {
+        Car c = new Car();
+        c.start();
+        c.drive();
+        }
+        }
+
+        <!-- Image popup (left side) -->
+        <img src="mycar.png" alt="Demo Image" class="popup-img">
+        <div class="popup"><b>Output:</b><br>NBKRIST Vehicle starting...<br>Car driving smoothly...</div>
+
+
+      </div>
+      <div>
+
+      </div>
+      <div class="tip">💡 <strong>Pro Tip:</strong> Always design your base class to be as reusable as possible — just
+        like a universal vehicle chassis in manufacturing!</div>
     </div>
-    <div class="tip">💡 <strong>Pro Tip:</strong> Always design your base class to be as reusable as possible — just like a universal vehicle chassis in manufacturing!</div>
-  </div>
 
-  <div class="subsection">
-    <h2>2. Process of Inheritance</h2>
-    <p>In Java, inheritance is implemented using the <code>extends</code> keyword. The subclass (child) inherits accessible members from the superclass (parent), forming a “is-a” relationship.</p>
-    <div class="code-block">
-class Vehicle {
-  int wheels = 4;
-}
-class Bus extends Vehicle {
-  void showInfo() {
-    System.out.println("NBKRIST Bus with " + wheels + " wheels.");
-  }
-}
-public class FactoryDemo {
-  public static void main(String[] args) {
-    Bus b = new Bus();
-    b.showInfo();
-  }
-}
-      <div class="popup"><b>Output:</b><br>NBKRIST Bus with 4 wheels.</div>
+    <div class="subsection">
+      <h2>2. Process of Inheritance</h2>
+      <p>In Java, inheritance is implemented using the <code>extends</code> keyword. The subclass (child) inherits
+        accessible members from the superclass (parent), forming a “is-a” relationship.</p>
+      <div class="code-block">
+        class Vehicle {
+        int wheels = 4;
+        }
+        class Bus extends Vehicle {
+        void showInfo() {
+        System.out.println("NBKRIST Bus with " + wheels + " wheels.");
+        }
+        }
+        public class FactoryDemo {
+        public static void main(String[] args) {
+        Bus b = new Bus();
+        b.showInfo();
+        }
+        }
+        <!-- Image popup (left side) -->
+        <img src="mycar2.png" alt="Demo Image" class="popup-img">
+        <div class="popup"><b>Output:</b><br>NBKRIST Bus with 4 wheels.</div>
+      </div>
+      <div class="tip">🔧 <strong>Pro Tip:</strong> Before extending, ensure your parent class has generic properties
+        that make sense to all subclasses.</div>
     </div>
-    <div class="tip">🔧 <strong>Pro Tip:</strong> Before extending, ensure your parent class has generic properties that make sense to all subclasses.</div>
-  </div>
 
-  <div class="subsection">
-    <h2>3. Types of Inheritance</h2>
-    <ul>
-      <li><b>Single:</b> Car extends Vehicle.</li>
-      <li><b>Multilevel:</b> ElectricCar extends Car extends Vehicle.</li>
-      <li><b>Hierarchical:</b> Bus, Car, and Truck all extend Vehicle.</li>
-      <li><b>Multiple:</b> Achieved through Interfaces in Java.</li>
-    </ul>
-    <div class="tip">🚘 <strong>Pro Tip:</strong> Visualize your hierarchy as an organization chart — it helps in designing better class structures.</div>
-  </div>
+    <div class="subsection">
+      <h2>3. Types of Inheritance</h2>
+      <ul>
+        <li><b>Single:👉 A subclass inherits properties and behaviors from a single parent class.</b> Car extends
+          Vehicle. </li>
+        <img src="singleInhe.png" alt="Large Image"
+          style="width:380px; height:250px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.15); margin:10px; transition:transform 0.3s ease, box-shadow 0.3s ease;"
+          onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.25)';"
+          onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.15)';">
+        <li><b>Multilevel:👉 A class is derived from another derived class, forming a multi-layered chain.</b>
+          ElectricCar extends Car extends Vehicle.</li>
+        <img src="hierarimg.png" alt="Large Image"
+          style="width:380px; height:250px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.15); margin:10px; transition:transform 0.3s ease, box-shadow 0.3s ease;"
+          onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.25)';"
+          onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.15)';">
 
-  <div class="subsection">
-    <h2>4. Universal Superclass – Object Class</h2>
-    <p>Every class in Java implicitly inherits from the <code>Object</code> class — much like every machine in a factory follows universal operational protocols. This class provides methods such as <code>equals()</code>, <code>toString()</code>, and <code>hashCode()</code>.</p>
-    <div class="code-block">
-class Vehicle {
-  String model;
-  Vehicle(String model) { this.model = model; }
-  public String toString() { return "NBKRIST Vehicle Model: " + model; }
-}
-public class ObjectDemo {
-  public static void main(String[] args) {
-    Vehicle v = new Vehicle("Bus-XL");
-    System.out.println(v);
-  }
-}
-      <div class="popup"><b>Output:</b><br>NBKRIST Vehicle Model: Bus-XL</div>
+        <li><b>Hierarchical:👉 Multiple subclasses inherit from the same parent class, sharing its common features.</b>
+          Bus, Car, and Truck all extend Vehicle.</li>
+        <!-- Medium Image -->
+        <img src="hierarinh.png" alt="Large Image"
+          style="width:380px; height:250px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.15); margin:10px; transition:transform 0.3s ease, box-shadow 0.3s ease;"
+          onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.25)';"
+          onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.15)';">
+
+        <li><b>Multiple:A class implements multiple interfaces to inherit behavior from multiple sources.</b> Achieved
+          through Interfaces in Java. class SmartCar implements GPS, Engine</li>
+        <img src="javamultiple.png" alt="Large Image"
+          style="width:380px; height:250px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.15); margin:10px; transition:transform 0.3s ease, box-shadow 0.3s ease;"
+          onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.25)';"
+          onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.15)';">
+      </ul>
+      <div class="tip">🚘 <strong>Pro Tip:</strong> Visualize your hierarchy as an organization chart — it helps in
+        designing better class structures.</div>
     </div>
-    <div class="tip">🔍 <strong>Pro Tip:</strong> Override <code>toString()</code> to give meaningful representations to your objects — especially in debugging and logging.</div>
-  </div>
 
-  <div class="subsection">
-    <h2>5. Multilevel Inheritance</h2>
-    <p>Multilevel inheritance represents a layered evolution — for instance, a <strong>Bus</strong> inherits from <strong>Vehicle</strong>, and a <strong>LuxuryBus</strong> inherits from <strong>Bus</strong>.</p>
-    <div class="code-block">
-class Vehicle { void start(){ System.out.println("NBKRIST Vehicle starting..."); } }
-class Bus extends Vehicle { void move(){ System.out.println("Bus moving..."); } }
-class LuxuryBus extends Bus { void airCondition(){ System.out.println("AC running..."); } }
-public class MultiLevelDemo {
-  public static void main(String[] args) {
-    LuxuryBus lb = new LuxuryBus();
-    lb.start(); lb.move(); lb.airCondition();
-  }
-}
-      <div class="popup"><b>Output:</b><br>NBKRIST Vehicle starting...<br>Bus moving...<br>AC running...</div>
+    <div class="subsection">
+      <h2>4. Universal Superclass – Object Class</h2>
+      <p>Every class in Java implicitly inherits from the <code>Object</code> class — much like every machine in a
+        factory follows universal operational protocols. This class provides methods such as <code>equals()</code>,
+        <code>toString()</code>, and <code>hashCode()</code>.
+      </p>
+      <div class="code-block">
+        class Vehicle {
+        String model;
+        Vehicle(String model) { this.model = model; }
+        public String toString() { return "NBKRIST Vehicle Model: " + model; }
+        }
+        public class ObjectDemo {
+        public static void main(String[] args) {
+        Vehicle v = new Vehicle("Bus-XL");
+        System.out.println(v);
+        }
+        }
+        <img src="Object.png" alt="Demo Image" class="popup-img">
+        <div class="popup"><b>Output:</b><br>NBKRIST Vehicle Model: Bus-XL</div>
+      </div>
+      <div class="tip">🔍 <strong>Pro Tip:</strong> Override <code>toString()</code> to give meaningful representations
+        to your objects — especially in debugging and logging.
+        <br> In Java, a superclass reference variable can hold a reference to any of its subclass objects. Since Object
+        is the universal superclass of all classes in Java, it can refer to an instance of any class, making it a
+        generic reference type within the language’s inheritance hierarchy. <br> Object base= new Vehicle("BUS-XXL");//
+        correct <br>very high-level form of polymorphism!!! or Universal polymorphism through Object upcasting.
+      </div>
     </div>
-    <div class="tip">🏗️ <strong>Pro Tip:</strong> Use multilevel inheritance to gradually specialize your base features rather than overloading one class.</div>
-  </div>
 
-  <div class="subsection">
-    <h2>6. Application of Keyword <code>super</code></h2>
-    <p>The <code>super</code> keyword lets a subclass access its superclass members — ideal for refining inherited behavior or invoking the parent constructor.</p>
-    <div class="code-block">
-class Vehicle {
-  Vehicle() { System.out.println("NBKRIST Vehicle created"); }
-  void start() { System.out.println("Vehicle starting..."); }
-}
-class Car extends Vehicle {
-  Car() { super(); System.out.println("Car ready for test drive!"); }
-  void start() {
-    super.start();
-    System.out.println("Car engine started successfully!");
-  }
-}
-public class SuperDemo {
-  public static void main(String[] args) {
-    new Car().start();
-  }
-}
-      <div class="popup"><b>Output:</b><br>NBKRIST Vehicle created<br>Car ready for test drive!<br>Vehicle starting...<br>Car engine started successfully!</div>
+    <div class="subsection">
+      <h2>5. Multilevel Inheritance</h2>
+      <p>Multilevel inheritance represents a layered evolution — for instance, a <strong>Bus</strong> inherits from
+        <strong>Vehicle</strong>, and a <strong>LuxuryBus</strong> inherits from <strong>Bus</strong>.
+      </p>
+      <div class="code-block">
+        class Vehicle { void start(){ System.out.println("NBKRIST Vehicle starting..."); } }
+        class Bus extends Vehicle { void move(){ System.out.println("Bus moving..."); } }
+        class LuxuryBus extends Bus { void airCondition(){ System.out.println("AC running..."); } }
+        public class MultiLevelDemo {
+        public static void main(String[] args) {
+        LuxuryBus lb = new LuxuryBus();
+        lb.start(); lb.move(); lb.airCondition();
+        }
+        }
+        <img src="mycar3.png" alt="Demo Image" class="popup-img">
+        <div class="popup"><b>Output:</b><br>NBKRIST Vehicle starting...<br>Bus moving...<br>AC running...</div>
+      </div>
+      <div class="tip">🏗️ <strong>Pro Tip:</strong> Use multilevel inheritance to gradually specialize your base
+        features rather than overloading one class.</div>
     </div>
-    <div class="tip">⚙️ <strong>Pro Tip:</strong> Use <code>super()</code> wisely to ensure the correct initialization flow in complex hierarchies.</div>
-  </div>
 
-  <div class="subsection">
-    <h2>7. Constructor Method and Inheritance</h2>
-    <p>Constructors are not inherited but invoked in a sequence from parent to child using <code>super()</code>.  
-    This ensures proper initialization from general (Vehicle) to specific (Car).</p>
-    <div class="code-block">
-class Vehicle { Vehicle() { System.out.println("NBKRIST Vehicle built"); } }
-class Car extends Vehicle { Car() { System.out.println("Car assembled"); } }
-class SportsCar extends Car { SportsCar() { System.out.println("SportsCar tuned for performance"); } }
-public class ConstructorChain {
-  public static void main(String[] args) {
-    new SportsCar();
-  }
-}
-      <div class="popup"><b>Output:</b><br>NBKRIST Vehicle built<br>Car assembled<br>SportsCar tuned for performance</div>
+    <div class="subsection">
+      <h2>6. Application of Keyword <code>super</code></h2>
+      <p>The <code>super</code> keyword lets a subclass access its superclass members — ideal for refining inherited
+        behavior or invoking the parent constructor.</p>
+      <div class="code-block">
+        class Vehicle {
+        Vehicle() { System.out.println("NBKRIST Vehicle created"); }
+        void start() { System.out.println("Vehicle starting..."); }
+        }
+        class Car extends Vehicle {
+        Car() { super(); System.out.println("Car ready for test drive!"); }
+        void start() {
+        super.start();
+        System.out.println("Car engine started successfully!");
+        }
+        }
+        public class SuperDemo {
+        public static void main(String[] args) {
+        new Car().start();
+        }
+        }
+        <img src="super.png" alt="Demo Image" class="popup-img">
+        <div class="popup"><b>Output:</b><br>NBKRIST Vehicle created<br>Car ready for test drive!<br>Vehicle
+          starting...<br>Car engine started successfully!</div>
+      </div>
+      <div class="tip">⚙️ <strong>Pro Tip:</strong> Use <code>super()</code> wisely to ensure the correct initialization
+        flow in complex hierarchies.</div>
     </div>
-    <div class="tip">🚀 <strong>Pro Tip:</strong> Always design constructor chains logically — from general initialization to specialization.</div>
+
+    <div class="subsection">
+      <h2>7. Constructor Method and Inheritance</h2>
+      <p>Constructors are not inherited but invoked in a sequence from parent to child using <code>super()</code>.
+        This ensures proper initialization from general (Vehicle) to specific (Car).</p>
+      <div class="code-block">
+        class Vehicle { Vehicle() { System.out.println("NBKRIST Vehicle built"); } }
+        class Car extends Vehicle { Car() { System.out.println("Car assembled"); } }
+        class SportsCar extends Car { SportsCar() { System.out.println("SportsCar tuned for performance"); } }
+        public class ConstructorChain {
+        public static void main(String[] args) {
+        new SportsCar();
+        }
+        }
+        <img src="inchain.png" alt="Demo Image" class="popup-img">
+        <div class="popup"><b>Output:</b><br>NBKRIST Vehicle built<br>Car assembled<br>SportsCar tuned for performance
+        </div>
+      </div>
+      <div class="tip">🚀 <strong>Pro Tip:</strong> Always design constructor chains logically — from general
+        initialization to specialization.</div>
+    </div>
+
+    <div class="summary">
+      <h2>🔑 Key Takeaways</h2>
+      <ul>
+        <li>Inheritance forms the backbone of reusable, maintainable Java systems.</li>
+        <li>Real-world manufacturing models like Vehicles perfectly reflect “is-a” relationships.</li>
+        <li><code>super</code> ensures structured hierarchy communication between classes.</li>
+        <li>Every Java class inherits from <code>Object</code>, forming the universal base.</li>
+        <li>Practice by building your own Vehicle hierarchy — make NBKRIST proud of your code!</li>
+      </ul>
+
+
+      <img src="summary.png" alt="Large Image"
+        style="width:380px; height:250px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.15); margin:10px; transition:transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.25)';"
+        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.15)';">
+    </div>
   </div>
 
-  <div class="summary">
-    <h2>🔑 Key Takeaways</h2>
-    <ul>
-      <li>Inheritance forms the backbone of reusable, maintainable Java systems.</li>
-      <li>Real-world manufacturing models like Vehicles perfectly reflect “is-a” relationships.</li>
-      <li><code>super</code> ensures structured hierarchy communication between classes.</li>
-      <li>Every Java class inherits from <code>Object</code>, forming the universal base.</li>
-      <li>Practice by building your own Vehicle hierarchy — make NBKRIST proud of your code!</li>
-    </ul>
-  </div>
-</div>
+  <footer>NBKRIST © 2025 | Authored by Hari Babu Mutchakala</footer>
 
-<footer>NBKRIST © 2025 | Authored by Hari Babu Mutchakala</footer>
-
-<script>
-const toggle=document.getElementById("themeToggle");
-toggle.addEventListener("click",()=>{
-  document.body.classList.toggle("dark");
-  toggle.textContent=document.body.classList.contains("dark")?"☀️ Light":"🌙 Dark";
-});
-</script>
+  <script>
+    const toggle = document.getElementById("themeToggle");
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      toggle.textContent = document.body.classList.contains("dark") ? "☀️ Light" : "🌙 Dark";
+    });
+  </script>
 </body>
-</html>
 
+</html>
