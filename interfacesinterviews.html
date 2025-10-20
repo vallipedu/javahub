@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NBKRIST - Java Hub | Interface Interview Questions</title>
+<style>
+:root {
+  --primary:#0078ff;
+  --accent:#00bfff;
+  --header:#004d99;
+  --glass:rgba(255,255,255,0.9);
+  --text:#222;
+  --light-bg:rgba(245,248,255,0.85);
+  --bg-gradient:linear-gradient(135deg,#f5faff,#ffffff);
+}
+body.dark {
+  --primary:#66b3ff;
+  --accent:#3399ff;
+  --header:#cce5ff;
+  --glass:rgba(25,25,25,0.9);
+  --text:#f0f0f0;
+  --light-bg:rgba(40,40,40,0.85);
+  --bg-gradient:linear-gradient(135deg,#0f172a,#1e293b);
+}
+body {
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Verdana,sans-serif;
+  background:var(--bg-gradient);
+  color:var(--text);
+  transition:background .4s,color .4s;
+  line-height:1.6;
+}
+header {
+  position:relative;
+  text-align:center;
+  padding:25px 10px 10px;
+  background:var(--glass);
+  backdrop-filter:blur(12px);
+  font-weight:bold;
+  font-size:1.8em;
+  color:var(--header);
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+}
+.theme-toggle {
+  position:absolute;
+  right:20px;
+  top:20px;
+  background:var(--light-bg);
+  border:none;
+  color:var(--primary);
+  font-weight:600;
+  border-radius:8px;
+  padding:6px 12px;
+  cursor:pointer;
+  transition:0.3s;
+}
+.theme-toggle:hover{background:var(--primary);color:#fff}
+.navbar {
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  padding:12px 10px;
+  background:rgba(255,255,255,0.3);
+  backdrop-filter:blur(10px);
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  width:90%;
+  margin:8px auto 20px;
+}
+.navbar a {
+  text-decoration:none;
+  color:var(--primary);
+  font-weight:600;
+  padding:5px 10px;
+  position:relative;
+}
+.navbar a::after {
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0%;
+  height:2px;
+  background:var(--primary);
+  transition:width 0.3s ease;
+}
+.navbar a:hover {color:var(--accent);}
+.navbar a:hover::after {width:100%;}
+
+.container {
+  max-width:950px;
+  margin:20px auto 40px;
+  background:var(--glass);
+  border-radius:16px;
+  padding:30px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+}
+.subsection {
+  position:relative;
+  background:rgba(240,248,255,0.45);
+  margin:25px 0;
+  padding:18px 22px 18px 30px;
+  border-radius:10px;
+}
+.subsection::before {
+  content:"";
+  position:absolute;
+  left:0;
+  top:8px;
+  bottom:8px;
+  width:4px;
+  background:linear-gradient(180deg,#0099ff,#0066cc);
+  border-radius:3px;
+}
+.subsection::after {
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:15px;
+  height:6px;
+  background:#0099ff;
+  border-radius:0 5px 5px 0;
+  box-shadow:0 calc(100% - 6px) 0 0 #0099ff;
+}
+h1{text-align:center;color:var(--header);}
+h2{color:var(--primary);margin-bottom:10px;}
+p{text-align:justify;}
+.qa-item {
+  background:rgba(255,255,255,0.9);
+  border-left:4px solid var(--primary);
+  margin:12px 0;
+  padding:12px 15px;
+  border-radius:8px;
+  transition:background .3s ease;
+}
+.qa-item:hover{background:rgba(230,243,255,0.95);}
+.qa-item .answer{display:none;margin-top:8px;}
+.qa-item:hover .answer{display:block;}
+footer {
+  text-align:center;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  color:#fff;
+  padding:15px;
+  border-radius:10px;
+  width:90%;
+  margin:40px auto 10px;
+  font-size:0.9em;
+}
+@media(max-width:880px){
+  .navbar{flex-direction:column;width:95%;}
+}
+</style>
+</head>
+
+<body>
+<header>
+  NBKRIST – Java Hub
+  <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+</header>
+
+<nav class="navbar">
+  <a href="interfaces.html">🏠 Home</a>
+ 
+</nav>
+
+<div class="container">
+  <h1>Basic Interview Questions on Interfaces</h1>
+
+  <div class="subsection">
+    <h2>Expert View</h2>
+    <p>As a software engineer, I often found that interviews on <strong>interfaces</strong> are not meant to test memory — they test your <strong>understanding of abstraction and design thinking</strong>. A confident student should be able to explain how interfaces define contracts, enable modular design, and support loose coupling in real-world projects. Many fresh graduates at NBKRIST initially overlook small but important details such as access modifiers, default/static methods, or how multiple inheritance is achieved. Remember — in interviews, clarity and confidence matter more than syntax perfection.</p>
+  </div>
+
+  <div class="subsection">
+    <h2>Core Conceptual Questions</h2>
+    <div class="qa-item">1. What is an interface in Java?<div class="answer">An interface is a contract that specifies what methods a class must implement, promoting abstraction and loose coupling.</div></div>
+    <div class="qa-item">2. How is an interface different from an abstract class?<div class="answer">An interface can’t have constructors and supports multiple inheritance; abstract classes can have constructors and partial implementations.</div></div>
+    <div class="qa-item">3. Why can’t we instantiate an interface?<div class="answer">Interfaces don’t provide concrete implementations; they only declare method signatures.</div></div>
+    <div class="qa-item">4. What are the access modifiers allowed in interface methods?<div class="answer">All interface methods are implicitly <code>public</code> and <code>abstract</code> (unless static or default).</div></div>
+    <div class="qa-item">5. Can an interface extend another interface?<div class="answer">Yes. Interfaces can extend one or more interfaces using the <code>extends</code> keyword.</div></div>
+  </div>
+
+  <div class="subsection">
+    <h2>Implementation & Usage Questions</h2>
+    <div class="qa-item">6. How do you implement an interface in a class?<div class="answer">By using the <code>implements</code> keyword and providing implementations for all its abstract methods.</div></div>
+    <div class="qa-item">7. Can a class implement multiple interfaces?<div class="answer">Yes, a class can implement multiple interfaces — this is how Java achieves multiple inheritance.</div></div>
+    <div class="qa-item">8. What happens if a class fails to implement all methods of an interface?<div class="answer">The class must be declared abstract; otherwise, a compilation error occurs.</div></div>
+    <div class="qa-item">9. Can interfaces have variables?<div class="answer">Yes, but all variables are implicitly <code>public static final</code> — constants.</div></div>
+    <div class="qa-item">10. What is the default access modifier for members of an interface?<div class="answer">Members are <code>public</code> by default, even if you don’t specify it.</div></div>
+  </div>
+
+  <div class="subsection">
+    <h2>Java 8+ Feature Questions</h2>
+    <div class="qa-item">11. What are default methods in interfaces?<div class="answer">Methods with a body introduced in Java 8 to add new behavior without breaking existing code.</div></div>
+    <div class="qa-item">12. What are static methods in interfaces?<div class="answer">Static methods belong to the interface itself and are called using the interface name.</div></div>
+    <div class="qa-item">13. What are private methods in interfaces (Java 9)?<div class="answer">Private methods in interfaces help reuse logic among default or static methods inside the same interface.</div></div>
+    <div class="qa-item">14. What is a functional interface?<div class="answer">An interface that contains exactly one abstract method, used for lambda expressions.</div></div>
+    <div class="qa-item">15. Give examples of functional interfaces from Java API.<div class="answer"><code>Runnable</code>, <code>Callable</code>, <code>Predicate</code>, <code>Consumer</code>, <code>Supplier</code>, <code>Function</code>.</div></div>
+  </div>
+
+  <div class="subsection">
+    <h2>Design & Real-World Questions</h2>
+    <div class="qa-item">16. Why are interfaces preferred in real-world projects?<div class="answer">They decouple implementation from definition, improving maintainability and scalability.</div></div>
+    <div class="qa-item">17. How do interfaces support polymorphism?<div class="answer">A variable of interface type can refer to any object implementing that interface, enabling dynamic method binding.</div></div>
+    <div class="qa-item">18. Can an interface be empty?<div class="answer">Yes. Such interfaces are called marker interfaces (e.g., <code>Serializable</code>, <code>Cloneable</code>).</div></div>
+    <div class="qa-item">19. What’s the use of marker interfaces?<div class="answer">They convey metadata to the JVM or frameworks to perform specific behavior.</div></div>
+    <div class="qa-item">20. What are common mistakes students make with interfaces?<div class="answer">Forgetting implicit modifiers, misunderstanding multiple inheritance, or confusing interface constants with instance variables.</div></div>
+  </div>
+
+  <div class="subsection">
+    <h2>Quick Recap by Expert</h2>
+    <p>In interviews, the focus isn’t just on definitions — it’s on how you apply concepts. If you can explain <em>why</em> interfaces exist, <em>how</em> they improve software design, and <em>what</em> benefits they bring in large-scale systems, you’ve already succeeded. Remember: <strong>Interfaces represent the promise of behavior — not the behavior itself.</strong></p>
+  </div>
+</div>
+
+<footer>NBKRIST © 2025 | Authored by Hari Babu Mutchakala</footer>
+
+<script>
+const toggle=document.getElementById("themeToggle");
+toggle.addEventListener("click",()=>{
+  document.body.classList.toggle("dark");
+  toggle.textContent=document.body.classList.contains("dark")?"☀️ Light":"🌙 Dark";
+});
+</script>
+</body>
+</html>
