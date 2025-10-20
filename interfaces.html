@@ -1,272 +1,356 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java Interfaces: Foundation and Practical View</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            background-color: #f4f4f4;
-            color: #333;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NBKRIST - Java Hub | Interfaces in Java</title>
+<style>
+:root {
+  --primary:#0078ff;
+  --accent:#00bfff;
+  --header:#004d99;
+  --glass:rgba(255,255,255,0.9);
+  --text:#222;
+  --light-bg:rgba(245,248,255,0.85);
+  --bg-gradient:linear-gradient(135deg,#f5faff,#ffffff);
+}
+body.dark {
+  --primary:#66b3ff;
+  --accent:#3399ff;
+  --header:#cce5ff;
+  --glass:rgba(25,25,25,0.9);
+  --text:#f0f0f0;
+  --light-bg:rgba(40,40,40,0.85);
+  --bg-gradient:linear-gradient(135deg,#0f172a,#1e293b);
+}
+body {
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+  background:var(--bg-gradient);
+  color:var(--text);
+  line-height:1.6;
+  transition:background .4s ease,color .4s ease;
+}
+header {
+  position:relative;
+  text-align:center;
+  padding:25px 10px 10px 10px;
+  background:var(--glass);
+  backdrop-filter:blur(12px);
+  font-weight:bold;
+  font-size:1.8em;
+  color:var(--header);
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+  border-bottom:1px solid rgba(0,0,0,0.05);
+}
+.theme-toggle {
+  position:absolute;
+  right:20px;
+  top:20px;
+  background:var(--light-bg);
+  border:none;
+  color:var(--primary);
+  font-weight:600;
+  border-radius:8px;
+  padding:6px 12px;
+  cursor:pointer;
+  transition:0.3s;
+}
+.theme-toggle:hover{background:var(--primary);color:#fff}
 
-        .container {
-            max-width: 900px;
-            margin: auto;
-            background: #fff;
-            padding: 20px 40px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+/* Horizontal Menu Bar */
+.navbar {
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  padding:12px 10px;
+  background:rgba(255,255,255,0.3);
+  backdrop-filter:blur(10px);
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  border-radius:10px;
+  margin:8px auto 20px auto;
+  width:90%;
+  transition:background 0.3s ease;
+}
+.navbar a {
+  text-decoration:none;
+  color:var(--primary);
+  font-weight:600;
+  font-size:1em;
+  position:relative;
+  padding:5px 10px;
+  transition:color 0.3s ease;
+}
+.navbar a::after {
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0%;
+  height:2px;
+  background:var(--primary);
+  transition:width 0.3s ease;
+}
+.navbar a:hover {
+  color:var(--accent);
+}
+.navbar a:hover::after {
+  width:100%;
+}
 
-        h1,
-        h2 {
-            color: #2c3e50;
-        }
+.container {
+  max-width:950px;
+  margin:20px auto 40px auto;
+  background:var(--glass);
+  border-radius:16px;
+  padding:30px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+}
 
-        h1 {
-            text-align: center;
-        }
-
-        pre {
-            background: #ecf0f1;
-            padding: 15px;
-            border-radius: 5px;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-
-        code {
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        .note {
-            background: #e6f7ff;
-            border-left: 5px solid #3498db;
-            padding: 10px;
-            margin: 20px 0;
-        }
-
-        ul {
-            list-style-type: disc;
-            padding-left: 20px;
-        }
-
-        li {
-            margin-bottom: 10px;
-        }
-
-        .code-title {
-            font-style: italic;
-            color: #7f8c8d;
-        }
-
-        /* Style for the back button */
-        .back-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .back-button:hover {
-            background-color: #2980b9;
-        }
-
-        /* Style for the footer */
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #ccc;
-            font-size: 0.9em;
-            color: #777;
-        }
-
-        footer a {
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+/* Section styling */
+.subsection {
+  position:relative;
+  background:rgba(240,248,255,0.45);
+  margin:25px 0;
+  padding:18px 22px 18px 30px;
+  border-radius:10px;
+  overflow:hidden;
+}
+.subsection::before {
+  content:"";
+  position:absolute;
+  left:0;
+  top:8px;
+  bottom:8px;
+  width:4px;
+  background:linear-gradient(180deg,#0099ff,#0066cc);
+  border-radius:3px;
+}
+.subsection::after {
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:15px;
+  height:6px;
+  background:#0099ff;
+  border-radius:0 5px 5px 0;
+  box-shadow:0 calc(100% - 6px) 0 0 #0099ff;
+}
+h1{text-align:center;color:var(--header);margin-top:0}
+h2{color:var(--primary);margin-bottom:10px}
+.code-block {
+  position:relative;
+  background:var(--light-bg);
+  border-left:3px solid var(--primary);
+  padding:10px 12px;
+  border-radius:8px;
+  font-family:Consolas,monospace;
+  font-size:0.9em;
+  line-height:1.4;
+  white-space:pre-wrap;
+  margin:10px 0;
+}
+.code-block .popup {
+  position:absolute;
+  left:calc(100% + 10px);
+  top:0;
+  background:rgba(255,255,255,0.97);
+  color:#000;
+  border-radius:10px;
+  padding:8px 12px;
+  width:260px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+  opacity:0;
+  transform:translateX(10px);
+  transition:all 0.25s ease;
+  pointer-events:none;
+  font-size:0.9em;
+}
+.code-block:hover .popup {
+  opacity:1;
+  transform:translateX(0);
+  pointer-events:auto;
+  z-index:10;
+}
+.qa-item {
+  background:rgba(255,255,255,0.9);
+  border-left:4px solid var(--primary);
+  margin:12px 0;
+  padding:12px 15px;
+  border-radius:8px;
+}
+.qa-item:hover{background:rgba(230,243,255,0.95)}
+.qa-item .answer{display:none;margin-top:8px}
+.qa-item:hover .answer{display:block}
+.key-summary {
+  background:rgba(230,245,255,0.9);
+  border-left:4px solid var(--primary);
+  border-radius:8px;
+  padding:14px;
+  margin-top:25px;
+}
+footer {
+  text-align:center;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  color:#fff;
+  padding:15px;
+  border-radius:10px;
+  width:90%;
+  margin:40px auto 10px auto;
+  font-size:0.9em;
+}
+@media(max-width:880px){
+  .navbar{flex-direction:column;gap:10px;width:95%;}
+  .code-block .popup{left:0;top:calc(100% + 10px);width:95%;}
+}
+</style>
 </head>
 
 <body>
-    <a href="index.html" class="back-button">Back to Home</a>
-    <a href="interfacesSyllabus.html" class="back-button">Go to Assignment</a>
-    <a href="interfacesClasswork.html" class="back-button">In Class Examples</a>
+<header>
+  NBKRIST – Java Hub
+  <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+</header>
 
-    <hr>
-    <div class="container">
-        <h1>NBKRIST JAVAHUB - Java Interfaces: A Foundation and Practical Guide</h1>
-        <hr>
-        <p>
-            An <strong>interface</strong> in Java is a blueprint for a class. It defines a contract that specifies what
-            a class must do, but not how it does it. Before Java 8, interfaces could only contain method signatures
-            (abstract methods) and constant fields. Since Java 8, they can also include default and static methods.
-        </p>
+<nav class="navbar">
+  <a href="index.html">🏠 Home</a>
+  <a href="intjava8.html">🧩  Java 8 and Beyond </a>
+    <a href="interfacesSyllabus.html">🧩  Beyond Basics </a>
+  <a href="interfacesClasswork.html">💻 Examples</a>
+   <a href="interfacesinterviews.html">🧩 Interview Questions</a>
+</nav>
 
-        <h2>What is an Interface? 🤔</h2>
-        <p>
-            Think of an interface as a formal agreement. If a class decides to <code>implement</code> an interface, it's
-            making a promise to provide concrete implementations for all the abstract methods defined in that interface.
-            This promotes a concept called <strong>abstraction</strong>, where you hide the complex implementation
-            details and only show the necessary functionalities to the user.
-        </p>
-        <p>
-            Key characteristics of a Java interface:
-        </p>
-        <ul>
-            <li>By default, all methods in an interface are <strong>public</strong> and <strong>abstract</strong>.</li>
-            <li>All variables are <strong>public</strong>, <strong>static</strong>, and <strong>final</strong> by
-                default.</li>
-            <li>Interfaces cannot be instantiated.</li>
-            <li>A class can <code>implement</code> multiple interfaces.</li>
-            <li>An interface can <code>extend</code> another interface.</li>
-        </ul>
+<div class="container">
+  <h1>Interfaces in Java – Foundation to Implementation</h1>
 
-        <h2>How Java Achieves Multiple Inheritance with Interfaces</h2>
-        <p>
-            Unlike C++, Java does not support multiple inheritance of classes. This is primarily to avoid the "Diamond
-            Problem."
-            The diamond problem occurs when a class inherits from two superclasses that both have a method with the same
-            name. It creates ambiguity for the compiler, which can't determine which version of the method to inherit.
+  <div class="subsection">
+    <h2>Expert View</h2>
+    <p>As a software engineer at NBKRIST, I often tell students that understanding interfaces is like understanding the nervous system of Java — it defines communication and consistency. At Vidyanagar, we use interfaces to connect components cleanly, ensuring flexibility and security. Interfaces are the foundation of modern frameworks and layered architectures.</p>
+  </div>
 
-            However, this problem is neatly avoided by using interfaces.
-        </p>
-        <p>
-            Since interfaces only define a contract (a set of abstract methods) and not the implementation, there's no
-            ambiguity when a class implements multiple interfaces. The implementing class itself provides the concrete
-            implementation for each method.
-            This allows a single class to adopt behaviors from multiple "parent" interfaces, effectively achieving
-            <strong>multiple inheritance of behavior</strong>.
-        </p>
-        <p>
-            Let's look at an example:
-        </p>
-        <pre><code class="language-java">
-// Interface for a land vehicle
-interface Walkable {
-    void walk();
+  <div class="subsection">
+    <h2>Introduction</h2>
+    <p>An interface in Java defines a contract for what a class must do without dictating how it does it. It supports abstraction and allows unrelated classes to share capabilities through implementation.</p>
+  </div>
+
+  <div class="subsection">
+    <h2>Declaration of Interface</h2>
+    <div class="code-block">
+interface College {
+  String NAME = "NBKRIST";
+  void showDetails();
 }
-
-// Interface for a water vehicle
-interface Swimmable {
-    void swim();
-}
-
-// A class that can both walk and swim
-class Duck implements Walkable, Swimmable {
-    &#64;Override
-    public void walk() {
-        System.out.println("Duck is walking.");
-    }
-    
-    &#64;Override
-    public void swim() {
-        System.out.println("Duck is swimming.");
-    }
-}
-        </code></pre>
-        <p>
-            In the code above, the <code>Duck</code> class inherits the behaviors of both <code>Walkable</code> and
-            <code>Swimmable</code>, providing its own implementation for each. There is no ambiguity because the
-            implementation is explicitly provided by the <code>Duck</code> class itself.
-        </p>
-        <hr>
-        <h2>Important Notes for Interview Preparation 📝</h2>
-
-        <h3>1. Interface vs. Abstract Class</h3>
-        <p>
-            This is a very common interview question. While both are used to achieve abstraction, they have key
-            differences:
-        </p>
-        <ul>
-            <li><strong>Interface:</strong> Provides 100% abstraction (before Java 8). Cannot have constructors. A class
-                can implement multiple interfaces.</li>
-            <li><strong>Abstract Class:</strong> Can have both abstract and concrete (implemented) methods. Can have
-                constructors. A class can only extend one abstract class. Use abstract classes when you need to share a
-                common base implementation among subclasses.</li>
-        </ul>
-
-        <h3>2. Default and Static Methods (Java 8+)</h3>
-        <p>
-            Java 8 introduced <strong>default methods</strong> to interfaces. This was a significant change that allows
-            developers to add new methods to an existing interface without breaking all the classes that implement it.
-        </p>
-        <p>
-            Default methods are useful for backward compatibility. They have a default implementation that can be used
-            by implementing classes, but can also be overridden.
-        </p>
-        <pre><code class="language-java">
-interface Vehicle {
-    void move();
-    
-    // Default method introduced in Java 8
-    default void honk() {
-        System.out.println("Honk!");
-    }
-}
-        </code></pre>
-        <p>
-            <strong>Static methods</strong> in interfaces are utility methods that are tied to the interface itself, not
-            to an implementing class or object. They are called using the interface name (e.g.,
-            <code>InterfaceName.staticMethod()</code>).
-        </p>
-
-        <h3>3. Marker Interfaces</h3>
-        <p>
-            A <strong>marker interface</strong> is an interface that has no methods or fields. Its sole purpose is to
-            "mark" a class with a certain capability. The Java Virtual Machine (JVM) then uses this information to
-            perform some special operation on the class. Common examples include <code>Serializable</code> and
-            <code>Cloneable</code>.
-        </p>
-        <pre><code class="language-java">
-// This is a marker interface
-public interface Serializable {
-}
-        </code></pre>
-        <p>
-            When a class implements <code>Serializable</code>, the JVM knows that objects of this class can be converted
-            into a byte stream (serialized).
-        </p>
-
-        <h3>4. Loose Coupling and Polymorphism</h3>
-        <p>
-            Interfaces promote <strong>loose coupling</strong>, which means different parts of your code are less
-            dependent on each other. You can program to an interface rather than to a concrete implementation.
-        </p>
-        <p>
-            This also enables <strong>polymorphism</strong>. A variable of an interface type can hold a reference to any
-            object that implements that interface. This makes your code flexible and easy to maintain.
-        </p>
-        <pre><code class="language-java">
-// Using an interface type for polymorphism
-List&lt;String&gt; myList = new ArrayList&lt;&gt;();
-// The variable 'myList' is of type List, but its object is an ArrayList.
-// You can later switch to a different implementation (e.g., LinkedList)
-// without changing the code that uses 'myList'.
-        </code></pre>
-        <hr>
-        <a href="index.html" class="back-button">Back to Home</a>
+      <div class="popup"><b>Note:</b> Variables in interfaces are <b>public, static</b> and <b>final</b> by default.</div>
     </div>
+  </div>
 
-    <footer>
-        <p>&copy; 2025 NBKRIST JAVAHUB: all rights are reserved</p>
-        <p><a href="https://www.nbkrist.co.in/index.php" target="_blank">Visit NBKRIST Website</a></p>
-    </footer>
+  <div class="subsection">
+    <h2>Implementation of Interface</h2>
+    <div class="code-block">
+class Department implements College {
+  public void showDetails(){
+    System.out.println("Department of CSE - " + NAME + ", Vidyanagar");
+  }
+}
+class Demo {
+  public static void main(String[] args){
+    Department d = new Department();
+    d.showDetails();
+  }
+}
+      <div class="popup"><b>Output:</b><br>Department of CSE - NBKRIST, Vidyanagar</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2>Multiple Interfaces</h2>
+    <div class="code-block">
+interface Sports { void play(); }
+interface Academics { void learn(); }
+class Student implements Sports, Academics {
+  public void play(){ System.out.println("Playing Cricket at Vidyanagar"); }
+  public void learn(){ System.out.println("Learning Interfaces in " + College.NAME); }
+}
+      <div class="popup"><b>Output:</b><br>Playing Cricket at Vidyanagar<br>Learning Interfaces in NBKRIST</div>
+    </div>
+    <p>Java supports multiple inheritance of type using interfaces, unlike classes, which cannot inherit from multiple classes.</p>
+  </div>
+
+  <div class="subsection">
+    <h2>Nested Interfaces</h2>
+    <div class="code-block">
+interface University {
+  interface Department { void display(); }
+}
+class ECE implements University.Department {
+  public void display(){
+    System.out.println("Nested Interface Example: ECE Department - NBKRIST, Vidyanagar");
+  }
+}
+      <div class="popup"><b>Output:</b><br>Nested Interface Example: ECE Department - NBKRIST, Vidyanagar</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2>Inheritance of Interfaces</h2>
+    <div class="code-block">
+interface Campus {
+  void campusName();
+}
+interface Hostels extends Campus {
+  void hostelDetails();
+}
+class NBKHostel implements Hostels {
+  public void campusName(){ System.out.println("Campus: NBKRIST, Vidyanagar"); }
+  public void hostelDetails(){ System.out.println("Hostel: Silicon Block"); }
+}
+      <div class="popup"><b>Output:</b><br>Campus: NBKRIST, Vidyanagar<br>Hostel: Silicon Block</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2>How Multiple Inheritance is Achieved in Java</h2>
+    <div class="code-block">
+interface Teacher { void guide(); }
+interface Researcher { void guide(); }
+class Professor implements Teacher, Researcher {
+  public void guide(){ System.out.println("Guiding students at NBKRIST, Vidyanagar"); }
+}
+      <div class="popup"><b>Output:</b><br>Guiding students at NBKRIST, Vidyanagar</div>
+    </div>
+    <p>Multiple inheritance through interfaces is possible since interfaces declare methods without implementations, removing ambiguity. Classes cannot do this because they inherit implementation, which may conflict.</p>
+  </div>
+
+  <div class="subsection">
+    <h2>Practice Questions</h2>
+    <div class="qa-item">1. Define interface and its purpose.<div class="answer">An interface defines abstract behavior contracts.</div></div>
+    <div class="qa-item">2. Can interfaces extend another interface?<div class="answer">Yes, for multi-level abstraction.</div></div>
+    <div class="qa-item">3. What is the purpose of nested interfaces?<div class="answer">To logically group related functionalities.</div></div>
+    <div class="qa-item">4. Why can’t Java have multiple inheritance with classes?<div class="answer">To avoid ambiguity in method definitions.</div></div>
+    <div class="qa-item">5. How does Java achieve multiple inheritance safely?<div class="answer">By using interfaces that require explicit implementation.</div></div>
+  </div>
+
+  <div class="key-summary">
+    <h2>Key Summary</h2>
+    <ul>
+      <li>Interfaces define the structure of behavior without implementation.</li>
+      <li>Constants in interfaces like NBKRIST, Vidyanagar are public and final.</li>
+      <li>Java achieves multiple inheritance safely using interfaces.</li>
+      <li>Nested and inherited interfaces organize and extend behavior.</li>
+      <li>Mastery of interfaces builds the foundation for understanding frameworks like Spring and JavaFX.</li>
+    </ul>
+  </div>
+</div>
+
+<footer> © 2025 All rights reserved for NBKRIST | Authored by Hari Babu Mutchakala</footer>
+
+<script>
+const toggle=document.getElementById("themeToggle");
+toggle.addEventListener("click",()=>{
+  document.body.classList.toggle("dark");
+  toggle.textContent=document.body.classList.contains("dark")?"☀️ Light":"🌙 Dark";
+});
+</script>
 </body>
-
 </html>
