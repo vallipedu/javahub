@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NBKRIST - Java Hub | Java Lambda Expressions</title>
+<style>
+:root {
+  --primary:#0078ff;
+  --accent:#00bfff;
+  --header:#004d99;
+  --glass:rgba(255,255,255,0.95);
+  --text:#222;
+  --light-bg:rgba(245,248,255,0.95);
+  --bg-gradient:linear-gradient(135deg,#f5faff,#ffffff);
+}
+body.dark {
+  --primary:#66b3ff;
+  --accent:#3399ff;
+  --header:#cce5ff;
+  --glass:rgba(18,24,32,0.9);
+  --text:#f0f0f0;
+  --light-bg:rgba(40,40,40,0.85);
+  --bg-gradient:linear-gradient(135deg,#0f172a,#1e293b);
+}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Verdana,sans-serif;
+  background:var(--bg-gradient);
+  color:var(--text);
+  transition:background .35s,color .35s;
+  line-height:1.6;
+}
+header{
+  position:relative;
+  text-align:center;
+  padding:22px 10px 8px;
+  background:var(--glass);
+  backdrop-filter:blur(10px);
+  font-weight:700;
+  font-size:1.6em;
+  color:var(--header);
+  box-shadow:0 4px 18px rgba(0,0,0,0.06);
+}
+.theme-toggle{
+  position:absolute;
+  right:18px;top:16px;
+  background:var(--light-bg);
+  border:none;color:var(--primary);
+  font-weight:600;border-radius:8px;padding:6px 12px;cursor:pointer;transition:0.25s;
+}
+.theme-toggle:hover{background:var(--primary);color:#fff}
+.navbar{display:flex;justify-content:center;gap:28px;padding:10px 8px;background:rgba(255,255,255,0.28);backdrop-filter:blur(8px);border-radius:10px;width:90%;margin:10px auto 20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);} 
+.navbar a{ text-decoration:none;color:var(--primary);font-weight:600;padding:6px 10px;position:relative;}
+.navbar a::after{content:"";position:absolute;left:0;bottom:0;width:0%;height:2px;background:var(--primary);transition:width .25s ease}
+.navbar a:hover{color:var(--accent)}
+.navbar a:hover::after{width:100%}
+.container{max-width:980px;margin:18px auto 40px;background:var(--glass);border-radius:14px;padding:28px;box-shadow:0 6px 20px rgba(0,0,0,0.08)}
+.subsection{position:relative;background:rgba(240,248,255,0.55);margin:20px 0;padding:16px 22px;border-radius:10px}
+.subsection::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:4px;background:linear-gradient(180deg,#0099ff,#0066cc);border-radius:3px}
+.subsection::after{content:"";position:absolute;left:0;top:0;width:15px;height:6px;background:#0099ff;border-radius:0 5px 5px 0}
+h1{text-align:center;color:var(--header);}
+h2{color:var(--primary);margin-bottom:8px}
+p{text-align:justify}
+.code-block{position:relative;background:var(--light-bg);border-left:3px solid var(--primary);padding:12px 14px;border-radius:8px;font-family:Consolas,monospace;font-size:0.92em;line-height:1.45;white-space:pre-wrap;margin:10px 0}
+.code-block .popup{position:absolute;left:calc(100% + 10px);top:0;background:rgba(255,255,255,0.98);color:#000;border-radius:10px;padding:8px 12px;width:260px;box-shadow:0 8px 20px rgba(0,0,0,0.15);opacity:0;transform:translateX(10px);transition:all .25s ease;pointer-events:none;font-size:0.9em}
+.code-block:hover .popup{opacity:1;transform:translateX(0);pointer-events:auto}
+.quote-banner {
+  text-align:center;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  color:#fff;
+  font-style:italic;
+  border-radius:12px;
+  padding:14px;
+  margin:20px 0;
+  box-shadow:0 3px 12px rgba(0,0,0,0.1);
+}
+.qa-item{background:rgba(255,255,255,0.95);border-left:4px solid var(--primary);margin:10px 0;padding:12px;border-radius:8px}
+.qa-item:hover{background:rgba(230,243,255,0.96)}
+.qa-item .answer{display:none;margin-top:8px}
+.qa-item:hover .answer{display:block}
+.key-summary{background:rgba(230,245,255,0.95);border-left:4px solid var(--primary);border-radius:8px;padding:14px;margin-top:18px}
+.footer{ text-align:center;background:linear-gradient(90deg,var(--primary),var(--accent));color:#fff;padding:14px;border-radius:10px;width:90%;margin:32px auto 10px;font-size:0.95em}
+@media(max-width:900px){.navbar{flex-direction:column;width:95%}.code-block .popup{left:0;top:calc(100% + 10px);width:95%}}
+</style>
+</head>
+<body>
+<header>
+  NBKRIST – Java Hub
+  <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+</header>
+<nav class="navbar">
+  <a href="interfaces.html">Home</a>
+
+</nav>
+<div class="container">
+  <h1>Java Lambda Expressions — A Practical Guide</h1>
+
+  <div class="subsection" id="myview">
+    <h2>My View on Lambdas</h2>
+    <p>Having seen the evolution of Java over the years, I can confidently say that Lambdas and Streams have revolutionized the way we write code. I thought I would share my experience. When I was working as a software engineer, after I started using Lambdas and Streams, I almost became addicted to this style of coding — building functional pipelines felt like crafting beautiful logic flows. I love lambdas; they are <strong>cute, precise, and elegant</strong> to use. Having worked on older versions of Java, I felt a huge sense of relief and joy when I adopted lambdas — it was as if Java got a fresh new life.</p>
+    <p>Java’s introduction of Lambdas marked a <strong>paradigm shift</strong> in how we write and think about Java code. It transformed Java from an imperative to a hybrid functional language, allowing developers to focus more on <em>what</em> to do rather than <em>how</em> to do it. This evolution placed Java back in the forefront of modern programming languages, alongside Python and Kotlin. The simplicity, power, and expressiveness of Lambdas and Streams inspire developers to think differently, code smartly, and love Java all over again.</p>
+    <div class="quote-banner">“Lambdas transformed Java from verbose to versatile — a leap that made coding not just efficient but joyful.”</div>
+  </div>
+
+  <div class="subsection" id="what">
+    <h2>1. What is a Lambda Expression?</h2>
+    <p>A <strong>lambda expression</strong> is a short block of code that takes parameters and returns a value. It provides a clear and concise way to represent a single-method interface (a functional interface) as an expression. Lambdas enable functional-style programming in Java and make code more compact and readable—especially when used with collections and streams.</p>
+    <div class="code-block">
+// Conceptual form
+(parameters) -> { body }
+
+// Example: a lambda that adds two integers
+(int a, int b) -> a + b
+      <div class="popup"><b>Idea:</b><br>Lambda replaces anonymous inner classes for single-method interfaces.</div>
+    </div>
+  </div>
+
+  <div class="subsection" id="create">
+    <h2>2. How to create and use Lambda expressions</h2>
+    <p>To use a lambda you need a <em>functional interface</em> — an interface with exactly one abstract method. Java provides the <code>@FunctionalInterface</code> annotation to make intent explicit, though it's optional.</p>
+
+    <div class="code-block">
+@FunctionalInterface
+interface Operation { int apply(int a, int b); }
+
+class LambdaExample {
+  public static void main(String[] args) {
+    Operation sum = (a,b) -> a + b;                  // inferred types
+    Operation mul = (a,b) -> { return a * b; };      // block body with return
+
+    System.out.println("Sum: " + sum.apply(5, 7)); // Sum: 12
+    System.out.println("Mul: " + mul.apply(5, 7)); // Mul: 35
+  }
+}
+      <div class="popup"><b>Output:</b><br>Sum: 12<br>Mul: 35</div>
+    </div>
+
+    <p>Use lambdas with collection APIs — e.g., <code>List.forEach</code>, <code>Stream.map</code>, <code>filter</code>, etc.</p>
+    <div class="code-block">
+List<String> names = List.of("Alice","Bob","Charlie");
+names.stream()
+     .filter(n -> n.length() > 3)
+     .map(n -> n.toUpperCase())
+     .forEach(System.out::println);
+      <div class="popup"><b>Note:</b><br>Method references like <code>System.out::println</code> are shorthand for simple lambdas.</div>
+    </div>
+  </div>
+
+  <div class="subsection" id="passreturn">
+    <h2>3. Passing Lambdas as parameters & returning Lambdas from methods</h2>
+    <p>Lambdas are objects — you can pass them as parameters or return them from methods using functional interfaces.</p>
+
+    <div class="code-block">
+// Passing a lambda
+public static int operate(int a, int b, Operation op) {
+  return op.apply(a,b);
+}
+
+// Returning a lambda
+public static Operation makeAdder(int x) {
+  return (a,b) -> a + b + x; // captures x (effectively final)
+}
+
+// Usage
+Operation adder = makeAdder(10);
+System.out.println( operate(2,3, adder) ); // prints 15
+      <div class="popup"><b>Tip:</b><br>Lambdas can capture (effectively) final variables from enclosing scope.</div>
+    </div>
+  </div>
+
+  <div class="subsection" id="funcs">
+    <h2>4. java.util.function — Predicate, Function, Supplier, Consumer</h2>
+    <p>Java provides common functional interfaces in <code>java.util.function</code>. Learn their purpose with compact examples.</p>
+
+    <div class="code-block">
+// Predicate<T> - boolean test(T t)
+Predicate<String> isLong = s -> s.length() > 5;
+System.out.println(isLong.test("NBKRIST")); // true
+
+// Function<T,R> - R apply(T t)
+Function<String,Integer> len = s -> s.length();
+System.out.println(len.apply("Lambda")); // 6
+
+// Supplier<T> - T get()
+Supplier<Double> random = () -> Math.random();
+System.out.println(random.get()); // e.g., 0.345
+
+// Consumer<T> - void accept(T t)
+Consumer<String> printer = s -> System.out.println(">> " + s);
+printer.accept("Learn Lambdas");
+      <div class="popup"><b>Quick:</b><br>Predicate filters, Function transforms, Supplier supplies values, Consumer consumes values.</div>
+    </div>
+
+    <p>They compose nicely. Example: combine Predicates or use Function chaining.</p>
+    <div class="code-block">
+Predicate<String> p1 = s -> s.startsWith("A");
+Predicate<String> p2 = s -> s.endsWith("e");
+Predicate<String> combined = p1.and(p2);
+System.out.println(combined.test("Alice")); // true
+
+Function<Integer,Integer> plus2 = x -> x + 2;
+Function<Integer,Integer> times3 = x -> x * 3;
+Function<Integer,Integer> pipeline = plus2.andThen(times3);
+System.out.println(pipeline.apply(4)); // (4+2)*3 = 18
+      <div class="popup"><b>Compose:</b><br>Use <code>andThen</code> and <code>compose</code> to chain Functions.</div>
+    </div>
+  </div>
+
+  <div class="subsection" id="threads">
+    <h2>5. Creating Threads with Lambdas & Comparing Strings</h2>
+    <p>Lambda makes creating <code>Runnable</code> instances concise. Also, lambdas pair nicely with <code>Comparator</code> for sorting.</p>
+
+    <div class="code-block">
+// Runnable via lambda
+Runnable job = () -> {
+  System.out.println("Working in: " + Thread.currentThread().getName());
+};
+Thread t = new Thread(job);
+t.start();
+
+// Comparator for strings (case-insensitive)
+Comparator<String> ci = (a,b) -> a.compareToIgnoreCase(b);
+List<String> s = new ArrayList<>(List.of("Venkat","Raju","Chiru","Anil"));
+s.sort(ci);
+s.forEach(System.out::println);  //result: Anil, Chiru, Raju, Venkat
+      <div class="popup"><b>Output idea:</b><br>Thread prints thread name; sort is case-insensitive.</div>
+    </div>
+
+    <p>Also showing a short example of using lambda to compare by length:</p>
+    <div class="code-block">
+// Comparator by length
+Comparator<String> byLen = (a,b) -> Integer.compare(a.length(), b.length());
+List<String> names = List.of("Rajani","Chiru","Amit","Venkat");
+List<String> sorted = new ArrayList<>(names);
+sorted.sort(byLen);
+// Result: [Amit, Chiru, Rajani, Venkat]
+      <div class="popup"><b>Why this matters:</b><br>Readable, reusable comparators help when sorting complex objects.</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2>6. Best Practices & Common Pitfalls</h2>
+    <ul>
+      <li>Prefer meaningful variable names over single letters in complex lambdas.</li>
+      <li>Keep lambdas short—if logic grows complex, extract to a named method or class.</li>
+      <li>Be aware of captured variables: they must be effectively final.</li>
+      <li>Avoid side-effects inside functional pipelines; prefer pure functions where possible.</li>
+    </ul>
+  </div>
+
+  <div class="subsection">
+    <h2>7. Quick Hands-on Exercises</h2>
+    <div class="qa-item">1. Write a <code>Predicate&lt;Integer&gt;</code> that checks prime numbers.<div class="answer">Hint: Use <code>IntStream.rangeClosed(2, n-1)</code> and <code>noneMatch</code>.</div></div>
+    <div class="qa-item">2. Create a <code>Function&lt;String,String&gt;</code> that reverses a string.<div class="answer">Hint: Use <code>new StringBuilder(s).reverse().toString()</code>.</div></div>
+    <div class="qa-item">3. Produce a <code>Supplier&lt;LocalDate&gt;</code> that returns current date.<div class="answer">Hint: <code>() -> LocalDate.now()</code>.</div></div>
+  </div>
+
+  <div class="key-summary">
+    <h2>Key Summary</h2>
+    <ul>
+      <li>Lambdas provide a compact way to represent functional interfaces.</li>
+      <li>Use <code>java.util.function</code> for common patterns (Predicate, Function, Supplier, Consumer).</li>
+      <li>Pass and return lambdas from methods to write flexible APIs.</li>
+      <li>Prefer clarity—extract complex logic out of lambdas.</li>
+      <li>Practice with small exercises to build fluency and confidence.</li>
+    </ul>
+  </div>
+</div>
+<div class="footer">NBKRIST © 2025 | Authored by Hari Babu Mutchakala</div>
+<script>
+const toggle=document.getElementById('themeToggle');
+toggle.addEventListener('click',()=>{document.body.classList.toggle('dark');toggle.textContent=document.body.classList.contains('dark')? '☀️ Light' : '🌙 Dark';});
+toggle.addEventListener('keydown',(e)=>{ if(e.key === 'Enter' || e.key === ' ') toggle.click(); });
+</script>
+</body>
+</html>
