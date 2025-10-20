@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NBKRIST - Java Hub | Advanced Interfaces in Java</title>
+<style>
+:root {
+  --primary:#0078ff;
+  --accent:#00bfff;
+  --header:#004d99;
+  --glass:rgba(255,255,255,0.9);
+  --text:#222;
+  --light-bg:rgba(245,248,255,0.85);
+  --bg-gradient:linear-gradient(135deg,#f5faff,#ffffff);
+}
+body.dark {
+  --primary:#66b3ff;
+  --accent:#3399ff;
+  --header:#cce5ff;
+  --glass:rgba(25,25,25,0.9);
+  --text:#f0f0f0;
+  --light-bg:rgba(40,40,40,0.85);
+  --bg-gradient:linear-gradient(135deg,#0f172a,#1e293b);
+}
+body {
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+  background:var(--bg-gradient);
+  color:var(--text);
+  line-height:1.6;
+  transition:background .4s ease,color .4s ease;
+}
+header {
+  position:relative;
+  text-align:center;
+  padding:25px 10px 10px 10px;
+  background:var(--glass);
+  backdrop-filter:blur(12px);
+  font-weight:bold;
+  font-size:1.8em;
+  color:var(--header);
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+}
+.theme-toggle {
+  position:absolute;
+  right:20px;
+  top:20px;
+  background:var(--light-bg);
+  border:none;
+  color:var(--primary);
+  font-weight:600;
+  border-radius:8px;
+  padding:6px 12px;
+  cursor:pointer;
+  transition:0.3s;
+}
+.theme-toggle:hover{background:var(--primary);color:#fff}
+
+/* Navbar */
+.navbar {
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  padding:12px 10px;
+  background:rgba(255,255,255,0.3);
+  backdrop-filter:blur(10px);
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  border-radius:10px;
+  margin:8px auto 20px auto;
+  width:90%;
+}
+.navbar a {
+  text-decoration:none;
+  color:var(--primary);
+  font-weight:600;
+  position:relative;
+  padding:5px 10px;
+  transition:color 0.3s ease;
+}
+.navbar a::after {
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0%;
+  height:2px;
+  background:var(--primary);
+  transition:width 0.3s ease;
+}
+.navbar a:hover{color:var(--accent);}
+.navbar a:hover::after{width:100%;}
+
+.container {
+  max-width:950px;
+  margin:20px auto 40px auto;
+  background:var(--glass);
+  border-radius:16px;
+  padding:30px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* Sections */
+.subsection {
+  position:relative;
+  background:rgba(240,248,255,0.45);
+  margin:25px 0;
+  padding:18px 22px 18px 30px;
+  border-radius:10px;
+  overflow:hidden;
+}
+.subsection::before {
+  content:"";
+  position:absolute;
+  left:0;
+  top:8px;
+  bottom:8px;
+  width:4px;
+  background:linear-gradient(180deg,#0099ff,#0066cc);
+  border-radius:3px;
+}
+.subsection::after {
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:15px;
+  height:6px;
+  background:#0099ff;
+  border-radius:0 5px 5px 0;
+  box-shadow:0 calc(100% - 6px) 0 0 #0099ff;
+}
+h1{text-align:center;color:var(--header);margin-top:0}
+h2{color:var(--primary);margin-bottom:10px}
+.code-block {
+  position:relative;
+  background:var(--light-bg);
+  border-left:3px solid var(--primary);
+  padding:10px 12px;
+  border-radius:8px;
+  font-family:Consolas,monospace;
+  font-size:0.9em;
+  line-height:1.4;
+  white-space:pre-wrap;
+  margin:10px 0;
+}
+.code-block .popup {
+  position:absolute;
+  left:calc(100% + 10px);
+  top:0;
+  background:rgba(255,255,255,0.97);
+  color:#000;
+  border-radius:10px;
+  padding:8px 12px;
+  width:260px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+  opacity:0;
+  transform:translateX(10px);
+  transition:all 0.25s ease;
+  pointer-events:none;
+  font-size:0.9em;
+}
+.code-block:hover .popup {
+  opacity:1;
+  transform:translateX(0);
+  pointer-events:auto;
+  z-index:10;
+}
+.qa-item {
+  background:rgba(255,255,255,0.9);
+  border-left:4px solid var(--primary);
+  margin:12px 0;
+  padding:12px 15px;
+  border-radius:8px;
+}
+.qa-item:hover{background:rgba(230,243,255,0.95)}
+.qa-item .answer{display:none;margin-top:8px}
+.qa-item:hover .answer{display:block}
+.key-summary {
+  background:rgba(230,245,255,0.9);
+  border-left:4px solid var(--primary);
+  border-radius:8px;
+  padding:14px;
+  margin-top:25px;
+}
+footer {
+  text-align:center;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  color:#fff;
+  padding:15px;
+  border-radius:10px;
+  width:90%;
+  margin:40px auto 10px auto;
+  font-size:0.9em;
+}
+@media(max-width:880px){
+  .navbar{flex-direction:column;gap:10px;width:95%;}
+  .code-block .popup{left:0;top:calc(100% + 10px);width:95%;}
+}
+</style>
+</head>
+
+<body>
+<header>
+  NBKRIST – Java Hub
+  <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+</header>
+
+<nav class="navbar">
+  <a href="interfaces.html">🏠 Home</a>
+
+</nav>
+
+<div class="container">
+  <h1>Advanced Interfaces in Java (Java 8+ Evolution)</h1>
+
+  <div class="subsection">
+    <h2>Expert View</h2>
+    <p>As a software engineer at NBKRIST, I realized how Java 8 marked a turning point in the language's evolution. Interfaces were no longer just contracts — they became active participants in programming through <strong>default</strong> and <strong>static methods</strong>. This transformation paved the way for <strong>functional programming</strong> in Java, enabling features like <strong>lambda expressions</strong> and <strong>streams</strong>. Without these enhancements, Java might have lost its position in the IT industry. From Java 8 to Java 25, this steady evolution shows how interfaces continue to adapt to modern software design patterns.</p>
+  </div>
+
+  <div class="subsection">
+    <h2>Default Methods in Interfaces</h2>
+    <p>Default methods allow interfaces to provide a method implementation without breaking existing code. Introduced in Java 8, they enable interface evolution while maintaining backward compatibility.</p>
+    <div class="code-block">
+interface Greeting {
+  default void sayHello() {
+    System.out.println("Hello from NBKRIST, Vidyanagar!");
+  }
+}
+class Student implements Greeting {}
+class Test {
+  public static void main(String[] args) {
+    new Student().sayHello();
+  }
+}
+      <div class="popup"><b>Output:</b><br>Hello from NBKRIST, Vidyanagar!</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2>Static Methods in Interfaces</h2>
+    <p>Static methods in interfaces are invoked using the interface name. They provide utility functionality that’s logically tied to the interface rather than instances.</p>
+    <div class="code-block">
+interface Utility {
+  static void displayCampus() {
+    System.out.println("NBKRIST - Static Method in Interface, Vidyanagar");
+  }
+}
+class TestStatic {
+  public static void main(String[] args) {
+    Utility.displayCampus();
+  }
+}
+      <div class="popup"><b>Output:</b><br>NBKRIST - Static Method in Interface, Vidyanagar</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2>Functional Interfaces</h2>
+    <p>A functional interface contains exactly one abstract method. It forms the basis of lambda expressions and method references.</p>
+    <div class="code-block">
+@FunctionalInterface
+interface Calculator {
+  int operate(int a, int b);
+}
+class LambdaDemo {
+  public static void main(String[] args) {
+    Calculator add = (a, b) -> a + b;
+    System.out.println("Sum: " + add.operate(10, 20));
+  }
+}
+      <div class="popup"><b>Output:</b><br>Sum: 30</div>
+    </div>
+    <p>Examples of functional interfaces in Java include <code>Runnable</code>, <code>Callable</code>, <code>Comparator</code>, and those in the <code>java.util.function</code> package like <code>Predicate</code> and <code>Consumer</code>.</p>
+  </div>
+
+  <div class="subsection">
+    <h2>Annotations in Interfaces</h2>
+    <p>Annotations such as <code>@FunctionalInterface</code>, <code>@Override</code>, and <code>@Deprecated</code> add metadata and ensure correctness. In Java 8+, annotations help enforce interface behavior consistency.</p>
+    <div class="code-block">
+@FunctionalInterface
+interface CampusPrinter {
+  void print(String msg);
+}
+class NBKPrinter {
+  public static void main(String[] args) {
+    CampusPrinter printer = (m) -> System.out.println("NBKRIST Message: " + m);
+    printer.print("Welcome to Functional Programming at Vidyanagar!");
+  }
+}
+      <div class="popup"><b>Output:</b><br>NBKRIST Message: Welcome to Functional Programming at Vidyanagar!</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h2>Practice Questions</h2>
+    <div class="qa-item">1. What is the purpose of a default method?<div class="answer">To add new functionality without breaking existing implementations.</div></div>
+    <div class="qa-item">2. How do static methods differ from default methods?<div class="answer">Static methods belong to the interface itself and are called using the interface name.</div></div>
+    <div class="qa-item">3. Define a functional interface.<div class="answer">An interface containing a single abstract method, enabling lambda expressions.</div></div>
+    <div class="qa-item">4. Why was @FunctionalInterface introduced?<div class="answer">To ensure the interface strictly has one abstract method.</div></div>
+    <div class="qa-item">5. What are examples of functional interfaces in Java?<div class="answer">Runnable, Callable, Predicate, Consumer, Function.</div></div>
+  </div>
+
+  <div class="key-summary">
+    <h2>Key Summary</h2>
+    <ul>
+      <li>Java 8 revolutionized interfaces with default and static methods.</li>
+      <li>Functional interfaces and lambdas introduced a concise way to code behavior.</li>
+      <li>Annotations like @FunctionalInterface enforce structure and correctness.</li>
+      <li>NBKRIST Java Hub encourages learning functional paradigms as they dominate modern Java development.</li>
+    </ul>
+  </div>
+</div>
+
+<footer>NBKRIST © 2025 | Authored by Hari Babu Mutchakala</footer>
+
+<script>
+const toggle=document.getElementById("themeToggle");
+toggle.addEventListener("click",()=>{
+  document.body.classList.toggle("dark");
+  toggle.textContent=document.body.classList.contains("dark")?"☀️ Light":"🌙 Dark";
+});
+</script>
+</body>
+</html>
