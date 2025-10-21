@@ -35,7 +35,7 @@
 
     /* ===== header ===== */
     header {
-     
+
       top: 0;
       left: 0;
       right: 0;
@@ -69,7 +69,7 @@
 
     /* ===== nav (fixed, below header) ===== */
     nav {
-    
+
       top: 106px;
       /* moved down to avoid overlap with header */
       left: 12px;
@@ -111,15 +111,16 @@
     }
 
     /* ===== main card ===== */
- main {
-  max-width: 980px;
-  margin: 5px auto 22px; /* smaller top margin */
-  background: var(--card-bg);
-  border-radius: 16px;
-  padding: 34px 42px;
-  box-shadow: 0 20px 50px rgba(8, 16, 40, 0.06);
-  color: var(--text);
-}
+    main {
+      max-width: 980px;
+      margin: 5px auto 22px;
+      /* smaller top margin */
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 34px 42px;
+      box-shadow: 0 20px 50px rgba(8, 16, 40, 0.06);
+      color: var(--text);
+    }
 
     h2 {
       color: var(--accent-2);
@@ -276,6 +277,14 @@
     a.underline-animate:hover::after {
       width: 100%;
     }
+        .tip {
+      background: rgba(224, 247, 255, 0.7);
+      border-left: 4px solid var(--accent);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-style: italic;
+      margin-top: 10px;
+    }
   </style>
 </head>
 
@@ -288,15 +297,17 @@
   <nav>
     <p
       style="color: rgb(108, 11, 204); font-size: 40px; font-weight: 200;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-      JAVA FX </p><a href="index.html">← Back to Home</a> <a href="SceneBuilder.html">GUI Builder </a> <a
-      href="eventhandling.html">Event Handling</a> <a href="fxqa.html">Q & A</a> <audio controls class="mt-3">
+      JAVA FX </p><a href="index.html">← Back to Home</a> <a href="SceneBuilder.html">GUI - SceneBuilder </a> <a
+      href="eventhandling.html">Event Handling</a> <a href="fxqa.html">Q & A</a> 
+      <audio controls class="mt-3">
       <source src="javafx.m4a" type="audio/mp4">
       <p>Your browser does not support the audio element.</p>
     </audio>
   </nav>
 
   <main>
-    <h2>💡 Introduction to JavaFX – A Creative Analogy</h2>
+    
+    <h2>🎭 Introduction to JavaFX GUI – The Stage Where Your Code Performs</h2>
     <p> While teaching, I often relate concepts to real-world examples to make learning intuitive and engaging. For
       JavaFX, I drew inspiration from a familiar cultural practice: the South Indian Muggu—known as Rangoli in English—a
       decorative design traditionally drawn on the floor during festivals.
@@ -321,8 +332,10 @@
         interactive interface. Just as every element in a Rangoli contributes to the overall aesthetic, each JavaFX
         component plays a role in creating a functional and visually appealing application.
       </div>
+     
     </div>
-    <h2>💡 Why GUI Development Matters in Modern Software Engineering</h2>
+     <div class="tip">💡A Graphical User Interface (GUI) is the face of your application — it’s how users connect with your code. JavaFX gives you the power to turn simple logic into interactive, visual experiences. Learning GUI development helps you make software that not only works but also feels alive and user-friendly.</div>
+    <h2>🎨 Why GUI Development Matters in Modern Software Engineering</h2>
     <p> Having built and deployed software across platforms, I see GUI development as an essential craft, not just a
       skill. No matter how strong the backend, an application's success depends on intuitive user interaction. Modern
       users expect clarity, responsiveness, and visual feedback from every application. This applies to desktop tools,
@@ -333,7 +346,10 @@
       design, a skill transferable across technologies. Mastering GUI bridges functionality and usability, turning great
       code into software people love. <img src="login1.png" alt="the login screen"
         style="max-width:100%;height:auto;margin-top:15px;border:1px solid #ccc;padding:5px;border-radius:5px;">
-    <h2>1. JavaFX Application Window Structure</h2>
+   <div class="tip">💡A well-designed Graphical User Interface (GUI) is crucial because it bridges the gap between the user and the application’s logic. A clear, intuitive GUI not only enhances user experience but also makes software more accessible, engaging, and efficient to use.</div>
+   
+   
+        <h2>1.🪟 JavaFX Application Window Structure</h2>
     <p> Every JavaFX application begins with a class that extends the <code>Application</code> class. The application
       window is structured around three main components: </p>
     <ul>
@@ -345,7 +361,9 @@
       <code>stop()</code> methods, allowing initialization, display, and cleanup tasks respectively.
     </p> <img src="fx2.png" alt="JavaFX Application Structure"
       style="max-width:100%;height:auto;margin-top:15px;border:1px solid #ccc;padding:5px;border-radius:5px;">
-    <h2>2. Displaying Text and Images</h2>
+    
+    <div class="tip">💡Understand the JavaFX Application Window Structure — it starts with a Stage (the main window), holds a Scene (the container for content), and displays layout panes and controls inside it. Mastering this hierarchy helps you design GUIs that are organized, scalable, and easy to manage.</div>
+      <h2>2.🧩 Displaying Text and Images</h2>
     <p> JavaFX provides several classes to display text and images elegantly. Text can be displayed using
       <code>Label</code> or <code>Text</code> classes, and images can be loaded with <code>Image</code> and displayed
       using <code>ImageView</code>.
@@ -357,7 +375,7 @@
     </ul>
     <p> These components can also be styled using CSS for a more appealing interface, making it easy to display
       multimedia content efficiently in JavaFX applications. </p>
-    <h2>3. Event Handling</h2>
+    <h2>3.⚡ Event Handling</h2>
     <p> Event handling in JavaFX is a mechanism to respond to user interactions such as mouse clicks, key presses, or
       window actions. Each node in the scene graph can generate and listen to events. </p>
     <p> Events can be handled using: </p>
@@ -368,7 +386,10 @@
       </li>
     </ul>
     <p> Example: responding to a button click with <code>setOnAction()</code> method to trigger a specific task. </p>
-    <h2>4. Laying Out Nodes in Scene Graph</h2>
+    <div class="tip">💡Event handling is the heart of interactivity in JavaFX. Every click, keypress, or mouse move is a chance to make your app respond intelligently. Keep your event-handling code clean and modular — let each event do one clear job. That’s how you turn static interfaces into dynamic, user-driven experiences.</div>
+
+
+    <h2>4.🛠️ Laying Out Nodes in Scene Graph</h2>
     <p> JavaFX organizes UI components in a hierarchical structure called the <strong>Scene Graph</strong>. The root
       node contains layout containers and controls arranged to form the complete interface. </p>
     <p> Common layout containers include: </p>
@@ -378,9 +399,10 @@
       <li><strong>GridPane:</strong> Places elements in a grid-like structure.</li>
       <li><strong>BorderPane:</strong> Divides the layout into top, bottom, left, right, and center sections.</li>
     </ul>
+    <div class="tip">💡In JavaFX, laying out nodes means arranging visual elements like buttons, labels, and images inside the Scene Graph — a hierarchical tree that defines how every UI component appears on screen. Use layout panes such as VBox (vertical arrangement) and GridPane (grid-based layout) to organize your nodes neatly. A well-structured Scene Graph with proper layouts makes your GUI clean, responsive, and easy to maintain.</div>
     <p> Using appropriate layout managers ensures that the UI remains responsive and well-structured across different
       screen sizes. </p>
-    <h2>5. Mouse Events</h2>
+    <h2>5.🖱️ Mouse Events</h2>
     <p> JavaFX supports various mouse-based interactions such as clicking, dragging, hovering, and scrolling. The
       <code>MouseEvent</code> class captures these actions and allows developers to define responses for each event.
     </p>
@@ -401,6 +423,139 @@
         class="underline-animate">About JavaFX SceneBuilder</a>
 
     </p>
+
+    <h2>6.🎨 JavaFX Practice Questions</h2>
+<!-- ✅ JavaFX Practice Questions Section -->
+<div style="max-width: 800px; margin: 40px auto; background: rgba(255,255,255,0.9); border-radius: 12px; padding: 25px; box-shadow: 0 0 15px rgba(0,0,0,0.1); font-family: 'Segoe UI', sans-serif;">
+
+
+  <style>
+    .q-card {
+      background: #f8fafc;
+      border: 1px solid #dbeafe;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+      position: relative;
+      cursor: pointer;
+    }
+    .q-card:hover {
+      background: #eff6ff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+    }
+    .answer {
+      display: none;
+      margin-top: 10px;
+      color: #374151;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .q-card:hover .answer {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 600px) {
+      .q-card { font-size: 0.95rem; }
+    }
+  </style>
+
+  <!-- Question 1 -->
+  <div class="q-card">
+    <p><strong>1️⃣ JavaFX Application Window Structure:</strong>  
+    What are the main components of a JavaFX application window, and how do they relate?</p>
+    <div class="answer">🧠 <strong>Answer:</strong> A JavaFX window has a <strong>Stage</strong> (the main window), a <strong>Scene</strong> (content container), and <strong>Nodes</strong> (UI elements). The Stage holds the Scene, and the Scene contains the Nodes.</div>
+  </div>
+
+  <!-- Question 2 -->
+  <div class="q-card">
+    <p><strong>2️⃣ Displaying Text and Images:</strong>  
+    How can you show text and images in a JavaFX application?</p>
+    <div class="answer">🧠 <strong>Answer:</strong> Use <code>Label</code> or <code>Text</code> for text, and <code>Image</code> with <code>ImageView</code> for images.  
+    Example: <code>ImageView img = new ImageView(new Image("pic.png"));</code></div>
+  </div>
+
+  <!-- Question 3 -->
+  <div class="q-card">
+    <p><strong>3️⃣ Event Handling:</strong>  
+    What is Event Handling in JavaFX, and how do you handle a button click?</p>
+    <div class="answer">🧠 <strong>Answer:</strong> Event handling lets the app respond to user actions.  
+    Example: <code>button.setOnAction(e -> label.setText("Button Clicked!"));</code></div>
+  </div>
+
+  <!-- Question 4 -->
+  <div class="q-card">
+    <p><strong>4️⃣ Laying Out Nodes in Scene Graph:</strong>  
+    What does laying out nodes mean, and name any two layout panes.</p>
+    <div class="answer">🧠 <strong>Answer:</strong> Laying out nodes means arranging UI components within the <strong>Scene Graph</strong> (a tree structure).  
+    Common panes include <strong>VBox</strong> (vertical layout) and <strong>GridPane</strong> (grid-based layout).</div>
+  </div>
+
+  <!-- Question 5 -->
+  <div class="q-card">
+    <p><strong>5️⃣ Mouse Events:</strong>  
+    What are mouse events in JavaFX, and how can you handle a click?</p>
+    <div class="answer">🧠 <strong>Answer:</strong> Mouse events capture user interactions like clicks and movement.  
+    Example: <code>node.setOnMouseClicked(e -> System.out.println("Mouse Clicked!"));</code></div>
+  </div>
+
+ 
+</div>
+
+   <h2>6. 🌟Key Summary Points on JavaFX</h2>
+<!-- ✅ JavaFX Key Summary Points Section -->
+<div style="max-width: 800px; margin: 40px auto; background: rgba(255,255,255,0.9); border-radius: 12px; padding: 25px; box-shadow: 0 0 15px rgba(0,0,0,0.1); font-family: 'Segoe UI', sans-serif;">
+  <style>
+    .fx-points {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .fx-points li {
+      background: #f0f9ff;
+      border-left: 5px solid #2563eb;
+      border-radius: 6px;
+      padding: 12px 15px;
+      margin: 10px 0;
+      font-size: 1rem;
+      color: #1f2937;
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: fadeSlideIn 0.8s forwards;
+    }
+    .fx-points li:nth-child(1) { animation-delay: 0.3s; }
+    .fx-points li:nth-child(2) { animation-delay: 0.6s; }
+    .fx-points li:nth-child(3) { animation-delay: 0.9s; }
+    .fx-points li:nth-child(4) { animation-delay: 1.2s; }
+    .fx-points li:nth-child(5) { animation-delay: 1.5s; }
+
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @media (max-width: 600px) {
+      .fx-points li { font-size: 0.95rem; }
+    }
+  </style>
+
+  <ul class="fx-points">
+    <li><strong>1️⃣ JavaFX is a Modern GUI Framework:</strong> It’s used to create interactive, visually rich desktop Graphical User Interface <b>(GUI)</b> applications using Java.</li>
+    <li><strong>2️⃣ Core Structure:</strong> Every JavaFX app is built around <b>Stage</b> (window), <b>Scene</b> (content area), and <b>Nodes</b> (UI elements).</li>
+    <li><strong>3️⃣ Layouts and Scene Graph:</strong> UI elements are arranged using layout panes like <b>VBox</b>, <b>HBox</b>, and <b>GridPane</b> inside a hierarchical Scene Graph.</li>
+    <li><strong>4️⃣ Event Handling:</strong> JavaFX apps respond to user actions (clicks, key presses, mouse moves) through event listeners or lambda expressions.</li>
+    
+  </ul>
+
+  <p style="text-align:center; color:#6b7280; font-size:0.9rem; margin-top:20px;">
+    ⚡ These are the building blocks to start your JavaFX journey!
+  </p>
+</div>
+
   </main>
   <footer> All rights reserved for NBKRIST and authored by Hari Babu Mutchakala!!!!!
   </footer>
