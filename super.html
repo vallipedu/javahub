@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>NBKRIST — Java super Keyword Interactive Learning</title>
+<style>
+  :root{
+    --bg:#e0f2fe;
+    --card:#f0f9ff;
+    --text:#0f172a;
+    --accent:#0284c7;
+    --muted:#475569;
+    --output-bg:#f1f5f9;
+    --popup-bg:#ffffff;
+    --popup-shadow:rgba(0,0,0,0.15);
+  }
+  [data-theme="dark"]{
+    --bg:#0f1724;
+    --card:#0b1220;
+    --text:#e6eef6;
+    --accent:#7dd3fc;
+    --muted:#94a3b8;
+    --output-bg:#071526;
+    --popup-bg:#1e293b;
+    --popup-shadow:rgba(255,255,255,0.06);
+  }
+
+  html{scroll-behavior:smooth}
+  body{
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+    background:var(--bg); color:var(--text);
+    margin:0; padding:28px;
+    transition:background .25s,color .25s;
+    overflow-x:hidden;
+  }
+
+  .container{max-width:980px;margin:0 auto}
+
+  header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px}
+  .header-left{display:flex;align-items:center;gap:14px}
+  .brand{padding:8px 12px;border-radius:10px;background:linear-gradient(135deg,#0ea5e9,#06b6d4);color:#012;font-weight:700}
+  header h1{font-size:18px;margin:0}
+  .subtitle{color:var(--muted);font-size:13px}
+
+  .header-buttons{display:flex;gap:10px;align-items:center}
+  .theme-toggle,.home-btn{border:none;cursor:pointer;border-radius:8px;font-size:13px;font-weight:500;transition:.18s;padding:8px 12px}
+  .theme-toggle{background:var(--accent);color:#fff}
+  .home-btn{background:#fff;border:1px solid var(--accent);color:var(--accent)}
+  [data-theme="dark"] .home-btn{background:transparent;color:var(--accent)}
+  .theme-toggle:hover,.home-btn:hover{transform:translateY(-1px)}
+
+  /* Cards */
+  .card{background:var(--card);border-radius:12px;padding:18px 18px 18px 24px;border-left:4px solid var(--accent);box-shadow:0 4px 10px rgba(0,0,0,0.06);margin-bottom:18px}
+  h2{font-size:17px;margin:0 0 8px}
+  .desc{color:var(--muted);font-size:14px;margin:6px 0 10px}
+
+  /* code */
+  .code{background:var(--output-bg);padding:12px;border-radius:8px;border:1px solid rgba(0,0,0,0.04);overflow:auto;margin-top:8px}
+  pre{margin:0;color:var(--text);font-size:13px;white-space:pre-wrap}
+  .btns{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+  button.action{background:transparent;border:1px solid var(--accent);color:var(--accent);padding:6px 12px;border-radius:8px;cursor:pointer;transition:.14s}
+  button.action:hover{background:var(--accent);color:white}
+
+  .output{margin-top:8px;color:var(--accent);font-family:monospace;white-space:pre-wrap;background:var(--output-bg);padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.04);display:none}
+
+  /* Navigation list */
+  .navlist{background:var(--card);border-radius:12px;padding:16px;margin-bottom:18px;box-shadow:0 4px 10px rgba(0,0,0,0.06);border-left:4px solid var(--accent)}
+  .navlist ul{margin:0;padding-left:20px}
+  .navlist li{margin:8px 0}
+  .navlist a{color:var(--accent);text-decoration:none}
+  .navlist a:hover{text-decoration:underline}
+
+  /* Interview Q&A and popup */
+  .qa-list{position:relative;padding:0;margin:0;list-style:none}
+  .qa-item{margin:10px 0;padding:12px;border-radius:8px;background:var(--output-bg);border-left:4px solid var(--accent);cursor:pointer;position:relative}
+  .qa-item:hover{background:rgba(2,132,199,0.06)}
+  .answer-popup{
+    display:none;position:absolute;top:0;left:calc(100% + 12px);
+    width:28%;max-height:650px;overflow-y:auto;
+    background:var(--popup-bg);color:var(--text);border-radius:10px;box-shadow:0 6px 18px var(--popup-shadow);
+    padding:14px 16px;z-index:120;white-space:normal;
+  }
+  .qa-item.active .answer-popup{display:block;animation:slideIn .22s ease-out}
+  @keyframes slideIn{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:translateX(0)}}
+  .answer-popup::-webkit-scrollbar{width:7px}
+  .answer-popup::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
+
+  /* key summary styling list */
+  .qa-list-style{list-style:none;padding:0;margin:0}
+  .qa-list-style li{margin:8px 0;padding:8px;background:var(--output-bg);border-left:4px solid var(--accent);border-radius:8px}
+
+  /* responsive */
+  @media(max-width:900px){
+    .answer-popup{position:relative;left:0;width:100%;margin-top:8px;max-height:none}
+    .container{padding:12px}
+    body{padding:16px}
+  }
+
+  footer{color:var(--muted);font-size:13px;text-align:center;margin-top:20px}
+</style>
+</head>
+<body>
+<div class="container" id="top">
+  <header>
+    <div class="header-left">
+      <div class="brand">NBKRIST-JavaHub</div>
+      <div>
+        <h1>Java <code>super</code> Keyword — Interactive Learning</h1>
+        <div class="subtitle">Clear examples, expert note, interview practice & summary</div>
+      </div>
+    </div>
+
+    <div class="header-buttons">
+      <a class="home-btn" href="inheritance.html" title="Back to Home">🏠 Back to Home</a>
+      <button class="theme-toggle" id="themeToggle" aria-pressed="false">Switch to Dark</button>
+    </div>
+  </header>
+
+  <!-- Expert view (first) -->
+  <div class="card" id="expert">
+    <h2>💡 Expert View — Why I Love <code>super</code></h2>
+    <p>The <code>super</code> keyword is the bridge between a parent class and its subclass. It ensures subclasses are built upon a stable, initialized foundation and allows explicit reuse of parent constructors, methods, and fields.</p>
+    <p>When an object is created in an inheritance chain, Java initializes the parent part first (via the parent constructor) and then the subclass. <code>super()</code> makes this explicit and controlled. Using <code>super</code> improves clarity when members are shadowed or methods overridden — the intention becomes clear.</p>
+  </div>
+
+  <!-- Navigation -->
+  <div class="navlist" aria-label="List of uses">
+    <h2>📘 List of All Uses of <code>super</code></h2>
+    <ul>
+      <li><a href="#use1"> Access Parent Class Variables</a></li>
+      <li><a href="#use2"> Invoke Parent Class Methods</a></li>
+      <li><a href="#use3"> Invoke Parent Class Constructor</a></li>
+      <li><a href="#use4"> Invoking Parent Class Constructor with Parameters</a></li>
+      <li><a href="#use5"> Constructor Chaining Across Inheritance</a></li>
+     
+    </ul>
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a style="text-decoration: underline;color: red;" href="#interview">Interview Practice Questions</a>
+     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a style="text-decoration: underline;color: red;" href="#summary">Key Summary</a>
+  </div>
+
+  <!-- Use Case 1 -->
+  <div class="card" id="use1">
+    <h2>1️⃣ Access Parent Class Variables (Fields)</h2>
+    <p class="desc">The super keyword lets a subclass access its parent’s variable when it’s hidden by a field of the same name.<br>Look at <code>Child.java</code>, which illustrates how <code>super</code> accesses the parent's field when the subclass has a field with the same name.</p>
+    <div class="code" id="code1"><pre><code>class Parent {
+    int value = 100;
+}
+class Child extends Parent {
+    int value = 200;
+    void show() {
+        System.out.println("Child value: " + value);
+        System.out.println("Parent value: " + super.value);
+    }
+    public static void main(String[] args) {
+        Child obj = new Child();
+        obj.show();
+    }
+}</code></pre></div>
+    <div class="btns">
+      <button class="action" data-copy="#code1">Copy</button>
+      <button class="action" onclick="runExample(1)">Show Output</button>
+    </div>
+    <div class="output" id="out1" role="status" aria-live="polite"></div>
+  </div>
+
+  <!-- Use Case 2 -->
+  <div class="card" id="use2">
+    <h2>2️⃣ Invoke Parent Class Methods</h2>
+    <p class="desc">When a subclass overrides a method of a superclass, the parent’s version is hidden; using super.methodName() allows calling the parent version explicitly.<br>Look at <code>Child.java</code>, which demonstrates calling a parent's method from the subclass using <code>super.methodName()</code>.</p>
+    <div class="code" id="code2"><pre><code>class Parent {
+    void display() { System.out.println("Display from Parent"); }
+}
+class Child extends Parent {
+    void display() { System.out.println("Display from Child"); }
+    void show() { super.display(); }
+    public static void main(String[] args) {
+        Child obj = new Child();
+        obj.show();
+    }
+}</code></pre></div>
+    <div class="btns">
+      <button class="action" data-copy="#code2">Copy</button>
+      <button class="action" onclick="runExample(2)">Show Output</button>
+    </div>
+    <div class="output" id="out2" role="status" aria-live="polite"></div>
+  </div>
+
+  <!-- Use Case 3 -->
+  <div class="card" id="use3">
+    <h2>3️⃣ Invoke Parent Class Constructor</h2>
+    <p class="desc">The super() call inside a subclass constructor explicitly invokes the matching parent class constructor to ensure proper and controlled initialization.<br>Look at <code>Child.java</code>, which shows <code>super()</code> used to call a  parent constructor.</p>
+    <div class="code" id="code3"><pre><code>class Parent {
+    // default constructor of the Parent class
+        Parent() { System.out.println("Parent (NBKRIST) constructor");
+    }
+}
+
+class Child extends Parent {
+    // default constructor of the Child class
+    Child() {
+        super(); // calling parent constructor
+        System.out.println("Child (Department of CSE) constructor");
+    }
+    public static void main(String[] args) {
+        new Child();
+    }
+}</code></pre></div>
+    <div class="btns">
+      <button class="action" data-copy="#code3">Copy</button>
+      <button class="action" onclick="runExample(3)">Show Output</button>
+    </div>
+    <div class="output" id="out3" role="status" aria-live="polite"></div>
+  </div>
+
+  <!-- Use Case 4 -->
+  <div class="card" id="use4">
+    <h2>4️⃣ Calling Super Class Constructor with parameters</h2>
+    <p class="desc">The super(parameterlist) call in a sub class constructor invokes the matching parent class constructor with the specified arguments.<br> Look at <code>Child.java</code>, which shows how <code>super</code> is used to call a parameterized parent constructor to build base foundation first.</p>
+    <div class="code" id="code4"><pre><code>class Parent {
+    String collegeName;
+    int establishedYear;
+
+    Parent(String name, int year) {
+        collegeName = name;
+        establishedYear = year;
+        System.out.println("Parent Constructor: " + collegeName + " - Established " + establishedYear);
+    }
+}
+
+class Child extends Parent {
+    String department;
+
+    Child(String name, int year, String dept) {
+        super(name, year); // calling parent constructor with parameters
+        department = dept;
+        System.out.println("Child Constructor: Department - " + department);
+    }
+
+    void displayDetails() {
+        System.out.println("College: " + collegeName);
+        System.out.println("Year: " + establishedYear);
+        System.out.println("Department: " + department);
+    }
+
+    public static void main(String[] args) {
+        Child c = new Child("NBKRIST", 1979, "Computer Science");
+        c.displayDetails();
+    }
+}
+</code></pre></div>
+    <div class="btns">
+      <button class="action" data-copy="#code4">Copy</button>
+      <button class="action" onclick="runExample(4)">Show Output</button>
+    </div>
+    <div class="output" id="out4" role="status" aria-live="polite"></div>
+  </div>
+
+  <!-- Use Case 5 -->
+  <div class="card" id="use5">
+    <h2>5️⃣ Constructor Chaining Across Inheritance</h2>
+    <p class="desc">Constructor chaining across inheritance ensures that when a subclass object is created, constructors from the parent to the child execute in order, forming a complete and consistent object initialization chain.<br>Look at <code>C.java</code>, which demonstrates how <code>super()</code> ensures constructors run in correct order across inheritance levels.</p>
+    <div class="code" id="code5"><pre><code>class A {
+    A() { System.out.println("A constructor"); }
+}
+class B extends A {
+    B() { super(); System.out.println("B constructor"); }
+}
+class C extends B {
+    C() { super(); System.out.println("C constructor"); }
+    public static void main(String[] args) {
+        new C();
+    }
+}</code></pre></div>
+    <div class="btns">
+      <button class="action" data-copy="#code5">Copy</button>
+      <button class="action" onclick="runExample(5)">Show Output</button>
+    </div>
+    <div class="output" id="out5" role="status" aria-live="polite"></div>
+  </div>
+
+  <!-- Interview Questions -->
+  <div class="card" id="interview">
+    <h2>💼 Interview Practice Questions</h2>
+    <ul class="qa-list" aria-live="polite">
+      <li class="qa-item">
+        What is the primary purpose of the <code>super</code> keyword in Java?
+        <div class="answer-popup">It allows a subclass to access its parent class’s members — variables, methods, and constructors — promoting reuse and structured inheritance design.</div>
+      </li>
+      <li class="qa-item">
+        Can a subclass constructor call its parent constructor without <code>super()</code>?
+        <div class="answer-popup">Yes, if the parent class defines a no-argument constructor. Otherwise you must explicitly call the appropriate <code>super(args)</code>.</div>
+      </li>
+      <li class="qa-item">
+        How does <code>super</code> help when a method is overridden in the subclass?
+        <div class="answer-popup">It lets the subclass invoke the parent’s original version (using <code>super.methodName()</code>), which is useful to extend — not fully replace — parent behavior.</div>
+      </li>
+      <li class="qa-item">
+        What happens if a parent constructor has parameters and the subclass doesn’t call <code>super()</code> explicitly?
+        <div class="answer-popup">The compiler inserts a no-arg <code>super()</code> call; if the parent has no such constructor, a compilation error occurs — you must add <code>super(args)</code>.</div>
+      </li>
+      <li class="qa-item">
+        When does using <code>super</code> improve code readability?
+        <div class="answer-popup">When differentiating overridden or shadowed members and during constructor chaining — <code>super</code> clarifies intent and preserves readable inheritance flow.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Key Summary -->
+  <div class="card" id="summary">
+    <h2>🧾 Key Summary</h2>
+    <ul class="qa-list-style">
+      <li><strong>super</strong> links subclass and parent class behavior.</li>
+      <li>Use <code>super()</code> to call parent constructors (must be first in constructor).</li>
+      <li>Use <code>super.field</code> to access hidden fields; <code>super.method()</code> to call overridden methods.</li>
+      <li>Constructor chaining ensures predictable object initialization (parent → child).</li>
+      <li><em>Tip:</em> Use <code>super</code> to make inheritance intent explicit and code readable.</li>
+    </ul>
+  </div>
+
+  <footer>
+    <a href="#top" style="color:var(--accent);text-decoration:none">⬆ Back to top</a><br>
+    All rights reserved © NBKRIST | Authored by Hari Babu Mutchakala
+  </footer>
+</div>
+
+<script>
+  // Copy buttons
+  document.querySelectorAll('button[data-copy]').forEach(btn=>{
+    btn.textContent = 'Copy';
+    btn.addEventListener('click', async ()=>{
+      const sel = btn.getAttribute('data-copy');
+      const el = document.querySelector(sel);
+      if(!el) return;
+      try{
+        await navigator.clipboard.writeText(el.innerText);
+        const prev = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(()=> btn.textContent = prev,900);
+      }catch(e){
+        btn.textContent = 'Copy failed';
+        setTimeout(()=> btn.textContent = 'Copy',900);
+      }
+    });
+  });
+
+  // Show output mapping
+  const outputs = {
+    1: "Child value: 200\nParent value: 100",
+    2: "Display from Parent",
+    3: "Parent(NBKRIST) constructor\nChild(CSE Department) constructor",
+    4: "Parent Constructor: NBKRIST - Established 1979\nChild Constructor: Department - Computer Science\nCollege: NBKRIST\nYear: 1979\nDepartment: Computer Science",
+    5: "A constructor\nB constructor\nC constructor"
+  };
+  function runExample(n){
+    const out = document.getElementById('out'+n);
+    if(!out) return;
+    out.style.display = 'block';
+    out.textContent = outputs[n] || '';
+    out.animate([{opacity:0.6},{opacity:1}],{duration:220,fill:'forwards'});
+    // ensure visible
+    out.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+
+  // Theme handling
+  const body = document.body;
+  const toggleBtn = document.getElementById('themeToggle');
+  const THEME_KEY = 'nbkrist-theme';
+  function getInitialTheme(){
+    const stored = localStorage.getItem(THEME_KEY);
+    if(stored === 'dark' || stored === 'light') return stored;
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  function applyTheme(theme){
+    body.setAttribute('data-theme', theme);
+    toggleBtn.textContent = theme === 'dark' ? 'Switch to Light' : 'Switch to Dark';
+    toggleBtn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+  }
+  applyTheme(getInitialTheme());
+  toggleBtn.addEventListener('click', ()=>{
+    const cur = body.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    const next = cur === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    localStorage.setItem(THEME_KEY, next);
+  });
+
+  // Q&A popup logic
+  (function setupQAs(){
+    const items = Array.from(document.querySelectorAll('.qa-item'));
+    function closeAll(){ items.forEach(i=>i.classList.remove('active')); }
+    items.forEach(item=>{
+      item.addEventListener('click', function(e){
+        e.stopPropagation();
+        const active = item.classList.contains('active');
+        closeAll();
+        if(!active) item.classList.add('active');
+        // ensure popup fully visible vertically
+        const popup = item.querySelector('.answer-popup');
+        if(popup){
+          requestAnimationFrame(()=>{
+            const r = popup.getBoundingClientRect();
+            const margin = 16;
+            if(r.bottom > window.innerHeight - margin){
+              const diff = r.bottom - (window.innerHeight - margin);
+              window.scrollBy({top: diff + 24, left:0, behavior:'smooth'});
+            }
+            if(r.top < margin){
+              const diff = r.top - margin;
+              window.scrollBy({top: diff - 24, left:0, behavior:'smooth'});
+            }
+          });
+        }
+      });
+    });
+    document.addEventListener('click', ()=> closeAll());
+    // stop clicks inside popup from closing
+    document.querySelectorAll('.answer-popup').forEach(pop => pop.addEventListener('click', e => e.stopPropagation()));
+    // Escape closes
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeAll(); });
+  })();
+</script>
+</body>
+</html>
