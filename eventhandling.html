@@ -1,191 +1,335 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaFX Event Handling</title>
-    <style>
-        body {
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f6f6;
-            color: #1b3d1b;
-            margin: 0;
-            padding: 0;
-            line-height: 1.7;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NBKRIST - JavaFX Event Handling</title>
+<style>
+  :root {
+    --primary: #0284c7;
+    --accent-1: #2563eb;
+    --accent-2: #1e40af;
+    --bg: linear-gradient(135deg, #eef6ff 0%, #f8fbfd 100%);
+    --text: #0f172a;
+    --card: rgba(255, 255, 255, 0.95);
+    --muted: #64748b;
+    --section-border: #0284c7;
+  }
 
-        header.main-header {
-            background-color: #c8e6c9; /* Light green */
-            padding: 15px 40px;
-            text-align: center;
-            color: #1b5e20;
-            font-size: 26px;
-            font-weight: bold;
-        }
+  [data-theme="dark"] {
+    --primary: #7dd3fc;
+    --accent-1: #60a5fa;
+    --accent-2: #1e3a8a;
+    --bg: #0f1724;
+    --text: #e2e8f0;
+    --card: rgba(17, 25, 40, 0.95);
+    --muted: #94a3b8;
+    --section-border: #38bdf8;
+  }
 
-        header.page-header {
-            background-color: #a5d6a7; /* Slightly darker green */
-            padding: 25px 40px;
-            text-align: center;
-            color: #1b5e20;
-            font-size: 32px;
-            font-weight: bold;
-        }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        nav {
-            margin: 20px 40px;
-        }
+  body {
+    font-family: "Segoe UI", "Poppins", Tahoma, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    transition: background 0.3s, color 0.3s;
+  }
 
-        nav a {
-            text-decoration: none;
-            color: #1b5e20;
-            font-weight: bold;
-            padding: 8px 15px;
-            border: 1px solid #1b5e20;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 14px 20px;
+    background: linear-gradient(90deg, #d0ecff, #b9e4ff, #9edaff);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    color: var(--primary);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
 
-        nav a:hover {
-            background-color: #1b5e20;
-            color: #ffffff;
-        }
+  header h1 {
+    font-size: 1.4rem;
+    text-align: center;
+    flex: 1;
+  }
 
-        main {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 30px 40px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
+  header span {
+    color: red;
+    font-style: italic;
+  }
 
-        h2 {
-            color: #2e7d32;
-            margin-top: 40px;
-            margin-bottom: 10px;
-            position: relative;
-        }
+  .btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: 0.3s;
+  }
 
-        h2::after {
-            content: "";
-            display: block;
-            width: 60px;
-            height: 3px;
-            background-color: #2e7d32;
-            margin-top: 5px;
-        }
+  .btn:hover { background: #0369a1; }
+  .btn a { text-decoration: none; color: white; }
 
-        p {
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
+  main {
+    max-width: 950px;
+    margin: 30px auto;
+    background: var(--card);
+    padding: 40px 50px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
 
-        .highlight {
-            color: #1b5e20;
-            font-weight: bold;
-        }
+  main::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    bottom: 20px;
+    width: 4px;
+    background: var(--section-border);
+    border-radius: 4px;
+  }
 
-        footer {
-            background-color: #c8e6c9;
-            color: #1b5e20;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            font-size: 14px;
-        }
+  section {
+    border-left: 4px solid var(--section-border);
+    padding-left: 18px;
+    margin-bottom: 30px;
+  }
 
-        code {
-            background-color: #e0f2f1;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-family: monospace;
-        }
-    </style>
+  h2 {
+    color: var(--accent-2);
+    border-bottom: 2px solid rgba(96, 165, 250, 0.25);
+    padding-bottom: 5px;
+    margin-top: 20px;
+  }
+
+  p {
+    text-align: justify;
+    margin-bottom: 18px;
+    font-size: 1rem;
+  }
+
+  code {
+    background: rgba(15, 23, 42, 0.07);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+  }
+
+  pre {
+    background: rgba(15, 23, 42, 0.05);
+    padding: 12px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: monospace;
+    font-size: 0.95rem;
+  }
+
+  .tip, .expert {
+    background: rgba(224, 247, 255, 0.7);
+    border-left: 4px solid var(--primary);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-style: italic;
+    margin: 20px 0;
+  }
+
+  .expert {
+    background: rgba(191, 239, 255, 0.75);
+    font-style: normal;
+    font-size: 1rem;
+    line-height: 1.7;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+
+  .expert strong { color: var(--primary); }
+
+  .practice {
+    background: rgba(230, 248, 255, 0.9);
+    border-left: 6px solid var(--primary);
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-top: 25px;
+  }
+
+  .practice h3 {
+    color: var(--accent-2);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .practice ul {
+    margin-left: 20px;
+    list-style-type: "🎯 ";
+  }
+
+  footer {
+    background: linear-gradient(90deg, #0078d4, #0284c7);
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+    box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+    border-radius: 10px 10px 0 0;
+  }
+
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      text-align: center;
+      gap: 10px;
+    }
+    main {
+      padding: 25px;
+      margin: 20px 10px;
+    }
+    main::before { left: 10px; }
+    section { padding-left: 14px; }
+  }
+</style>
 </head>
+
 <body>
-    <header class="page-header">
-      NBKRIST - Java Hub :  JavaFX Event Handling
-    </header>
+<header>
+  <button class="btn"><a href="fx.html">🏠 Home</a></button>
+  <h1>NBKRIST - Java Hub : <span>JavaFX Event Handling</span></h1>
+  <button class="btn" id="themeToggle">🌗 Mode</button>
+</header>
 
-    <nav>
-        <a href="fx.html">Back to Home</a>
-    </nav>
+<main>
+    <section class="expert">
+    <h2>💬 Expert View</h2>
+    <p>
+      You might be thinking — “Oh no! So many event types — it’s confusing!” 😅  
+      But here’s the secret from Hari Shankar: **every event works the same way** — something happens, and you respond!  
+      Once you understand one type (like a button click), you’ve mastered them all!  
+      Keep experimenting and you’ll soon be handling JavaFX events like a pro 🎯
+    </p>
+  </section>
+  <section>
+    <h2>Understanding Event Handling in JavaFX</h2>
+    <p>
+      JavaFX follows a structured approach to handle user interactions like button clicks, key presses, or mouse moves.
+      The main elements involved are:
+      <strong>Event Source</strong> (like a Button),
+      <strong>Event Object</strong> (which carries event data),
+      and <strong>Event Handler</strong> (which executes when the event occurs).
+    </p>
+    <div class="tip">💡 Every click, drag, or key press is an *event* — JavaFX gives you the power to make your app respond intelligently!</div>
+  </section>
 
-    <main>
-        <h2>Understanding Event Handling in JavaFX</h2>
-        <p>
-            JavaFX follows a structured approach to handle events, ensuring that user actions like clicks or key presses are captured and responded to efficiently. 
-            The main objects involved in event handling include the <span class="highlight">Event Source</span> (e.g., a Button), the <span class="highlight">Event Object</span> (contains details about the event), and the <span class="highlight">Event Handler</span> (code that responds to the event). 
-            These objects coordinate seamlessly: the source generates the event, the event object carries information, and the handler processes it.
-        </p>
+  <section>
+    <h2>Implementing EventHandler Class</h2>
+    <p>
+      You can define an <code>EventHandler</code> by creating a class that implements
+      <code>EventHandler&lt;EventType&gt;</code> and overriding the <code>handle()</code> method.
+      Then, register this handler with your control to listen for user actions.
+    </p>
+    <pre>
+Button btn = new Button("Click Me");
+btn.setOnAction(new ButtonClickHandler());
 
-        <h2>Implementing EventHandler Class</h2>
-        <p>
-            You can implement an <span class="highlight">EventHandler</span> by creating a class that implements the <code>EventHandler&lt;EventType&gt;</code> interface. 
-            This class must override the <code>handle()</code> method, which contains the logic to execute when the event occurs. 
-            Once the handler is defined, it is registered with a UI control (the listener), so it listens for events generated by that control.
-        </p>
-
-        <h2>How Listeners Listen to Events</h2>
-        <p>
-            A listener is essentially an object that monitors a particular source for specific types of events. 
-            When the source triggers an event, the listener detects it and passes the event to the associated handler. 
-            This mechanism ensures that only relevant events are processed, keeping the application responsive and organized.
-        </p>
-
-        <h2>Button Events</h2>
-        <p>
-            For a <span class="highlight">Button</span>, you can add an event handler for the <code>ActionEvent</code>. 
-            Example:
-            <br><code>button.setOnAction(new ButtonHandler());</code>
-            Here, <code>ButtonHandler</code> is a class implementing <code>EventHandler&lt;ActionEvent&gt;</code>. 
-            Clicking the button triggers the <code>handle()</code> method.</p>
-            <pre>
-                      Button btn = new Button("Click Me");
-                     btn.setOnAction(new ButtonClickHandler());
-
-                  // Separate EventHandler class
-    public class ButtonClickHandler implements EventHandler&lt;ActionEvent&gt; {
-        @Override
-        public void handle(ActionEvent event) {
-            System.out.println("Button was clicked!");
-        }
+// Separate EventHandler class
+public class ButtonClickHandler implements EventHandler&lt;ActionEvent&gt; {
+    @Override
+    public void handle(ActionEvent event) {
+        System.out.println("Button was clicked!");
     }
-               </pre>
-        
+}
+    </pre>
+  </section>
 
-        <h2>Mouse Events</h2>
-        <p>
-            Mouse actions like clicks, movement, or dragging generate <span class="highlight">MouseEvent</span>. 
-            You can attach handlers to controls or scenes:
-            <br><code>node.setOnMouseClicked(new MouseHandler());</code>
-            The <code>MouseHandler</code> class implements <code>EventHandler&lt;MouseEvent&gt;</code> and handles specific mouse actions.
-          <pre>    Button btn = new Button("Hover or Click Me");
-                   btn.setOnMouseClicked(new MouseClickHandler());
-                   //separate handler class
-                   public class MouseClickHandler implements EventHandler&lt;MouseEvent&gt; {
-                   @Override
-                   public void handle(MouseEvent event) {
-                   System.out.println("Mouse clicked on button!");
-           }
+  <section>
+    <h2>How Listeners Work</h2>
+    <p>
+      A listener “listens” for events on a particular source. When an event occurs, it notifies the assigned handler.
+      This ensures that only the relevant logic executes, keeping the app clean and responsive.
+    </p>
+  </section>
+
+  <section>
+    <h2>Mouse Events</h2>
+    <p>
+      JavaFX supports events such as <code>setOnMouseClicked</code>,
+      <code>setOnMouseEntered</code>, <code>setOnMouseExited</code>, and <code>setOnMouseDragged</code>.
+      You can use these to make interactive, fun UIs.
+    </p>
+    <pre>
+Button btn = new Button("Hover or Click Me");
+btn.setOnMouseClicked(new MouseClickHandler());
+
+public class MouseClickHandler implements EventHandler&lt;MouseEvent&gt; {
+    @Override
+    public void handle(MouseEvent event) {
+        System.out.println("Mouse clicked on button!");
     }
-        </pre>
-              setOnMouseClicked,setOnMouseEntered,setOnMouseExited,setOnMouseDragged ..etc.
-        </p>
+}
+    </pre>
+  </section>
 
-        <h2>Keyboard Events</h2>
-        <p>
-            Keyboard actions such as pressing or releasing keys trigger <span class="highlight">KeyEvent</span>. 
-            Handlers are registered with the scene or specific nodes:
-            <br><code>scene.setOnKeyPressed(new KeyHandler());</code>
-            The <code>KeyHandler</code> class implements <code>EventHandler&lt;KeyEvent&gt;</code> to respond to the key press events.
-        </p>
-        setOnKeyPressed,setOnKeyReleased,setOnKeyTyped
-    </main>
+  <section>
+    <h2>Keyboard Events</h2>
+    <p>
+      Keyboard interactions like pressing or releasing keys trigger <code>KeyEvent</code>.
+      Example:
+      <br><code>scene.setOnKeyPressed(new KeyHandler());</code>
+    </p>
+    <pre>
+public class KeyHandler implements EventHandler&lt;KeyEvent&gt; {
+    @Override
+    public void handle(KeyEvent event) {
+        System.out.println("Key Pressed: " + event.getCode());
+    }
+}
+    </pre>
+  </section>
 
-    <footer>
-        All rights reserved for NBKRIST | Authored by Hari Shankar Mutchakala
-    </footer>
+  
+
+  <section class="practice">
+    <h3>🧠 Practice Zone — Build & Explore</h3>
+    <ul>
+      <li>Create a button that changes its text when clicked.</li>
+      <li>Add a label that updates when you press any keyboard key.</li>
+      <li>Try changing the color of a rectangle when the mouse enters and leaves its area.</li>
+      <li>Make a small “drawing board” using mouse drag events.</li>
+    </ul>
+    <p style="margin-top:10px;font-style:italic;">
+      💡 Every event is a doorway to interactivity — open it and explore JavaFX’s real power!
+    </p>
+  </section>
+</main>
+
+<footer>
+  © 2025 NBKRIST Java Hub | Authored by Hari Shankar Mutchakala
+</footer>
+
+<script>
+  const btn = document.getElementById('themeToggle');
+  const body = document.body;
+  const THEME_KEY = 'event-theme';
+  function setTheme(t) {
+    body.setAttribute('data-theme', t);
+    btn.textContent = t === 'dark' ? '🌞 Light' : '🌗 Dark';
+  }
+  const saved = localStorage.getItem(THEME_KEY) || 'light';
+  setTheme(saved);
+  btn.onclick = () => {
+    const cur = body.getAttribute('data-theme');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    localStorage.setItem(THEME_KEY, next);
+  };
+</script>
 </body>
 </html>
