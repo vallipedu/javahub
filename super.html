@@ -146,7 +146,7 @@
     <div class="code" id="code1"><pre><code>class Parent {
     int value = 100;
 }
-class Child extends Parent {
+public class Child extends Parent {
     int value = 200;
     void show() {
         System.out.println("Child value: " + value);
@@ -171,7 +171,7 @@ class Child extends Parent {
     <div class="code" id="code2"><pre><code>class Parent {
     void display() { System.out.println("Display from Parent"); }
 }
-class Child extends Parent {
+public class Child extends Parent {
     void display() { System.out.println("Display from Child"); }
     void show() { super.display(); }
     public static void main(String[] args) {
@@ -196,7 +196,7 @@ class Child extends Parent {
     }
 }
 
-class Child extends Parent {
+public class Child extends Parent {
     // default constructor of the Child class
     Child() {
         super(); // calling parent constructor
@@ -228,7 +228,7 @@ class Child extends Parent {
     }
 }
 
-class Child extends Parent {
+public class Child extends Parent {
     String department;
 
     Child(String name, int year, String dept) {
@@ -266,7 +266,7 @@ class Child extends Parent {
 class B extends A {
     B() { super(); System.out.println("B constructor"); }
 }
-class C extends B {
+public class C extends B {
     C() { super(); System.out.println("C constructor"); }
     public static void main(String[] args) {
         new C();
@@ -282,6 +282,7 @@ class C extends B {
   <!-- Interview Questions -->
   <div class="card" id="interview">
     <h2>💼 Interview Practice Questions</h2>
+     <span style="color: #06b6d4; font-family: monospace;">You can hover your mouse pointer over the question to see the correct answer.</span>
     <ul class="qa-list" aria-live="polite">
       <li class="qa-item">
         What is the primary purpose of the <code>super</code> keyword in Java?
@@ -421,3 +422,4 @@ class C extends B {
 </script>
 </body>
 </html>
+
