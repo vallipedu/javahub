@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NBKRIST - Displaying Text and Images in JavaFX</title>
+<style>
+  :root {
+    --primary: #0284c7;
+    --accent-1: #2563eb;
+    --accent-2: #1e40af;
+    --bg: linear-gradient(135deg, #eef6ff 0%, #f8fbfd 100%);
+    --text: #0f172a;
+    --card: rgba(255, 255, 255, 0.95);
+    --muted: #64748b;
+    --section-border: #0284c7;
+  }
+
+  [data-theme="dark"] {
+    --primary: #7dd3fc;
+    --accent-1: #60a5fa;
+    --accent-2: #1e3a8a;
+    --bg: #0f1724;
+    --text: #e2e8f0;
+    --card: rgba(17, 25, 40, 0.95);
+    --muted: #94a3b8;
+    --section-border: #38bdf8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: "Segoe UI", "Poppins", Tahoma, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 14px 20px;
+    background: linear-gradient(90deg, #d0ecff, #b9e4ff, #9edaff);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    color: var(--primary);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  header h1 {
+    font-size: 1.4rem;
+    text-align: center;
+    flex: 1;
+  }
+
+  header span {
+    color: red;
+    font-style: italic;
+  }
+
+  .btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  .btn:hover { background: #0369a1; }
+  .btn a { text-decoration: none; color: white; }
+
+  main {
+    max-width: 950px;
+    margin: 30px auto;
+    background: var(--card);
+    padding: 40px 50px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
+  main::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    bottom: 20px;
+    width: 4px;
+    background: var(--section-border);
+    border-radius: 4px;
+  }
+
+  section {
+    border-left: 4px solid var(--section-border);
+    padding-left: 18px;
+    margin-bottom: 30px;
+  }
+
+  h2 {
+    color: var(--accent-2);
+    border-bottom: 2px solid rgba(96, 165, 250, 0.25);
+    padding-bottom: 5px;
+    margin-top: 20px;
+  }
+
+  p {
+    text-align: justify;
+    margin-bottom: 18px;
+    font-size: 1rem;
+  }
+
+  code {
+    background: rgba(15, 23, 42, 0.07);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+  }
+
+  pre {
+    background: rgba(15, 23, 42, 0.05);
+    padding: 12px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: monospace;
+    font-size: 0.95rem;
+  }
+
+  img {
+    display: block;
+    margin: 20px auto;
+    max-width: 90%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid #e6e9ef;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .tip, .expert {
+    background: rgba(224, 247, 255, 0.7);
+    border-left: 4px solid var(--primary);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-style: italic;
+    margin: 20px 0;
+  }
+
+  .expert {
+    background: rgba(191, 239, 255, 0.75);
+    font-style: normal;
+    font-size: 1rem;
+    line-height: 1.7;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+
+  .expert strong { color: var(--primary); }
+
+  .practice {
+    background: rgba(230, 248, 255, 0.9);
+    border-left: 6px solid var(--primary);
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-top: 25px;
+  }
+
+  .practice h3 {
+    color: var(--accent-2);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .practice ul {
+    margin-left: 20px;
+    list-style-type: "🎯 ";
+  }
+
+  footer {
+    background: linear-gradient(90deg, #0078d4, #0284c7);
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+    box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+    border-radius: 10px 10px 0 0;
+  }
+
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      text-align: center;
+      gap: 10px;
+    }
+    main {
+      padding: 25px;
+      margin: 20px 10px;
+    }
+    main::before { left: 10px; }
+    section { padding-left: 14px; }
+  }
+</style>
+</head>
+
+<body>
+<header>
+  <button class="btn"><a href="fx.html">🏠 Home</a></button>
+  <h1>NBKRIST - Java Hub : <span>Displaying Text and Images in JavaFX</span></h1>
+  <button class="btn" id="themeToggle">🌗 Mode</button>
+</header>
+
+<main>
+     <section class="expert">
+    <h2>💬 Expert View</h2>
+    <p>
+      You might be thinking — “Images and text? That’s too basic!” 😅  
+      But trust me — these are the building blocks of every great GUI!  
+      Using them smartly gives life to your apps — from dashboards to login screens.  
+      Experiment, style, and align — make your interface tell a story 🎨🖼️
+    </p>
+  </section>
+  <section>
+    <h2>Understanding Text Display in JavaFX</h2>
+    <p>
+      JavaFX provides multiple ways to display text on the screen. You can use <code>Label</code> for short messages or <code>Text</code> for styled and positioned text.  
+      These classes allow customization of font, size, color, and alignment — essential for designing user-friendly interfaces.
+    </p>
+
+    <pre>
+Label label = new Label("Welcome to NBKRIST - JavaFX!");
+label.setFont(Font.font("Verdana", 18));
+label.setTextFill(Color.DARKBLUE);
+
+Text message = new Text(100, 120, "Learning JavaFX is fun!");
+message.setFont(Font.font("Arial", FontWeight.BOLD, 22));
+message.setFill(Color.CORNFLOWERBLUE);
+    </pre>
+
+    <div class="tip">
+      💡 <strong>Tip:</strong> Use <code>Label</code> for simple UI text (like button titles or info), and <code>Text</code> when you need precise positioning and font styling.
+    </div>
+  </section>
+
+  <section>
+    <h2>Displaying Images in JavaFX</h2>
+    <p>
+      You can easily display images using <code>Image</code> and <code>ImageView</code> classes.  
+      <code>Image</code> loads the file, and <code>ImageView</code> displays it on the scene.  
+      You can scale, rotate, or apply effects to make your UI visually appealing.
+    </p>
+
+    <pre>
+Image img = new Image("file:college_logo.png");
+ImageView view = new ImageView(img);
+view.setFitWidth(200);
+view.setPreserveRatio(true);
+    </pre>
+
+    <img src="sample_image.png" alt="Sample JavaFX Image Display">
+    <div class="tip">
+      💡 Always use <code>setPreserveRatio(true)</code> to keep the original image aspect ratio.  
+      This ensures your images look neat and professional across all resolutions.
+    </div>
+  </section>
+
+ 
+
+  <section class="practice">
+    <h3>🧠 Practice Zone — Create & Experiment</h3>
+    <ul>
+      <li>Display your college name using a <code>Text</code> object with custom color and font.</li>
+      <li>Show a college logo using <code>ImageView</code> with <code>setFitWidth()</code> and <code>setPreserveRatio()</code>.</li>
+      <li>Try combining text and image side-by-side in a <code>HBox</code>.</li>
+      <li>Add hover effects that change image opacity when the mouse enters and leaves.</li>
+    </ul>
+    <p style="margin-top:10px;font-style:italic;">
+      💡 Each pixel you place is a piece of art — go build your visual story with JavaFX!
+    </p>
+  </section>
+</main>
+
+<footer>
+  © 2025 NBKRIST Java Hub | Authored by Hari Shankar Mutchakala
+</footer>
+
+<script>
+  const btn = document.getElementById('themeToggle');
+  const body = document.body;
+  const THEME_KEY = 'display-theme';
+  function setTheme(t) {
+    body.setAttribute('data-theme', t);
+    btn.textContent = t === 'dark' ? '🌞 Light' : '🌗 Dark';
+  }
+  const saved = localStorage.getItem(THEME_KEY) || 'light';
+  setTheme(saved);
+  btn.onclick = () => {
+    const cur = body.getAttribute('data-theme');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    localStorage.setItem(THEME_KEY, next);
+  };
+</script>
+</body>
+</html>
