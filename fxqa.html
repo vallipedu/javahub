@@ -1,407 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JavaFX - Questions and Answers</title>
-  <style>
-    body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      background: #f9fafc;
-      color: #333;
-      line-height: 1.6;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NBKRIST - JavaFX Event Handling Q&A</title>
+<style>
+  :root {
+    --primary: #0284c7;
+    --bg: linear-gradient(180deg, #cce8ff, #e9f7ff);
+    --text: #0f172a;
+    --card: rgba(255, 255, 255, 0.9);
+    --expert-bg: rgba(230, 248, 255, 0.95);
+    --shadow: rgba(0,0,0,0.1);
+  }
 
-    header {
-      background: linear-gradient(90deg, #e6f2fc, #d3d6da);
-      color: rgb(197, 120, 120);
-      padding: 20px 0;
-      text-align: center;
-      font-size: 1.8em;
-      font-weight: bold;
-      letter-spacing: 1px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    }
+  [data-theme="dark"] {
+    --primary: #7dd3fc;
+    --bg: #0f1724;
+    --text: #e2e8f0;
+    --card: rgba(17,25,40,0.95);
+    --expert-bg: rgba(30, 41, 59, 0.9);
+    --shadow: rgba(255,255,255,0.06);
+  }
 
-    nav {
-      background: #e3f2fd;
-      text-align: center;
-      padding: 10px 0;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    transition: background 0.3s, color 0.3s;
+  }
 
-    nav a {
-      color: #0078d4;
-      text-decoration: none;
-      margin: 0 20px;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
+  header {
+    background: linear-gradient(90deg, #d0ecff, #b9e4ff, #9edaff);
+    color: var(--primary);
+    text-align: center;
+    padding: 24px 0;
+    font-weight: 700;
+    font-size: 1.8em;
+    box-shadow: 0 3px 10px var(--shadow);
+  }
 
-    nav a:hover {
-      color: #005fa3;
-    }
+  .header-btns {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin: 10px 15px 0;
+  }
 
-    .container {
-      width: 85%;
-      margin: 40px auto;
-      background: white;
-      padding: 30px 40px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
+  .btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  .btn:hover { background: #0369a1; }
 
-    h2 {
-      color: rgb(197, 120, 120);
-      ;
-      margin-bottom: 10px;
-    }
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 25px;
+  }
 
-    p {
-      margin-bottom: 20px;
-      text-align: justify;
-    }
+  .card {
+    background: var(--card);
+    border-left: 4px solid var(--primary);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px var(--shadow);
+    padding: 20px 24px;
+    margin-bottom: 18px;
+  }
 
-    footer {
-      background: #0078d4;
-      color: white;
-      text-align: center;
-      padding: 10px 0;
-      font-size: 0.95em;
-      margin-top: 50px;
-    }
+  .expert-view {
+    background: var(--expert-bg);
+    border-left: 6px solid var(--primary);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px var(--shadow);
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    color: var(--text);
+    transition: background 0.3s, color 0.3s;
+  }
 
-    .back-btn {
-      display: inline-block;
-      background: #0078d4;
-      color: white;
-      text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      margin-top: 20px;
-      transition: background 0.3s;
-    }
+  .expert-view h2 {
+    color: var(--primary);
+    margin-top: 0;
+  }
 
-    .back-btn:hover {
-      background: #005fa3;
-    }
+  h2 {
+    color: var(--primary);
+    margin-top: 0;
+    font-size: 1.4em;
+  }
 
-    pre {
-      background: #f4f4f4;
-      padding: 10px;
-      border-radius: 8px;
-      overflow-x: auto;
-    }
-  </style>
+  .question {
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 12px;
+  }
+
+  .answer {
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 8px;
+    border-left: 3px solid var(--primary);
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+
+  pre {
+    background: #f4faff;
+    padding: 10px;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+
+  footer {
+    text-align: center;
+    background: linear-gradient(90deg, #0078d4, #0284c7);
+    color: white;
+    padding: 12px 0;
+    border-radius: 10px 10px 0 0;
+    font-size: 0.95em;
+    margin-top: 30px;
+  }
+</style>
 </head>
-
 <body>
-  <header>NBKRIST - Java Hub</header>
+<header>NBKRIST - JavaFX Event Handling Q&A</header>
+<div class="header-btns">
+  <a href="fx.html" class="btn">🏠 Back to Home</a>
+  <button class="btn" id="themeToggle">🌗 Switch Theme</button>
+</div>
 
+<div class="container">
 
-
-  <div class="container">
-    <a href="fx.html" class="back-btn">⬅ Back to Home</a>
-    <h2 style="text-align: center; color: green;">JavaFx QA</h2>
-    <h2>1. How to handle events in JavaFX?</h2>
-    <p>
-      In JavaFX, events are handled through an event-driven model. Event sources (like buttons) generate events, and
-      event handlers respond to them. You can register event handlers using the <code>setOnAction()</code> or
-      <code>addEventHandler()</code> methods.
+  <div class="expert-view">
+    <h2>💼 Expert View</h2>
+    <p style="font-style:italic; line-height:1.7;">
+      As an industry professional with years of experience in enterprise Java projects,  
+      I strongly recommend mastering these types of JavaFX and event-handling questions.  
+      Companies like <b>Infosys</b>, <b>Wipro</b>, <b>Tech Mahindra</b>, and <b>TCS</b> often assess how well you understand  
+      GUI fundamentals, event-driven programming, and real-time problem-solving in interviews.  
+      Remember — consistent practice with these scenarios not only boosts your interview confidence  
+      but also builds the kind of hands-on thinking required in real-world software development.  
     </p>
-
-    <h2>2. How to handle keyboard and mouse events? Explain with an example.</h2>
-    <p>
-      JavaFX provides dedicated event classes such as <code>KeyEvent</code> and <code>MouseEvent</code>. You can
-      register listeners using methods like <code>setOnKeyPressed()</code> or <code>setOnMouseClicked()</code>.
-    </p>
-    <pre>
-TextField tf = new TextField();
-tf.setOnKeyPressed(e -> System.out.println("Key Pressed: " + e.getCode()));
-
-Pane pane = new Pane();
-pane.setOnMouseClicked(e -> System.out.println("Mouse Clicked at: " + e.getX() + ", " + e.getY()));
-    </pre>
-
-    <h2>3. How to display text in JavaFX Scene?</h2>
-    <p>
-      The <code>Text</code> class is used to display text in a JavaFX scene. You can specify font, color, and position.
-    </p>
-    <pre>
-Text message = new Text(50, 100, "Welcome to JavaFX!");
-message.setFont(Font.font("Arial", 24));
-message.setFill(Color.BLUE);
-    </pre>
-
-    <h2>4. How to display an image?</h2>
-    <p>
-      The <code>Image</code> and <code>ImageView</code> classes are used to display images.
-    </p>
-    <pre>
-Image img = new Image("file:photo.png");
-ImageView imageView = new ImageView(img);
-imageView.setFitWidth(200);
-imageView.setPreserveRatio(true);
-    </pre>
-
-    <h2>5. What are main components of JavaFX App Window Structure?</h2>
-    <p>
-      A JavaFX application window consists of three main components:
-    <ul>
-      <li><b>Stage:</b> The top-level container (main window).</li>
-      <li><b>Scene:</b> Holds the visual elements (nodes).</li>
-      <li><b>Nodes:</b> Elements like buttons, labels, images, etc.</li>
-    </ul>
-    </p>
-
-    <h2>6. What are advantages of JavaFX Scene Builder over writing code using packages?</h2>
-    <p>
-      Scene Builder provides a visual interface for designing layouts, making development faster and less error-prone.
-      It auto-generates FXML, allowing developers to focus more on logic than manual UI coding.
-    </p>
-
-    <h2>7. What is role of layout in JavaFX? List different layouts.</h2>
-    <p>
-      Layouts define how nodes are arranged in a scene. JavaFX offers several layout panes, such as:
-    <ul>
-      <li>FlowPane</li>
-      <li>BorderPane</li>
-      <li>GridPane</li>
-      <li>VBox and HBox</li>
-      <li>StackPane</li>
-    </ul>
-    </p>
-
-    <h2>8. Explain GridPane layout. When should we use this layout?</h2>
-    <p>
-      <code>GridPane</code> arranges nodes in a flexible grid of rows and columns. It is ideal when you need form-like
-      structures (e.g., login forms, data entry screens).
-    </p>
-
-    <h2>9. How do you handle button press event?</h2>
-    <p>
-      Button press events are handled using <code>setOnAction()</code>.
-    </p>
-    <pre>
-Button btn = new Button("Click Me");
-btn.setOnAction(e -> System.out.println("Button Pressed!"));
-    </pre>
-
-    <h2>10. How do you lay out nodes in Scene graph?</h2>
-    <p>
-      Nodes are added to layout panes, which are part of a hierarchical <b>Scene Graph</b>. Each parent node can contain
-      multiple children nodes, forming a tree structure that JavaFX renders efficiently.
-    </p>
-
-    <a href="<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JavaFX - Questions and Answers</title>
-  <style>
-    body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      background: #f9fafc;
-      color: #333;
-      line-height: 1.6;
-    }
-
-    header {
-      background: linear-gradient(90deg, #e6f2fc, #d3d6da);
-      color: rgb(197, 120, 120);
-      padding: 20px 0;
-      text-align: center;
-      font-size: 1.8em;
-      font-weight: bold;
-      letter-spacing: 1px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    }
-
-    nav {
-      background: #e3f2fd;
-      text-align: center;
-      padding: 10px 0;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    nav a {
-      color: #0078d4;
-      text-decoration: none;
-      margin: 0 20px;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: #005fa3;
-    }
-
-    .container {
-      width: 85%;
-      margin: 40px auto;
-      background: white;
-      padding: 30px 40px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
-      color: rgb(197, 120, 120);
-      ;
-      margin-bottom: 10px;
-    }
-
-    p {
-      margin-bottom: 20px;
-      text-align: justify;
-    }
-
-    footer {
-      background: #0078d4;
-      color: white;
-      text-align: center;
-      padding: 10px 0;
-      font-size: 0.95em;
-      margin-top: 50px;
-    }
-
-    .back-btn {
-      display: inline-block;
-      background: #0078d4;
-      color: white;
-      text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      margin-top: 20px;
-      transition: background 0.3s;
-    }
-
-    .back-btn:hover {
-      background: #005fa3;
-    }
-
-    pre {
-      background: #f4f4f4;
-      padding: 10px;
-      border-radius: 8px;
-      overflow-x: auto;
-    }
-  </style>
-</head>
-
-<body>
-  <header>NBKRIST - Java Hub</header>
-
-
-
-  <div class="container">
-    <a href="fx.html" class="back-btn">⬅ Back to Home</a>
-    <h2 style="text-align: center; color: green;">JavaFx QA</h2>
-    <h2>1. How to handle events in JavaFX?</h2>
-    <p>
-      In JavaFX, events are handled through an event-driven model. Event sources (like buttons) generate events, and
-      event handlers respond to them. You can register event handlers using the <code>setOnAction()</code> or
-      <code>addEventHandler()</code> methods.
-    </p>
-
-    <h2>2. How to handle keyboard and mouse events? Explain with an example.</h2>
-    <p>
-      JavaFX provides dedicated event classes such as <code>KeyEvent</code> and <code>MouseEvent</code>. You can
-      register listeners using methods like <code>setOnKeyPressed()</code> or <code>setOnMouseClicked()</code>.
-    </p>
-    <pre>
-TextField tf = new TextField();
-tf.setOnKeyPressed(e -> System.out.println("Key Pressed: " + e.getCode()));
-
-Pane pane = new Pane();
-pane.setOnMouseClicked(e -> System.out.println("Mouse Clicked at: " + e.getX() + ", " + e.getY()));
-    </pre>
-
-    <h2>3. How to display text in JavaFX Scene?</h2>
-    <p>
-      The <code>Text</code> class is used to display text in a JavaFX scene. You can specify font, color, and position.
-    </p>
-    <pre>
-Text message = new Text(50, 100, "Welcome to JavaFX!");
-message.setFont(Font.font("Arial", 24));
-message.setFill(Color.BLUE);
-    </pre>
-
-    <h2>4. How to display an image?</h2>
-    <p>
-      The <code>Image</code> and <code>ImageView</code> classes are used to display images.
-    </p>
-    <pre>
-Image img = new Image("file:photo.png");
-ImageView imageView = new ImageView(img);
-imageView.setFitWidth(200);
-imageView.setPreserveRatio(true);
-    </pre>
-
-    <h2>5. What are main components of JavaFX App Window Structure?</h2>
-    <p>
-      A JavaFX application window consists of three main components:
-    <ul>
-      <li><b>Stage:</b> The top-level container (main window).</li>
-      <li><b>Scene:</b> Holds the visual elements (nodes).</li>
-      <li><b>Nodes:</b> Elements like buttons, labels, images, etc.</li>
-    </ul>
-    </p>
-
-    <h2>6. What are advantages of JavaFX Scene Builder over writing code using packages?</h2>
-    <p>
-      Scene Builder provides a visual interface for designing layouts, making development faster and less error-prone.
-      It auto-generates FXML, allowing developers to focus more on logic than manual UI coding.
-    </p>
-
-    <h2>7. What is role of layout in JavaFX? List different layouts.</h2>
-    <p>
-      Layouts define how nodes are arranged in a scene. JavaFX offers several layout panes, such as:
-    <ul>
-      <li>FlowPane</li>
-      <li>BorderPane</li>
-      <li>GridPane</li>
-      <li>VBox and HBox</li>
-      <li>StackPane</li>
-    </ul>
-    </p>
-
-    <h2>8. Explain GridPane layout. When should we use this layout?</h2>
-    <p>
-      <code>GridPane</code> arranges nodes in a flexible grid of rows and columns. It is ideal when you need form-like
-      structures (e.g., login forms, data entry screens).
-    </p>
-
-    <h2>9. How do you handle button press event?</h2>
-    <p>
-      Button press events are handled using <code>setOnAction()</code>.
-    </p>
-    <pre>
-Button btn = new Button("Click Me");
-btn.setOnAction(e -> System.out.println("Button Pressed!"));
-    </pre>
-
-    <h2>10. How do you lay out nodes in Scene graph?</h2>
-    <p>
-      Nodes are added to layout panes, which are part of a hierarchical <b>Scene Graph</b>. Each parent node can contain
-      multiple children nodes, forming a tree structure that JavaFX renders efficiently.
-    </p>
-
-    <a href="fx.html" class="back-btn">⬅ Back to Home</a>
   </div>
 
-  <footer>All rights reserved for NBKRIST and authored by Hari Babu Mutchakala</footer>
-</body>
+  <div class="card">
+    <h2>🎯 JavaFX Event Handling and Basics (Beginner Level)</h2>
+    <div class="question">1. What is JavaFX?</div>
+    <div class="answer">JavaFX is a GUI framework in Java used for building rich desktop applications. It provides tools for 2D/3D graphics, media, UI controls, CSS styling, and event handling mechanisms.</div>
 
-</html>" class="back-btn">⬅ Back to Index</a>
+    <div class="question">2. What are the key components of a JavaFX application?</div>
+    <div class="answer">The three main components are:<br>
+    • <b>Stage</b> – The top-level window.<br>
+    • <b>Scene</b> – Holds all UI components (nodes).<br>
+    • <b>Nodes</b> – The individual visual elements (like Button, Text, or ImageView).</div>
+
+    <div class="question">3. Explain the lifecycle of a JavaFX application.</div>
+    <div class="answer">Every JavaFX program extends the <code>Application</code> class and follows this sequence:<br>
+    1️⃣ <code>init()</code> – initializes variables/resources.<br>
+    2️⃣ <code>start(Stage primaryStage)</code> – builds and shows the UI.<br>
+    3️⃣ <code>stop()</code> – cleans up resources before exit.</div>
+
+    <div class="question">4. What is an Event in JavaFX?</div>
+    <div class="answer">An event represents an action or interaction in the UI, such as a mouse click, key press, or window resize. JavaFX uses event objects to describe and handle these interactions.</div>
+
+    <div class="question">5. What are the main types of Events?</div>
+    <div class="answer">Common event types include:<br>
+    • <b>ActionEvent</b> – triggered by buttons or menu items.<br>
+    • <b>MouseEvent</b> – when the mouse is clicked, moved, or dragged.<br>
+    • <b>KeyEvent</b> – keyboard input events.<br>
+    • <b>WindowEvent</b> – window actions like close or minimize.</div>
+
+    <div class="question">6. What is Event Source and Event Target?</div>
+    <div class="answer"><b>Event Source</b> is the node that triggers the event (like a Button).<br>
+    <b>Event Target</b> is the node that receives and handles the event.</div>
+
+    <div class="question">7. How to handle a Button Click event using a regular class?</div>
+    <div class="answer">
+<pre><code>class MyButtonHandler implements EventHandler&lt;ActionEvent&gt; {
+    public void handle(ActionEvent e) {
+        System.out.println("Button clicked!");
+    }
+}
+
+Button btn = new Button("Click Me");
+btn.setOnAction(new MyButtonHandler());</code></pre>
+This approach separates logic from the UI code — useful for clarity and reusability.</div>
+
+    <div class="question">8. How do you handle Mouse Events in JavaFX?</div>
+    <div class="answer">
+<pre><code>class CircleClickHandler implements EventHandler&lt;MouseEvent&gt; {
+    public void handle(MouseEvent e) {
+        System.out.println("Mouse clicked at: " + e.getX() + ", " + e.getY());
+    }
+}
+
+Circle circle = new Circle(50, Color.CORNFLOWERBLUE);
+circle.setOnMouseClicked(new CircleClickHandler());</code></pre></div>
+
+    <div class="question">9. Explain a real-time example using Mouse Events.</div>
+    <div class="answer">
+<pre><code>Pane pane = new Pane();
+pane.setOnMouseClicked(new EventHandler&lt;MouseEvent&gt;() {
+    public void handle(MouseEvent e) {
+        Circle c = new Circle(e.getX(), e.getY(), 10, Color.DODGERBLUE);
+        pane.getChildren().add(c);
+    }
+});</code></pre>
+📘 This demonstrates dynamic UI creation using mouse coordinates.</div>
+
+    <div class="question">10. How to detect mouse entered or exited events?</div>
+    <div class="answer">
+<pre><code>Rectangle box = new Rectangle(100, 50, Color.LIGHTGRAY);
+box.setOnMouseEntered(e -> box.setFill(Color.LIGHTGREEN));
+box.setOnMouseExited(e -> box.setFill(Color.LIGHTGRAY));</code></pre></div>
+
+    <div class="question">11. How to handle keyboard events without lambdas?</div>
+    <div class="answer">
+<pre><code>class KeyHandler implements EventHandler&lt;KeyEvent&gt; {
+    public void handle(KeyEvent e) {
+        System.out.println("Key Pressed: " + e.getCode());
+    }
+}
+
+scene.setOnKeyPressed(new KeyHandler());</code></pre></div>
+
+    <div class="question">12. What is Scene Builder in JavaFX?</div>
+    <div class="answer">Scene Builder is a drag-and-drop tool for designing JavaFX user interfaces visually.<br>
+    • It automatically generates <b>FXML</b> files.<br>
+    • It allows quick design without writing code.<br>
+    • Helps separate <b>UI layout</b> from <b>application logic</b>.<br>
+    • Increases productivity and reduces syntax errors.</div>
+
+    <div class="question">13. How do you display text in JavaFX?</div>
+    <div class="answer">
+<pre><code>Text msg = new Text(100, 120, "Welcome to JavaFX!");
+msg.setFont(Font.font("Arial", 20));
+msg.setFill(Color.DARKBLUE);</code></pre>
+This displays styled text on the scene at position (100,120).</div>
+
+    <div class="question">14. How do you display an image in JavaFX?</div>
+    <div class="answer">
+<pre><code>Image img = new Image("file:photo.png");
+ImageView view = new ImageView(img);
+view.setFitWidth(200);
+view.setPreserveRatio(true);</code></pre>
+💡 Tip: Always use <code>setPreserveRatio(true)</code> to maintain aspect ratio.</div>
+
+    <div class="question">15. What is the difference between Stage and Scene?</div>
+    <div class="answer"><b>Stage</b> is the main application window, while <b>Scene</b> is the content area that holds and displays all UI components (nodes) inside that stage.</div>
   </div>
+</div>
 
-  <footer>All rights reserved for NBKRIST and authored by Hari Babu Mutchakala</footer>
+<footer>All rights reserved © NBKRIST | Authored by Hari Babu Mutchakala</footer>
+
+<script>
+  const btn = document.getElementById('themeToggle');
+  const body = document.body;
+  const THEME_KEY = 'javafx-theme';
+  function setTheme(t) {
+    body.setAttribute('data-theme', t);
+    btn.textContent = t === 'dark' ? '🌞 Light Mode' : '🌗 Dark Mode';
+  }
+  const saved = localStorage.getItem(THEME_KEY) || 'light';
+  setTheme(saved);
+  btn.onclick = () => {
+    const cur = body.getAttribute('data-theme');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    localStorage.setItem(THEME_KEY, next);
+  };
+</script>
 </body>
-
 </html>
