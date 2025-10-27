@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NBKRIST-JavaHub — JavaFX Event Handling (Tabs)</title>
+<style>
+  :root{
+    --brand:#0284c7; --ink:#0b2540; --muted:#475569; --bg:#f2f4f7; --card:#ffffff; --border:#dbe4ea;
+  }
+  body { margin:0; font-family:'Segoe UI',system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--ink); }
+  header { background:var(--card); border-bottom:3px solid var(--brand); padding:18px 26px; display:flex; gap:16px; align-items:center; }
+  .logo { background:var(--brand); color:#fff; width:54px; height:54px; display:flex; justify-content:center; align-items:center; border-radius:12px; font-size:22px; font-weight:700; }
+  h1 { margin:0; font-size:23px; color:#075985; }
+
+  .container { max-width:1100px; margin:26px auto; background:var(--card); padding:24px; border-radius:16px; box-shadow:0 10px 32px rgba(0,0,0,0.08); }
+
+  /* Tabs */
+  .tabs { display:flex; border-bottom:3px solid var(--border); position:sticky; top:0; background:var(--card); z-index:5; border-top-left-radius:12px; border-top-right-radius:12px; }
+  .tab-btn { flex:1; text-align:center; padding:14px; cursor:pointer; font-weight:600; user-select:none; }
+  .active-tab { color:#0369a1; border-bottom:4px solid var(--brand); background:#e0f2fe; }
+
+  .tab-content { display:none; padding:20px 0 6px; font-size:15px; line-height:1.6; }
+  .show { display:block; }
+
+  /* Section blocks */
+  .section { border-left:5px solid #e2e8f0; padding:12px 14px; border-radius:12px; background:#fafcff; margin:14px 0; }
+  .section h3 { margin:0 0 6px 0; color:#0b2540; font-size:18px; display:flex; align-items:center; gap:8px; }
+  .badge { display:inline-block; background:#eef2f7; color:#0b2540; border:1px solid #e5e7eb; padding:2px 8px; border-radius:999px; font-size:12px; }
+
+  table { width:100%; border-collapse:collapse; margin-top:8px; }
+  th,td { padding:10px 12px; border-bottom:1px solid #e6edf2; text-align:left; }
+  th { background:#e9f6ff; color:#094067; }
+
+  pre { background:#001122; color:#e6eef8; padding:14px; border-radius:10px; font-size:14px; white-space:pre-wrap; overflow:auto; }
+  code.inline{ background:#eef2ff; color:#0b2540; padding:1px 6px; border-radius:6px; }
+
+  .note { background:#f0f9ff; border:1px solid #bae6fd; border-left:5px solid var(--brand); border-radius:10px; padding:10px 12px; }
+  .tip  { background:#f0fdf4; border:1px solid #bbf7d0; border-left:5px solid #10b981; border-radius:10px; padding:10px 12px; }
+  .warn { background:#fff7ed; border:1px solid #fed7aa; border-left:5px solid #f59e0b; border-radius:10px; padding:10px 12px; }
+
+  .diagram { background:#fcfeff; border:1px solid #e6edf2; border-radius:12px; padding:12px; }
+  .diagram svg{max-width:100%; height:auto}
+
+  footer { text-align:center; margin:26px 0; font-size:13px; color:var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">JH</div>
+  <h1>NBKRIST-JavaHub — JavaFX Event Handling</h1>
+</header>
+
+<div class="container">
+  <p class="note" style="margin-top:0">This page teaches the JavaFX <strong>Delegation Event Model</strong> for three core event types — <strong>ActionEvent</strong>, <strong style="color: green;">MouseEvent</strong>, and <strong>KeyEvent</strong>. The content is beginner‑friendly. According to your syllabus, you should focus on understanding <span style="color: red;">MouseEvent</span> Events thoroughly.</em>
+<button class="btn"><a href="eventhandling.html">🏠 Home</a></button></p>
+   
+
+  <div class="tabs">
+    <div class="tab-btn active-tab" data-tab="act">ActionEvent</div>
+    <div class="tab-btn" data-tab="mouse">MouseEvent</div>
+    <div class="tab-btn" data-tab="key">KeyEvent</div>
+  </div>
+
+  <!-- ACTION EVENT TAB -->
+  <div class="tab-content show" id="act">
+    <div class="section">
+      <h3>📘 What is ActionEvent?</h3>
+      <p><strong>ActionEvent</strong> represents a <em>semantic action</em>, such as activating a <code class="inline">Button</code> (mouse click or ENTER/SPACE when focused), choosing a <code class="inline">MenuItem</code>, or clicking a <code class="inline">Hyperlink</code>.</p>
+    </div>
+
+    <div class="section">
+      <h3>🎯 Why is it important?</h3>
+      <p>It abstracts input method (mouse/keyboard), improves accessibility, and keeps your code focused on <em>what</em> happened, not <em>how</em> it happened.</p>
+    </div>
+
+    <div class="section">
+      <h3>🧩 How does it help GUI programming?</h3>
+      <p>Use it to trigger form submissions, navigation, save actions, and other UI commands consistently across mouse and keyboard.</p>
+    </div>
+
+    <div class="section">
+      <h3>🌍 Real‑world uses</h3>
+      <ul>
+        <li>Submit/Save/Cancel buttons</li>
+        <li>Toolbar/Context actions via MenuItem</li>
+        <li>Hyperlink navigation</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3>⚙️ Listener methods</h3>
+      <table>
+        <thead><tr><th>Source</th><th>Listener</th><th>Event Type</th></tr></thead>
+        <tbody>
+          <tr><td>Button</td><td>setOnAction()</td><td>ActionEvent.ACTION</td></tr>
+          <tr><td>MenuItem</td><td>setOnAction()</td><td>ActionEvent.ACTION</td></tr>
+          <tr><td>Hyperlink</td><td>setOnAction()</td><td>ActionEvent.ACTION</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h3>🧪 Step‑by‑Step Procedure</h3>
+      <ol>
+        <li>Create a <strong>Button</strong> (event source).</li>
+        <li>Create a <strong>handler class</strong> that implements <code class="inline">EventHandler&lt;ActionEvent&gt;</code>.</li>
+        <li>Register the handler with <code class="inline">button.setOnAction(new Handler())</code>.</li>
+        <li>Write action logic inside <code class="inline">handle(ActionEvent e)</code>.</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h3>🔡 Example (beginner — named class)</h3>
+<pre>Button btn = new Button("Submit");
+btn.setOnAction(new SubmitHandler());
+
+class SubmitHandler implements EventHandler&lt;ActionEvent&gt; {
+  public void handle(ActionEvent e) {
+    System.out.println("Form submitted!");
+  }
+}</pre>
+      <div class="tip"><strong>Expected output:</strong> Console prints <em>Form submitted!</em> when the button is activated (mouse or keyboard).</div>
+    </div>
+
+    <div class="section diagram">
+      <h3>🚀 Delegation Event Model (ActionEvent)</h3>
+      <svg viewBox="0 0 900 160">
+        <defs><marker id="arr" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z"/></marker></defs>
+        <rect x="20" y="40" width="180" height="60" rx="12" fill="#e0f7ff" stroke="#0369a1" stroke-width="2"/>
+        <text x="110" y="75" text-anchor="middle" font-weight="700">Button (Source)</text>
+        <rect x="240" y="40" width="200" height="60" rx="12" fill="#e8faff" stroke="#0284c7" stroke-width="2"/>
+        <text x="340" y="75" text-anchor="middle" font-weight="700">ActionEvent</text>
+        <rect x="480" y="40" width="180" height="60" rx="12" fill="#edfffa" stroke="#059669" stroke-width="2"/>
+        <text x="570" y="75" text-anchor="middle" font-weight="700">Listener setOnAction</text>
+        <rect x="700" y="40" width="180" height="60" rx="12" fill="#fff5e6" stroke="#d97706" stroke-width="2"/>
+        <text x="790" y="75" text-anchor="middle" font-weight="700">Handler.handle()</text>
+        <line x1="200" y1="70" x2="240" y2="70" stroke="#000" stroke-width="3" marker-end="url(#arr)"/>
+        <line x1="440" y1="70" x2="480" y2="70" stroke="#000" stroke-width="3" marker-end="url(#arr)"/>
+        <line x1="660" y1="70" x2="700" y2="70" stroke="#000" stroke-width="3" marker-end="url(#arr)"/>
+      </svg>
+    </div>
+
+    <div class="section">
+      <h3>🏆 Will learning ActionEvent help you?</h3>
+      <p>Yes. It teaches you to write <em>accessible</em> UI actions that work with both mouse and keyboard, a key skill for professional apps.</p>
+    </div>
+
+    <div class="section">
+      <h3>✅ Practice Task</h3>
+      <p>Create two buttons: <em>Save</em> and <em>Reset</em>. Implement two handler classes. Show different console messages when each is activated.</p>
+    </div>
+  </div>
+
+  <!-- MOUSE EVENT TAB -->
+  <div class="tab-content" id="mouse">
+    <div class="section">
+      <h3>📘 What is MouseEvent?</h3>
+      <p><strong>MouseEvent</strong> occurs when the user interacts with the mouse over a JavaFX <em>Node</em> (Pane, Button, Circle, ImageView, etc.). Contains position (X,Y), button used, click count, and modifier key state.</p>
+    </div>
+
+    <div class="section"><h3>🎯 Why is it important?</h3><p>It turns static UI into <em>interactive</em> experiences: drawing, dragging, selecting, hovering, context menus, and more.</p></div>
+    <div class="section"><h3>🧩 How does it help GUI programming?</h3><p>Supports free‑form gestures and precision control not covered by semantic events — crucial for graphics tools and games.</p></div>
+
+    <div class="section">
+      <h3>🌍 Real‑world uses</h3>
+      <ul>
+        <li>Paint tools and diagram editors</li>
+        <li>Drag‑and‑drop reordering</li>
+        <li>Game input (aim, move)</li>
+        <li>Interactive charts (zoom/inspect)</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3>⚙️ Listener methods</h3>
+      <table>
+        <thead><tr><th>Listener</th><th>When it Fires</th></tr></thead>
+        <tbody>
+          <tr><td>setOnMousePressed()</td><td>Mouse button pressed</td></tr>
+          <tr><td>setOnMouseReleased()</td><td>Mouse button released</td></tr>
+          <tr><td>setOnMouseClicked()</td><td>Press + release on same node (supports double‑click via <code class="inline">getClickCount()</code>)</td></tr>
+          <tr><td>setOnMouseMoved()</td><td>Pointer moves without button down</td></tr>
+          <tr><td>setOnMouseDragged()</td><td>Pointer moves while button is down</td></tr>
+          <tr><td>setOnMouseEntered()/Exited()</td><td>Pointer crosses node boundary</td></tr>
+          <tr><td>setOnScroll()</td><td>Mouse wheel / touchpad scroll</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h3>🧪 Step‑by‑Step Procedure</h3>
+      <ol>
+        <li>Create a <strong>Node</strong> (e.g., <code class="inline">Pane</code>).</li>
+        <li>Create a <strong>handler class</strong> that implements <code class="inline">EventHandler&lt;MouseEvent&gt;</code>.</li>
+        <li>Register it with <code class="inline">node.setOnMouseClicked(new Handler())</code> (or other mouse listeners).</li>
+        <li>Use <code class="inline">getX()/getY()</code>, <code class="inline">getButton()</code>, and <code class="inline">getClickCount()</code> inside <code class="inline">handle()</code>.</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h3>🔡 Example (named class)</h3>
+<pre>Pane canvas = new Pane();
+canvas.setOnMouseClicked(new CanvasClick());
+
+class CanvasClick implements EventHandler&lt;MouseEvent&gt; {
+  public void handle(MouseEvent e) {
+    System.out.println("Clicked at X="+e.getX()+" Y="+e.getY());
+  }
+}</pre>
+      <div class="tip"><strong>Expected output:</strong> Console prints the coordinates of the click within the Pane.</div>
+    </div>
+
+    <div class="section diagram">
+      <h3>🚀 Delegation Event Model (MouseEvent)</h3>
+      <svg viewBox="0 0 900 160">
+        <defs><marker id="arr2" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z"/></marker></defs>
+        <rect x="20" y="40" width="180" height="60" rx="12" fill="#e0f7ff" stroke="#0369a1" stroke-width="2"/>
+        <text x="110" y="75" text-anchor="middle" font-weight="700">Node (Pane)</text>
+        <rect x="240" y="40" width="200" height="60" rx="12" fill="#e8faff" stroke="#0284c7" stroke-width="2"/>
+        <text x="340" y="75" text-anchor="middle" font-weight="700">MouseEvent</text>
+        <rect x="480" y="40" width="180" height="60" rx="12" fill="#edfffa" stroke="#059669" stroke-width="2"/>
+        <text x="570" y="75" text-anchor="middle" font-weight="700">Listener setOnMouse...</text>
+        <rect x="700" y="40" width="180" height="60" rx="12" fill="#fff5e6" stroke="#d97706" stroke-width="2"/>
+        <text x="790" y="75" text-anchor="middle" font-weight="700">Handler.handle()</text>
+        <line x1="200" y1="70" x2="240" y2="70" stroke="#000" stroke-width="3" marker-end="url(#arr2)"/>
+        <line x1="440" y1="70" x2="480" y2="70" stroke="#000" stroke-width="3" marker-end="url(#arr2)"/>
+        <line x1="660" y1="70" x2="700" y2="70" stroke="#000" stroke-width="3" marker-end="url(#arr2)"/>
+      </svg>
+    </div>
+
+    <div class="section">
+      <h3>🏆 Will learning MouseEvent help you?</h3>
+      <p>Yes. You’ll be able to build drawing tools, interactive visualizations, and engaging UI mechanics — vital for modern apps.</p>
+    </div>
+
+    <div class="section">
+      <h3>✅ Practice Task</h3>
+      <p>Write a handler that prints the button used (PRIMARY/SECONDARY) and shows “Double Click!” when <code class="inline">getClickCount()==2</code>.</p>
+    </div>
+  </div>
+
+  <!-- KEY EVENT TAB -->
+  <div class="tab-content" id="key">
+    <div class="section">
+      <h3>📘 What is KeyEvent?</h3>
+      <p><strong>KeyEvent</strong> occurs when the user presses, releases, or types keys while a <em>focused</em> Node (or the Scene) is active.</p>
+    </div>
+
+    <div class="section"><h3>🎯 Why is it important?</h3><p>Keyboard shortcuts speed up workflows, enable accessibility, and make apps efficient for power users.</p></div>
+    <div class="section"><h3>🧩 How does it help GUI programming?</h3><p>Use it to implement hotkeys (e.g., Ctrl+S), navigation (arrow keys), and text input behavior.</p></div>
+
+    <div class="section">
+      <h3>🌍 Real‑world uses</h3>
+      <ul>
+        <li>Enter to submit forms</li>
+        <li>Arrow keys to move focus or objects</li>
+        <li>Shortcuts like Ctrl+S / Ctrl+Z</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3>⚙️ Listener methods</h3>
+      <table>
+        <thead><tr><th>Listener</th><th>When it Fires</th></tr></thead>
+        <tbody>
+          <tr><td>setOnKeyPressed()</td><td>Key pressed down</td></tr>
+          <tr><td>setOnKeyReleased()</td><td>Key released</td></tr>
+          <tr><td>setOnKeyTyped()</td><td>Textual character produced</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h3>🧪 Step‑by‑Step Procedure</h3>
+      <ol>
+        <li>Create/focus a Node (e.g., <code class="inline">TextField</code>) or register on the <code class="inline">Scene</code>.</li>
+        <li>Create a handler class implementing <code class="inline">EventHandler&lt;KeyEvent&gt;</code>.</li>
+        <li>Register with <code class="inline">setOnKeyPressed/Released/Typed</code>.</li>
+        <li>Read <code class="inline">e.getCode()</code> (for non‑text keys) or <code class="inline">e.getCharacter()</code> (typed).</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h3>🔡 Example (named class on Scene)</h3>
+<pre>Scene scene = new Scene(root);
+scene.setOnKeyPressed(new GlobalKeys());
+
+class GlobalKeys implements EventHandler&lt;KeyEvent&gt; {
+  public void handle(KeyEvent e) {
+    System.out.println("Key Pressed: " + e.getCode());
+  }
+}</pre>
+      <div class="tip"><strong>Expected output:</strong> Console prints the key code (e.g., <em>ENTER</em>, <em>LEFT</em>) when pressed while the window is focused.</div>
+    </div>
+
+    <div class="section diagram">
+      <h3>🚀 Delegation Event Model (KeyEvent)</h3>
+      <svg viewBox="0 0 900 160">
+        <defs><marker id="arr3" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z"/></marker></defs>
+        <rect x="20" y="40" width="180" height="60" rx="12" fill="#e0f7ff" stroke="#0369a1" stroke-width="2"/>
+        <text x="110" y="75" text-anchor="middle" font-weight="700">Node/Scene</text>
+        <rect x="240" y="40" width="200" height="60" rx="12" fill="#e8faff" stroke="#0284c7" stroke-width="2"/>
+        <text x="340" y="75" text-anchor="middle" font-weight="700">KeyEvent</text>
+        <rect x="480" y="40" width="180" height="60" rx="12" fill="#edfffa" stroke="#059669" stroke-width="2"/>
+        <text x="570" y="75" text-anchor="middle" font-weight="700">Listener setOnKey...</text>
+        <rect x="700" y="40" width="180" height="60" rx="12" fill="#fff5e6" stroke="#d97706" stroke-width="2"/>
+        <text x="790" y="75" text-anchor="middle" font-weight="700">Handler.handle()</text>
+        <line x1="200" y1="70" x2="240" y2="70" stroke="#000" stroke-width="3" marker-end="url(#arr3)"/>
+        <line x1="440" y1="70" x2="480" y2="70" stroke="#000" stroke-width="3" marker-end="url(#arr3)"/>
+        <line x1="660" y1="70" x2="700" y2="70" stroke="#000" stroke-width="3" marker-end="url(#arr3)"/>
+      </svg>
+    </div>
+
+    <div class="section">
+      <h3>🏆 Will learning KeyEvent help you?</h3>
+      <p>Yes. You’ll implement productive shortcuts and accessible navigation — essential for professional UIs.</p>
+    </div>
+
+    <div class="section">
+      <h3>✅ Practice Task</h3>
+      <p>Register a handler that moves a rectangle left/right with arrow keys and prints the new X position.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>All rights reserved for NBKRIST | Authored by HariBabu Mutchakala</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.tab-btn');
+  const contents = document.querySelectorAll('.tab-content');
+
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => b.classList.remove('active-tab'));
+      contents.forEach(c => c.classList.remove('show'));
+      btn.classList.add('active-tab');
+      document.getElementById(btn.dataset.tab).classList.add('show');
+      window.scrollTo({top:document.querySelector('.container').offsetTop - 10, behavior:'smooth'});
+    });
+  });
+</script>
+</body>
+</html>
