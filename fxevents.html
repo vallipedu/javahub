@@ -57,13 +57,14 @@
    
 
   <div class="tabs">
+      <div class="tab-btn active-tab" data-tab="mouse">MouseEvent</div>
     <div class="tab-btn" data-tab="act">ActionEvent</div>
-    <div class="tab-btn active-tab" data-tab="mouse">MouseEvent</div>
+  
     <div class="tab-btn" data-tab="key">KeyEvent</div>
   </div>
 
   <!-- ACTION EVENT TAB -->
-  <div class="tab-content show" id="act">
+  <div class="tab-content " id="act">
     <div class="section">
       <h3>📘 What is ActionEvent?</h3>
       <p><strong>ActionEvent</strong> represents a <em>semantic action</em>, such as activating a <code class="inline">Button</code> (mouse click or ENTER/SPACE when focused), choosing a <code class="inline">MenuItem</code>, or clicking a <code class="inline">Hyperlink</code>.</p>
@@ -153,7 +154,7 @@ class SubmitHandler implements EventHandler&lt;ActionEvent&gt; {
   </div>
 
   <!-- MOUSE EVENT TAB -->
-  <div class="tab-content" id="mouse">
+  <div class="tab-content show" id="mouse">
     <div class="section">
       <h3>📘 What is MouseEvent?</h3>
       <p><strong>MouseEvent</strong> occurs when the user interacts with the mouse over a JavaFX <em>Node</em> (Pane, Button, Circle, ImageView, etc.). Contains position (X,Y), button used, click count, and modifier key state. 
