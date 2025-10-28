@@ -57,8 +57,8 @@
    
 
   <div class="tabs">
-    <div class="tab-btn active-tab" data-tab="act">ActionEvent</div>
-    <div class="tab-btn" data-tab="mouse">MouseEvent</div>
+    <div class="tab-btn" data-tab="act">ActionEvent</div>
+    <div class="tab-btn active-tab" data-tab="mouse">MouseEvent</div>
     <div class="tab-btn" data-tab="key">KeyEvent</div>
   </div>
 
@@ -156,8 +156,13 @@ class SubmitHandler implements EventHandler&lt;ActionEvent&gt; {
   <div class="tab-content" id="mouse">
     <div class="section">
       <h3>📘 What is MouseEvent?</h3>
-      <p><strong>MouseEvent</strong> occurs when the user interacts with the mouse over a JavaFX <em>Node</em> (Pane, Button, Circle, ImageView, etc.). Contains position (X,Y), button used, click count, and modifier key state.</p>
+      <p><strong>MouseEvent</strong> occurs when the user interacts with the mouse over a JavaFX <em>Node</em> (Pane, Button, Circle, ImageView, etc.). Contains position (X,Y), button used, click count, and modifier key state. 
+      <br>  JavaFX MouseEvent(package: javafx.scene.input.MouseEvent) represents mouse interactions like moving, pressing, releasing, clicking, dragging, entering, and exiting a node (any GUI element that can receive user interaction). It provides detailed info such as cursor coordinates, button type, click count, and modifier keys to enable precise handling of user actions.</p>
+   
+    
     </div>
+
+
 
     <div class="section"><h3>🎯 Why is it important?</h3><p>It turns static UI into <em>interactive</em> experiences: drawing, dragging, selecting, hovering, context menus, and more.</p></div>
     <div class="section"><h3>🧩 How does it help GUI programming?</h3><p>Supports free‑form gestures and precision control not covered by semantic events — crucial for graphics tools and games.</p></div>
