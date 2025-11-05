@@ -1,220 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NBKRIST - Java Lab Exam</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-        
-        :root {
-            --primary-color: #004d99; /* A professional, deep blue */
-            --secondary-color: #f0f8ff; /* A light, clean blue-white */
-            --accent-color: #ffc107; /* A contrasting gold for emphasis */
-            --text-color: #343a40;
-            --link-color: #007bff;
-            --hover-bg: #e9f2fa;
-            --border-color: #dee2e6;
-            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NBKRIST - Java Lab Exam</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
+    :root {
+      --primary-color: #004d99;
+      --secondary-color: #f0f8ff;
+      --accent-color: #ffc107;
+      --text-color: #343a40;
+      --hover-bg: #e9f2fa;
+      --border-color: #dee2e6;
+      --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
 
-        header {
-            width: 100%;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1.5rem 0;
-            text-align: center;
-            box-shadow: var(--box-shadow);
-        }
+    /* Dark Mode Variables */
+    body.dark-mode {
+      --primary-color: #0d1117;
+      --secondary-color: #161b22;
+      --text-color: #f0f6fc;
+      --hover-bg: #21262d;
+      --border-color: #30363d;
+    }
 
-        header h1 {
-            margin: 0;
-            font-weight: 700;
-            font-size: 2.5rem;
-            letter-spacing: 2px;
-        }
+    body {
+      font-family: "Roboto", sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: var(--secondary-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden; /* ✅ Prevent horizontal scroll */
+    }
 
-        .container {
-            width: 90%;
-            max-width: 1000px;
-            background-color: #fff;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: var(--box-shadow);
-            margin: 2rem 0;
-        }
+    /* Header */
+    header {
+      width: 100%;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--box-shadow);
+      flex-wrap: wrap;
+      text-align: center;
+      overflow-x: hidden;
+    }
 
-        .instructions {
-            background-color: var(--hover-bg);
-            border-left: 5px solid var(--primary-color);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-        }
+    header h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 1.9rem;
+      flex: 1;
+    }
 
-        .instructions h2 {
-            margin-top: 0;
-            color: var(--primary-color);
-            font-size: 1.5rem;
-        }
+    header span {
+      color: rgb(159, 213, 34);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 1.2rem;
+    }
 
-        .instructions p, .instructions ol {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
+    /* Control Buttons */
+    .control-button {
+      background-color: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
 
-        .problem-statements {
-            display: grid;
-            gap: 1.5rem;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        }
+    .control-button:hover {
+      background-color: var(--accent-color);
+      color: #000;
+      transform: translateY(-2px);
+    }
 
-        .problem-card {
-            background-color: #fff;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
+    .header-left,
+    .header-right {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
 
-        .problem-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-        }
+    /* Navigation Buttons below header */
+    .button-row-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), transparent);
+      padding: 1rem 0; /* added more spacing */
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      overflow-x: hidden;
+    }
 
-        .problem-card a {
-            text-decoration: none;
-            color: white;
-            font-weight: 700;
-            font-size: 1.1rem;
-            display: block;
-            background-color: var(--primary-color);
-            padding: 0.75rem 1.5rem;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
+    .button-row {
+      width: 90%;
+      max-width: 1000px;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 0 auto;
+    }
 
-        .problem-card a:hover {
-            background-color: #0056b3;
-        }
+    .nav-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      background-color: #ffffff;
+      color: var(--primary-color);
+      border: 2px solid rgba(0, 77, 153, 0.12);
+      padding: 0.65rem 1.2rem;
+      border-radius: 10px;
+      font-weight: 700;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+      transition: all 0.2s ease;
+      min-width: 150px;
+      margin: 0.25rem; /* ✅ added small margin around each button */
+    }
 
-        footer {
-            width: 100%;
-            text-align: center;
-            padding: 1.5rem 0;
-            background-color: var(--primary-color);
-            color: white;
-            margin-top: auto; /* Pushes the footer to the bottom */
-            font-size: 0.9rem;
-            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
-        }
+    .nav-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+      background-color: var(--primary-color);
+      color: #fff;
+    }
 
-        footer p {
-            margin: 0;
-            letter-spacing: 1px;
-        }
+    /* Container */
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      background-color: #fff;
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: var(--box-shadow);
+      margin: 2rem 0;
+      transition: background-color 0.3s ease;
+      overflow-x: hidden;
+    }
 
-         /* Style for the back button */
-        .back-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
+    body.dark-mode .container {
+      background-color: #1e2228;
+    }
 
-        .back-button:hover {
-            background-color: #2980b9;
-        }
-    </style>
+    .instructions {
+      background-color: var(--hover-bg);
+      border-left: 5px solid var(--primary-color);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+
+    .instructions h2 {
+      margin-top: 0;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+    }
+
+    .instructions p,
+    .instructions ol {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      width: 100%;
+      text-align: center;
+      padding: 1.5rem 0;
+      background-color: var(--primary-color);
+      color: white;
+      margin-top: auto;
+      font-size: 0.9rem;
+      box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+      overflow-x: hidden;
+    }
+
+    footer p {
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    /* Responsive */
+    @media (max-width: 650px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+      header h1 {
+        font-size: 1.4rem;
+        margin: 0.5rem 0;
+      }
+      .control-button {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.7rem;
+      }
+      .button-row {
+        gap: 0.6rem;
+      }
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <div class="header-left">
+      <button class="control-button" id="backBtn">⬅ Back</button>
+    </div>
 
-<header>
-    <h1>NBKRIST - Java Lab Exam</h1>
-</header>
+    <h1>
+      NBKRIST:JavaHub
+      <span>Practicals Examination Platform</span>
+    </h1>
 
-<div class="container">
-        <a href="index.html" class="back-button">← Back to Index</a>
+    <div class="header-right">
+      <button class="control-button" id="modeToggle">🌙 Dark Mode</button>
+    </div>
+  </header>
+
+  <div class="button-row-wrapper" aria-hidden="false">
+    <nav class="button-row" aria-label="Primary quick links">
+      <a class="nav-button" href="oopsmid.html">Internal Lab Exam1</a>
+      <a class="nav-button" href="oopsmid.html">Internal Lab Exam2</a>
+      <a class="nav-button" href="examwraning.html">External Lab Exam</a>
+      <a class="nav-button" href="examwraning.html">Student-Experiment Mapping Sheet</a>
+    </nav>
+  </div>
+
+  <div class="container">
     <section class="instructions">
-        <h2>Instructions for the Lab Exam</h2>
-        <p>Dear Students,</p>
-        <p>Welcome to the Java Lab Exam. Your success in this exam depends on your ability to not only write code but also to think like a professional software developer. Follow these steps for your assigned problem:</p>
-        <ol>
-            <li><b>Find Your Assignment:</b> Locate your assigned problem statement below. Click on the corresponding link to view the details.</li>
-            <li><b>Understand the Requirements:</b> Read the problem statement carefully. Pay close attention to the **Technical Requirements**, **Functional Requirements**, and **Testing Requirements**.</li>
-            <li><b>Analyze & Design:</b> Before you start coding, spend time analyzing the problem. Think about the classes, interfaces, and methods you'll need. Sketch out a simple class diagram or a design plan.</li>
-            <li><b>Implement:</b> Write clean, well-commented, and efficient Java code. Adhere to best practices and coding standards.</li>
-            <li><b>Test:</b> Use the provided testing requirements to verify that your solution works as expected. A well-tested solution is a key part of a successful project.</li>
-        </ol>
-        <p>Good luck! 🤞</p>
+      <h2>Instructions for the Lab Exam</h2>
+      <p>Dear Students,</p>
+      <p>
+        Welcome to the Java Lab Exam. Your success in this exam depends on your
+        ability to not only write code but also to think like a professional software
+        developer.
+      </p>
+      <ol>
+        <li><b>Find Your Assignment:</b> Locate your assigned problem statement below.</li>
+        <li><b>Understand the Requirements:</b> Read the problem statement carefully.</li>
+        <li><b>Analyze & Design:</b> Before coding, spend time analyzing the problem.</li>
+        <li><b>Implement:</b> Write clean, well-commented, and efficient Java code.</li>
+        <li><b>Test:</b> Verify your code thoroughly before submission.</li>
+      </ol>
+
+      <img
+        src="sdlc2.png"
+        alt="sdlc text"
+        style="display:block; margin:30px auto; max-width:50%; height:auto; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.25); border:4px solid #f0f0f0; background-color:#fff;"
+      />
+
+      <p>Good luck! 🤞</p>
     </section>
+  </div>
 
-    <section class="problem-statements">
-        <div class="problem-card">
-            <a href="q2.html">View Problem 1</a>
-        </div>
-        <div class="problem-card">
-            <a href="Q3.html">View Problem 2</a>
-        </div>
-        <div class="problem-card">
-            <a href="q4.html">View Problem 3</a>
-        </div>
-        <div class="problem-card">
-            <a href="Q5.html">View Problem 4</a>
-        </div>
-        <div class="problem-card">
-            <a href="Q6.html">View Problem 5</a>
-        </div>
-        <div class="problem-card">
-            <a href="Q7.html">View Problem 6</a>
-        </div>
+  <footer>
+    <p>&copy; 2025 NBKRIST. All Rights Reserved. | Authored by Hari Babu Mutchakala.</p>
+  </footer>
 
-        <div class="problem-card">
-            <a href="Q9.html">View Problem 7</a>
-        </div>
-        <div class="problem-card">
-            <a href="Q10.html">View Problem 8</a>
-        </div>
-        <div class="problem-card">
-            <a href="Q11.html">View Problem 9</a>
-        </div>
-        <div class="problem-card">
-            <a href="Q12.html">View Problem 10</a>
-        </div>
-        <div class="problem-card">
-            <a href="Q13.html">View Problem 11</a>
-        </div>
-        <div class="problem-card">
-            <a href="Q14.html">View Problem 12</a>
-        </div>
-    </section>
-</div>
+  <script>
+    // Back Button
+    document.getElementById("backBtn").addEventListener("click", () => {
+      history.back();
+    });
 
-<footer>
-    <p>&copy; 2025 NBKRIST. All Rights Reserved.</p>
-</footer>
+    // Dark / Light Mode Toggle
+    const toggleBtn = document.getElementById("modeToggle");
+    const currentMode = localStorage.getItem("theme");
 
+    if (currentMode === "dark") {
+      document.body.classList.add("dark-mode");
+      toggleBtn.textContent = "☀ Light Mode";
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      let isDark = document.body.classList.contains("dark-mode");
+      toggleBtn.textContent = isDark ? "☀ Light Mode" : "🌙 Dark Mode";
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+  </script>
 </body>
-
 </html>
-
