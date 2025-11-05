@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBKRIST - Java Lab Exam</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #004d99;
+            --secondary-color: #f0f8ff;
+            --accent-color: #ffc107;
+            --text-color: #343a40;
+            --hover-bg: #e9f2fa;
+            --border-color: #dee2e6;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dark Mode Variables */
+        body.dark-mode {
+            --primary-color: #0d1117;
+            --secondary-color: #161b22;
+            --text-color: #f0f6fc;
+            --hover-bg: #21262d;
+            --border-color: #30363d;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Header layout with flex */
+        header {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--box-shadow);
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2rem;
+            letter-spacing: 1px;
+            text-align: center;
+            flex: 1;
+        }
+
+        /* Control buttons in header */
+        .control-button {
+            background-color: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .control-button:hover {
+            background-color: var(--accent-color);
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        /* Header button container for layout */
+        .header-left,
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            margin: 2rem 0;
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-mode .container {
+            background-color: #1e2228;
+        }
+
+        .instructions {
+            background-color: var(--hover-bg);
+            border-left: 5px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .instructions h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        .problem-statements {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .problem-card {
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark-mode .problem-card {
+            background-color: #21262d;
+            border: 1px solid #444c56;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .problem-card a {
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: block;
+            background-color: var(--primary-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .problem-card a:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem 0;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: auto;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive tweaks */
+        @media (max-width: 650px) {
+            header h1 {
+                font-size: 1.4rem;
+            }
+
+            .control-button {
+                padding: 0.4rem 0.7rem;
+                font-size: 0.85rem;
+            }
+        }
+
+             span {
+      color: rgb(53, 75, 2);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 1.5rem;
+    }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-left">
+            <button class="control-button" id="backBtn">⬅ Back</button>
+        </div>
+
+        <h1>NBKRIST - JavaHub </h1>
+
+        <div class="header-right">
+            <button class="control-button" id="modeToggle">🌙 Dark Mode</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="instructions">
+            <h2> Execution Protocol for <span>OOPs through Java Lab</span></h2>
+            These guidelines outline the mandatory procedures and phases that must be followed for the successful
+            completion and submission of the assigned project.
+            <ol>
+                <li><b>Experiment Allocation and Access:</b>Students are strictly required to access and work only on
+                    the specific experiment allocated to them. This allocation must align precisely with the mapping
+                    information provided in the Student and Experiment Mapping Sheet.</li>
+                <li><b>Adherence to the Software Development Life Cycle (SDLC):</b> All project work must be conducted
+                    sequentially through the established phases of the Software Development Life Cycle (SDLC). Failure
+                    to complete a phase or obtain required approvals will halt progress to the next stage.</li>
+                <li><b>Phase A: Analysis and Design (Gate 1)</b>
+
+                    A comprehensive Analysis and Design phase must be completed first.
+
+                    The resulting documentation (e.g., design diagrams, functional specifications) must be presented to
+                    the examiner.
+
+                    Formal Approval from the examiner is mandatory before proceeding to the implementation stage.
+
+                <li><b>Phase B: Implementation and Testing:</b>
+
+                    The Implementation (coding) phase may only begin after formal design approval has been granted.
+
+                    Upon completion of coding, a thorough Testing phase must be executed.
+
+                    A prerequisite for the final submission is that all predefined test cases must pass successfully.
+                <li><b>Phase C: Assessment and Conclusion</b> 
+                    The functional results and successful test reports must be presented to the examiner for the final Viva Voce assessment.
+
+Upon successful completion of the Viva Voce, the project procedure is officially concluded, and the student may be dismissed from the laboratory.
+                    </li>
+            </ol>
+            <p>All sections of the SDLC must be strictly followed and documented. 🤞</p>
+        </section>
+
+        <section class="problem-statements">
+            <div class="problem-card"><a href="q2.html">View Problem 1</a></div>
+            <div class="problem-card"><a href="Q3.html">View Problem 2</a></div>
+            <div class="problem-card"><a href="Q4.html">View Problem 3</a></div>
+            <div class="problem-card"><a href="Q5.html">View Problem 4</a></div>
+            <div class="problem-card"><a href="Q6.html">View Problem 5</a></div>
+            <div class="problem-card"><a href="Q7.html">View Problem 6</a></div>
+            <div class="problem-card"><a href="Q9.html">View Problem 7</a></div>
+            <div class="problem-card"><a href="Q10.html">View Problem 8</a></div>
+            <div class="problem-card"><a href="Q11.html">View Problem 9</a></div>
+            <div class="problem-card"><a href="Q12.html">View Problem 10</a></div>
+            <div class="problem-card"><a href="Q13.html">View Problem 11</a></div>
+            <div class="problem-card"><a href="Q14.html">View Problem 12</a></div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 NBKRIST. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Back button function
+        document.getElementById("backBtn").addEventListener("click", () => {
+            history.back();
+        });
+
+        // Dark / Light mode toggle
+        const toggleBtn = document.getElementById("modeToggle");
+        const currentMode = localStorage.getItem("theme");
+
+        if (currentMode === "dark") {
+            document.body.classList.add("dark-mode");
+            toggleBtn.textContent = "☀ Light Mode";
+        }
+
+        toggleBtn.addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+            let isDark = document.body.classList.contains("dark-mode");
+            toggleBtn.textContent = isDark ? "☀ Light Mode" : "🌙 Dark Mode";
+            localStorage.setItem("theme", isDark ? "dark" : "light");
+        });
+    </script>
+
+</body>
+
+</html>
