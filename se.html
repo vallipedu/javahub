@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NBKRIST – Infosys Interview Prep | SDLC, Agile, DevOps & Cloud</title>
+  <style>
+    :root {
+      --primary: #0078ff;
+      --accent: #00bfff;
+      --header: #004d99;
+      --glass: rgba(255, 255, 255, 0.9);
+      --text: #222;
+      --light-bg: rgba(245, 248, 255, 0.85);
+      --bg-gradient: linear-gradient(135deg, #f5faff, #ffffff);
+    }
+
+    body.dark {
+      --primary: #66b3ff;
+      --accent: #3399ff;
+      --header: #cce5ff;
+      --glass: rgba(25, 25, 25, 0.9);
+      --text: #f0f0f0;
+      --light-bg: rgba(40, 40, 40, 0.85);
+      --bg-gradient: linear-gradient(135deg, #0f172a, #1e293b);
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.4s ease, color 0.4s ease;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      position: relative;
+      text-align: center;
+      padding: 25px 10px 10px 10px;
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      font-weight: bold;
+      font-size: 1.8em;
+      color: var(--header);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .header-buttons {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .theme-toggle,
+    .back-btn {
+      background: var(--light-bg);
+      border: none;
+      color: var(--primary);
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .theme-toggle:hover,
+    .back-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 20px auto 40px auto;
+      background: var(--glass);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--header);
+      margin-top: 0;
+    }
+
+    .intro {
+      background: rgba(240, 248, 255, 0.5);
+      border-left: 5px solid var(--primary);
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      font-style: italic;
+    }
+
+    .subsection {
+      position: relative;
+      background: rgba(240, 248, 255, 0.45);
+      margin: 25px 0;
+      padding: 18px 22px 18px 30px;
+      border-radius: 10px;
+    }
+
+    .subsection::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 4px;
+      background: linear-gradient(180deg, #0099ff, #0066cc);
+      border-radius: 3px;
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .accordion {
+      background: var(--light-bg);
+      color: var(--text);
+      cursor: pointer;
+      padding: 12px 16px;
+      margin-top: 10px;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 1em;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: 0.3s ease;
+    }
+
+    .accordion:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .panel {
+      padding: 0 16px;
+      background-color: var(--glass);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out, padding 0.3s;
+      border-left: 3px solid var(--primary);
+      border-radius: 8px;
+    }
+
+    .panel.open {
+      padding: 15px;
+    }
+
+    footer {
+      text-align: center;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      width: 90%;
+      margin: 40px auto 10px auto;
+      font-size: 0.9em;
+    }
+
+    #backToTop {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 100;
+      background-color: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: 0.3s;
+    }
+
+    #backToTop:hover {
+      background-color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    NBKRIST JavaHub 
+    <div class="header-buttons">
+      <button class="back-btn"><a href="infosys.html">⬅ Back</a></button>
+      <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Interview Preparation – SDLC, Agile, DevOps & Cloud</h1>
+    <div class="intro">
+      These questions reflect the core understanding expected in SDLC, Agile, DevOps, Testing, and Delivery/Deployment
+      with cloud concepts for freshers interviewing at Infosys in 2025.
+    </div>
+
+    <!-- SDLC Section -->
+    <div class="subsection">
+      <h2>📘 SDLC (Software Development Life Cycle)</h2>
+
+      <button class="accordion">1. What are the different phases of the SDLC?</button>
+      <div class="panel">
+        <p>Typical SDLC phases include: Requirement Analysis, System Design, Implementation (Coding), Testing,
+          Deployment, and Maintenance. Each phase ensures quality and structure in software development.</p>
+      </div>
+
+      <button class="accordion">2. What is the difference between SDLC and STLC?</button>
+      <div class="panel">
+        <p>SDLC defines the overall software development process, while STLC (Software Testing Life Cycle) focuses only
+          on the testing phase — including test planning, case design, execution, and reporting.</p>
+      </div>
+    </div>
+
+    <!-- Agile Section -->
+    <div class="subsection">
+      <h2>⚡ Agile Methodology</h2>
+
+      <button class="accordion">1. What is Agile methodology?</button>
+      <div class="panel">
+        <p>Agile is an iterative development approach where software is built in small, usable increments called
+          sprints, enabling flexibility and customer feedback at each stage.</p>
+      </div>
+
+      <button class="accordion">2. Explain the key principles of Agile.</button>
+      <div class="panel">
+        <p>Key principles include: customer collaboration, welcoming change, frequent delivery, self-organizing teams,
+          and continuous improvement through reflection and adaptation.</p>
+      </div>
+
+      <button class="accordion">3. What are the differences between Agile and Waterfall?</button>
+      <div class="panel">
+        <p>Agile is iterative, adaptive, and emphasizes collaboration. Waterfall is linear, rigid, and sequential, where
+          testing happens only after development completion.</p>
+      </div>
+    </div>
+
+    <!-- DevOps Section -->
+    <div class="subsection">
+      <h2>🧩 DevOps</h2>
+
+      <button class="accordion">1. What is DevOps, and why is it used?</button>
+      <div class="panel">
+        <p>DevOps integrates Development and Operations teams to automate workflows, improve collaboration, and speed up
+          software delivery through CI/CD practices.</p>
+      </div>
+
+      <button class="accordion">2. Explain Continuous Integration and Continuous Deployment (CI/CD).</button>
+      <div class="panel">
+        <p><strong>Continuous Integration (CI)</strong> automatically builds and tests code after each commit.<br>
+          <strong>Continuous Deployment (CD)</strong> automatically delivers tested code to production, ensuring rapid
+          and reliable releases.</p>
+      </div>
+    </div>
+
+    <!-- Testing Section -->
+    <div class="subsection">
+      <h2>🧪 Software Testing</h2>
+
+      <button class="accordion">1. What are different types of software testing?</button>
+      <div class="panel">
+        <p>Main types: Unit Testing (individual modules), Integration Testing (combined modules), System Testing (entire
+          system), and User Acceptance Testing (real-world validation).</p>
+      </div>
+
+      <button class="accordion">2. Difference between manual and automated testing</button>
+      <div class="panel">
+        <p>Manual testing involves human execution of test cases. Automated testing uses scripts/tools (like Selenium)
+          for faster, repeatable tests.</p>
+      </div>
+    </div>
+
+    <!-- Delivery & Cloud Section -->
+    <div class="subsection">
+      <h2>☁️ Delivery, Deployment & Cloud Concepts</h2>
+
+      <button class="accordion">1. Difference between Continuous Delivery and Continuous Deployment</button>
+      <div class="panel">
+        <p><strong>Continuous Delivery</strong> automates code build, test, and staging, but final deployment requires
+          manual approval.<br><strong>Continuous Deployment</strong> extends automation to production without manual
+          intervention.</p>
+      </div>
+
+      <button class="accordion">2. What are the common cloud service models?</button>
+      <div class="panel">
+        <p>Three models:<br><strong>IaaS</strong> – Infrastructure as a Service (e.g., AWS EC2)<br>
+          <strong>PaaS</strong> – Platform as a Service (e.g., Google App Engine)<br>
+          <strong>SaaS</strong> – Software as a Service (e.g., Gmail, Salesforce)</p>
+      </div>
+
+      <button class="accordion">3. How does cloud computing benefit deployment?</button>
+      <div class="panel">
+        <p>Cloud computing provides scalability, flexibility, high availability, and cost efficiency. It simplifies
+          deployment through automation, load balancing, and on-demand resources.</p>
+      </div>
+    </div>
+  </div>
+
+  <button id="backToTop" title="Go to top">⬆</button>
+
+  <footer>© 2025 NBKRIST | Infosys Campus Drive Preparation | Designed by Hari Babu Mutchakala</footer>
+
+  <script>
+    // Dark mode toggle
+    const toggle = document.getElementById("themeToggle");
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      toggle.textContent = document.body.classList.contains("dark") ? "☀️ Light" : "🌙 Dark";
+    });
+
+    // Accordion
+    document.querySelectorAll(".accordion").forEach(btn => {
+      btn.addEventListener("click", () => {
+        btn.classList.toggle("active");
+        const panel = btn.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+          panel.classList.remove("open");
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+          panel.classList.add("open");
+        }
+      });
+    });
+
+    // Back to top
+    const topBtn = document.getElementById("backToTop");
+    window.onscroll = () => {
+      topBtn.style.display = (document.documentElement.scrollTop > 200) ? "block" : "none";
+    };
+    topBtn.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NBKRIST – Infosys Interview Prep | Technical Q&A</title>
+  <style>
+    :root {
+      --primary: #0078ff;
+      --accent: #00bfff;
+      --header: #004d99;
+      --glass: rgba(255, 255, 255, 0.9);
+      --text: #222;
+      --light-bg: rgba(245, 248, 255, 0.85);
+      --bg-gradient: linear-gradient(135deg, #f5faff, #ffffff);
+    }
+
+    body.dark {
+      --primary: #66b3ff;
+      --accent: #3399ff;
+      --header: #cce5ff;
+      --glass: rgba(25, 25, 25, 0.9);
+      --text: #f0f0f0;
+      --light-bg: rgba(40, 40, 40, 0.85);
+      --bg-gradient: linear-gradient(135deg, #0f172a, #1e293b);
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.4s ease, color 0.4s ease;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      position: relative;
+      text-align: center;
+      padding: 25px 10px 10px 10px;
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      font-weight: bold;
+      font-size: 1.8em;
+      color: var(--header);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .header-buttons {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .theme-toggle,
+    .back-btn {
+      background: var(--light-bg);
+      border: none;
+      color: var(--primary);
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .theme-toggle:hover,
+    .back-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 20px auto 40px auto;
+      background: var(--glass);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--header);
+      margin-top: 0;
+    }
+
+    .subsection {
+      position: relative;
+      background: rgba(240, 248, 255, 0.45);
+      margin: 25px 0;
+      padding: 18px 22px 18px 30px;
+      border-radius: 10px;
+    }
+
+    .subsection::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 4px;
+      background: linear-gradient(180deg, #0099ff, #0066cc);
+      border-radius: 3px;
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .accordion {
+      background: var(--light-bg);
+      color: var(--text);
+      cursor: pointer;
+      padding: 12px 16px;
+      margin-top: 10px;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 1em;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: 0.3s ease;
+    }
+
+    .accordion:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .panel {
+      padding: 0 16px;
+      background-color: var(--glass);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out, padding 0.3s;
+      border-left: 3px solid var(--primary);
+      border-radius: 8px;
+    }
+
+    .panel.open {
+      padding: 15px;
+    }
+
+    footer {
+      text-align: center;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      width: 90%;
+      margin: 40px auto 10px auto;
+      font-size: 0.9em;
+    }
+
+    /* Back to Top Button */
+    #backToTop {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 100;
+      background-color: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: 0.3s;
+    }
+
+    #backToTop:hover {
+      background-color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    NBKRIST JavaHub –  Interview Q&A
+    <div class="header-buttons">
+      <button class="back-btn"><a href="infosys.html">⬅ Back</a></button>
+      <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Infosys Interview Preparation – Core Technical Topics</h1>
+
+    <!-- ☕ Core Java Section -->
+    <div class="subsection">
+      <h2>☕ Core Java Questions</h2>
+      <button class="accordion">1. What is OOP and what are its advantages?</button>
+      <div class="panel">
+        <p>OOP organizes code into objects. Advantages: modularity, encapsulation, inheritance, polymorphism, abstraction, and reusability.</p>
+      </div>
+
+      <button class="accordion">2. What is an immutable String? Why is String immutable in Java?</button>
+      <div class="panel">
+        <p>Immutable strings can’t be changed once created. Java makes them immutable for thread-safety, caching, and security.</p>
+      </div>
+
+      <button class="accordion">3. What class supports mutable strings?</button>
+      <div class="panel">
+        <p><strong>StringBuilder</strong> (faster, non-synchronized) and <strong>StringBuffer</strong> (thread-safe, synchronized).</p>
+      </div>
+
+      <button class="accordion">4. Differences between String and StringBuffer</button>
+      <div class="panel">
+        <p>String: Immutable. StringBuffer: Mutable and synchronized, suitable for multi-threaded use.</p>
+      </div>
+
+      <button class="accordion">5. Difference between Array and List</button>
+      <div class="panel">
+        <p>Arrays have fixed size and homogeneous data. Lists are dynamic and part of Java Collections Framework.</p>
+      </div>
+
+      <button class="accordion">6. Classes for Array and List</button>
+      <div class="panel">
+        <p>Array: primitive structure. List implemented by ArrayList, LinkedList, Vector, Stack.</p>
+      </div>
+
+      <button class="accordion">7. Difference between List, Set, and Map</button>
+      <div class="panel">
+        <p>List – ordered, duplicates allowed. Set – unordered, unique elements. Map – key-value pairs, unique keys.</p>
+      </div>
+
+      <button class="accordion">8. Types of inheritance in Java</button>
+      <div class="panel">
+        <p>Single, Multilevel, Hierarchical. Multiple inheritance via interfaces only.</p>
+      </div>
+
+      <button class="accordion">9. Does Java 8 support multiple interfaces?</button>
+      <div class="panel">
+        <p>Yes, using <strong>default</strong> and <strong>static</strong> methods inside interfaces.</p>
+      </div>
+
+      <button class="accordion">10. Explain Static and Dynamic Overloading</button>
+      <div class="panel">
+        <p>Static (compile-time) via method overloading. Dynamic (runtime) via overriding (polymorphism).</p>
+      </div>
+
+      <button class="accordion">11. Why is Java platform independent?</button>
+      <div class="panel">
+        <p>Java compiles to bytecode that runs on any JVM (“Write Once, Run Anywhere”).</p>
+      </div>
+
+      <button class="accordion">12. Heap vs Stack memory</button>
+      <div class="panel">
+        <p>Stack: local variables, method calls. Heap: objects managed by Garbage Collector.</p>
+      </div>
+
+      <button class="accordion">13. What is a final variable?</button>
+      <div class="panel">
+        <p>Constant value that can’t change once initialized.</p>
+      </div>
+
+      <button class="accordion">14. Constructor vs Method</button>
+      <div class="panel">
+        <p>Constructors initialize objects (no return type). Methods define behavior and have a return type.</p>
+      </div>
+
+      <button class="accordion">15. Public vs Private specifiers</button>
+      <div class="panel">
+        <p>Public: accessible anywhere. Private: only within class – supports encapsulation.</p>
+      </div>
+    </div>
+
+    <!-- 🧮 SQL Section -->
+    <div class="subsection">
+      <h2>🧮 RDBMS – SQL Questions</h2>
+      <button class="accordion">1. Query for second highest salary</button>
+      <div class="panel">
+        <p><code>SELECT MAX(salary) FROM employees WHERE salary &lt; (SELECT MAX(salary) FROM employees);</code></p>
+      </div>
+
+      <button class="accordion">2. WHERE vs HAVING</button>
+      <div class="panel">
+        <p>WHERE filters rows before grouping. HAVING filters after aggregation.</p>
+      </div>
+
+      <button class="accordion">3. Join employee and department</button>
+      <div class="panel">
+        <p><code>SELECT e.name, d.dept_name FROM employee e JOIN department d ON e.dept_id = d.id;</code></p>
+      </div>
+
+      <button class="accordion">4. Count employees per department</button>
+      <div class="panel">
+        <p><code>SELECT dept_id, COUNT(*) FROM employee GROUP BY dept_id;</code></p>
+      </div>
+
+      <button class="accordion">5. Handle NULL values</button>
+      <div class="panel">
+        <p>Use <strong>COALESCE()</strong> or <strong>ISNULL()</strong> to replace NULLs.</p>
+      </div>
+
+      <button class="accordion">6. Update salary by 10%</button>
+      <div class="panel">
+        <p><code>UPDATE employee SET salary = salary * 1.10;</code></p>
+      </div>
+
+      <button class="accordion">7. What is indexing?</button>
+      <div class="panel">
+        <p>Speeds up searches by minimizing full table scans using B-tree or hash structures.</p>
+      </div>
+
+      <button class="accordion">8. Employees joined last 30 days</button>
+      <div class="panel">
+        <p><code>SELECT * FROM employee WHERE join_date &gt;= CURDATE() - INTERVAL 30 DAY;</code></p>
+      </div>
+
+      <button class="accordion">9. Primary vs Foreign key</button>
+      <div class="panel">
+        <p>Primary: unique row identifier. Foreign: establishes relation between tables.</p>
+      </div>
+
+      <button class="accordion">10. Delete duplicates</button>
+      <div class="panel">
+        <p><code>DELETE FROM employees WHERE id NOT IN (SELECT MIN(id) FROM employees GROUP BY name, salary);</code></p>
+      </div>
+    </div>
+
+    <!-- 🌐 CN Section -->
+    <div class="subsection">
+      <h2>🌐 Computer Networks Questions</h2>
+      <button class="accordion">1. What is a computer network?</button>
+      <div class="panel">
+        <p>Interconnected devices share data and resources.</p>
+      </div>
+
+      <button class="accordion">2. Types of networks</button>
+      <div class="panel">
+        <p>LAN (local), MAN (metro), WAN (wide), PAN (personal).</p>
+      </div>
+
+      <button class="accordion">3. IP address – IPv4 vs IPv6</button>
+      <div class="panel">
+        <p>IPv4: 32-bit. IPv6: 128-bit, more secure and scalable.</p>
+      </div>
+
+      <button class="accordion">4. OSI model layers</button>
+      <div class="panel">
+        <p>Physical, Data Link, Network, Transport, Session, Presentation, Application.</p>
+      </div>
+
+      <button class="accordion">5. TCP vs UDP</button>
+      <div class="panel">
+        <p>TCP: reliable, connection-oriented. UDP: faster, connectionless.</p>
+      </div>
+
+      <button class="accordion">6. Router vs Switch vs Hub</button>
+      <div class="panel">
+        <p>Router: connects networks. Switch: connects devices. Hub: broadcasts to all.</p>
+      </div>
+
+      <button class="accordion">7. What is DNS?</button>
+      <div class="panel">
+        <p>Domain Name System translates domain names to IP addresses.</p>
+      </div>
+
+      <button class="accordion">8. What is a MAC address?</button>
+      <div class="panel">
+        <p>Hardware address identifying a device; unique and permanent.</p>
+      </div>
+
+      <button class="accordion">9. What is a firewall?</button>
+      <div class="panel">
+        <p>Monitors and filters network traffic for security.</p>
+      </div>
+
+      <button class="accordion">10. What is DHCP?</button>
+      <div class="panel">
+        <p>Assigns dynamic IP addresses automatically to devices.</p>
+      </div>
+    </div>
+
+    <!-- ⚙️ OS Section -->
+    <div class="subsection">
+      <h2>⚙️ Operating Systems Questions</h2>
+      <button class="accordion">1. What is an OS?</button>
+      <div class="panel">
+        <p>Manages hardware, software, memory, and user interaction.</p>
+      </div>
+
+      <button class="accordion">2. Process vs Thread</button>
+      <div class="panel">
+        <p>Process: independent execution. Thread: lightweight unit within a process.</p>
+      </div>
+
+      <button class="accordion">3. What is a deadlock?</button>
+      <div class="panel">
+        <p>Two or more processes waiting indefinitely for each other’s resources.</p>
+      </div>
+
+      <button class="accordion">4. CPU Scheduling algorithms</button>
+      <div class="panel">
+        <p>FCFS, SJF, Round Robin, Priority Scheduling.</p>
+      </div>
+
+      <button class="accordion">5. Virtual memory</button>
+      <div class="panel">
+        <p>Uses part of disk as temporary RAM for large programs.</p>
+      </div>
+
+      <button class="accordion">6. Mutex vs Semaphore</button>
+      <div class="panel">
+        <p>Mutex: single resource lock. Semaphore: manages multiple instances.</p>
+      </div>
+
+      <button class="accordion">7. Context Switching</button>
+      <div class="panel">
+        <p>CPU saves and restores process state during multitasking.</p>
+      </div>
+
+      <button class="accordion">8. File system</button>
+      <div class="panel">
+        <p>Organizes and manages data storage (e.g., FAT32, NTFS, ext4).</p>
+      </div>
+
+      <button class="accordion">9. Process States</button>
+      <div class="panel">
+        <p>New → Ready → Running → Waiting → Terminated.</p>
+      </div>
+
+      <button class="accordion">10. Memory management</button>
+      <div class="panel">
+        <p>Contiguous (fixed/variable) and Non-contiguous (paging, segmentation).</p>
+      </div>
+    </div>
+  </div>
+
+  <button id="backToTop" title="Go to top">⬆</button>
+
+  <footer>© 2025 NBKRIST | Infosys Campus Drive Preparation | Designed by Hari Babu Mutchakala</footer>
+
+  <script>
+    // Theme toggle
+    const toggle = document.getElementById("themeToggle");
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      toggle.textContent = document.body.classList.contains("dark")
+        ? "☀️ Light"
+        : "🌙 Dark";
+    });
+
+    // Accordion
+    document.querySelectorAll(".accordion").forEach(btn => {
+      btn.addEventListener("click", () => {
+        btn.classList.toggle("active");
+        const panel = btn.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+          panel.classList.remove("open");
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+          panel.classList.add("open");
+        }
+      });
+    });
+
+    // Back to top
+    const topBtn = document.getElementById("backToTop");
+    window.onscroll = () => {
+      if (document.documentElement.scrollTop > 200) topBtn.style.display = "block";
+      else topBtn.style.display = "none";
+    };
+    topBtn.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBKRIST – Java Hub | Infosys Campus Preparation</title>
+  <style>
+    :root {
+      --primary: #0078ff;
+      --accent: #00bfff;
+      --header: #004d99;
+      --glass: rgba(255, 255, 255, 0.9);
+      --text: #222;
+      --light-bg: rgba(245, 248, 255, 0.85);
+      --bg-gradient: linear-gradient(135deg, #f5faff, #ffffff);
+    }
+
+    body.dark {
+      --primary: #66b3ff;
+      --accent: #3399ff;
+      --header: #cce5ff;
+      --glass: rgba(25, 25, 25, 0.9);
+      --text: #f0f0f0;
+      --light-bg: rgba(40, 40, 40, 0.85);
+      --bg-gradient: linear-gradient(135deg, #0f172a, #1e293b);
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    header {
+      position: relative;
+      text-align: center;
+      padding: 25px 10px 10px 10px;
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      font-weight: bold;
+      font-size: 1.8em;
+      color: var(--header);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .header-buttons {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .theme-toggle,
+    .back-btn {
+      background: var(--light-bg);
+      border: none;
+      color: var(--primary);
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .theme-toggle:hover,
+    .back-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 20px auto 40px auto;
+      background: var(--glass);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .subsection {
+      position: relative;
+      background: rgba(240, 248, 255, 0.45);
+      margin: 25px 0;
+      padding: 18px 22px 18px 30px;
+      border-radius: 10px;
+    }
+
+    .subsection::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 4px;
+      background: linear-gradient(180deg, #0099ff, #0066cc);
+      border-radius: 3px;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--header);
+      margin-top: 0;
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .tip {
+      background: #e3f2fd;
+      border-left: 5px solid #1e88e5;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-style: italic;
+      color: #0d47a1;
+      margin: 20px 0;
+    }
+
+    .accordion {
+      background: var(--light-bg);
+      color: var(--text);
+      cursor: pointer;
+      padding: 12px 16px;
+      margin-top: 10px;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 1em;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: 0.3s ease;
+    }
+
+    .accordion:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .panel {
+      padding: 0 16px;
+      background-color: var(--glass);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out, padding 0.3s;
+      border-left: 3px solid var(--primary);
+      border-radius: 8px;
+    }
+
+    .panel.open {
+      padding: 15px;
+    }
+
+    .code-block {
+      background: var(--light-bg);
+      border-left: 3px solid var(--primary);
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-family: Consolas, monospace;
+      font-size: 0.9em;
+      white-space: pre-wrap;
+      margin: 10px 0;
+    }
+
+    footer {
+      text-align: center;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      width: 90%;
+      margin: 40px auto 10px auto;
+      font-size: 0.9em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+
+
+
+    NBKRIST – Java Hub
+    <div class="header-buttons">
+      <button class="back-btn"><a href="interviews.html">⬅ Back</a></button>
+      <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>Infosys Campus Drive – Mentor’s Guidance & Java Q&A</h2>
+        <button class="back-btn"><a href="infonext.html">Next Tech Drill</a></button>
+    <button class="back-btn"><a href="se.html">Basic SDLC Path</a></button>
+
+    <div class="subsection">
+      <h2>🌟 MyView</h2>
+      <p>
+        Over the years, I have been part of several IT recruitment panels and have interacted with numerous candidates
+        during campus drives and technical interviews. From my experience, I can confidently say that most interviewers
+        look beyond your marks or how many programs you can memorize. What truly matters is your
+        <strong>clarity of thought</strong>, <strong>sound understanding of fundamentals</strong>, and the
+        <strong>ability to write efficient, logical code</strong>.
+      </p>
+      <p>
+        My sincere suggestion is — <strong>don’t just memorize; understand the concepts, visualize how they work, and
+          learn to apply them in real-world scenarios</strong>. Infosys, like most reputed IT organizations, values
+        candidates who think clearly, learn continuously, and can collaborate effectively in team settings.
+      </p>
+
+      <div class="tip">
+        “Preparation is not about doing everything — it’s about doing the right things with focus, depth, and
+        confidence.”
+      </div>
+
+      <h3>📚 The Three Pillars of Preparation</h3>
+      <ul>
+        <li><strong>Data Structures & Algorithms (DSA):</strong> Build logical thinking and problem-solving ability.
+        </li>
+        <li><strong>Java Programming:</strong> Master OOP principles and write clean, efficient code.</li>
+        <li><strong>Computer Networks & Operating Systems:</strong> Strengthen your conceptual foundation.</li>
+      </ul>
+    </div>
+
+    <div class="subsection">
+      <h2>☕ Core Java Interview Questions</h2>
+
+      <button class="accordion">1. What are the benefits of OOPs?</button>
+      <div class="panel">
+        <p>Benefits include Modularity, Encapsulation, Inheritance, Polymorphism, Abstraction, Maintainability, and
+          Real-world Modeling.</p>
+
+        <h4>Example – Modularity</h4>
+        <div class="code-block">
+          class MathUtils {
+          public int add(int a, int b) { return a + b; }
+          }
+          MathUtils util = new MathUtils();
+          System.out.println(util.add(5, 10)); // 15
+        </div>
+
+        <h4>Example – Encapsulation</h4>
+        <div class="code-block">
+          class BankAccount {
+          private double balance;
+          public void deposit(double amount) { balance += amount; }
+          public double getBalance() { return balance; }
+          }
+        </div>
+
+        <h4>Example – Inheritance</h4>
+        <div class="code-block">
+          class Vehicle { void start() { System.out.println("Vehicle starts"); } }
+          class Car extends Vehicle { void honk() { System.out.println("Car honks"); } }
+          Car c = new Car();
+          c.start(); c.honk();
+        </div>
+      </div>
+
+      <button class="accordion">2. What is a final variable?</button>
+      <div class="panel">
+        <p>A final variable is a constant whose value cannot change once assigned. For references, the reference remains
+          fixed, but the object state can change.</p>
+      </div>
+
+      <button class="accordion">3. What is a constructor in Java?</button>
+      <div class="panel">
+        <p>A constructor is a special method used to initialize objects. It has the same name as the class and no return
+          type.</p>
+      </div>
+
+      <button class="accordion">4. Difference between a constructor and a method</button>
+      <div class="panel">
+        <ul>
+          <li>Constructor name = class name; Method name differs.</li>
+          <li>Constructor has no return type; Method has one.</li>
+          <li>Constructor initializes objects; Method defines behavior.</li>
+          <li>Constructor is called automatically; Method explicitly.</li>
+        </ul>
+      </div>
+
+      <button class="accordion">5. What is the public access specifier?</button>
+      <div class="panel">
+        <p>Public members can be accessed anywhere, across classes and packages.</p>
+      </div>
+
+      <button class="accordion">6. What is the private access specifier?</button>
+      <div class="panel">
+        <p>Private members are accessible only within the same class, supporting encapsulation.</p>
+      </div>
+
+      <button class="accordion">7. Why declare instance variables as private?</button>
+      <div class="panel">
+        <p>To enforce encapsulation and ensure data protection via getters/setters.</p>
+      </div>
+
+      <button class="accordion">8. What is a static variable?</button>
+      <div class="panel">
+        <p>A static variable belongs to the class, not to any instance, and is shared by all objects.</p>
+      </div>
+
+
+    </div>
+    <footer>© 2025 NBKRIST | Java Hub | Authored by Hari Babu Mutchakala</footer>
+
+    <script>
+      // Dark Mode
+      const toggle = document.getElementById("themeToggle");
+      toggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark");
+        toggle.textContent = document.body.classList.contains("dark")
+          ? "☀️ Light"
+          : "🌙 Dark";
+      });
+
+      // Accordion Functionality
+      const acc = document.querySelectorAll(".accordion");
+      acc.forEach(btn => {
+        btn.addEventListener("click", () => {
+          btn.classList.toggle("active");
+          const panel = btn.nextElementSibling;
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+            panel.classList.remove("open");
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+            panel.classList.add("open");
+          }
+        });
+      });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBKRIST – Java Hub | Infosys HR Round (Interactive)</title>
+  <style>
+    :root {
+      --primary: #0078ff;
+      --accent: #00bfff;
+      --header: #004d99;
+      --glass: rgba(255, 255, 255, 0.9);
+      --text: #222;
+      --light-bg: rgba(245, 248, 255, 0.85);
+      --bg-gradient: linear-gradient(135deg, #f5faff, #ffffff);
+    }
+
+    body.dark {
+      --primary: #66b3ff;
+      --accent: #3399ff;
+      --header: #cce5ff;
+      --glass: rgba(25, 25, 25, 0.9);
+      --text: #f0f0f0;
+      --light-bg: rgba(40, 40, 40, 0.85);
+      --bg-gradient: linear-gradient(135deg, #0f172a, #1e293b);
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    header {
+      position: relative;
+      text-align: center;
+      padding: 25px 10px 10px 10px;
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      font-weight: bold;
+      font-size: 1.8em;
+      color: var(--header);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .header-buttons {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .left-buttons {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .theme-toggle, .back-btn, .print-btn {
+      background: var(--light-bg);
+      border: none;
+      color: var(--primary);
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .theme-toggle:hover, .back-btn:hover, .print-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 20px auto 40px auto;
+      background: var(--glass);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--header);
+      margin-top: 0;
+    }
+
+    .question {
+      background: rgba(240, 248, 255, 0.45);
+      border-left: 4px solid var(--primary);
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin: 15px 0;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-weight: 600;
+    }
+
+    .question:hover {
+      background: rgba(0, 120, 255, 0.1);
+    }
+
+    .answer {
+      display: none;
+      background: var(--light-bg);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 15px 20px;
+      margin-top: 8px;
+      font-weight: normal;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-5px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .tip {
+      background: #e3f2fd;
+      border-left: 5px solid #1e88e5;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-style: italic;
+      color: #0d47a1;
+      margin: 20px 0;
+    }
+
+    footer {
+      text-align: center;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      width: 90%;
+      margin: 40px auto 10px auto;
+      font-size: 0.9em;
+    }
+
+    @media print {
+      header, footer, .print-btn, .theme-toggle, .back-btn {
+        display: none !important;
+      }
+      .container {
+        box-shadow: none;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    NBKRIST – Java Hub
+    <div class="left-buttons">
+      <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+    </div>
+    <div class="header-buttons">
+      <button class="back-btn" ><a href="interviews.html">⬅ Back</a></button>
+      <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Infosys HR Round for Freshers</h1>
+
+    <!-- Questions -->
+    <div class="question">1️⃣ Tell me about yourself</div>
+    <div class="answer">
+      Keep it professional and concise — include your education, Java skills, project experience, and enthusiasm to join Infosys. Avoid unnecessary personal details.
+    </div>
+
+    <div class="question">2️⃣ Why do you want to join Infosys?</div>
+    <div class="answer">
+      Show that you’ve researched Infosys. Mention its world-class training (Mysore), excellent culture, and focus on innovation. Express how it aligns with your career goals.
+    </div>
+
+    <div class="question">3️⃣ Where do you see yourself in five years?</div>
+    <div class="answer">
+      Highlight growth within Infosys. Example: “In five years, I aim to become a Subject Matter Expert in Java, leading projects and mentoring juniors.”
+    </div>
+
+    <div class="question">4️⃣ Are you willing to relocate or work in shifts?</div>
+    <div class="answer">
+      Always say “Yes” confidently. Example: “I’m open to relocation and flexible with any shift, including rotational or night shifts, as per project requirements.”
+    </div>
+
+    <div class="question">5️⃣ Do you plan to pursue higher studies soon?</div>
+    <div class="answer">
+      Reassure stability: “My immediate goal is to build a strong technical foundation and contribute to Infosys. I have no plans for higher studies in the near term.”
+    </div>
+
+    <div class="question">6️⃣ What are your strengths and weaknesses?</div>
+    <div class="answer">
+      Strengths: Quick learner, disciplined, team player. Weakness: “I tend to over-analyze, but I’m improving by focusing on priorities.”
+    </div>
+
+    <div class="question">7️⃣ How do you handle pressure or deadlines?</div>
+    <div class="answer">
+      Use the STAR method — Situation, Task, Action, Result. Example: “During my final project, I divided tasks into modules and prioritized deliverables to meet the deadline calmly.”
+    </div>
+
+    <div class="question">💡 What do you know about Infosys?</div>
+    <div class="answer">
+      Infosys is a global leader in digital services and consulting, headquartered in Bengaluru. It offers IT, Cloud (Cobalt), AI (Topaz), and Cybersecurity services. Known for its training at Mysore and ethical work culture.
+    </div>
+
+    <div class="question">✨ Final Tips for HR Round</div>
+    <div class="answer">
+      Be confident, polite, and natural. Don’t memorize — speak with clarity and enthusiasm. Smile, stay composed, and show your eagerness to learn.
+    </div>
+
+    <div class="tip">
+      💡 Remember: Infosys HR isn’t testing your textbook knowledge — they’re evaluating your attitude, communication, and readiness for a professional environment.
+    </div>
+  </div>
+
+  <footer>© 2025 NBKRIST | Java Hub | Authored by Hari Babu Mutchakala</footer>
+
+  <script>
+    // Theme toggle
+    const toggle = document.getElementById("themeToggle");
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      toggle.textContent = document.body.classList.contains("dark")
+        ? "☀️ Light"
+        : "🌙 Dark";
+    });
+
+    // Interactive Q&A
+    const questions = document.querySelectorAll(".question");
+    const answers = document.querySelectorAll(".answer");
+
+    questions.forEach((question, index) => {
+      question.addEventListener("click", () => {
+        // Hide all answers
+        answers.forEach((ans, i) => {
+          if (i !== index) ans.style.display = "none";
+        });
+        // Toggle current
+        const current = answers[index];
+        current.style.display =
+          current.style.display === "block" ? "none" : "block";
+        current.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+    });
+  </script>
+</body>
+</html>
