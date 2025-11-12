@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NBKRIST – Java 2 Marks Questions (Detailed)</title>
+  <style>
+    :root {
+      --primary: #0078ff;
+      --accent: #00bfff;
+      --header: #004d99;
+      --glass: rgba(255, 255, 255, 0.9);
+      --text: #222;
+      --light-bg: rgba(245, 248, 255, 0.85);
+      --bg-gradient: linear-gradient(135deg, #f5faff, #ffffff);
+    }
+
+    body.dark {
+      --primary: #66b3ff;
+      --accent: #3399ff;
+      --header: #cce5ff;
+      --glass: rgba(25, 25, 25, 0.9);
+      --text: #f0f0f0;
+      --light-bg: rgba(40, 40, 40, 0.85);
+      --bg-gradient: linear-gradient(135deg, #0f172a, #1e293b);
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.4s ease, color 0.4s ease;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      position: relative;
+      text-align: center;
+      padding: 25px 10px 10px 10px;
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      font-weight: bold;
+      font-size: 1.8em;
+      color: var(--header);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .header-buttons {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .theme-toggle,
+    .back-btn {
+      background: var(--light-bg);
+      border: none;
+      color: var(--primary);
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .theme-toggle:hover,
+    .back-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 20px auto 40px auto;
+      background: var(--glass);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--header);
+      margin-top: 0;
+    }
+
+    .subsection {
+      position: relative;
+      background: rgba(240, 248, 255, 0.45);
+      margin: 25px 0;
+      padding: 18px 22px 18px 30px;
+      border-radius: 10px;
+    }
+
+    .subsection::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 4px;
+      background: linear-gradient(180deg, #0099ff, #0066cc);
+      border-radius: 3px;
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .accordion {
+      background: var(--light-bg);
+      color: var(--text);
+      cursor: pointer;
+      padding: 12px 16px;
+      margin-top: 10px;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 1em;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: 0.3s ease;
+    }
+
+    .accordion:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .panel {
+      padding: 0 16px;
+      background-color: var(--glass);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out, padding 0.3s;
+      border-left: 3px solid var(--primary);
+      border-radius: 8px;
+    }
+
+    .panel.open {
+      padding: 15px;
+    }
+
+    /* Navigation Buttons */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      flex: 1 1 45%;
+      text-align: center;
+      background: var(--light-bg);
+      color: var(--primary);
+      font-weight: 600;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .nav-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      width: 90%;
+      margin: 40px auto 10px auto;
+      font-size: 0.9em;
+    }
+
+    #backToTop {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 100;
+      background-color: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: 0.3s;
+    }
+
+    #backToTop:hover {
+      background-color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    NBKRIST JavaHub – II Mid Exam Key -<span style="color: red;"> II CSE  I SEM </span> OCTOBER - 2025
+    <div class="header-buttons">
+      <button class="back-btn"><a href="exampanel.html">⬅ Home</a></button>
+      <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>2 Marks Questions – Answers</h1>
+
+    <div class="subsection">
+      <button class="accordion">1. Compare class with interface.</button>
+      <div class="panel">
+        <p>A <strong>class</strong> defines both data (fields) and behavior (methods), and can have full method implementations.<br>
+          An <strong>interface</strong> defines only method signatures, not implementations, serving as a contract.<br>
+          A class can extend one class but implement multiple interfaces, allowing abstraction.<br>
+          Interfaces enable multiple inheritance and polymorphic behavior in Java.<br>
+          Example: <code>class Dog implements Animal</code> means Dog follows Animal’s contract.</p>
+      </div>
+
+      <button class="accordion">2. Explain abstract class and abstract methods with example.</button>
+      <div class="panel">
+        <p>An <strong>abstract class</strong> is a base class that cannot be instantiated directly.<br>
+          It can have both abstract (unimplemented) and concrete (implemented) methods.<br>
+          Abstract classes allow partial implementation for subclasses to reuse.<br>
+          Example: <code>abstract class Shape { abstract void draw(); }</code><br>
+          Concrete classes like <code>Circle</code> or <code>Square</code> must implement <code>draw()</code>.</p>
+      </div>
+
+      <button class="accordion">3. What are the different exception handlers in Java?</button>
+      <div class="panel">
+        <p>Java exception handling uses five main keywords: <code>try</code>, <code>catch</code>, <code>finally</code>, <code>throw</code>, and <code>throws</code>.<br>
+          The <code>try</code> block contains risky code, and <code>catch</code> handles exceptions.<br>
+          <code>finally</code> always executes, used for cleanup operations.<br>
+          <code>throw</code> manually raises exceptions, while <code>throws</code> declares possible exceptions.<br>
+          Together they ensure smooth error handling and prevent abnormal termination.</p>
+      </div>
+
+      <button class="accordion">4. What is deadlock and race condition in Java?</button>
+      <div class="panel">
+        <p><strong>Deadlock</strong> occurs when two or more threads hold resources and wait endlessly for each other.<br>
+          It happens due to improper synchronization and lock ordering.<br>
+          <strong>Race Condition</strong> arises when multiple threads modify shared data concurrently.<br>
+          It causes inconsistent or unexpected results during execution.<br>
+          Using <code>synchronized</code> blocks and thread-safe designs helps avoid both issues.</p>
+      </div>
+
+      <button class="accordion">5. Explain below methods – equals() and regionMatches().</button>
+      <div class="panel">
+        <p>The <code>equals()</code> method compares the <strong>contents</strong> of two strings instead of references.<br>
+          Example: <code>"Java".equals("Java")</code> returns true.<br>
+          The <code>regionMatches()</code> method compares a specific part (region) of two strings.<br>
+          Example: <code>str1.regionMatches(0, str2, 0, 3)</code> compares first three characters.<br>
+          Both methods belong to the <code>String</code> class and help in text comparison.</p>
+      </div>
+    </div>
+
+    <!-- Navigation buttons -->
+    <div class="nav-buttons">
+     
+      <a href="FiveMarks.html" class="nav-btn">Next: 5 Marks Questions ➡</a>
+    </div>
+  </div>
+
+  <button id="backToTop" title="Go to top">⬆</button>
+
+  <footer>© 2025 NBKRIST | Java 2 Marks (Detailed) | Designed by Hari Babu Mutchakala</footer>
+
+  <script>
+    const toggle = document.getElementById("themeToggle");
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      toggle.textContent = document.body.classList.contains("dark")
+        ? "☀️ Light"
+        : "🌙 Dark";
+    });
+
+    document.querySelectorAll(".accordion").forEach(btn => {
+      btn.addEventListener("click", () => {
+        btn.classList.toggle("active");
+        const panel = btn.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+          panel.classList.remove("open");
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+          panel.classList.add("open");
+        }
+      });
+    });
+
+    const topBtn = document.getElementById("backToTop");
+    window.onscroll = () => {
+      if (document.documentElement.scrollTop > 200) topBtn.style.display = "block";
+      else topBtn.style.display = "none";
+    };
+    topBtn.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  </script>
+</body>
+
+</html>
