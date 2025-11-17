@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Java Architecture – JVM, JRE & JDK | NBKRIST JavaHub</title>
+<style>
+:root{
+  --primary: #0078ff;
+  --accent:  #00bfff;
+  --header:  #004d99;
+  --glass:   rgba(255,255,255,0.94);
+  --text:    #222;
+  --light-bg: rgba(245,248,255,0.9);
+  --bg-gradient: linear-gradient(135deg,#f5faff,#ffffff);
+}
+body.dark{
+  --primary: #66b3ff;
+  --accent:  #3399ff;
+  --header:  #cce5ff;
+  --glass:   rgba(20,20,28,0.86);
+  --text:    #eef6ff;
+  --light-bg: rgba(35,40,50,0.8);
+  --bg-gradient: linear-gradient(135deg,#0f172a,#1e293b);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background:var(--bg-gradient);
+  color:var(--text);
+  transition: background .25s, color .25s;
+  line-height:1.6;
+}
+.header{
+  position:relative;
+  text-align:center;
+  padding:22px 12px;
+  background:var(--glass);
+  backdrop-filter: blur(8px);
+  color:var(--header);
+  font-weight:700;
+  font-size:1.45rem;
+  box-shadow:0 6px 20px rgba(0,0,0,0.06);
+}
+.print-btn, .theme-btn{
+  position:absolute;
+  top:12px;
+  padding:7px 10px;
+  border-radius:8px;
+  border: none;
+  background:var(--light-bg);
+  color:var(--primary);
+  font-weight:600;
+  cursor:pointer;
+}
+.print-btn{ left:18px; }
+.theme-btn{ right:18px; }
+
+.navbar{
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  padding:10px;
+  margin:12px auto;
+  width:92%;
+  background:rgba(255,255,255,0.26);
+  backdrop-filter: blur(6px);
+  border-radius:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+.navbar a{ text-decoration:none; color:var(--primary); font-weight:600; }
+
+.container{
+  max-width:980px;
+  margin:18px auto;
+  background:var(--glass);
+  border-radius:14px;
+  padding:22px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.06);
+}
+
+h1{ text-align:center; color:var(--header); margin:6px 0 12px 0; }
+
+.subsection{
+  background: rgba(240,248,255,0.55);
+  margin:18px 0;
+  padding:18px;
+  border-radius:10px;
+  border-left:5px solid var(--primary);
+}
+.subsection h2{ margin-top:0; color:var(--primary); }
+
+.code-block{
+  background:var(--light-bg);
+  padding:12px;
+  border-radius:8px;
+  border-left:4px solid var(--primary);
+  font-family:Consolas, monospace;
+  white-space:pre-wrap;
+  margin:12px 0;
+}
+ol{ padding-left: 1.1rem; }
+
+.summary{
+  background: rgba(224,247,255,0.75);
+  padding:16px;
+  border-radius:10px;
+  border-left:5px solid var(--primary);
+}
+
+footer{
+  text-align:center;
+  margin:20px;
+}
+.footer-box{
+  max-width:980px;
+  margin:0 auto;
+  background: linear-gradient(90deg,var(--primary),var(--accent));
+  color:#fff;
+  padding:12px;
+  border-radius:10px;
+}
+
+/* responsive */
+@media (max-width:820px){
+  .navbar{ flex-direction:column; gap:8px; width:96%; }
+  .header{ font-size:1.2rem; }
+}
+
+/* print adjustments */
+@media print{
+  .navbar, .print-btn, .theme-btn { display:none !important; }
+  body{ background:#fff !important; color:#000; }
+  .container{ box-shadow:none; border-radius:0; padding:0; }
+  .header{ display:none; }
+}
+</style>
+</head>
+<body>
+  <header class="header" role="banner">
+    <button class="print-btn" aria-label="Print page" onclick="window.print()">🖨️</button>
+    NBKRIST JavaHub — Java Architecture (JVM • JRE • JDK)
+    <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">🌙</button>
+  </header>
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="index.html">🏠 Home</a>
+    <a href="#overview">Overview</a>
+    <a href="#jdk">JDK</a>
+    <a href="#jre">JRE</a>
+    <a href="#jvm">JVM</a>
+    <a href="#flow">Execution Flow</a>
+    <a href="#summary">Summary</a>
+  </nav>
+
+  <main class="container" role="main">
+    <h1>Java Architecture — JDK, JRE & JVM Explained</h1>
+    <p style="text-align:center; color:#444; margin-bottom:14px;">
+      This page explains the three core components that make Java platform-independent and powerful:
+      <strong>JDK, JRE, and the JVM</strong>. Save this as a quick reference for interviews and exams.
+    </p>
+
+    <section id="overview" class="subsection" aria-labelledby="overviewHeading">
+      <h2 id="overviewHeading">Overview</h2>
+      <p>Java’s architecture is designed around the idea of portability and security. The three pillars:</p>
+      <ul>
+        <li><strong>JDK</strong> — Java Development Kit (for developers)</li>
+        <li><strong>JRE</strong> — Java Runtime Environment (to run Java programs)</li>
+        <li><strong>JVM</strong> — Java Virtual Machine (executes bytecode)</li>
+      </ul>
+      <p>Together they enable the famous motto: <strong>Write Once, Run Anywhere (WORA)</strong>.</p>
+    </section>
+
+    <section id="jdk" class="subsection" aria-labelledby="jdkHeading">
+      <h2 id="jdkHeading">JDK — Java Development Kit</h2>
+      <p>The JDK is the full kit for developing Java applications. If you plan to write and compile Java code, you need the JDK.</p>
+      <p><strong>What JDK contains:</strong> the Java compiler (<code>javac</code>), the JRE, debugging tools, and utilities like <code>jar</code>, <code>javadoc</code>, etc.</p>
+
+      <div class="code-block" aria-label="Compile and run example">
+// Write source
+// Hello.java
+public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Hello, Java Architecture!");
+    }
+}
+
+// Compile (using JDK)
+// javac Hello.java
+
+// Produce Hello.class (bytecode)
+      </div>
+
+      <p>Developers use the JDK to compile source code into bytecode (.class files) which the JVM later executes.</p>
+    </section>
+
+    <section id="jre" class="subsection" aria-labelledby="jreHeading">
+      <h2 id="jreHeading">JRE — Java Runtime Environment</h2>
+      <p>The JRE provides the runtime libraries and the JVM — everything required to run Java applications.</p>
+      <p><strong>JRE includes:</strong> the JVM implementation, core class libraries (rt.jar or modules), and configuration files for runtime.</p>
+
+      <p>End users who only need to run Java programs (not develop) typically install the JRE or use a JVM bundled with the OS or container image.</p>
+    </section>
+
+    <section id="jvm" class="subsection" aria-labelledby="jvmHeading">
+      <h2 id="jvmHeading">JVM — Java Virtual Machine</h2>
+      <p>The JVM is the heart of Java. It reads bytecode (.class files), verifies them for safety, and executes them on the host machine.</p>
+      <p><strong>Key responsibilities of the JVM:</strong></p>
+      <ul>
+        <li>Class loading (ClassLoader subsystem)</li>
+        <li>Bytecode verification (security)</li>
+        <li>Execution: interpreter + JIT (Just-In-Time) compiler</li>
+        <li>Memory management and garbage collection</li>
+        <li>Providing runtime environment abstractions</li>
+      </ul>
+
+      <div class="code-block" aria-label="Conceptual JVM steps">
+// Conceptual bytecode (illustrative)
+// 0x2A: aload_0
+// 0xB6: invokevirtual #3
+// (JVM interprets/compiles these into machine instructions)
+      </div>
+      <p>The JVM abstracts away OS and hardware differences — so the same bytecode runs across platforms.</p>
+    </section>
+
+    <section id="flow" class="subsection" aria-labelledby="flowHeading">
+      <h2 id="flowHeading">Execution Flow: Source → Bytecode → Native Code</h2>
+      <p>Step-by-step how Java runs your program:</p>
+      <ol>
+        <li><strong>Write</strong> Java source file: <code>Hello.java</code></li>
+        <li><strong>Compile</strong> with <code>javac</code> (JDK) → produces <code>Hello.class</code> (bytecode)</li>
+        <li><strong>Load</strong> the class: JVM ClassLoader loads <code>Hello.class</code></li>
+        <li><strong>Verify</strong> bytecode for security and correctness</li>
+        <li><strong>Execute</strong>: JVM interprets or uses the JIT compiler to produce optimized native code</li>
+        <li><strong>Run</strong> on the host OS — same bytecode, different machines</li>
+      </ol>
+
+      <p><strong>Note:</strong> The JIT compiler compiles "hot" methods to native code at runtime, dramatically improving performance compared to pure interpretation.</p>
+    </section>
+
+    <section id="summary" class="summary" aria-labelledby="summaryHeading">
+      <h2 id="summaryHeading">Summary & Why It Matters</h2>
+      <ul>
+        <li><strong>JDK</strong> — the developer kit (compile & package)</li>
+        <li><strong>JRE</strong> — runtime libraries + JVM (for running apps)</li>
+        <li><strong>JVM</strong> — executes bytecode, provides portability & security</li>
+        <li>Java's layered architecture is the reason it became dominant in enterprise systems, cloud, and Android ecosystems.</li>
+        <li>Understanding this architecture helps you debug, tune, and deploy Java applications with confidence.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="footer-box" role="presentation">
+      NBKRIST © 2025 | JavaHub — Hari Babu Mutchakala
+    </div>
+  </footer>
+
+<script>
+/* Theme toggle */
+const themeBtn = document.getElementById('themeToggle');
+if (themeBtn) {
+  themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    themeBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+  });
+}
+</script>
+</body>
+</html>

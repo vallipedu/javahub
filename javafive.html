@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Java Iteration Statements – NBKRIST JavaHub</title>
+
+<style>
+:root{
+ --primary:#0078ff; --accent:#00bfff; --header:#004d99;
+ --glass:rgba(255,255,255,0.94); --text:#222;
+ --light-bg:rgba(245,248,255,0.9);
+ --bg-gradient:linear-gradient(135deg,#f5faff,#ffffff);
+}
+body.dark{
+ --primary:#66b3ff; --accent:#3399ff; --header:#cce5ff;
+ --glass:rgba(25,25,25,0.85); --text:#f1f1f1;
+ --light-bg:rgba(40,40,50,0.85);
+ --bg-gradient:linear-gradient(135deg,#0f172a,#1e293b);
+}
+body{
+ margin:0; font-family:"Segoe UI",Tahoma;
+ background:var(--bg-gradient); color:var(--text);
+ line-height:1.6; transition:0.3s;
+}
+header{
+ text-align:center; padding:22px 10px;
+ background:var(--glass); backdrop-filter:blur(10px);
+ font-weight:bold; font-size:1.8rem; color:var(--header);
+ position:relative; box-shadow:0 4px 15px rgba(0,0,0,0.08);
+}
+.print-btn,.theme-btn{
+ position:absolute; top:12px; padding:6px 10px;
+ border:none; border-radius:8px; font-weight:600;
+ background:var(--light-bg); color:var(--primary);
+ cursor:pointer;
+}
+.print-btn{ left:20px; }
+.theme-btn{ right:20px; }
+
+.navbar{
+ display:flex; justify-content:center; gap:24px;
+ margin:14px auto; width:92%; padding:12px;
+ background:rgba(255,255,255,0.3);
+ backdrop-filter:blur(8px); border-radius:10px;
+}
+.navbar a{
+ text-decoration:none; font-weight:600; color:var(--primary);
+}
+
+.container{
+ max-width:980px; background:var(--glass);
+ margin:20px auto; padding:24px;
+ border-radius:16px; box-shadow:0 4px 18px rgba(0,0,0,0.08);
+}
+
+.subsection{
+ background:rgba(240,248,255,0.55);
+ margin:20px 0; padding:18px;
+ border-radius:10px; border-left:5px solid var(--primary);
+}
+.code-block{
+ background:var(--light-bg); border-left:4px solid var(--primary);
+ padding:12px; border-radius:8px; white-space:pre-wrap;
+ font-family:Consolas;
+}
+.output{
+ background:white; border-left:4px solid var(--accent);
+ padding:10px; border-radius:8px; margin-top:8px;
+ font-family:Consolas;
+}
+
+.question{
+ cursor:pointer; font-weight:600; margin:12px 0;
+}
+.answer{
+ display:none; background:var(--light-bg);
+ padding:10px; border-radius:8px;
+ border-left:3px solid var(--accent);
+ margin-top:6px;
+}
+
+.summary{
+ background:rgba(224,247,255,0.75);
+ border-left:5px solid var(--primary);
+ padding:18px; border-radius:10px;
+}
+
+@media(max-width:800px){
+ .navbar{ flex-direction:column; gap:10px; width:95%; }
+ header{ font-size:1.4rem; }
+}
+@media print{
+ .navbar,.theme-btn,.print-btn{ display:none !important; }
+ body{ background:#fff !important; }
+}
+</style>
+</head>
+
+<body>
+<header>
+ <button class="print-btn" onclick="window.print()">🖨️</button>
+ NBKRIST JavaHub – Java Iteration Statements
+ <button class="theme-btn" id="themeToggle">🌙</button>
+</header>
+
+<nav class="navbar">
+ <a href="theJava.html">🏠 Home</a>
+
+</nav>
+
+<div class="container">
+<h1>Java Iteration Statements – Complete Beginner Guide</h1>
+<p>Iteration statements allow Java programs to repeat tasks automatically. Loops are essential for performing repetitive tasks efficiently.</p>
+
+<!-- INTRO -->
+<div class="subsection" id="intro">
+<h2>1. Introduction to Iteration</h2>
+<p>Iteration means executing a block of code repeatedly. Java provides multiple loop structures, each useful for different scenarios.</p>
+<p>Main loops: <b>while</b>, <b>do-while</b>, <b>for</b>, <b>nested for</b>, <b>for-each</b>.</p>
+</div>
+
+<!-- WHILE -->
+<div class="subsection" id="while">
+<h2>2. The while Expression</h2>
+<p>The <code>while</code> loop checks the condition first and executes the block only while the condition is true.</p>
+<div class="code-block">
+int i = 1;
+while(i <= 5){
+    System.out.println(i);
+    i++;
+}
+</div>
+<div class="output">1<br>2<br>3<br>4<br>5</div>
+</div>
+
+<!-- DO WHILE -->
+<div class="subsection" id="dowhile">
+<h2>3. The do–while Loop</h2>
+<p>The <code>do-while</code> loop executes at least once, because the condition is checked after running the loop body.</p>
+<div class="code-block">
+int x = 1;
+do{
+    System.out.println(x);
+    x++;
+}while(x <= 3);
+</div>
+<div class="output">1<br>2<br>3</div>
+</div>
+
+<!-- FOR -->
+<div class="subsection" id="for">
+<h2>4. The for Loop</h2>
+<p>The <code>for</code> loop is used when the number of iterations is known in advance.</p>
+<div class="code-block">
+for(int k = 1; k <= 5; k++){
+    System.out.println(k);
+}
+</div>
+<div class="output">1<br>2<br>3<br>4<br>5</div>
+</div>
+
+<!-- NESTED FOR -->
+<div class="subsection" id="nested">
+<h2>5. Nested for Loop</h2>
+<p>Using a loop inside another loop allows multi-level repetition. Useful in matrix operations and pattern printing.</p>
+<div class="code-block">
+for(int i = 1; i <= 3; i++){
+    for(int j = 1; j <= 3; j++){
+        System.out.println(i + \" \" + j);
+    }
+}
+</div>
+<div class="output">
+1 1<br>1 2<br>1 3<br>
+2 1<br>2 2<br>2 3<br>
+3 1<br>3 2<br>3 3
+</div>
+</div>
+
+<!-- FOR EACH -->
+<div class="subsection" id="foreach">
+<h2>6. For–Each Loop</h2>
+<p>The <code>for-each</code> loop is used for easy traversal of arrays and collections.</p>
+<div class="code-block">
+int nums[] = {10, 20, 30};
+for(int n : nums){
+    System.out.println(n);
+}
+</div>
+<div class="output">10<br>20<br>30</div>
+</div>
+
+<!-- BREAK -->
+<div class="subsection" id="break">
+<h2>7. The break Statement</h2>
+<p><code>break</code> immediately stops the loop execution.</p>
+<div class="code-block">
+for(int i = 1; i <= 5; i++){
+    if(i == 3) break;
+    System.out.println(i);
+}
+</div>
+<div class="output">1<br>2</div>
+</div>
+
+<!-- CONTINUE -->
+<div class="subsection" id="continue">
+<h2>8. The continue Statement</h2>
+<p><code>continue</code> skips the current loop iteration and proceeds with the next.</p>
+<div class="code-block">
+for(int i = 1; i <= 5; i++){
+    if(i == 3) continue;
+    System.out.println(i);
+}
+</div>
+<div class="output">1<br>2<br>4<br>5</div>
+</div>
+
+<!-- PRACTICE -->
+<div class="subsection" id="practice">
+<h2>Practice Questions – Click to Reveal Answers</h2>
+
+<div class="question" onclick="toggleAnswer('q1')">1️⃣ Difference between while and do–while?</div>
+<div class="answer" id="ansq1">while checks before; do–while checks after, so it executes at least once.</div>
+
+<div class="question" onclick="toggleAnswer('q2')">2️⃣ Best loop for fixed number of iterations?</div>
+<div class="answer" id="ansq2">The for loop.</div>
+
+<div class="question" onclick="toggleAnswer('q3')">3️⃣ What does break do?</div>
+<div class="answer" id="ansq3">Stops the loop immediately.</div>
+
+<div class="question" onclick="toggleAnswer('q4')">4️⃣ What does continue do?</div>
+<div class="answer" id="ansq4">Skips the current iteration.</div>
+
+<div class="question" onclick="toggleAnswer('q5')">5️⃣ What is a nested loop?</div>
+<div class="answer" id="ansq5">A loop inside another loop.</div>
+
+</div>
+
+<!-- SUMMARY -->
+<div class="summary">
+<h2>Quick Summary</h2>
+<ul>
+ <li><b>while</b> → checks first.</li>
+ <li><b>do–while</b> → runs at least once.</li>
+ <li><b>for</b> → best for fixed repetitions.</li>
+ <li><b>nested for</b> → multi-dimensional tasks.</li>
+ <li><b>for-each</b> → easy array traversal.</li>
+ <li><b>break</b> → stops loop.</li>
+ <li><b>continue</b> → skips iteration.</li>
+</ul>
+</div>
+
+</div>
+
+<footer style="text-align:center; margin:20px;">
+ <div style="background:linear-gradient(90deg,var(--primary),var(--accent)); padding:12px; border-radius:10px; color:white;">
+   NBKRIST © 2025 | JavaHub Learning Series
+ </div>
+</footer>
+
+<script>
+function toggleAnswer(id){
+ const el = document.getElementById('ans'+id);
+ el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+}
+
+const toggleBtn = document.getElementById('themeToggle');
+toggleBtn.addEventListener('click',()=>{
+ document.body.classList.toggle('dark');
+ toggleBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Java Data Types & Variables – NBKRIST JavaHub</title>
+
+<style>
+:root{
+ --primary:#0078ff; --accent:#00bfff; --header:#004d99;
+ --glass:rgba(255,255,255,0.94); --text:#222;
+ --light-bg:rgba(245,248,255,0.9);
+ --bg-gradient:linear-gradient(135deg,#f5faff,#ffffff);
+}
+body.dark{
+ --primary:#66b3ff; --accent:#3399ff; --header:#cce5ff;
+ --glass:rgba(25,25,25,0.85); --text:#f1f1f1;
+ --light-bg:rgba(40,40,50,0.85);
+ --bg-gradient:linear-gradient(135deg,#0f172a,#1e293b);
+}
+body{
+ margin:0; font-family:"Segoe UI",Tahoma;
+ background:var(--bg-gradient); color:var(--text);
+ line-height:1.6; transition:0.3s;
+}
+header{
+ text-align:center; padding:22px 10px;
+ background:var(--glass); backdrop-filter:blur(10px);
+ font-weight:bold; font-size:1.8rem; color:var(--header);
+ position:relative; box-shadow:0 4px 15px rgba(0,0,0,0.08);
+}
+.print-btn,.theme-btn{
+ position:absolute; top:12px; padding:6px 10px;
+ border:none; border-radius:8px; font-weight:600;
+ background:var(--light-bg); color:var(--primary);
+ cursor:pointer;
+}
+.print-btn{ left:20px; }
+.theme-btn{ right:20px; }
+
+.navbar{
+ display:flex; justify-content:center; gap:24px;
+ margin:14px auto; width:92%; padding:12px;
+ background:rgba(255,255,255,0.3);
+ backdrop-filter:blur(8px); border-radius:10px;
+}
+.navbar a{
+ text-decoration:none; font-weight:600; color:var(--primary);
+}
+
+.container{
+ max-width:980px; background:var(--glass);
+ margin:20px auto; padding:24px;
+ border-radius:16px; box-shadow:0 4px 18px rgba(0,0,0,0.08);
+}
+
+.subsection{
+ background:rgba(240,248,255,0.55);
+ margin:20px 0; padding:18px;
+ border-radius:10px; border-left:5px solid var(--primary);
+}
+.code-block{
+ background:var(--light-bg); border-left:4px solid var(--primary);
+ padding:12px; border-radius:8px; white-space:pre-wrap;
+ font-family:Consolas;
+}
+.output{
+ background:white; border-left:4px solid var(--accent);
+ padding:10px; border-radius:8px; margin-top:8px;
+ font-family:Consolas;
+}
+.question{
+ cursor:pointer; font-weight:600; margin:12px 0;
+}
+.answer{
+ display:none; background:var(--light-bg);
+ padding:10px; border-radius:8px;
+ border-left:3px solid var(--accent);
+ margin-top:6px;
+}
+.summary{
+ background:rgba(224,247,255,0.75);
+ border-left:5px solid var(--primary);
+ padding:18px; border-radius:10px;
+}
+
+@media(max-width:800px){
+ .navbar{ flex-direction:column; gap:8px; width:96%; }
+ header{ font-size:1.4rem; }
+}
+@media print{
+ .navbar,.theme-btn,.print-btn{ display:none !important; }
+ body{ background:#fff !important; }
+}
+</style>
+</head>
+
+<body>
+<header>
+ <button class="print-btn" onclick="window.print()">🖨️</button>
+ NBKRIST JavaHub – Java Data Types & Variables
+ <button class="theme-btn" id="themeToggle">🌙</button>
+</header>
+
+<nav class="navbar">
+ <a href="theJava.html">🏠 Home</a>
+
+</nav>
+
+<div class="container">
+<h1>Java Fundamentals – Data Types, Variables & More</h1>
+<p>This page helps beginners quickly understand one of the most essential areas of Core Java—variables, data types, constants, and formatted output.</p>
+
+<!-- INTRO -->
+<div class="subsection" id="intro">
+<h2>1. Introduction</h2>
+<p>Java programs store and manipulate data using variables. Each variable has a type, which decides what value it can hold.</p>
+<p>Java is strongly typed—meaning every variable must have a clearly defined type.</p>
+</div>
+
+<!-- DATA TYPES -->
+<div class="subsection" id="datatypes">
+<h2>2. Data Types in Java</h2>
+<p>Java provides primitive and reference data types. Primitive types store simple values, while objects store complex data.</p>
+<p>Primitive types include: int, float, char, boolean, byte, short, long, double.</p>
+
+<div class="code-block">
+class TypesDemo {
+    public static void main(String[] args) {
+        int age = 20;
+        double salary = 45000.75;
+        char grade = 'A';
+        boolean pass = true;
+        System.out.println(age + " " + salary + " " + grade + " " + pass);
+    }
+}
+</div>
+<div class="output">20 45000.75 A true</div>
+</div>
+
+<!-- DECLARATION OF VARIABLES -->
+<div class="subsection">
+<h2>3. Declaration of Variables</h2>
+<p>Variables must be declared before use. Declaration tells Java what type of data will be stored.</p>
+<p>Multiple variables can be declared together if they share the same type.</p>
+
+<div class="code-block">
+int a = 10;
+int x, y, z;
+</div>
+</div>
+
+<!-- TYPE CASTING -->
+<div class="subsection" id="casting">
+<h2>4. Type Casting</h2>
+<p>Type casting converts one data type to another. Two types: widening and narrowing.</p>
+<p>Widening happens automatically; narrowing requires explicit conversion.</p>
+
+<div class="code-block">
+double d = 10.5;
+int x = (int)d; // narrowing
+System.out.println(x);
+</div>
+<div class="output">10</div>
+</div>
+
+<!-- SCOPE -->
+<div class="subsection" id="scope">
+<h2>5. Scope of Variables & Identifiers</h2>
+<p>Scope defines where a variable is accessible: local, instance, static.</p>
+<p>Local variables exist inside methods; instance variables belong to objects.</p>
+
+<div class="code-block">
+class Scope {
+    int a = 10; // instance
+    void show(){
+        int x = 5; // local
+        System.out.println(a + x);
+    }
+}
+</div>
+<div class="output">15</div>
+</div>
+
+<!-- LITERAL CONSTANTS -->
+<div class="subsection">
+<h2>6. Literal Constants</h2>
+<p>Literals are fixed values stored in variables. Examples: numbers, characters, strings.</p>
+<p>Java supports integer, floating, boolean, and string literals.</p>
+
+<div class="code-block">
+int age = 21;
+char grade = 'A';
+String name = "NBKRIST";
+</div>
+</div>
+
+<!-- SYMBOLIC CONSTANTS -->
+<div class="subsection">
+<h2>7. Symbolic Constants (final)</h2>
+<p>Symbolic constants are defined using the <code>final</code> keyword. Their value cannot change once assigned.</p>
+<p>Used for fixed values like PI, TAX_RATE, MAX_SPEED.</p>
+
+<div class="code-block">
+final int MAX_SPEED = 180;
+System.out.println(MAX_SPEED);
+</div>
+</div>
+
+<!-- PRINTF FORMATTING -->
+<div class="subsection">
+<h2>8. Formatted Output using printf()</h2>
+<p><code>printf()</code> prints formatted output similar to C language.</p>
+<p>Useful for aligning values and formatting decimals.</p>
+
+<div class="code-block">
+System.out.printf("Salary: %.2f", 25000.678);
+</div>
+<div class="output">Salary: 25000.68</div>
+</div>
+
+<!-- STATIC -->
+<div class="subsection">
+<h2>9. Static Variables and Methods</h2>
+<p>Static members belong to the class, not objects. All objects share the same static variable.</p>
+<p>Static methods can be called using class name.</p>
+
+<div class="code-block">
+class Demo {
+    static int count = 0;
+    static void show(){ System.out.println(count); }
+}
+Demo.show();
+</div>
+<div class="output">0</div>
+</div>
+
+<!-- FINAL ATTRIBUTE -->
+<div class="subsection">
+<h2>10. Attribute final</h2>
+<p><code>final</code> variables cannot be modified after assignment.</p>
+<p>Used for constants that must not change.</p>
+
+<div class="code-block">
+final int ROLL_NO = 101;
+System.out.println(ROLL_NO);
+</div>
+<div class="output">101</div>
+</div>
+
+<!-- PRACTICE QUESTIONS -->
+<div class="subsection" id="practice">
+<h2>Practice Questions – Click to Reveal Answers</h2>
+
+<div class="question" onclick="toggleAnswer('q1')">1️⃣ What are primitive data types in Java?</div>
+<div class="answer" id="ansq1">byte, short, int, long, float, double, char, boolean.</div>
+
+<div class="question" onclick="toggleAnswer('q2')">2️⃣ What is a variable?</div>
+<div class="answer" id="ansq2">A named memory location to store data.</div>
+
+<div class="question" onclick="toggleAnswer('q3')">3️⃣ What is narrowing casting?</div>
+<div class="answer" id="ansq3">Converting larger type to smaller: double → int.</div>
+
+<div class="question" onclick="toggleAnswer('q4')">4️⃣ What is a literal?</div>
+<div class="answer" id="ansq4">A fixed value directly written in code.</div>
+
+<div class="question" onclick="toggleAnswer('q5')">5️⃣ What is the use of final keyword?</div>
+<div class="answer" id="ansq5">It creates constants whose values cannot change.</div>
+
+<div class="question" onclick="toggleAnswer('q6')">6️⃣ What is scope?</div>
+<div class="answer" id="ansq6">Defines where a variable is accessible.</div>
+
+<div class="question" onclick="toggleAnswer('q7')">7️⃣ What is a static method?</div>
+<div class="answer" id="ansq7">A method that belongs to class, not objects.</div>
+
+<div class="question" onclick="toggleAnswer('q8')">8️⃣ Why use printf()?</div>
+<div class="answer" id="ansq8">For formatted printing.</div>
+
+<div class="question" onclick="toggleAnswer('q9')">9️⃣ Give an example of a symbolic constant.</div>
+<div class="answer" id="ansq9"><pre>final int MAX = 100;</pre></div>
+
+<div class="question" onclick="toggleAnswer('q10')">🔟 Define type casting.</div>
+<div class="answer" id="ansq10">Converting one data type into another.</div>
+</div>
+
+<!-- SUMMARY -->
+<div class="summary">
+<h2>Quick Summary</h2>
+<ul>
+ <li>Java supports both primitive and reference types.</li>
+ <li>Variables must be declared before use.</li>
+ <li>final creates constants.</li>
+ <li>printf() provides formatted output.</li>
+ <li>Static members belong to the class, not objects.</li>
+</ul>
+</div>
+
+</div>
+
+<footer style="text-align:center; margin:20px;">
+ <div style="background:linear-gradient(90deg,var(--primary),var(--accent)); padding:12px; border-radius:10px; color:white;">
+   NBKRIST © 2025 | JavaHub Learning Series – Hari Babu Mutchakala
+ </div>
+</footer>
+
+<script>
+function toggleAnswer(id){
+ const el=document.getElementById('ans'+id);
+ if(!el) return;
+ el.style.display = el.style.display==='block'?'none':'block';
+ if(el.style.display==='block'){
+   el.scrollIntoView({behavior:'smooth',block:'center'});} }
+
+const toggle=document.getElementById('themeToggle');
+toggle.addEventListener('click',()=>{
+ document.body.classList.toggle('dark');
+ toggle.textContent=document.body.classList.contains('dark')?'☀️':'🌙';
+});
+</script>
+
+</body>
+</html>

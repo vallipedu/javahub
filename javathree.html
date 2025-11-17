@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Java Operators – NBKRIST JavaHub</title>
+
+<style>
+:root{
+  --primary:#0078ff; --accent:#00bfff; --header:#004d99;
+  --glass:rgba(255,255,255,0.94); --text:#222;
+  --light-bg:rgba(245,248,255,0.9);
+  --bg-gradient:linear-gradient(135deg,#f5faff,#ffffff);
+}
+body.dark{
+  --primary:#66b3ff; --accent:#3399ff; --header:#cce5ff;
+  --glass:rgba(25,25,25,0.85); --text:#f1f1f1;
+  --light-bg:rgba(40,40,50,0.85);
+  --bg-gradient:linear-gradient(135deg,#0f172a,#1e293b);
+}
+body{
+  margin:0; font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:var(--bg-gradient); color:var(--text); line-height:1.6;
+  transition:background .25s, color .25s;
+}
+header{
+  text-align:center; padding:22px 10px;
+  background:var(--glass); backdrop-filter:blur(10px);
+  font-weight:700; font-size:1.6rem; color:var(--header);
+  position:relative; box-shadow:0 4px 15px rgba(0,0,0,0.08);
+}
+.print-btn,.theme-btn{
+  position:absolute; top:12px; padding:6px 10px; border:none;
+  border-radius:8px; font-weight:600; background:var(--light-bg);
+  color:var(--primary); cursor:pointer;
+}
+.print-btn{ left:18px; } .theme-btn{ right:18px; }
+
+.navbar{
+  display:flex; justify-content:center; gap:20px;
+  margin:14px auto; width:92%; padding:12px;
+  background:rgba(255,255,255,0.28); backdrop-filter:blur(6px); border-radius:10px;
+}
+.navbar a{ text-decoration:none; color:var(--primary); font-weight:600; }
+
+.container{
+  max-width:980px; margin:20px auto; background:var(--glass);
+  padding:22px; border-radius:14px; box-shadow:0 6px 20px rgba(0,0,0,0.06);
+}
+
+h1{ text-align:center; color:var(--header); margin-top:6px; }
+
+.subsection{
+  background:rgba(240,248,255,0.55); margin:18px 0; padding:16px;
+  border-radius:10px; border-left:5px solid var(--primary);
+}
+.subsection h2{ margin-top:0; color:var(--primary); }
+
+.code-block{
+  background:var(--light-bg); padding:12px; border-radius:8px;
+  border-left:4px solid var(--primary); font-family:Consolas, monospace;
+  white-space:pre-wrap; margin:10px 0;
+}
+.output{
+  background:#fff; padding:10px; border-radius:8px; margin-top:8px;
+  border-left:4px solid var(--accent); font-family:Consolas, monospace;
+}
+
+.question{ cursor:pointer; font-weight:700; margin:12px 0; }
+.answer{
+  display:none; background:var(--light-bg); padding:10px; border-radius:8px;
+  margin-top:8px; border-left:3px solid var(--accent);
+}
+
+.summary{
+  background:rgba(224,247,255,0.75); padding:16px; border-radius:10px;
+  border-left:5px solid var(--primary);
+}
+
+table{ width:100%; border-collapse:collapse; margin-top:12px; }
+td, th{ padding:10px; border:1px solid #ccc; }
+th{ background:rgba(0,120,255,0.08); font-weight:700; }
+
+@media(max-width:820px){
+  .navbar{ flex-direction:column; gap:8px; width:96% }
+  header{ font-size:1.25rem; }
+}
+@media print{
+  .navbar, .print-btn, .theme-btn { display:none !important; }
+  body{ background:#fff !important; color:#000; }
+  .container{ box-shadow:none; border-radius:0; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <button class="print-btn" aria-label="Print page" onclick="window.print()">🖨️</button>
+  NBKRIST JavaHub – Java Operators
+  <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">🌙</button>
+</header>
+
+<nav class="navbar" role="navigation">
+  <a href="theJava.html">🏠 Home</a>
+>
+</nav>
+
+<main class="container" role="main">
+  <h1>Java Operator Fundamentals — Quick & Clear</h1>
+  <p style="text-align:center; color:#444; margin-top:6px;">Short examples and outputs to make operators easy for students.</p>
+
+  <!-- Precedence & Associativity -->
+  <section class="subsection" id="precedence">
+    <h2>1. Precedence & Associativity</h2>
+    <p>Operator precedence determines the order in which operators are evaluated. Associativity decides evaluation direction when precedence is same.</p>
+    <p>Example: multiplication has higher precedence than addition.</p>
+
+    <div class="code-block">
+int x = 10 + 5 * 2;
+System.out.println(x); // multiplication first
+    </div>
+    <div class="output">20</div>
+  </section>
+
+  <!-- Assignment -->
+  <section class="subsection" id="assignment">
+    <h2>2. Assignment Operator ( = )</h2>
+    <p>Assignment stores a value into a variable. Right-hand side is evaluated first, then assigned to the left-hand variable.</p>
+    <div class="code-block">
+int a = 10;
+int b = a + 5;
+System.out.println(b);
+    </div>
+    <div class="output">15</div>
+  </section>
+
+  <!-- Arithmetic -->
+  <section class="subsection" id="arithmetic">
+    <h2>3. Basic Arithmetic Operators</h2>
+    <p>Use <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code> for arithmetic on numbers.</p>
+    <div class="code-block">
+int a = 10, b = 3;
+System.out.println(a + b);
+System.out.println(a % b);
+    </div>
+    <div class="output">13<br>1</div>
+  </section>
+
+  <!-- Increment / Decrement -->
+  <section class="subsection" id="increment">
+    <h2>4. Increment (++) and Decrement (--)</h2>
+    <p>Prefix (++x) updates the value then uses it. Postfix (x++) uses the current value then updates it.</p>
+    <div class="code-block">
+int x = 5;
+System.out.println(++x); // 6
+System.out.println(x++); // 6 (old value)
+System.out.println(x);   // 7 (after postfix)
+    </div>
+    <div class="output">6<br>6<br>7</div>
+  </section>
+
+  <!-- Ternary -->
+  <section class="subsection" id="ternary">
+    <h2>5. Ternary Operator</h2>
+    <p>Short form of if-else: <code>condition ? valueIfTrue : valueIfFalse</code>. Great for concise expressions.</p>
+    <div class="code-block">
+int age = 20;
+String res = (age >= 18) ? "Adult" : "Minor";
+System.out.println(res);
+    </div>
+    <div class="output">Adult</div>
+  </section>
+
+  <!-- Relational -->
+  <section class="subsection" id="relational">
+    <h2>6. Relational Operators</h2>
+    <p>Compare values using <code>&gt;, &lt;, &gt;=, &lt;=, ==, !=</code>. They return boolean results.</p>
+    <div class="code-block">
+int a = 10, b = 20;
+System.out.println(a < b); // true
+    </div>
+    <div class="output">true</div>
+  </section>
+
+  <!-- Boolean Logical -->
+  <section class="subsection" id="logical">
+    <h2>7. Boolean Logical Operators</h2>
+    <p>Use <code>&&</code> (AND), <code>||</code> (OR), and <code>!</code> (NOT) to combine boolean expressions.</p>
+    <div class="code-block">
+boolean x = true, y = false;
+System.out.println(x && y);
+System.out.println(x || y);
+    </div>
+    <div class="output">false<br>true</div>
+  </section>
+
+  <!-- Bitwise -->
+  <section class="subsection" id="bitwise">
+    <h2>8. Bitwise Logical Operators</h2>
+    <p>Operate at bit-level: <code>&</code>, <code>|</code>, <code>^</code>, <code>~</code>, shifts <code><<</code>, <code>>></code>. Useful in low-level tasks and optimizations.</p>
+    <div class="code-block">
+int x = 5;  // 0101
+int y = 3;  // 0011
+System.out.println(x & y); // 0001 -> 1
+System.out.println(x | y); // 0111 -> 7
+    </div>
+    <div class="output">1<br>7</div>
+  </section>
+
+  <!-- Quick Table: Precedence (mini) -->
+  <section class="subsection">
+    <h2>Mini Precedence Reminder</h2>
+    <p>High to low (short): <code>() → ++/-- → * / % → + - → &lt;&lt; &gt;&gt; → &amp; → ^ → | → && → || → ?: → =&nbsp;=</code></p>
+  </section>
+
+  <!-- Practice -->
+  <section class="subsection" id="practice">
+    <h2>Practice Questions – Click to Reveal Answers</h2>
+
+    <div class="question" onclick="toggleAnswer('q1')">1️⃣ Which operator has higher precedence: <code>*</code> or <code>+</code>?</div>
+    <div class="answer" id="ansq1">The multiplication operator (<code>*</code>) has higher precedence.</div>
+
+    <div class="question" onclick="toggleAnswer('q2')">2️⃣ What does <code>a = b + 5</code> do?</div>
+    <div class="answer" id="ansq2">It evaluates <code>b + 5</code> first, then assigns the result to <code>a</code>.</div>
+
+    <div class="question" onclick="toggleAnswer('q3')">3️⃣ What is the % operator?</div>
+    <div class="answer" id="ansq3">The modulus operator; it returns the remainder after division.</div>
+
+    <div class="question" onclick="toggleAnswer('q4')">4️⃣ If <code>x = 5</code>, what is the output of <code>++x</code>?</div>
+    <div class="answer" id="ansq4">It outputs <code>6</code> because prefix increments before use.</div>
+
+    <div class="question" onclick="toggleAnswer('q5')">5️⃣ Write a ternary expression to check if <code>x</code> is positive.</div>
+    <div class="answer" id="ansq5"><pre>String r = (x > 0) ? "Positive" : "Not Positive";</pre></div>
+
+    <div class="question" onclick="toggleAnswer('q6')">6️⃣ What does <code>==</code> check for primitives?</div>
+    <div class="answer" id="ansq6">It checks if the two primitive values are equal.</div>
+
+    <div class="question" onclick="toggleAnswer('q7')">7️⃣ What is the result of <code>true && false</code>?</div>
+    <div class="answer" id="ansq7">It evaluates to <code>false</code>.</div>
+
+    <div class="question" onclick="toggleAnswer('q8')">8️⃣ What is the bitwise result of <code>5 & 3</code>?</div>
+    <div class="answer" id="ansq8">Binary: 0101 & 0011 = 0001 → <code>1</code>.</div>
+
+    <div class="question" onclick="toggleAnswer('q9')">9️⃣ Explain postfix <code>x++</code> behavior.</div>
+    <div class="answer" id="ansq9">It returns the current value of <code>x</code>, then increments <code>x</code> by 1.</div>
+
+    <div class="question" onclick="toggleAnswer('q10')">🔟 Which operator short-circuits: <code>&&</code> or <code>&</code>?</div>
+    <div class="answer" id="ansq10">The conditional <code>&&</code> short-circuits (doesn't evaluate right-hand side if left is false); bitwise <code>&</code> always evaluates both sides.</div>
+  </section>
+
+  <!-- Summary -->
+  <section class="summary" aria-labelledby="summaryHeading">
+    <h2 id="summaryHeading">Quick Summary</h2>
+    <ul>
+      <li>Precedence & associativity control evaluation order.</li>
+      <li>Assignment evaluates RHS then assigns to LHS.</li>
+      <li>Use ++/-- carefully — prefix vs postfix matters.</li>
+      <li>Ternary is concise for simple conditional values.</li>
+      <li>Bitwise operators operate on bits and are useful for low-level tasks.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer style="text-align:center; margin:18px;">
+  <div style="max-width:980px; margin:0 auto;">
+    <div style="background:linear-gradient(90deg,var(--primary),var(--accent)); color:#fff; padding:12px; border-radius:10px;">
+      NBKRIST © 2025 | JavaHub Learning Series — Authored by Hari Babu Mutchakala
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Toggle answer visibility */
+function toggleAnswer(id){
+  const el = document.getElementById('ans' + id);
+  if(!el) return;
+  el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+  if(el.style.display === 'block'){ el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+}
+
+/* Theme toggle */
+const themeBtn = document.getElementById('themeToggle');
+if(themeBtn){
+  themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    themeBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+  });
+}
+
+/* Keyboard accessibility for questions */
+document.querySelectorAll('.question').forEach(q => {
+  q.setAttribute('tabindex', '0');
+  q.addEventListener('keydown', e => {
+    if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); q.click(); }
+  });
+});
+</script>
+
+</body>
+</html>
