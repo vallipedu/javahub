@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Passing Arguments & Objects – NBKRIST JavaHub</title>
+<style>
+:root { --primary:#0078ff; --accent:#00bfff; --header:#004d99; --glass:rgba(255,255,255,0.9); --text:#222; --light-bg:rgba(245,248,255,0.85); --bg-gradient:linear-gradient(135deg,#f5faff,#ffffff);} 
+body.dark { --primary:#66b3ff; --accent:#3399ff; --header:#cce5ff; --glass:rgba(25,25,25,0.9); --text:#f0f0f0; --light-bg:rgba(40,40,40,0.85); --bg-gradient:linear-gradient(135deg,#0f172a,#1e293b);} 
+body { margin:0; font-family:"Segoe UI", Tahoma; background:var(--bg-gradient); color:var(--text); transition:0.3s; } 
+header { text-align:center; padding:25px 10px 10px; background:var(--glass); font-weight:bold; font-size:1.8em; color:var(--header); box-shadow:0 4px 20px rgba(0,0,0,0.08); position:relative;} 
+.print-btn, .theme-btn { position:absolute; top:12px; padding:6px 10px; border:none; border-radius:8px; cursor:pointer; background:var(--light-bg); color:var(--primary); font-weight:600;} 
+.print-btn{ left:20px;} .theme-btn{ right:20px;} 
+.navbar { display:flex; justify-content:center; gap:25px; padding:12px; background:rgba(255,255,255,0.3); backdrop-filter:blur(10px); border-radius:10px; width:90%; margin:10px auto;} 
+.navbar a { text-decoration:none; color:var(--primary); font-weight:600;} 
+.container { max-width:1000px; background:var(--glass); margin:20px auto; padding:25px; border-radius:16px; box-shadow:0 6px 20px rgba(0,0,0,0.08);} 
+.subsection { background:rgba(240,248,255,0.55); padding:20px; margin:20px 0; border-left:4px solid var(--primary); border-radius:12px;} 
+.code-block { background:var(--light-bg); border-left:4px solid var(--primary); padding:12px; font-family:Consolas; border-radius:8px; white-space:pre-wrap; margin:10px 0;} 
+.output { background:white; padding:10px; border-left:4px solid var(--accent); border-radius:8px; font-family:Consolas; margin-top:8px;} 
+.question { cursor:pointer; margin:10px 0; font-weight:600;} 
+.answer { display:none; background:var(--light-bg); padding:12px; border-radius:8px; border-left:3px solid var(--accent); margin-top:6px;} 
+.summary { background:rgba(224,247,255,0.75); padding:18px; border-radius:10px; border-left:5px solid var(--primary);} 
+footer { text-align:center; margin:40px auto 10px; padding:12px; width:90%; border-radius:10px; background:linear-gradient(90deg,var(--primary),var(--accent)); color:white;} 
+@media(max-width:768px){ .navbar{ flex-direction:column; gap:10px; width:95%; } header{ font-size:1.4em; }}
+</style>
+</head>
+<body>
+<header>
+<button class="print-btn" onclick="window.print()">🖨️</button>
+NBKRIST JavaHub
+<button class="theme-btn" id="themeToggle">🌙</button>
+</header>
+
+<nav class="navbar">
+<a href="oopsthroughJava.html">Home</a>
+
+</nav>
+
+<div class="container">
+<h1>Passing Arguments in Java – Value & Reference</h1>
+<p>Java handles data passing in a unique but consistent way. This page explains one of the most misunderstood topics: <b>Pass by Value</b> and <b>Objects as Parameters</b>.</p>
+
+<!-- PASS BY VALUE -->
+<div class="subsection" id="value">
+<h2>1. Passing Arguments by Value</h2>
+<p>Java is strictly <b>pass-by-value</b>. This means a <i>copy</i> of the variable is passed to methods. Modifying the copy does NOT affect the original value.</p>
+
+<div class="code-block">
+class Test {
+    void change(int x) {
+        x = 50;
+    }
+
+    public static void main(String[] args) {
+        int a = 10;
+        new Test().change(a);
+        System.out.println(a);
+    }
+}
+</div>
+
+<div class="output"><b>Output:</b>
+10 (Original value unchanged)
+</div>
+</div>
+
+<!-- OBJECTS AS PARAMETERS -->
+<div class="subsection" id="reference">
+<h2>2. Class Objects as Parameters (Looks Like Reference)</h2>
+<p>Objects behave differently because the value passed is a <b>copy of the reference</b>. Both references point to the same object, so modifying the object reflects outside the method.</p>
+
+<div class="code-block">
+class Car {
+    int speed;
+}
+
+class Demo {
+    void modify(Car c) {
+        c.speed = 100;
+    }
+
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.speed = 40;
+
+        new Demo().modify(car);
+        System.out.println(car.speed);
+    }
+}
+</div>
+
+<div class="output"><b>Output:</b>
+100 (Object modified!)
+</div>
+
+<p>Java does NOT pass objects by reference. It passes a <b>copy of the reference</b> → but the referenced object is the same.</p>
+</div>
+
+<!-- PRACTICE -->
+<div class="subsection" id="practice">
+<h2>Practice Questions – Click to Reveal Answers</h2>
+
+<div class="question" onclick="toggleAnswer('q1')">1️⃣ What does Java pass: value or reference?</div>
+<div class="answer" id="ansq1">Java always passes by value. For objects, it passes a copy of the reference.</div>
+
+<div class="question" onclick="toggleAnswer('q2')">2️⃣ Why does modifying an object inside a method reflect outside?</div>
+<div class="answer" id="ansq2">Because the reference copy still points to the same object in memory.</div>
+
+<div class="question" onclick="toggleAnswer('q3')">3️⃣ Will reassigning an object inside a method affect the original?</div>
+<div class="answer" id="ansq3">No. Reassignment changes only the local copy of the reference.</div>
+</div>
+
+<div class="summary">
+<h2>Quick Summary</h2>
+<ul>
+<li>Java passes everything by value (copies).</li>
+<li>Primitive copies do NOT affect originals.</li>
+<li>Object reference copies point to the same object.</li>
+<li>Modifying object fields affects the original object.</li>
+<li>Reassigning references affects only the local copy.</li>
+</ul>
+</div>
+
+</div>
+
+<footer>NBKRIST © 2025 | JavaHub Learning Series</footer>
+<script>
+function toggleAnswer(id){ const el=document.getElementById('ans'+id); if(!el) return; el.style.display=el.style.display==='block'?'none':'block'; }
+const toggle=document.getElementById("themeToggle"); toggle.addEventListener("click",()=>{ document.body.classList.toggle("dark"); toggle.textContent=document.body.classList.contains("dark")?"☀️":"🌙"; });
+</script>
+</body>
+</html>

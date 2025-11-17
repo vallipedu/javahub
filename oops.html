@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OOP Foundations – NBKRIST Java Hub</title>
+<style>
+:root { --primary:#0078ff; --accent:#00bfff; --header:#004d99; --glass:rgba(255,255,255,0.9); --text:#222; --light-bg:rgba(245,248,255,0.85); --bg-gradient:linear-gradient(135deg,#f5faff,#ffffff);} 
+body.dark { --primary:#66b3ff; --accent:#3399ff; --header:#cce5ff; --glass:rgba(25,25,25,0.9); --text:#f0f0f0; --light-bg:rgba(40,40,40,0.85); --bg-gradient:linear-gradient(135deg,#0f172a,#1e293b);} 
+body { margin:0; font-family:"Segoe UI",Tahoma,Verdana,sans-serif; background:var(--bg-gradient); color:var(--text); transition:.4s; line-height:1.6;} 
+header { position:relative; text-align:center; padding:25px 10px 10px; background:var(--glass); backdrop-filter:blur(12px); font-weight:bold; font-size:1.8em; color:var(--header); box-shadow:0 4px 20px rgba(0,0,0,0.08);} 
+.theme-toggle,.print-toggle { position:absolute; top:20px; background:var(--light-bg); border:none; color:var(--primary); font-weight:600; border-radius:8px; padding:6px 12px; cursor:pointer;} 
+.print-toggle{left:20px;} .theme-toggle{right:20px;} 
+.navbar { display:flex; justify-content:center; gap:30px; padding:12px 10px; background:rgba(255,255,255,0.3); backdrop-filter:blur(10px); border-radius:10px; width:90%; margin:8px auto 20px; box-shadow:0 2px 8px rgba(0,0,0,0.1);} 
+.navbar a{text-decoration:none; color:var(--primary); font-weight:600;} 
+.container{ max-width:950px; margin:2px auto 20px; background:var(--glass); border-radius:16px; padding:20px; box-shadow:0 6px 20px rgba(0,0,0,0.08);} 
+h1{text-align:center; color:var(--header);} 
+.subsection{position:relative; background:rgba(240,248,255,0.45); margin:20px 0; padding:18px 22px 18px 30px; border-radius:10px;} 
+.subsection::before{content:""; position:absolute; left:0; top:8px; bottom:8px; width:4px; background:linear-gradient(180deg,#0099ff,#0066cc); border-radius:3px;} 
+.question{background:rgba(240,248,255,0.45); padding:15px; margin:15px 0; border-radius:10px; cursor:pointer; border-left:4px solid var(--primary); font-weight:600;} 
+.answer{display:none; background:var(--light-bg); padding:12px 14px; border-radius:8px; margin-top:8px; border-left:3px solid var(--accent);} 
+.summary{background:rgba(224,247,255,0.7); border-left:5px solid var(--primary); padding:15px 20px; border-radius:10px; margin-top:30px; font-style:italic;} 
+footer{text-align:center; background:linear-gradient(90deg,var(--primary),var(--accent)); color:#fff; padding:15px; border-radius:10px; width:90%; margin:40px auto 10px;} 
+@media print{ header,.navbar,button,.theme-toggle{display:none!important;} body{background:white!important;} }
+</style>
+</head>
+<body>
+<header>
+  NBKRIST JavaHub
+  <button class="print-toggle" onclick="window.print()">🖨️</button>
+  <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+</header>
+<p style="text-align:center; font-size:1.05em; margin-top:5px; margin-bottom:15px;"><em>OOP: Because even messy ideas deserve structure and good manners.</em></p>
+<nav class="navbar">
+  <a href="index.html">🔙 Back</a>
+  <a href="myview.html">Expert View</a>
+  <a href="oopsworld.html">DeepDive</a>
+</nav>
+<div class="container">
+<h1>Object-Oriented Programming – Foundation Guide</h1>
+<div class="subsection">
+  <h2>What is OOP?</h2>
+  <p>Object-Oriented Programming (OOP) organizes software into objects — mini units combining data and behavior. Like students carrying both knowledge and attitude, objects carry both state and functionality. And yes, one of them becomes visible only during vivas.</p>
+  <p>OOP simplifies large systems by breaking them into smaller pieces. It boosts maintainability, reusability, and clarity — much like dividing subjects into different classrooms instead of one huge noisy hall.</p>
+</div>
+<div class="subsection" id="pillars">
+<h2>The Four Pillars of OOP</h2>
+<div class="question" onclick="toggleAnswer('p1')">1️⃣ Encapsulation</div>
+<div class="answer" id="ansp1">
+  <p>Encapsulation means storing data and methods inside one class and safeguarding internal details. Just like students quietly hide marks until results day, classes hide their fields behind methods.</p>
+  <p><strong>Example:</strong> <em>BankAccount</em> hides its balance but lets you withdraw() and deposit().</p>
+</div>
+<div class="question" onclick="toggleAnswer('p2')">2️⃣ Inheritance</div>
+<div class="answer" id="ansp2">
+  <p>Inheritance lets one class reuse the properties and methods of another. Similar to juniors inheriting seniors’ notes — whether useful or outdated, you still get them.</p>
+  <p><strong>Example:</strong> <em>Car</em> extends <em>Vehicle</em> gaining wheels, movement, and engine capability.</p>
+</div>
+<div class="question" onclick="toggleAnswer('p3')">3️⃣ Polymorphism</div>
+<div class="answer" id="ansp3">
+  <p>Polymorphism enables one action to behave differently depending on the object. Like the word “coming” — which means 2 minutes to friends, but 20 seconds to parents.</p>
+  <p><strong>Example:</strong> startEngine() behaves differently across vehicles.</p>
+</div>
+<div class="question" onclick="toggleAnswer('p4')">4️⃣ Abstraction</div>
+<div class="answer" id="ansp4">
+  <p>Abstraction hides complexity and exposes only what matters. Like Google Pay — you tap, it works (hopefully), and all the internal banking chaos stays hidden.</p>
+  <p><strong>Example:</strong> A dashboard shows fuel & speed, hiding complex mechanical systems.</p>
+</div>
+</div>
+<div class="subsection" id="thinking">
+<h2>How to Think in OOP</h2>
+<p>Thinking in OOP means seeing systems as interacting objects, each with a clear responsibility. Like teams in a college fest — one handles sound, one handles discipline, one takes attendance… and one disappears at lunch.</p>
+<ul>
+  <li>Identify entities → Classes</li>
+  <li>Identify actions → Methods</li>
+  <li>Group responsibilities → Cohesive classes</li>
+  <li>Find common features → Inheritance</li>
+  <li>Hide unnecessary details → Encapsulation & Abstraction</li>
+</ul>
+<p>OOP brings order, clarity, and reusability — unlike exam weeks where everything comes at once.</p>
+</div>
+<div class="subsection" id="practice">
+<h2>Practice Questions</h2>
+<div class="question" onclick="toggleAnswer('q1')">1️⃣ What is a Class?</div>
+<div class="answer" id="ansq1">A blueprint describing properties and behaviors — like a recipe that can create many dishes (objects).</div>
+<div class="question" onclick="toggleAnswer('q2')">2️⃣ What is an Object?</div>
+<div class="answer" id="ansq2">An instance created from a class containing real data — the actual dish prepared from the recipe.</div>
+<div class="question" onclick="toggleAnswer('q3')">3️⃣ Why do we need OOP?</div>
+<div class="answer" id="ansq3">It organizes complex logic, improves maintainability, encourages reusability, and makes code understandable even at 2 AM.</div>
+</div>
+<div class="summary">
+<h2>Key Takeaways</h2>
+<ul>
+  <li>OOP models real-world scenarios effectively.</li>
+  <li>The four pillars ensure structure, clarity, and long-term maintainability.</li>
+  <li>Essential for interviews, projects, and industrial applications.</li>
+</ul>
+</div>
+</div>
+<footer>NBKRIST © 2025 | Created for Students by Hari Babu Mutchakala</footer>
+<script>
+function toggleAnswer(id){ const el=document.getElementById('ans'+id); if(el) el.style.display = el.style.display==='block'?'none':'block'; }
+const toggle=document.getElementById("themeToggle"); toggle.addEventListener("click",()=>{document.body.classList.toggle("dark"); toggle.textContent=document.body.classList.contains("dark")?"☀️ Light":"🌙 Dark";});
+</script>
+</body>
+</html>

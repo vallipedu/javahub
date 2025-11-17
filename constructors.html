@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Constructors & Constructor Overloading – NBKRIST JavaHub</title>
+
+<style>
+:root {
+  --primary:#0078ff; --accent:#00bfff; --header:#004d99;
+  --glass:rgba(255,255,255,0.9); --text:#222;
+  --light-bg:rgba(245,248,255,0.85);
+  --bg-gradient:linear-gradient(135deg,#f5faff,#ffffff);
+}
+body.dark {
+  --primary:#66b3ff; --accent:#3399ff; --header:#cce5ff;
+  --glass:rgba(25,25,25,0.9); --text:#f0f0f0;
+  --light-bg:rgba(40,40,40,0.85);
+  --bg-gradient:linear-gradient(135deg,#0f172a,#1e293b);
+}
+body {
+  margin:0; font-family:"Segoe UI", Tahoma;
+  background:var(--bg-gradient); color:var(--text);
+  line-height:1.6; transition:0.3s;
+}
+header {
+  text-align:center; padding:25px 10px 10px;
+  background:var(--glass); backdrop-filter:blur(12px);
+  font-weight:bold; font-size:1.8em; color:var(--header);
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+  position:relative;
+}
+.print-btn, .theme-btn {
+  position:absolute; top:12px; padding:6px 10px;
+  border:none; border-radius:8px; cursor:pointer;
+  background:var(--light-bg); color:var(--primary);
+  font-weight:600;
+}
+.print-btn{ left:20px; }
+.theme-btn{ right:20px; }
+
+.navbar {
+  display:flex; justify-content:center; gap:25px;
+  padding:12px; background:rgba(255,255,255,0.3);
+  backdrop-filter:blur(10px); border-radius:10px;
+  width:90%; margin:10px auto;
+}
+.navbar a {
+  text-decoration:none; color:var(--primary); font-weight:600;
+}
+
+.container {
+  max-width:980px; background:var(--glass);
+  margin:20px auto; padding:25px;
+  border-radius:16px; box-shadow:0 6px 20px rgba(0,0,0,0.08);
+}
+.subsection {
+  background:rgba(240,248,255,0.55);
+  padding:20px; margin:20px 0;
+  border-left:4px solid var(--primary);
+  border-radius:12px;
+}
+.code-block {
+  background:var(--light-bg); border-left:4px solid var(--primary);
+  padding:12px; font-family:Consolas, monospace;
+  border-radius:8px; white-space:pre-wrap;
+  margin:10px 0;
+}
+.output {
+  background:white; padding:10px;
+  border-left:4px solid var(--accent);
+  border-radius:8px; font-family:Consolas;
+  margin-top:8px;
+}
+.question {
+  cursor:pointer; margin:10px 0;
+  font-weight:600;
+}
+.answer {
+  display:none; background:var(--light-bg);
+  padding:12px; border-radius:8px;
+  border-left:3px solid var(--accent);
+  margin-top:6px;
+}
+.summary {
+  background:rgba(224,247,255,0.75);
+  padding:18px; border-radius:10px;
+  border-left:5px solid var(--primary);
+}
+footer {
+  text-align:center; margin:40px auto 10px;
+  padding:12px; width:90%; border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--accent)); color:white;
+}
+@media(max-width:768px){
+  .navbar{ flex-direction:column; gap:10px; width:95%; }
+  header{ font-size:1.4em; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <button class="print-btn" onclick="window.print()">🖨️</button>
+  NBKRIST JavaHub
+  <button class="theme-btn" id="themeToggle">🌙</button>
+</header>
+
+<nav class="navbar">
+  <a href="oopsthroughJava.html">Home</a>
+
+</nav>
+
+<div class="container">
+<h1>Constructors & Constructor Overloading (Java)</h1>
+<p>A constructor is the very first block of code that executes when an object is created. It sets the initial state of the object and ensures the object enters the program in a valid, predictable condition.</p>
+
+<!-- INTRO -->
+<div class="subsection" id="intro">
+<h2>1. What is a Constructor?</h2>
+<p>A constructor is a special method that has the same name as the class and no return type. It runs automatically when we create an object using <code>new</code>. Its job is simple but powerful — initialize the object.</p>
+
+<div class="code-block">
+class Car {
+    Car() {
+        System.out.println("Car object created");
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Car c = new Car();
+    }
+}
+</div>
+
+<div class="output"><b>Output:</b>
+Car object created
+</div>
+</div>
+
+<!-- DEFAULT -->
+<div class="subsection" id="default">
+<h2>2. Default Constructor</h2>
+<p>If you do not define any constructor, Java automatically provides a default constructor. It assigns default values based on data types (0, null, false).</p>
+
+<div class="code-block">
+class Student {
+    String name;  // null
+    int age;      // 0
+}
+
+public class Demo {
+    public static void main(String[] args) {
+        Student s = new Student();
+        System.out.println(s.name);
+        System.out.println(s.age);
+    }
+}
+</div>
+
+<div class="output"><b>Output:</b>
+null
+0
+</div>
+</div>
+
+<!-- PARAM -->
+<div class="subsection" id="param">
+<h2>3. Parameterized Constructor</h2>
+<p>Parameterized constructors allow passing values to an object at the time of creation, making object initialization meaningful and dynamic.</p>
+
+<div class="code-block">
+class Employee {
+    String name;
+    int id;
+
+    Employee(String n, int i) {
+        name = n;
+        id = i;
+    }
+}
+
+public class Demo {
+    public static void main(String[] args) {
+        Employee e = new Employee("Hari", 101);
+        System.out.println(e.name + " " + e.id);
+    }
+}
+</div>
+<div class="output"><b>Output:</b>
+Hari 101
+</div>
+</div>
+
+<!-- OVERLOADING -->
+<div class="subsection" id="overload">
+<h2>4. Constructor Overloading</h2>
+<p>Constructor overloading means creating multiple constructors within the same class with different parameter lists. It provides flexibility in object creation.</p>
+
+<div class="code-block">
+class Box {
+    int length, width, height;
+
+    Box() {
+        length = width = height = 1;
+    }
+
+    Box(int side) {
+        length = width = height = side;
+    }
+
+    Box(int l, int w, int h) {
+        length = l; width = w; height = h;
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Box b1 = new Box();
+        Box b2 = new Box(5);
+        Box b3 = new Box(2,3,4);
+        System.out.println(b1.length+","+b2.length+","+b3.length);
+    }
+}
+</div>
+
+<div class="output"><b>Output:</b>
+1,5,2
+</div>
+</div>
+
+<!-- PRACTICE -->
+<div class="subsection" id="practice">
+<h2>Practice Questions – Click to Reveal Answers</h2>
+
+<div class="question" onclick="toggleAnswer('q1')">1️⃣ What is a constructor?</div>
+<div class="answer" id="ansq1">A constructor initializes objects and has the same name as the class.</div>
+
+<div class="question" onclick="toggleAnswer('q2')">2️⃣ Define default constructor.</div>
+<div class="answer" id="ansq2">A constructor automatically provided by Java when no constructor is written.</div>
+
+<div class="question" onclick="toggleAnswer('q3')">3️⃣ What is constructor overloading?</div>
+<div class="answer" id="ansq3">Multiple constructors with different parameter lists in the same class.</div>
+
+<div class="question" onclick="toggleAnswer('q4')">4️⃣ Why are parameterized constructors used?</div>
+<div class="answer" id="ansq4">To initialize objects with user-defined values.</div>
+
+
+</div>
+
+<div class="summary">
+<h2>Quick Summary</h2>
+<ul>
+<li>Constructors initialize object state.</li>
+<li>Default constructor is auto-created if none is defined.</li>
+<li>Parameterized constructors allow custom initialization.</li>
+<li>Constructor overloading offers flexibility in object creation.</li>
+</ul>
+</div>
+
+</div>
+
+<footer>NBKRIST © 2025 | JavaHub Learning Series</footer>
+
+<script>
+function toggleAnswer(id){
+  const el = document.getElementById('ans' + id);
+  if(!el) return;
+  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
+
+const toggle=document.getElementById("themeToggle");
+if (toggle) {
+  toggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    toggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+  });
+}
+</script>
+
+</body>
+</html>

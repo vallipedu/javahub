@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Object-Oriented Features</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #007acc;
+            padding-bottom: 10px;
+        }
+        .images {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        .images img {
+            height: 80px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            background: white;
+            border-radius: 7px;
+            padding: 8px;
+        }
+        .feature {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .feature strong {
+            color: #007acc;
+            font-size: 1.1em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #007acc;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+        }
+    </style>
+</head>
+<body>
+    <h1>Java Object-Oriented Features</h1>
+    <div class="images">
+        <img src="https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg" alt="Java Logo">
+        <img src="https://cdn.pixabay.com/photo/2012/04/13/21/07/class-33030_1280.png" alt="OOP Diagram">
+    </div>
+    <p>Java's <strong>object-oriented features</strong> are central to its structure and capabilities. Here are the key concepts:</p>
+    
+    <div class="feature">
+        <strong>Class and Object</strong>:
+        <ul>
+            <li><strong>Class</strong> is a blueprint or template for creating objects.</li>
+            <li><strong>Object</strong> is an instance of a class containing data and behavior.</li>
+        </ul>
+    </div>
+    
+    <div class="feature">
+        <strong>Encapsulation</strong>:
+        <ul>
+            <li>Bundling data (fields) and methods (functions) into a single unit called a class, and restricting access using access modifiers like private, public, and protected.</li>
+        </ul>
+    </div>
+    
+    <div class="feature">
+        <strong>Inheritance</strong>:
+        <ul>
+            <li>Mechanism by which one class (subclass) can inherit fields and methods of another class (superclass), enabling code reusability and method overriding.</li>
+        </ul>
+    </div>
+    
+    <div class="feature">
+        <strong>Polymorphism</strong>:
+        <ul>
+            <li>Ability of an object to take many forms. It can be achieved via method overloading (compile-time) and method overriding (runtime).</li>
+        </ul>
+    </div>
+    
+    <div class="feature">
+        <strong>Abstraction</strong>:
+        <ul>
+            <li>Hiding complex implementation details and showing only necessary features using abstract classes and interfaces.</li>
+        </ul>
+    </div>
+    
+    <div class="feature">
+        <strong>Dynamic Binding (Late Binding)</strong>:
+        <ul>
+            <li>Method to resolve method calls at runtime, supporting runtime polymorphism.</li>
+        </ul>
+    </div>
+    
+    <div class="feature">
+        <strong>Message Passing</strong>:
+        <ul>
+            <li>Objects communicate with each other by sending messages (calling methods).</li>
+        </ul>
+    </div>
+    
+    <h2>Summary Table</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Class/Object</strong></td>
+                <td>Template & instance of class</td>
+                <td><code>Car car1 = new Car();</code></td>
+            </tr>
+            <tr>
+                <td><strong>Encapsulation</strong></td>
+                <td>Data/methods bundled, restricted access via modifiers</td>
+                <td><code>private int speed; public void setSpeed()</code></td>
+            </tr>
+            <tr>
+                <td><strong>Inheritance</strong></td>
+                <td>Subclass inherits from superclass</td>
+                <td><code>class Sedan extends Car {}</code></td>
+            </tr>
+            <tr>
+                <td><strong>Polymorphism</strong></td>
+                <td>Same interface, different forms (overloading/overriding)</td>
+                <td><code>void draw(Shape s)</code> for Circle & Square</td>
+            </tr>
+            <tr>
+                <td><strong>Abstraction</strong></td>
+                <td>Only essential details exposed; implemented by abstract/interface</td>
+                <td><code>abstract class Animal {}</code></td>
+            </tr>
+            <tr>
+                <td><strong>Dynamic Binding</strong></td>
+                <td>Method called resolved at runtime</td>
+                <td><code>animal.sound();</code> (Dog, Cat, etc.)</td>
+            </tr>
+            <tr>
+                <td><strong>Message Passing</strong></td>
+                <td>Object interaction via method calls</td>
+                <td><code>obj.sendMessage()</code></td>
+            </tr>
+        </tbody>
+    </table>
+    <p>These features enable Java to create flexible, modular, and reusable code bases fundamental to modern software development.</p>
+</body>
+</html>
