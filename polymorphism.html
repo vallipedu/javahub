@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Polymorphism – Compile-time & Runtime | NBKRIST JavaHub</title>
+
 <style>
 :root{
   --primary:#0078ff;
@@ -18,369 +19,324 @@ body.dark{
   --primary:#66b3ff;
   --accent:#3399ff;
   --header:#cce5ff;
-  --glass:rgba(20,20,28,0.86);
-  --text:#eef6ff;
-  --light-bg:rgba(35,40,50,0.8);
+  --glass:rgba(25,25,25,0.85);
+  --text:#f1f1f1;
+  --light-bg:rgba(40,40,50,0.85);
   --bg-gradient:linear-gradient(135deg,#0f172a,#1e293b);
 }
-*{box-sizing:border-box}
 body{
   margin:0;
-  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  color:var(--text);
+  font-family:"Segoe UI",Tahoma;
   background:var(--bg-gradient);
-  transition:background .25s,color .25s;
+  color:var(--text);
   line-height:1.6;
+  transition:0.3s;
 }
-.header{
-  position:relative;
+header{
   text-align:center;
-  padding:22px 12px;
+  padding:22px 10px;
   background:var(--glass);
-  backdrop-filter:blur(8px);
+  backdrop-filter:blur(10px);
+  font-weight:bold;
+  font-size:1.8rem;
   color:var(--header);
-  font-weight:700;
-  font-size:1.45rem;
-  box-shadow:0 6px 20px rgba(0,0,0,0.06);
+  position:relative;
+  box-shadow:0 4px 15px rgba(0,0,0,0.08);
 }
-.print-btn, .theme-btn{
+.print-btn,.theme-btn{
   position:absolute;
   top:12px;
-  padding:7px 10px;
-  border-radius:8px;
+  padding:6px 10px;
   border:none;
+  border-radius:8px;
+  font-weight:600;
   background:var(--light-bg);
   color:var(--primary);
   cursor:pointer;
-  font-weight:600;
 }
-.print-btn{ left:18px }
-.theme-btn{ right:18px }
+.print-btn{ left:20px; }
+.theme-btn{ right:20px; }
 
 .navbar{
   display:flex;
   justify-content:center;
-  gap:20px;
-  padding:10px;
-  margin:12px auto;
+  gap:24px;
+  margin:14px auto;
   width:92%;
-  background:rgba(255,255,255,0.26);
-  backdrop-filter:blur(6px);
+  padding:12px;
+  background:rgba(255,255,255,0.3);
+  backdrop-filter:blur(8px);
   border-radius:10px;
-  box-shadow:0 3px 12px rgba(0,0,0,0.05);
 }
-.navbar a{ text-decoration:none; color:var(--primary); font-weight:600; }
+.navbar a{
+  text-decoration:none;
+  font-weight:600;
+  color:var(--primary);
+}
 
 .container{
   max-width:980px;
-  margin:18px auto;
   background:var(--glass);
-  border-radius:14px;
-  padding:20px;
-  box-shadow:0 8px 30px rgba(0,0,0,0.06);
+  margin:20px auto;
+  padding:24px;
+  border-radius:16px;
+  box-shadow:0 4px 18px rgba(0,0,0,0.08);
 }
 
-h1{ text-align:center; color:var(--header); margin-top:6px; }
 .subsection{
-  margin:18px 0;
-  padding:18px 20px;
-  background:rgba(240,248,255,0.6);
+  background:rgba(240,248,255,0.55);
+  margin:20px 0;
+  padding:18px;
   border-radius:10px;
   border-left:5px solid var(--primary);
 }
-.subsection h2{ margin-top:0; color:var(--primary); }
-
 .code-block{
   background:var(--light-bg);
-  padding:12px;
-  font-family:Consolas, "Courier New", monospace;
-  border-radius:8px;
   border-left:4px solid var(--primary);
+  padding:12px;
+  border-radius:8px;
   white-space:pre-wrap;
-  margin:12px 0;
+  font-family:Consolas;
 }
 .output{
-  margin-top:8px;
-  background:#fff;
+  background:white;
+  border-left:4px solid var(--accent);
   padding:10px;
   border-radius:8px;
-  border-left:4px solid var(--accent);
-  font-family:Consolas, monospace;
+  margin-top:8px;
+  font-family:Consolas;
 }
 
-.question{ cursor:pointer; font-weight:700; margin:12px 0; }
+.question{
+  cursor:pointer;
+  font-weight:600;
+  margin:12px 0;
+}
 .answer{
   display:none;
   background:var(--light-bg);
   padding:10px;
   border-radius:8px;
-  margin-top:8px;
   border-left:3px solid var(--accent);
+  margin-top:6px;
 }
 
-/* summary */
 .summary{
   background:rgba(224,247,255,0.75);
-  padding:16px;
-  border-radius:10px;
   border-left:5px solid var(--primary);
+  padding:18px;
+  border-radius:10px;
 }
 
-/* responsive */
-@media (max-width:820px){
-  .navbar{ flex-direction:column; gap:8px; width:96% }
-  .container{ padding:14px }
-  .header{ font-size:1.2rem }
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:12px;
+}
+td{
+  padding:10px;
+  border:1px solid #ccc;
+}
+th{
+  background:rgba(0,120,255,0.1);
+  padding:10px;
+  border:1px solid #ccc;
+  font-weight:bold;
 }
 
-/* print styles */
+@media(max-width:800px){
+  .navbar{ flex-direction:column; gap:8px; width:96%; }
+  header{ font-size:1.4rem; }
+}
 @media print{
-  .navbar, .print-btn, .theme-btn { display:none !important; }
+  .navbar,.theme-btn,.print-btn{ display:none !important; }
   body{ background:#fff !important; color:#000; }
-  .container{ box-shadow:none; border-radius:0; }
-  .code-block, .output { background:#f7f7f7; }
 }
-
-/* subtle focus style for accessibility */
-.question:focus{ outline:3px solid rgba(0,120,255,0.12); outline-offset:3px; }
 </style>
 </head>
+
 <body>
-  <header class="header" role="banner">
-    <button class="print-btn" aria-label="Print page" onclick="window.print()">🖨️</button>
-    NBKRIST JavaHub — Polymorphism (Deep Dive)
-    <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">🌙</button>
-  </header>
 
-  <nav class="navbar" role="navigation" aria-label="Main navigation">
-    <a href="index.html">🏠 Home</a>
-    <a href="#intro">Introduction</a>
-    <a href="#compile">Compile-time</a>
-    <a href="#runtime">Runtime</a>
-    <a href="#practice">Practice</a>
-  </nav>
+<header>
+  <button class="print-btn" onclick="window.print()">🖨️</button>
+  NBKRIST JavaHub – Polymorphism
+  <button class="theme-btn" id="themeToggle">🌙</button>
+</header>
 
-  <main class="container" role="main">
-    <h1>Polymorphism in Java — Compile-time & Runtime</h1>
+<nav class="navbar">
+  <a href="index.html">🏠 Home</a>
+  <a href="#intro">Intro</a>
+  <a href="#compile">Compile-time</a>
+  <a href="#runtime">Runtime</a>
+  <a href="#difference">Difference</a>
+  <a href="#practice">Practice</a>
+</nav>
 
-    <section class="subsection" id="intro" aria-labelledby="introHeading">
-      <h2 id="introHeading">1. What is Polymorphism?</h2>
-      <p>
-        <strong>Polymorphism</strong> means <em>many forms</em>. In Java it allows the same operation (method call)
-        to behave differently depending on the object that performs it. Polymorphism is fundamental to designing
-        systems that are extensible, maintainable and loosely-coupled.
-      </p>
+<div class="container">
 
-      <p><strong>Real-world analogy (Automobile):</strong> the action <code>start()</code> applies to every vehicle,
-      but how a vehicle starts differs — electric cars start silently, diesel engines crank, sports cars rev aggressively.
-      The interface (start) is the same; the implementation differs.</p>
-    </section>
+<h1>Polymorphism in Java – Compile-time & Runtime</h1>
+<p>Polymorphism is one of the strongest pillars of Object-Oriented Programming. It allows one action to behave in multiple ways depending on the object. It makes Java flexible, scalable, and ideal for large applications.</p>
 
-    <section class="subsection" id="compile" aria-labelledby="compileHeading">
-      <h2 id="compileHeading">2. Compile-time Polymorphism (Static Polymorphism)</h2>
-      <p>
-        Compile-time polymorphism is resolved during compilation. Java implements it using <strong>method overloading</strong>
-        (same method name, different parameter lists). The compiler decides which method variant to invoke based on the
-        call-site signature.
-      </p>
+<!-- INTRO -->
+<div class="subsection" id="intro">
+<h2>1. What is Polymorphism?</h2>
+<p>Polymorphism means <b>Many Forms</b>. A single method call behaves differently depending on the actual object executing it.</p>
 
-      <div class="code-block" aria-label="Example of method overloading">
+<h3>Real-time Example (Automobile)</h3>
+<p>The action <code>start()</code> is common for all vehicles, but each behaves differently:</p>
+<ul>
+<li>Electric Car → silent start</li>
+<li>Diesel Car → engine crank</li>
+<li>Sports Car → loud rev</li>
+</ul>
+</div>
+
+<!-- COMPILE TIME -->
+<div class="subsection" id="compile">
+<h2>2. Compile-time Polymorphism (Method Overloading)</h2>
+<p>Compile-time polymorphism occurs when the method call is resolved during compilation. It is achieved through <b>Method Overloading</b>.</p>
+
+<div class="code-block">
 class Calculator {
     int add(int a, int b) { return a + b; }
     int add(int a, int b, int c) { return a + b + c; }
-    double add(double a, double b) { return a + b; }
 }
+</div>
 
-public class Test {
-    public static void main(String[] args) {
-        Calculator c = new Calculator();
-        System.out.println(c.add(10, 20));       // -> 30
-        System.out.println(c.add(10, 20, 30));   // -> 60
-        System.out.println(c.add(2.5, 3.5));     // -> 6.0
-    }
-}
-      </div>
+<div class="output">30<br>60</div>
 
-      <div class="output"><strong>Output (conceptual):</strong> 30  60  6.0</div>
+<h3>Importance</h3>
+<ul>
+<li>Makes code readable</li>
+<li>Supports flexible APIs</li>
+<li>Handles multiple input formats</li>
+</ul>
+</div>
 
-      <h3>Why compile-time polymorphism matters</h3>
-      <ul>
-        <li>Simplifies APIs — same method name for closely related operations.</li>
-        <li>Improves readability and discoverability.</li>
-        <li>Enables cleaner method signatures for different input types.</li>
-      </ul>
-    </section>
+<!-- RUNTIME -->
+<div class="subsection" id="runtime">
+<h2>3. Runtime Polymorphism (Method Overriding)</h2>
+<p>Runtime polymorphism occurs when the overridden method is chosen based on the object type during execution.</p>
 
-    <section class="subsection" id="runtime" aria-labelledby="runtimeHeading">
-      <h2 id="runtimeHeading">3. Runtime Polymorphism (Dynamic Polymorphism)</h2>
-      <p>
-        Runtime polymorphism is resolved at run time via <strong>method overriding</strong>. A parent class declares a method,
-        and subclasses provide their specific implementations. When a parent type reference points to a subclass object,
-        the JVM dispatches the call to the appropriate overriding method at runtime.
-      </p>
-
-      <div class="code-block" aria-label="Example of runtime polymorphism">
+<div class="code-block">
 class Vehicle {
-    void start() { System.out.println("Vehicle starting..."); }
+    void start() { System.out.println("Vehicle starting"); }
 }
 class Car extends Vehicle {
-    @Override
-    void start() { System.out.println("Car starting with key..."); }
+    @Override void start() { System.out.println("Car starting with key"); }
 }
 class ElectricCar extends Vehicle {
-    @Override
-    void start() { System.out.println("ElectricCar starting silently..."); }
+    @Override void start() { System.out.println("Electric Car starting silently"); }
 }
 
 public class Test {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Vehicle v;
-
         v = new Car();
-        v.start();           // Car's start()
-
+        v.start();
         v = new ElectricCar();
-        v.start();           // ElectricCar's start()
+        v.start();
     }
 }
-      </div>
+</div>
 
-      <div class="output"><strong>Output (conceptual):</strong>
-        <div>Car starting with key...</div>
-        <div>ElectricCar starting silently...</div>
-      </div>
+<div class="output">Car starting with key<br>Electric Car starting silently</div>
 
-      <h3>Why runtime polymorphism is crucial in Java</h3>
-      <ul>
-        <li>Supports flexible and extensible designs (open for extension, closed for modification).</li>
-        <li>Enables frameworks and libraries to call user-provided implementations (e.g., callbacks, listeners).</li>
-        <li>Allows building plug-and-play components — new subclasses can be added without changing existing code.</li>
-      </ul>
+<h3>Importance</h3>
+<ul>
+<li>Foundational for frameworks (Spring/Hibernate)</li>
+<li>Enables plug-and-play architecture</li>
+<li>Supports dynamic behavior</li>
+</ul>
+</div>
 
-      <p><strong>Industry note:</strong> Java frameworks (Spring, Hibernate, servlet containers) rely heavily on runtime polymorphism
-      for inversion of control, proxying, callback handlers and dynamic dispatch.</p>
-    </section>
+<!-- DIFFERENCE -->
+<div class="subsection" id="difference">
+<h2>4. Difference: Compile-time vs Runtime Polymorphism</h2>
 
-    <section class="subsection" id="examples" aria-labelledby="examplesHeading">
-      <h2 id="examplesHeading">4. More Real-time Examples (Java context)</h2>
+<table>
+<tr>
+<th>Compile-time Polymorphism</th>
+<th>Runtime Polymorphism</th>
+</tr>
+<tr>
+<td>Achieved by method overloading</td>
+<td>Achieved by method overriding</td>
+</tr>
+<tr>
+<td>Binding happens at compile-time</td>
+<td>Binding happens at runtime</td>
+</tr>
+<tr>
+<td>Fast execution</td>
+<td>Slower (dynamic binding)</td>
+</tr>
+<tr>
+<td>Decided by method signature</td>
+<td>Decided by object type</td>
+</tr>
+<tr>
+<td>Suitable for utility & helper methods</td>
+<td>Suitable for extensible architectures</td>
+</tr>
+</table>
+</div>
 
-      <h3>Example — Payment Gateway (Runtime polymorphism)</h3>
-      <p>
-        Suppose a system supports multiple payment methods: <em>CreditCard</em>, <em>UPI</em>, <em>Wallet</em>.
-        All implement a common interface `Payment` with a method `process()`. At runtime, the chosen payment provider's
-        `process()` executes — same call, different implementations.
-      </p>
+<!-- PRACTICE -->
+<div class="subsection" id="practice">
+<h2>Practice Questions – Click to Reveal Answers</h2>
 
-      <div class="code-block">
-interface Payment { void process(double amount); }
+<div class="question" onclick="toggleAnswer('q1')">1️⃣ What is Polymorphism?</div>
+<div class="answer" id="ansq1">Polymorphism allows one method to perform differently depending on the object.</div>
 
-class CreditCard implements Payment {
-    public void process(double amount) { System.out.println("Processing CC: " + amount); }
-}
-class UPI implements Payment {
-    public void process(double amount) { System.out.println("Processing UPI: " + amount); }
-}
-class Wallet implements Payment {
-    public void process(double amount) { System.out.println("Processing Wallet: " + amount); }
-}
+<div class="question" onclick="toggleAnswer('q2')">2️⃣ What is Compile-time Polymorphism?</div>
+<div class="answer" id="ansq2">Method overloading resolved during compilation.</div>
 
-public class Checkout {
-    static void pay(Payment p, double amt) { p.process(amt); }
-    public static void main(String[] args) {
-        pay(new CreditCard(), 1500.0);
-        pay(new UPI(), 250.0);
-        pay(new Wallet(), 99.0);
-    }
-}
-      </div>
+<div class="question" onclick="toggleAnswer('q3')">3️⃣ What is Runtime Polymorphism?</div>
+<div class="answer" id="ansq3">Method overriding resolved by JVM at runtime.</div>
 
-      <div class="output"><strong>Output (conceptual):</strong>
-        <div>Processing CC: 1500.0</div>
-        <div>Processing UPI: 250.0</div>
-        <div>Processing Wallet: 99.0</div>
-      </div>
+<div class="question" onclick="toggleAnswer('q4')">4️⃣ Give a real-time example.</div>
+<div class="answer" id="ansq4">Different types of vehicles starting via the same start() method.</div>
 
-      <h3>Example — UI Controls (Compile-time & Runtime together)</h3>
-      <p>
-        Overloaded methods render controls with different parameters (compile-time). The `draw()` method in `Control`
-        might be overridden by `Button`, `TextField` subclasses (runtime).
-      </p>
-    </section>
+<div class="question" onclick="toggleAnswer('q5')">5️⃣ Why is Polymorphism important?</div>
+<div class="answer" id="ansq5">It supports flexibility, scalability, and extensibility in Java applications.</div>
+</div>
 
-    <section class="subsection" id="practice" aria-labelledby="practiceHeading">
-      <h2 id="practiceHeading">Practice Questions — Click to reveal answers</h2>
+<!-- SUMMARY -->
+<div class="summary">
+<h2>Quick Summary</h2>
+<ul>
+<li>Polymorphism = many forms</li>
+<li>Compile-time → Overloading</li>
+<li>Runtime → Overriding</li>
+<li>Java frameworks depend heavily on runtime polymorphism</li>
+<li>One of the strongest OOP pillars enabling flexible design</li>
+</ul>
+</div>
 
-      <div class="question" tabindex="0" role="button" onclick="toggleAnswer('q1')">1️⃣ What is polymorphism?</div>
-      <div class="answer" id="ansq1">Polymorphism allows the same operation to exhibit different behaviors depending on the object performing it.</div>
+</div>
 
-      <div class="question" tabindex="0" role="button" onclick="toggleAnswer('q2')">2️⃣ What is compile-time polymorphism?</div>
-      <div class="answer" id="ansq2">Compile-time polymorphism is method overloading; the compiler decides which overloaded method to call based on parameters.</div>
-
-      <div class="question" tabindex="0" role="button" onclick="toggleAnswer('q3')">3️⃣ What is runtime polymorphism?</div>
-      <div class="answer" id="ansq3">Runtime polymorphism is method overriding; JVM decides at runtime which overridden method to call based on the actual object's type.</div>
-
-      <div class="question" tabindex="0" role="button" onclick="toggleAnswer('q4')">4️⃣ How does polymorphism help in frameworks?</div>
-      <div class="answer" id="ansq4">Frameworks use polymorphism to call user-defined implementations or proxies at runtime without knowing concrete classes at compile time.</div>
-
-      <div class="question" tabindex="0" role="button" onclick="toggleAnswer('q5')">5️⃣ Give a short real-time example of polymorphism.</div>
-      <div class="answer" id="ansq5">Different vehicle types implementing a common start() method — the system calls start() but the concrete behavior depends on the vehicle.</div>
-    </section>
-
-    <section class="summary" aria-labelledby="summaryHeading">
-      <h2 id="summaryHeading">Quick Summary</h2>
-      <ul>
-        <li>Polymorphism = many forms. Same method name, different behavior.</li>
-        <li>Compile-time (static) polymorphism = method overloading (resolved by compiler).</li>
-        <li>Runtime (dynamic) polymorphism = method overriding (resolved by JVM at runtime).</li>
-        <li>Polymorphism increases extensibility, flexibility and is heavily used in Java frameworks.</li>
-      </ul>
-    </section>
-  </main>
-
-  <footer style="text-align:center; margin:22px auto 40px;">
-    <div style="max-width:980px; margin:0 auto;">
-      <div style="background:linear-gradient(90deg,var(--primary),var(--accent)); color:white; padding:12px; border-radius:10px;">
-        NBKRIST © 2025 | JavaHub Learning Series — Authored by Hari Babu Mutchakala
-      </div>
-    </div>
-  </footer>
+<footer style="text-align:center; margin:20px;">
+  <div style="background:linear-gradient(90deg,var(--primary),var(--accent)); padding:12px; border-radius:10px; color:white;">
+    NBKRIST © 2025 | JavaHub Learning Series – Hari Babu Mutchakala
+  </div>
+</footer>
 
 <script>
-/* Toggle answers for practice Q&A */
 function toggleAnswer(id){
-  const el = document.getElementById('ans' + id);
+  const el=document.getElementById('ans'+id);
   if(!el) return;
-  el.style.display = (el.style.display === 'block') ? 'none' : 'block';
-  if(el.style.display === 'block'){
+  el.style.display = el.style.display==='block'?'none':'block';
+  if(el.style.display==='block'){
     el.scrollIntoView({behavior:'smooth', block:'center'});
   }
 }
-
-/* Theme toggle */
-const themeBtn = document.getElementById('themeToggle');
-if(themeBtn){
-  themeBtn.addEventListener('click', () => {
-    document.body.classList.toggle('dark');
-    themeBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
-  });
-}
-
-/* Accessibility: toggle with Enter/Space when question focused */
-document.querySelectorAll('.question').forEach(q => {
-  q.addEventListener('keydown', e => {
-    if(e.key === 'Enter' || e.key === ' '){
-      e.preventDefault();
-      q.click();
-    }
-  });
+const toggle=document.getElementById('themeToggle');
+toggle.addEventListener('click',()=>{
+  document.body.classList.toggle('dark');
+  toggle.textContent=document.body.classList.contains('dark')?'☀️':'🌙';
 });
-
-/* Optional: close open answers on outside click (uncomment to enable)
-document.addEventListener('click', (e) => {
-  if (e.target.closest('.question')) return;
-  document.querySelectorAll('.answer').forEach(a => a.style.display = 'none');
-});
-*/
 </script>
+
 </body>
 </html>
