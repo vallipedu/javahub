@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NBKRIST :: User Authentication</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f0f4f8;
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-container {
+        background: white;
+        width: 360px;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.15);
+        text-align: center;
+    }
+
+    .institute-name {
+        font-size: 18px;
+        font-weight: bold;
+        color: #003366;
+        margin-bottom: 4px;
+    }
+
+    .sub {
+        font-size: 12px;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    input {
+        width: 90%;
+        padding: 10px;
+        margin: 8px 0;
+        border: 1px solid #999;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    button {
+        width: 95%;
+        padding: 10px;
+        background: #004d99;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        font-size: 15px;
+        cursor: pointer;
+        margin-top: 8px;
+    }
+
+    button:hover {
+        background: #003870;
+    }
+
+    .error-msg {
+        margin-top: 10px;
+        color: red;
+        font-size: 13px;
+        display: none;
+    }
+
+    #watermark {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-30deg);
+        font-size: 110px;
+        font-weight: bold;
+        color: rgba(0,0,0,0.05);
+        pointer-events: none;
+        z-index: -1;
+        user-select: none;
+    }
+</style>
+</head>
+
+<body>
+
+<div id="watermark">NBKRIST</div>
+
+<div class="login-container">
+    <div class="institute-name">N.B.K.R. INSTITUTE OF SCIENCE & TECHNOLOGY</div>
+    <div class="sub">(AUTONOMOUS) :: Vidyanagar</div>
+    <h3 style="color:#004d99; margin-top:10px;">User Authentication</h3>
+
+    <input type="text" id="username" placeholder="Enter Username">
+    <input type="password" id="password" placeholder="Enter Password">
+
+    <button onclick="login()">Login</button>
+
+    <div class="error-msg" id="errorMsg">Invalid Username or Password!</div>
+</div>
+
+
+<script>
+/* ===== HARD-CODED CREDENTIALS ===== */
+const VALID_USERNAME = "admin";
+const VALID_PASSWORD = "nbkrist123";  // change later if needed
+
+/* ===== LOGIN FUNCTION ===== */
+function login(){
+    let user = document.getElementById("username").value.trim();
+    let pass = document.getElementById("password").value.trim();
+    let errorBox = document.getElementById("errorMsg");
+
+    if(user === VALID_USERNAME && pass === VALID_PASSWORD){
+        errorBox.style.display = "none";
+
+        // SUCCESS → Redirect to target page
+        window.location.href = "javaexternal.html";   // <-- change to your page
+    }
+    else {
+        errorBox.style.display = "block";
+    }
+}
+</script>
+
+</body>
+</html>
