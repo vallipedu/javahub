@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,7 +39,8 @@
       align-items: center;
       min-height: 100vh;
       transition: background-color 0.3s ease, color 0.3s ease;
-      overflow-x: hidden; /* ✅ Prevent horizontal scroll */
+      overflow-x: hidden;
+      /* ✅ Prevent horizontal scroll */
     }
 
     /* Header */
@@ -102,7 +104,8 @@
       display: flex;
       justify-content: center;
       background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), transparent);
-      padding: 1rem 0; /* added more spacing */
+      padding: 1rem 0;
+      /* added more spacing */
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
       overflow-x: hidden;
     }
@@ -131,7 +134,8 @@
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
       transition: all 0.2s ease;
       min-width: 150px;
-      margin: 0.25rem; /* ✅ added small margin around each button */
+      margin: 0.25rem;
+      /* ✅ added small margin around each button */
     }
 
     .nav-button:hover {
@@ -201,20 +205,24 @@
         flex-direction: column;
         text-align: center;
       }
+
       header h1 {
         font-size: 1.4rem;
         margin: 0.5rem 0;
       }
+
       .control-button {
         font-size: 0.85rem;
         padding: 0.4rem 0.7rem;
       }
+
       .button-row {
         gap: 0.6rem;
       }
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="header-left">
@@ -233,12 +241,13 @@
 
   <div class="button-row-wrapper" aria-hidden="false">
     <nav class="button-row" aria-label="Primary quick links">
-            <a class="nav-button" href="secondMidKey.html">II Mid Key</a>
+      <a class="nav-button" href="secondMidKey.html">Java II Mid Key</a>
+      <a class="nav-button" href="oopsmid.html">Java Internal Lab Exam</a>
+      <a class="nav-button" href="javalogin.html">Oops Through Java External Exam</a>
+      <a class="nav-button" href="lgoin.html">Full-Stack2 External Exam</a>
 
-      <a class="nav-button" href="oopsmid.html">Internal Lab Exam1</a>
-      <a class="nav-button" href="oopsmid.html">Internal Lab Exam2</a>
-      <a class="nav-button" href="examwraning.html">External Lab Exam</a>
-      <a class="nav-button" href="examwraning.html">Student-Experiment Mapping Sheet</a>
+      <a class="nav-button" href="mappingLoigin.html">Student-Experiment Mapping Sheet</a>
+      <a class="nav-button" href="csegenlogin.html">CSV Generator</a>
     </nav>
   </div>
 
@@ -259,11 +268,8 @@
         <li><b>Test:</b> Verify your code thoroughly before submission.</li>
       </ol>
 
-      <img
-        src="sdlc2.png"
-        alt="sdlc text"
-        style="display:block; margin:30px auto; max-width:50%; height:auto; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.25); border:4px solid #f0f0f0; background-color:#fff;"
-      />
+      <img src="sdlc2.png" alt="sdlc text"
+        style="display:block; margin:30px auto; max-width:50%; height:auto; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.25); border:4px solid #f0f0f0; background-color:#fff;" />
 
       <p>Good luck! 🤞</p>
     </section>
@@ -276,7 +282,7 @@
   <script>
     // Back Button
     document.getElementById("backBtn").addEventListener("click", () => {
-       window.location.href = "index.html";
+      location.href = "index.html";
     });
 
     // Dark / Light Mode Toggle
@@ -296,6 +302,5 @@
     });
   </script>
 </body>
+
 </html>
-
-
