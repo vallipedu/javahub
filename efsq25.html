@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Problem Statement: Satellite Monitoring Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #004d99;
+            --secondary-color: #f0f8ff;
+            --text-color: #343a40;
+            --heading-color: #0056b3;
+            --border-color: #dee2e6;
+            --code-bg: #e9ecef;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 25px;
+            text-decoration: none;
+            color: white;
+            background-color: #6c757d;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            transition: 0.3s ease;
+            float: left;
+            clear: both;
+        }
+
+        .back-button:hover {
+            background-color: #5a6268;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+            clear: both;
+        }
+
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--heading-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        ul,
+        ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .requirements-list li strong {
+            color: var(--primary-color);
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem 0;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: auto;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>NBKRIST Java Hub</h1>
+</header>
+
+<div class="container">
+    <a class="back-button" href="exampanel.html">← Back to Exam Panel</a>
+
+    <div class="section">
+        <h2>25. Problem Statement for Full-Stack: Satellite Monitoring Dashboard</h2>
+        <p>
+            You are required to build a **Satellite Monitoring Dashboard**, similar to systems used by space agencies and satellite operation centers. The dashboard must display satellite parameters including **altitude**, **speed**, and **signal strength**, and classify satellite status.
+            Students will design a clean interface showing **satellite health**, **orbit details**, and **signal reliability**.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Technological Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>Technologies to Use:</strong>
+                <ul>
+                    <li>HTML — structure for dashboard</li>
+                    <li>CSS — styling and layout</li>
+                    <li>JavaScript — satellite status logic</li>
+                </ul>
+            </li>
+
+            <li><strong>JavaScript Concepts Allowed:</strong>
+                <ul>
+                    <li>Arrow Functions</li>
+                    <li>Objects & Arrays</li>
+                    <li>Event Handling</li>
+                </ul>
+            </li>
+
+            <li><strong>Restrictions:</strong>
+                <ul>
+                    <li>No external libraries/frameworks</li>
+                    <li>Client-side only (browser-based)</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Functional Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>1. Satellite Telemetry Data Handling:</strong>
+                <ul>
+                    <li>Create an array of satellite objects:<br>
+                        <code>{ satelliteName, altitude, speed, signalStrength }</code></li>
+                    <li>Display all satellite readings in an HTML table.</li>
+                </ul>
+            </li>
+
+            <li><strong>2. Satellite Status Classification:</strong>
+                <ul>
+                    <li>Calculate satellite condition using:</li>
+                    <li><code>healthScore = (altitude * 0.1) + (speed * 0.2) + (signalStrength * 0.7)</code></li>
+                    <li>Based on healthScore classify as:</li>
+                    <li>
+                        • ≥ 80 → <strong>Optimal</strong><br>
+                        • 50–79 → <strong>Stable</strong><br>
+                        • < 50 → <strong>Critical</strong>
+                    </li>
+                    <li>Display satellite condition next to each entry.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Testing Requirements</h2>
+        <p>Validate your satellite monitoring dashboard using the following <strong>2 test cases</strong>:</p>
+        <ol class="requirements-list">
+            <li><strong>Test Case 1 — Optimal Satellite:</strong>
+                <ul>
+                    <li>Input: altitude=500, speed=7, signalStrength=95</li>
+                    <li>Expected Output: healthScore ≈ 89 → <strong>Optimal</strong></li>
+                </ul>
+            </li>
+
+            <li><strong>Test Case 2 — Critical Satellite:</strong>
+                <ul>
+                    <li>Input: altitude=200, speed=5, signalStrength=20</li>
+                    <li>Expected Output: healthScore ≈ 24 → <strong>Critical</strong></li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 NBKRIST Java Hub. All Rights Reserved | Authored by Hari Babu Mutchakala.</p>
+</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Disable right-click
+      document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable copy
+      document.addEventListener("copy", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable cut
+      document.addEventListener("cut", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable paste
+      document.addEventListener("paste", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable text selection
+      document.addEventListener("selectstart", function (e) {
+        e.preventDefault();
+      });
+    });
+  </script>
+</body>
+</html>

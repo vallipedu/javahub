@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Problem Statement: Environmental Monitoring Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #004d99;
+            --secondary-color: #f0f8ff;
+            --text-color: #343a40;
+            --heading-color: #0056b3;
+            --border-color: #dee2e6;
+            --code-bg: #e9ecef;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 25px;
+            text-decoration: none;
+            color: white;
+            background-color: #6c757d;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            transition: 0.3s ease;
+            float: left;
+            clear: both;
+        }
+
+        .back-button:hover {
+            background-color: #5a6268;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+            clear: both;
+        }
+
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--heading-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        ul,
+        ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .requirements-list li strong {
+            color: var(--primary-color);
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem 0;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: auto;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>NBKRIST Java Hub</h1>
+</header>
+
+<div class="container">
+    <a class="back-button" href="exampanel.html">← Back to Exam Panel</a>
+
+    <div class="section">
+        <h2>23. Problem Statement for Full-Stack: Environmental Monitoring Dashboard</h2>
+        <p>
+            You are required to build an **Environmental Monitoring Dashboard**, similar to systems used in pollution control, climate tracking, and smart city environmental units.
+            The dashboard must display air quality parameters, pollution index, and categorize environmental condition levels.
+            Students will design a clean interface showing **location-wise environmental readings** and **health indicators**.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Technological Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>Technologies to Use:</strong>
+                <ul>
+                    <li>HTML — interface structure</li>
+                    <li>CSS — dashboard styling</li>
+                    <li>JavaScript — pollution evaluation logic</li>
+                </ul>
+            </li>
+
+            <li><strong>JavaScript Concepts Allowed:</strong>
+                <ul>
+                    <li>Arrow Functions</li>
+                    <li>Objects & Arrays</li>
+                    <li>Event Handling</li>
+                </ul>
+            </li>
+
+            <li><strong>Restrictions:</strong>
+                <ul>
+                    <li>No external libraries/frameworks</li>
+                    <li>Client-side only (no backend)</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Functional Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>1. Environmental Data Handling:</strong>
+                <ul>
+                    <li>Create an array of environmental measurement objects:<br>
+                        <code>{ location, pm25, pm10, temperature }</code></li>
+                    <li>Display all monitoring data in an HTML table.</li>
+                </ul>
+            </li>
+
+            <li><strong>2. Air Quality Index (AQI) Categorization:</strong>
+                <ul>
+                    <li>Calculate AQI using:</li>
+                    <li><code>aqi = pm25 + (pm10 * 0.5)</code></li>
+                    <li>Categorize based on AQI value:</li>
+                    <li>
+                        • aqi ≤ 50 → <strong>Good</strong><br>
+                        • 51–100 → <strong>Moderate</strong><br>
+                        • 101–200 → <strong>Unhealthy</strong><br>
+                        • > 200 → <strong>Hazardous</strong>
+                    </li>
+                    <li>Display AQI and category for each location.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Testing Requirements</h2>
+        <p>Validate your environmental monitoring dashboard using the following <strong>2 test cases</strong>:</p>
+        <ol class="requirements-list">
+            <li><strong>Test Case 1 — Good Air Quality:</strong>
+                <ul>
+                    <li>Input: pm25 = 20, pm10 = 40</li>
+                    <li>Expected Output: aqi = 20 + 20 = 40 → <strong>Good</strong></li>
+                </ul>
+            </li>
+
+            <li><strong>Test Case 2 — Hazardous:</strong>
+                <ul>
+                    <li>Input: pm25 = 180, pm10 = 100</li>
+                    <li>Expected Output: aqi = 180 + 50 = 230 → <strong>Hazardous</strong></li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 NBKRIST Java Hub. All Rights Reserved | Authored by Hari Babu Mutchakala.</p>
+</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Disable right-click
+      document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable copy
+      document.addEventListener("copy", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable cut
+      document.addEventListener("cut", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable paste
+      document.addEventListener("paste", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable text selection
+      document.addEventListener("selectstart", function (e) {
+        e.preventDefault();
+      });
+    });
+  </script>
+</body>
+</html>

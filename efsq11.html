@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Statement: OTT Content Recommendation Monitor</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+        :root {
+            --primary-color: #004d99;
+            --secondary-color: #f0f8ff;
+            --text-color: #343a40;
+            --heading-color: #0056b3;
+            --border-color: #dee2e6;
+            --code-bg: #e9ecef;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        body {
+            font-family: 'Merriweather', serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+        header {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            font-family: 'Roboto', sans-serif;
+        }
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background: #fff;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+        }
+        .back-button {
+            display: inline-block;
+            margin-bottom: 25px;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #6c757d;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            transition: 0.3s ease;
+            float: left;
+            clear: both;
+        }
+        .back-button:hover { background-color: #5a6268; }
+        .section { margin-bottom: 2rem; clear: both; }
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--heading-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+        ul, ol { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        .requirements-list li strong { color: var(--primary-color); }
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", monospace;
+        }
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem 0;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: auto;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>NBKRIST Java Hub</h1>
+</header>
+<div class="container">
+    <a href="externalExam.html" class="back-button">← Back to Exam Panel</a>
+
+    <div class="section">
+        <h2>11. Problem Statement for Full-Stack: OTT Content Recommendation Monitor</h2>
+        <p>
+            You are required to build a **simple OTT (Over-The-Top) Content Recommendation Dashboard**. This system simulates how platforms like Netflix, Hotstar, Amazon Prime, etc., track user watch history and generate basic recommendations. Students will design a clean dashboard that displays **watch history**, **genres**, and **recommended content**.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Technological Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>Technologies to Use:</strong>
+                <ul>
+                    <li>HTML — to structure the dashboard</li>
+                    <li>CSS — to style UI components</li>
+                    <li>JavaScript — to generate recommendations</li>
+                </ul>
+            </li>
+            <li><strong>JavaScript Concepts Allowed:</strong>
+                <ul>
+                    <li>Arrow Functions</li>
+                    <li>Objects & Arrays</li>
+                    <li>Event Handling</li>
+                </ul>
+            </li>
+            <li><strong>Restrictions:</strong>
+                <ul>
+                    <li>No external frameworks</li>
+                    <li>Client-side only (no backend)</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Functional Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>1. Watch History Handling:</strong>
+                <ul>
+                    <li>Create an array of watched items:<br>
+                        <code>{ title, genre, duration }</code></li>
+                    <li>Display all watched items in an HTML table.</li>
+                </ul>
+            </li>
+
+            <li><strong>2. Recommendation Generation:</strong>
+                <ul>
+                    <li>Identify the user's most-watched <strong>genre</strong>.</li>
+                    <li>Generate at least **3 recommended items** of the same genre.</li>
+                    <li>Display recommendations in a separate highlighted section.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Testing Requirements</h2>
+        <p>Validate your OTT system using the following <strong>2 test cases</strong>:</p>
+        <ol class="requirements-list">
+            <li><strong>Test Case 1 — Most Watched Genre:</strong>
+                <ul>
+                    <li>Input: 5 watched movies, 3 of them are "Action".</li>
+                    <li>Expected Output: "Action" must be selected as the <strong>preferred genre</strong>.</li>
+                </ul>
+            </li>
+            <li><strong>Test Case 2 — Recommendation Count:</strong>
+                <ul>
+                    <li>Input: Preferred genre = "Comedy"</li>
+                    <li>Expected Output: At least <strong>3 Comedy recommendations</strong> displayed.</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+</div>
+<footer>
+    <p>© 2025 NBKRIST Java Hub. All Rights Reserved | Authored by Hari Babu Mutchakala.</p>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Disable right-click
+      document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable copy
+      document.addEventListener("copy", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable cut
+      document.addEventListener("cut", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable paste
+      document.addEventListener("paste", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable text selection
+      document.addEventListener("selectstart", function (e) {
+        e.preventDefault();
+      });
+    });
+  </script>
+</body>
+</html>

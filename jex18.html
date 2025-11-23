@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Statement: Simple Student Feedback Analyzer</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #004d99;
+            --secondary-color: #f0f8ff;
+            --text-color: #343a40;
+            --heading-color: #0056b3;
+            --border-color: #dee2e6;
+            --code-bg: #e9ecef;
+            --box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            margin: 2rem 0;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 25px;
+            text-decoration: none;
+            color: white;
+            background-color: #6c757d;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            float: left;
+            clear: both;
+        }
+
+        .back-button:hover { background-color: #5a6268; }
+
+        .section { margin-bottom: 2rem; clear: both; }
+
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--heading-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        ul, ol { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+
+        .requirements-list li strong { color: var(--primary-color); }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem 0;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: auto;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+        }
+
+        footer p { margin: 0; letter-spacing: 1px; }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>NBKRIST Java Hub</h1>
+</header>
+
+<div class="container">
+
+    <a href="exampanel.html" class="back-button">← Back to Exam Panel</a>
+
+    <!-- PROBLEM STATEMENT -->
+    <div class="section">
+        <h2>Problem Statement: Simple Student Feedback Analyzer</h2>
+        <p>
+            Develop a Java program that collects feedback ratings from students for a course.  
+            The system should store 5 feedback scores in an array, calculate the average rating,  
+            and display the final feedback summary.  
+            This task helps beginners practice arrays, simple OOP,  
+            and keyboard input using the <code>Scanner</code> class.
+        </p>
+    </div>
+
+    <!-- FUNCTIONAL REQUIREMENTS -->
+    <div class="section">
+        <h2>Functional Requirements</h2>
+        <ul class="requirements-list">
+
+            <li>The system must store course feedback details:
+                <ul>
+                    <li>Course Name</li>
+                    <li>Faculty Name</li>
+                </ul>
+            </li>
+
+            <li>The system must:
+                <ul>
+                    <li>Read <strong>5 feedback ratings</strong> (values from 1 to 5)</li>
+                    <li>Store them in an <strong>int array</strong></li>
+                    <li>Calculate the average rating</li>
+                    <li>Display the summary in a clear format</li>
+                </ul>
+            </li>
+
+            <li>Validation:
+                <ul>
+                    <li>Each rating must be between 1 and 5 only</li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- TECHNICAL REQUIREMENTS -->
+    <div class="section">
+        <h2>Technical Requirements</h2>
+        <ul class="requirements-list">
+
+            <li>Use a <strong>Feedback</strong> class with private fields.</li>
+
+            <li>Use an <strong>int array</strong> to store ratings.</li>
+
+            <li>Use methods for:
+                <ul>
+                    <li>Reading course & faculty details</li>
+                    <li>Reading 5 ratings</li>
+                    <li>Calculating average</li>
+                    <li>Displaying final summary</li>
+                </ul>
+            </li>
+
+            <li>Use <strong>Scanner</strong> for all user input.</li>
+
+            <li>Apply <strong>encapsulation</strong> for field protection.</li>
+
+            <li>Use loops & simple validation.</li>
+
+        </ul>
+    </div>
+
+    <!-- TESTING REQUIREMENTS -->
+    <div class="section">
+        <h2>Testing Requirements</h2>
+        <p>Your program must demonstrate correctness using the following test cases:</p>
+
+        <ol class="requirements-list">
+
+            <li><strong>Test Case 1 — Valid Ratings</strong>
+                <ul>
+                    <li>Ratings: 5, 4, 4, 5, 5</li>
+                    <li>Expected Average: 4.6</li>
+                </ul>
+            </li>
+
+            <li><strong>Test Case 2 — Invalid Rating</strong>
+                <ul>
+                    <li>Input: 7</li>
+                    <li>Expected Result: System rejects and asks again</li>
+                </ul>
+            </li>
+
+        </ol>
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2025 NBKRIST Java Hub. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

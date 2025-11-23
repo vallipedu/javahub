@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Problem Statement: Railway Scheduling Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+        :root {
+            --primary-color: #004d99;
+            --secondary-color: #f0f8ff;
+            --text-color: #343a40;
+            --heading-color: #0056b3;
+            --border-color: #dee2e6;
+            --code-bg: #e9ecef;
+            --box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        body {
+            font-family: 'Merriweather', serif;
+            margin: 0; padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        header {
+            width: 100%; background-color: var(--primary-color);
+            color: white; padding: 1.5rem 0;
+            text-align: center; box-shadow: var(--box-shadow);
+        }
+        header h1 {
+            margin: 0; font-weight: 700;
+            font-size: 2.5rem; letter-spacing: 2px;
+            font-family: 'Roboto', sans-serif;
+        }
+        .container {
+            width: 90%; max-width: 900px;
+            background-color: #fff;
+            padding: 2.5rem; margin: 2rem 0;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+        }
+        .back-button {
+            display: inline-block; margin-bottom: 25px;
+            background-color: #6c757d; color: white;
+            padding: 10px 15px; border-radius: 5px;
+            text-decoration: none;
+            font-family: 'Roboto'; font-weight: bold;
+            transition: 0.3s ease;
+            float: left; clear: both;
+        }
+        .back-button:hover { background-color: #5a6268; }
+        .section { margin-bottom: 2rem; clear: both; }
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--heading-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+        ul, ol { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        .requirements-list li strong { color: var(--primary-color); }
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px; border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        footer {
+            width: 100%; text-align: center;
+            padding: 1.5rem 0; margin-top: auto;
+            background-color: var(--primary-color);
+            color: white; font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+<header><h1>NBKRIST Java Hub</h1></header>
+
+<div class="container">
+    <a href="exampanel.html" class="back-button">← Back to Exam Panel</a>
+
+    <div class="section">
+        <h2>28. Problem Statement for Full-Stack: Railway Scheduling Dashboard</h2>
+        <p>
+            You are required to build a **Railway Scheduling Dashboard**, similar to systems used in railway operations, control rooms, and smart transit planning.
+            The dashboard must display **train timings, routes, passenger capacity**, and classify train status.
+            Students will design a clean interface showing **train schedule data**, **on-time performance**, and **crowd level classification**.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Technological Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>Technologies to Use:</strong>
+                <ul>
+                    <li>HTML — dashboard layout</li>
+                    <li>CSS — styling & presentation</li>
+                    <li>JavaScript — scheduling & classification logic</li>
+                </ul>
+            </li>
+            <li><strong>JavaScript Concepts Allowed:</strong>
+                <ul>
+                    <li>Objects & Arrays</li>
+                    <li>Arrow Functions</li>
+                    <li>Event Handling</li>
+                </ul>
+            </li>
+            <li><strong>Restrictions:</strong>
+                <ul>
+                    <li>No external libraries/frameworks</li>
+                    <li>Frontend only</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Functional Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>1. Train Schedule Data Handling:</strong>
+                <ul>
+                    <li>Create an array of train objects:<br>
+                        <code>{ trainName, route, arrivalTime, departureTime, passengerCount }</code></li>
+                    <li>Display all train data in an HTML table.</li>
+                </ul>
+            </li>
+
+            <li><strong>2. Train Crowd Level Classification:</strong>
+                <ul>
+                    <li>Calculate crowd density using:</li>
+                    <li><code>crowdLevel = passengerCount</code></li>
+                    <li>Classify trains:</li>
+                    <li>
+                        • ≤ 300 → <strong>Low Crowd</strong><br>
+                        • 301–700 → <strong>Moderate Crowd</strong><br>
+                        • > 700 → <strong>High Crowd</strong>
+                    </li>
+                    <li>Display classification next to each train.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Testing Requirements</h2>
+        <p>Validate your railway scheduling dashboard with the following <strong>2 test cases</strong>:</p>
+        <ol class="requirements-list">
+            <li><strong>Test Case 1 — Low Crowd Train:</strong>
+                <ul>
+                    <li>Input: passengerCount = 250</li>
+                    <li>Expected Output: <strong>Low Crowd</strong></li>
+                </ul>
+            </li>
+
+            <li><strong>Test Case 2 — High Crowd Train:</strong>
+                <ul>
+                    <li>Input: passengerCount = 900</li>
+                    <li>Expected Output: <strong>High Crowd</strong></li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<footer><p>© 2025 NBKRIST Java Hub. All Rights Reserved | Authored by Hari Babu Mutchakala.</p></footer>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Disable right-click
+      document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable copy
+      document.addEventListener("copy", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable cut
+      document.addEventListener("cut", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable paste
+      document.addEventListener("paste", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable text selection
+      document.addEventListener("selectstart", function (e) {
+        e.preventDefault();
+      });
+    });
+  </script>
+</body>
+</html>

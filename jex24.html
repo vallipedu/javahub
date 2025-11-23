@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Problem Statement: Below-Average Students</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+
+        :root{
+            --primary-color: #004d99;
+            --secondary-color: #f0f8ff;
+            --text-color: #343a40;
+            --heading-color: #0056b3;
+            --border-color: #dee2e6;
+            --code-bg: #e9ecef;
+            --box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        body{
+            font-family: 'Merriweather', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header{
+            width:100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align:center;
+            box-shadow: var(--box-shadow);
+        }
+
+        header h1{
+            margin:0;
+            font-weight:700;
+            font-size:2.5rem;
+            letter-spacing:2px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container{
+            width:90%;
+            max-width:900px;
+            background:#fff;
+            padding:2.5rem;
+            border-radius:12px;
+            box-shadow: var(--box-shadow);
+            margin:2rem 0;
+        }
+
+        .back-button{
+            display:inline-block;
+            margin-bottom:25px;
+            text-decoration:none;
+            color:white;
+            background-color:#6c757d;
+            padding:10px 15px;
+            border-radius:5px;
+            font-family:'Roboto', sans-serif;
+            font-weight:700;
+            transition: background-color 0.3s ease;
+            float:left;
+            clear:both;
+        }
+
+        .back-button:hover{ background-color:#5a6268; }
+
+        .section{ margin-bottom:2rem; clear:both; }
+
+        h2{
+            font-family:'Roboto', sans-serif;
+            color:var(--heading-color);
+            border-bottom:2px solid var(--border-color);
+            padding-bottom:0.5rem;
+            margin-top:0;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:10px;
+        }
+
+        table, th, td{ border:1px solid #999; }
+
+        th, td{ padding:10px; text-align:center; }
+
+        td.absent{
+            background-color:#ffd6d6;
+            color:#b30000;
+            font-weight:bold;
+        }
+
+        .requirements-list li strong{ color: var(--primary-color); }
+
+        footer{
+            width:100%;
+            text-align:center;
+            padding:1.5rem 0;
+            background-color:var(--primary-color);
+            color:white;
+            margin-top:auto;
+            font-size:0.9rem;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+        }
+
+        footer p{ margin:0; letter-spacing:1px; }
+
+        .note { font-style:italic; color:#374151; margin-top:8px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>NBKRIST Java Hub</h1>
+</header>
+
+<div class="container">
+
+    <a href="exampanel.html" class="back-button">← Back to Exam Panel</a>
+
+  
+
+    <!-- PROBLEM STATEMENT -->
+    <div class="section">
+        <h2>Problem Statement: Identify Below-Average Students</h2>
+        <p>
+            Build a Java program that reads the provided student marks into a <strong>2D array</strong>, computes each student's average (considering only attended subjects), computes the class average, and then identifies students whose average is <strong>below the class average</strong>.
+            This exercise reinforces 2D arrays, missing-data handling (absentees), aggregation, and conditional filtering.
+        </p>
+    </div>
+
+    <!-- DATA TABLE -->
+    <div class="section">
+        <h2>Dataset: Student Marks Table</h2>
+        <p>Use the table below to initialize your 2D array (or read it into your arrays):</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Maths</th>
+                    <th>Java</th>
+                    <th>Python</th>
+                    <th>C</th>
+                    <th>C++</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Revathi</td><td>85</td><td>90</td><td>88</td><td>76</td><td>92</td></tr>
+                <tr><td>Diya</td><td>78</td><td>82</td><td class="absent">Absent</td><td>75</td><td class="absent">Absent</td></tr>
+                <tr><td>Shakthi</td><td>78</td><td>80</td><td>60</td><td>83</td><td class="absent">Absent</td></tr>
+                <tr><td>Meera</td><td>91</td><td>84</td><td>88</td><td>90</td><td>90</td></tr>
+                <tr><td>Venkat</td><td>55</td><td>69</td><td>50</td><td>72</td><td>74</td></tr>
+                <tr><td>Meenakshi</td><td>88</td><td>90</td><td>85</td><td>92</td><td>89</td></tr>
+                <tr><td>Vikram</td><td>40</td><td>45</td><td class="absent">Absent</td><td>35</td><td class="absent">Absent</td></tr>
+                <tr><td>Saroja</td><td>80</td><td>82</td><td>84</td><td>81</td><td>83</td></tr>
+                <tr><td>Aditya</td><td>92</td><td>95</td><td class="absent">Absent</td><td>93</td><td>88</td></tr>
+                <tr><td>Saravana</td><td>21</td><td class="absent">Absent</td><td>19</td><td>42</td><td class="absent">Absent</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- FUNCTIONAL REQUIREMENTS -->
+    <div class="section">
+        <h2>Functional Requirements</h2>
+        <ul class="requirements-list">
+            <li>Load the dataset into a <strong>2D array</strong> (or equivalent structure).</li>
+
+            <li>The program must compute:
+                <ul>
+                    <li>Each student's average (ignore "Absent" columns for that student)</li>
+                    <li>The overall class average (average of all student averages)</li>
+                    <li>A list of students whose average is strictly below the class average</li>
+                </ul>
+            </li>
+
+            <li>Display, for each below-average student:
+                <ul>
+                    <li>Student Name</li>
+                    <li>Student Average (rounded to 1 decimal place)</li>
+                    <li>Number of subjects attended</li>
+                </ul>
+            </li>
+
+            <li>Absentees must not be counted in the numerator or denominator for a student's average.</li>
+        </ul>
+    </div>
+
+    <!-- TECHNICAL REQUIREMENTS -->
+    <div class="section">
+        <h2>Technical Requirements</h2>
+        <ul class="requirements-list">
+            <li>Use a <strong>2D array</strong> (e.g., <code>int[][]</code>) for numeric marks and a parallel structure (e.g., <code>String[]</code>) for names. You may use sentinel values (like -1) to represent "Absent" internally.</li>
+            <li>Use loops to:
+                <ul>
+                    <li>Calculate each student's sum and count of attended subjects</li>
+                    <li>Compute each student's average</li>
+                    <li>Compute the class average from student averages</li>
+                    <li>Filter students below the class average</li>
+                </ul>
+            </li>
+            <li>Format averages to one decimal place for output (use <code>Math.round(x*10.0)/10.0</code> or <code>System.out.printf</code>).</li>
+            <li>Organize your code into methods for clarity (e.g., <code>calculateStudentAverages</code>, <code>computeClassAverage</code>, <code>listBelowAverageStudents</code>).</li>
+        </ul>
+    </div>
+
+    <!-- TESTING REQUIREMENTS -->
+    <div class="section">
+        <h2>Testing Requirements</h2>
+        <p>Verify functionality with these test checks (expected values are approximate rounded to 1 decimal):</p>
+
+        <ol class="requirements-list">
+            <li><strong>Test Case 1 — Individual Averages (sample)</strong>
+                <ul>
+                    <li>Revathi average ≈ <strong>86.2</strong></li>
+                    <li>Diya average ≈ <strong>78.3</strong></li>
+                    <li>Meera average ≈ <strong>88.6</strong></li>
+                </ul>
+            </li>
+
+            <li><strong>Test Case 2 — Class Average & Below-Average List</strong>
+                <ul>
+                    <li>Compute class average (average of all student averages) — expected ≈ <strong>73.6</strong></li>
+                    <li>Students with averages below class average (example expected list):
+                        <ul>
+                            <li>Venkat — average ≈ 64.0</li>
+                            <li>Vikram — average ≈ 40.0</li>
+                            <li>Saravana — average ≈ 27.3</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+
+        <p class="note">Note: Exact class average and list may vary slightly depending on rounding; ensure you compute using full precision then format for display.</p>
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2025 NBKRIST Java Hub. All Rights Reserved|Authored by Hari Babu Mutchakala.</p>
+</footer>
+
+</body>
+</html>

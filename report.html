@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Practical Examination Award List</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== GLOBAL ===== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f2f2f2;
+}
+
+.print-controls {
+    position: fixed;
+    top: 10px;
+    right: 15px;
+    z-index: 9999;
+}
+
+.print-controls button {
+    background: #004d99;
+    border: none;
+    color: white;
+    padding: 8px 14px;
+    margin-left: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ===== PAGE ===== */
+.page {
+    width: 190mm;
+    min-height: 250mm;
+    padding: 14mm;
+    margin: 14mm auto;
+    background: white;
+    box-sizing: border-box;
+    position: relative;
+    page-break-after: always;
+}
+
+/* ===== HEADER ===== */
+.header { text-align: center; margin-bottom: 10px; }
+.header .institute-name { font-size: 16px; font-weight: bold; }
+.header p { margin: 2px 0; font-size: 13px; }
+.header .sub-heading { margin-top: 6px; font-size: 14px; font-weight: bold; }
+
+/* ===== DETAILS ===== */
+.details-section { margin: 8px 0; }
+.detail-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    margin: 4px 0;
+    font-size: 14px;
+}
+.value { border-bottom: 1px dashed #000; min-height: 18px; padding-left: 6px; }
+
+.examiners-row {
+    display: grid;
+    grid-template-columns: 200px 25px 1fr;
+    margin: 4px 0;
+    font-size: 14px;
+}
+.e-value { border-bottom: 1px dashed #000; min-height: 18px; padding-left: 6px; }
+
+.max-marks {
+    border: 1px solid #000;
+    width: 140px;
+    padding: 5px;
+    float: right;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* ===== TABLE ===== */
+.marks-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+.marks-table th, .marks-table td {
+    border: 1px solid #000;
+    padding: 6px;
+    vertical-align: middle;
+}
+
+.col-sno { width: 5%; }
+.col-register { width: 25%; text-align: left; }
+.col-marks-fig { width: 20%; text-align: center; }
+.col-marks-words { width: 50%; text-align: left; padding-left: 8px; }
+
+/* ===== FOOTER ===== */
+.page-footer {
+    border-top: 1px solid black;
+    position: absolute;
+    left: 14mm;
+    right: 14mm;
+    bottom: 10mm;
+    height: 38mm;
+    padding-top: 4px;
+    background: white;
+}
+
+.footer-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 14px;
+}
+
+.signature-line {
+    display: grid;
+    grid-template-columns: 25px auto;
+    margin-bottom: 8px;
+}
+.signature-value {
+    border-bottom: 1px dashed #000;
+    height: 18px;
+}
+
+.page-number {
+    text-align: center;
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+/* ===== WATERMARK ===== */
+#watermark { display: none; }
+
+@media print {
+    body { background: none; }
+    .print-controls { display: none !important; }
+
+    #watermark {
+        display: block;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-30deg);
+        font-size: 120px;
+        font-weight: bold;
+        color: rgba(0,0,0,0.06);
+        z-index: -1;
+    }
+
+    @page { size: A4; margin: 12mm; }
+}
+</style>
+</head>
+<body>
+
+<div class="print-controls">
+    <button onclick="window.print()">Print</button>
+    <button onclick="window.print()">Save PDF</button>
+</div>
+
+<div id="watermark">NBKRIST</div>
+<div id="pagesContainer"></div>
+
+<script>
+/* Convert number to words */
+function numberToWords(n){
+    const a=["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven",
+             "Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
+    const b=["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
+    n = Number(n);
+    if (!n && n !== 0) return "";
+    if (n < 20) return a[n];
+    if (n < 100) return b[Math.floor(n/10)] + (n%10 ? " " + a[n%10] : "");
+    return n;
+}
+
+let payload = JSON.parse(localStorage.getItem("assessmentData") || "{}");
+let meta = payload.metadata || {};
+let rows = Array.isArray(payload.rows) ? payload.rows.slice() : [];
+
+/* ROW RULES */
+const FIRST_PAGE_ROWS = 13;
+const NEXT_PAGE_ROWS = 20;
+
+/* Paginate rows */
+function paginateRows(all){
+    const pages = [];
+    let first = all.slice(0, FIRST_PAGE_ROWS);
+    while (first.length < FIRST_PAGE_ROWS) first.push(null);
+    pages.push(first);
+
+    let idx = FIRST_PAGE_ROWS;
+    while (idx < all.length){
+        pages.push(all.slice(idx, idx + NEXT_PAGE_ROWS));
+        idx += NEXT_PAGE_ROWS;
+    }
+    return pages;
+}
+
+function headerHTML(){
+    return `
+    <div class="header">
+        <p class="institute-name">N.B.K.R. INSTITUTE OF SCIENCE & TECHNOLOGY :: VIDYANAGAR</p>
+        <p class="address">(AUTONOMOUS)</p>
+        <p class="affiliation">Affiliated to Jawaharlal Nehru Technological University Ananthapur</p>
+        <p class="exam-details">B.TECH DEGREE END EXAMINATION</p>
+        <p class="address">(Strike off whichever is not applicable)</p>
+        <p class="sub-heading">PRACTICAL EXAMINATION AWARD LIST</p>
+    </div>
+
+    <div class="details-section">
+        <div class="detail-row"><span>Name of the Examination</span><span class="value">${meta.examName || ""}</span></div>
+        <div class="detail-row"><span>Name of the Laboratory</span><span class="value">${meta.labName || ""}</span></div>
+        <div class="detail-row"><span>Date(s) of Examination</span><span class="value">${meta.examDate || ""}</span></div>
+        <div class="examiners-row"><span>Name of the Examiners</span><span>1.</span><span class="e-value">${meta.examiner1 || ""}</span></div>
+        <div class="examiners-row"><span></span><span>2.</span><span class="e-value">${meta.examiner2 || ""}</span></div>
+    </div>
+
+    <div class="max-marks">Max Marks : 60</div>
+    `;
+}
+
+function footerHTML(){
+    return `
+    <div class="page-footer">
+        <div class="footer-section">
+            <div>
+                <div class="detail-row"><span>Number of Corrections (Figures)</span><span class="value"></span></div>
+                <div class="detail-row"><span>(Words)</span><span class="value"></span></div>
+            </div>
+            <div>
+                <div class="signature-line"><span>1.</span><span class="signature-value"></span></div>
+                <div class="signature-line"><span>2.</span><span class="signature-value"></span></div>
+                <p>Signature of the Examiners</p>
+                <div class="detail-row"><span>Date</span><span class="value"></span></div>
+            </div>
+        </div>
+        <div class="page-number"></div>
+    </div>`;
+}
+
+function tableHeader(){
+    return `
+    <table class="marks-table">
+        <thead>
+            <tr>
+                <th rowspan="2" class="col-sno">S.No</th>
+                <th rowspan="2" class="col-register">Register Number</th>
+                <th colspan="2">Marks</th>
+            </tr>
+            <tr>
+                <th class="col-marks-fig">In Figures</th>
+                <th class="col-marks-words">In Words</th>
+            </tr>
+        </thead>
+        <tbody>
+    `;
+}
+
+function buildPages(){
+    let pages = paginateRows(rows);
+    let container = document.getElementById("pagesContainer");
+    container.innerHTML = "";
+
+    for (let p = 0; p < pages.length; p++){
+        let slice = pages[p];
+        let startIndex = (p === 0) ? 0 : (FIRST_PAGE_ROWS + (p - 1) * NEXT_PAGE_ROWS);
+
+        let html = `<div class="page">`;
+
+        if (p === 0) html += headerHTML();
+
+        html += tableHeader();
+
+        slice.forEach((r, i)=>{
+            let sno = r ? (startIndex + i + 1) : "";
+            let roll = r ? r.roll : "";
+            let total = r ? r.total : "";
+            let words = total ? numberToWords(total)+" Only" : "";
+
+            html += `
+            <tr>
+                <td>${sno}</td>
+                <td>${roll}</td>
+                <td>${total}</td>
+                <td>${words}</td>
+            </tr>`;
+        });
+
+        html += `</tbody></table>`;
+        html += footerHTML();
+        html += `</div>`;
+        container.innerHTML += html;
+    }
+
+    /* Page numbers */
+    [...document.querySelectorAll(".page")].forEach((pg, i)=>{
+        pg.querySelector(".page-number").textContent =
+            `Page ${i+1} of ${document.querySelectorAll(".page").length}`;
+    });
+}
+
+buildPages();
+</script>
+</body>
+</html>

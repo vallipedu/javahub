@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Statement: Simple Exam Grade Calculator</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #004d99;
+            --secondary-color: #f0f8ff;
+            --text-color: #343a40;
+            --heading-color: #0056b3;
+            --border-color: #dee2e6;
+            --code-bg: #e9ecef;
+            --box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            margin: 2rem 0;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 25px;
+            text-decoration: none;
+            color: white;
+            background-color: #6c757d;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            float: left;
+            clear: both;
+        }
+
+        .back-button:hover { background-color: #5a6268; }
+
+        .section { margin-bottom: 2rem; clear: both; }
+
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--heading-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        ul, ol { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+
+        .requirements-list li strong { color: var(--primary-color); }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem 0;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: auto;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+        }
+
+        footer p { margin: 0; letter-spacing: 1px; }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>NBKRIST Java Hub</h1>
+</header>
+
+<div class="container">
+
+    <a href="exampanel.html" class="back-button">← Back to Exam Panel</a>
+
+    <!-- PROBLEM STATEMENT -->
+    <div class="section">
+        <h2>Problem Statement: Simple Exam Grade Calculator</h2>
+        <p>
+            Develop a Java program that calculates a student’s exam grade based on marks entered for multiple subjects.  
+            The system must store student details, read marks using an array, compute total and average,  
+            and assign a grade. This experiment helps beginners practice arrays, OOP,  
+            and user input using the <code>Scanner</code> class.
+        </p>
+    </div>
+
+    <!-- FUNCTIONAL REQUIREMENTS -->
+    <div class="section">
+        <h2>Functional Requirements</h2>
+        <ul class="requirements-list">
+
+            <li>The system must store <strong>Student</strong> details:
+                <ul>
+                    <li>Student ID</li>
+                    <li>Student Name</li>
+                </ul>
+            </li>
+
+            <li>The program must:
+                <ul>
+                    <li>Read the number of subjects</li>
+                    <li>Use an <strong>integer array</strong> to store marks</li>
+                    <li>Calculate total and average marks</li>
+                    <li>Assign grade based on average</li>
+                    <li>Display the complete report</li>
+                </ul>
+            </li>
+
+            <li>The system must validate that:
+                <ul>
+                    <li>Marks must be between 0 and 100</li>
+                    <li>Number of subjects must be positive</li>
+                </ul>
+            </li>
+
+            <li>Grade assignment:
+                <ul>
+                    <li>90–100 → A</li>
+                    <li>80–89 → B</li>
+                    <li>70–79 → C</li>
+                    <li>60–69 → D</li>
+                    <li>Below 60 → Fail</li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- TECHNICAL REQUIREMENTS -->
+    <div class="section">
+        <h2>Technical Requirements</h2>
+        <ul class="requirements-list">
+
+            <li>Use a <strong>Student</strong> class with private fields.</li>
+
+            <li>Use an <strong>integer array</strong> to store marks.</li>
+
+            <li>Use methods for:
+                <ul>
+                    <li>Reading student details</li>
+                    <li>Reading marks</li>
+                    <li>Calculating total and average</li>
+                    <li>Determining grade</li>
+                    <li>Displaying final report</li>
+                </ul>
+            </li>
+
+            <li>Use the <strong>Scanner</strong> class for input.</li>
+
+            <li>Apply <strong>encapsulation</strong> to protect student data.</li>
+
+            <li>Use loops and conditions for validation and calculations.</li>
+
+        </ul>
+    </div>
+
+    <!-- TESTING REQUIREMENTS -->
+    <div class="section">
+        <h2>Testing Requirements</h2>
+        <p>Your program must demonstrate correctness using the following test cases:</p>
+
+        <ol class="requirements-list">
+
+            <li><strong>Test Case 1 — High Performer</strong>
+                <ul>
+                    <li>Subjects: 3</li>
+                    <li>Marks: 95, 90, 92</li>
+                    <li>Expected Output:</li>
+                    <ul>
+                        <li>Total = 277</li>
+                        <li>Average = 92.3</li>
+                        <li>Grade = A</li>
+                    </ul>
+                </ul>
+            </li>
+
+            <li><strong>Test Case 2 — Fail Case</strong>
+                <ul>
+                    <li>Subjects: 4</li>
+                    <li>Marks: 50, 45, 55, 40</li>
+                    <li>Expected Output:</li>
+                    <ul>
+                        <li>Total = 190</li>
+                        <li>Average = 47.5</li>
+                        <li>Grade = Fail</li>
+                    </ul>
+                </ul>
+            </li>
+
+        </ol>
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2025 NBKRIST Java Hub. All Rights Reserved.|Authored by Hari Babu</p>
+</footer>
+
+</body>
+</html>

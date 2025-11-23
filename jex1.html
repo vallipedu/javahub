@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Statement: Simple Employee Payroll System</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #004d99;
+            --secondary-color: #f0f8ff;
+            --text-color: #343a40;
+            --heading-color: #0056b3;
+            --border-color: #dee2e6;
+            --code-bg: #e9ecef;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            margin: 2rem 0;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 25px;
+            text-decoration: none;
+            color: white;
+            background-color: #6c757d;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            float: left;
+            clear: both;
+        }
+
+        .back-button:hover { background-color: #5a6268; }
+
+        .section { margin-bottom: 2rem; clear: both; }
+
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--heading-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        ul, ol { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+
+        .requirements-list li strong { color: var(--primary-color); }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem 0;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: auto;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+        }
+
+        footer p { margin: 0; letter-spacing: 1px; }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>NBKRIST Java Hub</h1>
+</header>
+
+<div class="container">
+
+    <a href="exampanel.html" class="back-button">← Back to Exam Panel</a>
+
+    <!-- PROBLEM STATEMENT -->
+    <div class="section">
+        <h2>Problem Statement: Simple Employee Payroll System</h2>
+        <p>
+            Develop a Java program that manages basic payroll details for an employee.  
+            The system should read employee data, compute gross and net salary,  
+            and display a formatted payroll report.  
+            This program is ideal for beginners to practice basic OOP, arrays (optional),  
+            and user input using the <code>Scanner</code> class.
+        </p>
+    </div>
+
+    <!-- FUNCTIONAL REQUIREMENTS -->
+    <div class="section">
+        <h2>Functional Requirements</h2>
+        <ul class="requirements-list">
+
+            <li>The system must store employee details:
+                <ul>
+                    <li>Employee ID</li>
+                    <li>Employee Name</li>
+                    <li>Basic Salary</li>
+                </ul>
+            </li>
+
+            <li>The program must allow entering:
+                <ul>
+                    <li>HRA (Housing Allowance)</li>
+                    <li>DA (Dearness Allowance)</li>
+                    <li>PF (Provident Fund)</li>
+                </ul>
+            </li>
+
+            <li>The system must compute:
+                <ul>
+                    <li><strong>Gross Salary</strong> = Basic + HRA + DA</li>
+                    <li><strong>Net Salary</strong> = Gross Salary − PF</li>
+                </ul>
+            </li>
+
+            <li>The system must validate that salary and allowance values are non-negative.</li>
+
+            <li>The program must display a clear formatted payroll summary.</li>
+
+        </ul>
+    </div>
+
+    <!-- TECHNICAL REQUIREMENTS -->
+    <div class="section">
+        <h2>Technical Requirements</h2>
+        <ul class="requirements-list">
+
+            <li>Use an <strong>Employee</strong> class with private fields.</li>
+
+            <li>Use <strong>methods</strong> for:
+                <ul>
+                    <li>Reading employee details</li>
+                    <li>Calculating gross salary</li>
+                    <li>Calculating net salary</li>
+                    <li>Displaying payroll details</li>
+                </ul>
+            </li>
+
+            <li>Use the <strong>Scanner</strong> class for input.</li>
+
+            <li>Apply <strong>encapsulation</strong> to protect salary information.</li>
+
+            <li>Use simple <strong>validation</strong> for salary and deduction inputs.</li>
+
+            <li>Arrays may be used for storing payroll components (optional).</li>
+
+        </ul>
+    </div>
+
+    <!-- TESTING REQUIREMENTS -->
+    <div class="section">
+        <h2>Testing Requirements</h2>
+        <p>Your program must demonstrate correctness using the following test cases:</p>
+
+        <ol class="requirements-list">
+
+            <li><strong>Test Case 1 — Standard Payroll Case</strong>
+                <ul>
+                    <li>Basic Salary: 20,000</li>
+                    <li>HRA: 2,000</li>
+                    <li>DA: 1,500</li>
+                    <li>PF: 1,000</li>
+                    <li>Expected Result: Gross = 23,500, Net = 22,500</li>
+                </ul>
+            </li>
+
+            <li><strong>Test Case 2 — Invalid Salary Input</strong>
+                <ul>
+                    <li>Basic Salary Entered: -5000</li>
+                    <li>Expected Result: Program must reject negative salary and ask for valid entry</li>
+                </ul>
+            </li>
+
+        </ol>
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2025 NBKRIST Java Hub. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

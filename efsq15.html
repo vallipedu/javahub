@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Statement: Sports Performance Analytics Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+        :root {
+            --primary-color: #004d99;
+            --secondary-color: #f0f8ff;
+            --text-color: #343a40;
+            --heading-color: #0056b3;
+            --border-color: #dee2e6;
+            --code-bg: #e9ecef;
+            --box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        body {
+            font-family: 'Merriweather', serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        header {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            font-family: 'Roboto', sans-serif;
+        }
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+        }
+        .back-button {
+            display: inline-block;
+            margin-bottom: 25px;
+            text-decoration: none;
+            color: white;
+            background-color: #6c757d;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            transition: 0.3s ease;
+            float: left;
+            clear: both;
+        }
+        .back-button:hover { background-color: #5a6268; }
+        .section { margin-bottom: 2rem; clear: both; }
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--heading-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+        ul, ol { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        .requirements-list li strong { color: var(--primary-color); }
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", monospace;
+        }
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem 0;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: auto;
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>NBKRIST Java Hub</h1>
+</header>
+
+<div class="container">
+    <a href="exampanel.html" class="back-button">← Back to Exam Panel</a>
+
+    <div class="section">
+        <h2>15. Problem Statement for Full-Stack: Sports Performance Analytics Dashboard</h2>
+        <p>
+            You are required to build a **Sports Analytics Dashboard** that tracks player performance metrics in a match.
+            This system simulates how coaches and analysts evaluate players based on **score**, **speed**, and **stamina**.
+            Students will design a neat dashboard displaying player statistics along with a simple **performance rating**.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Technological Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>Technologies to Use:</strong>
+                <ul>
+                    <li>HTML — layout structure</li>
+                    <li>CSS — styling the dashboard</li>
+                    <li>JavaScript — performance analysis logic</li>
+                </ul>
+            </li>
+            <li><strong>JavaScript Concepts Allowed:</strong>
+                <ul>
+                    <li>Arrow Functions</li>
+                    <li>Objects & Arrays</li>
+                    <li>Event Handling</li>
+                </ul>
+            </li>
+            <li><strong>Restrictions:</strong>
+                <ul>
+                    <li>No external libraries/frameworks</li>
+                    <li>Client-side only (no backend)</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Functional Requirements</h2>
+        <ul class="requirements-list">
+            <li><strong>1. Player Data Handling:</strong>
+                <ul>
+                    <li>Create an array of player objects:<br>
+                        <code>{ playerName, score, speed, stamina }</code></li>
+                    <li>Display all players in an HTML table.</li>
+                </ul>
+            </li>
+
+            <li><strong>2. Performance Rating System:</strong>
+                <ul>
+                    <li>Calculate player performance using the rule:</li>
+                    <li><code>performance = (score + speed + stamina) / 3</code></li>
+                    <li>Classify the performance:</li>
+                    <li>
+                        • ≥ 80 → <strong>Excellent</strong><br>
+                        • 60–80 → <strong>Good</strong><br>
+                        • 40–60 → <strong>Average</strong><br>
+                        • < 40 → <strong>Poor</strong>
+                    </li>
+                    <li>Show the rating next to each player.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Testing Requirements</h2>
+        <p>Validate your sports analytics system using the following <strong>2 test cases</strong>:</p>
+        <ol class="requirements-list">
+            <li><strong>Test Case 1 — Excellent Player:</strong>
+                <ul>
+                    <li>Input: score=90, speed=85, stamina=88</li>
+                    <li>Expected Output: Performance ≥ 80 → <strong>Excellent</strong></li>
+                </ul>
+            </li>
+            <li><strong>Test Case 2 — Poor Player:</strong>
+                <ul>
+                    <li>Input: score=20, speed=35, stamina=30</li>
+                    <li>Expected Output: Performance < 40 → <strong>Poor</strong></li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2025 NBKRIST Java Hub. All Rights Reserved | Authored by Hari Babu Mutchakala.</p>
+</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Disable right-click
+      document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable copy
+      document.addEventListener("copy", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable cut
+      document.addEventListener("cut", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable paste
+      document.addEventListener("paste", function (e) {
+        e.preventDefault();
+      });
+
+      // Disable text selection
+      document.addEventListener("selectstart", function (e) {
+        e.preventDefault();
+      });
+    });
+  </script>
+</body>
+</html>
