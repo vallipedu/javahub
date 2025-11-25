@@ -1,438 +1,309 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NBKRIST - Exam Mapper</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>NBKRIST - Exam Mapper (3-column)</title>
 
-        :root {
-            --primary-color: #004d99;
-            --secondary-color: #f0f8ff;
-            --accent-color: #ffc107;
-            --text-color: #343a40;
-            --hover-bg: #e9f2fa;
-            --border-color: #dee2e6;
-            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
+<!-- CSS -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+  :root{
+    --primary:#004d99; --secondary:#f0f8ff; --text:#343a40; --border:#dee2e6; --hover:#e9f2fa;
+    --g1:#dff7df; /* green */
+    --g2:#dfeaff; /* blue */
+    --g3:#fff4e0; /* orange */
+  }
+  body{ font-family:Roboto,system-ui,-apple-system; margin:0; padding:0; background:var(--secondary); color:var(--text); display:flex; flex-direction:column; align-items:center; min-height:100vh; transition:background .2s,color .2s;}
+  body.dark-mode{ background:#0f1720; color:#e6eef8; }
+  header{ width:100%; background:var(--primary); color:#fff; padding:12px 18px; display:flex; align-items:center; justify-content:space-between; box-shadow:0 4px 12px rgba(0,0,0,.12); }
+  header h1{ margin:0; font-size:1.1rem; text-align:center; flex:1; }
+  .btn-control{ background:#fff; color:var(--primary); border:none; padding:.4rem .75rem; border-radius:6px; cursor:pointer; font-weight:600; }
+  .container{ width:94%; max-width:1100px; background:#fff; margin:18px 0; padding:18px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.06); }
+  body.dark-mode .container{ background:#0f1418; }
+  h2{ margin:0 0 12px 0; color:var(--primary); }
+  .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:12px; }
+  .file-btn{ background:#0b79d0; color:#fff; padding:.5rem .9rem; border-radius:8px; border:none; cursor:pointer; font-weight:700; }
+  .range-label{ font-weight:700; margin-left:6px; }
+  input[type="number"]{ width:86px; padding:.45rem; border-radius:6px; border:1px solid var(--border); background:transparent; color:inherit; }
+  .primary{ background:var(--primary); color:#fff; border:none; padding:.55rem 1rem; border-radius:8px; cursor:pointer; font-weight:700; }
+  .secondary{ background:#fff; color:inherit; border:1px solid var(--border); padding:.45rem .75rem; border-radius:8px; cursor:pointer; font-weight:600; }
+  .preview{ border:1px solid var(--border); border-radius:10px; padding:10px; min-height:160px; overflow:auto; background:transparent; }
+  table{ width:100%; border-collapse:collapse; min-width:420px; }
+  th,td{ padding:.6rem .8rem; border-bottom:1px solid var(--border); text-align:left; vertical-align:middle; }
+  th{ background:rgba(0,0,0,0.04); font-weight:700; }
+  .empty-note{ color:#666; padding:.9rem; }
+  /* color classes */
+  .row-exp-low{ background:var(--g1); }
+  .row-exp-mid{ background:var(--g2); }
+  .row-exp-high{ background:var(--g3); }
+  /* instructions box */
+  #instructionsBox{ background:var(--hover); border-left:5px solid var(--primary); border-radius:8px; padding:12px; margin:12px 0; }
+  #instructionsBox h3{ margin:0 0 .4rem 0; color:var(--primary); }
+  .collapser{ cursor:pointer; color:var(--primary); font-weight:700; background:transparent; border:none; padding:6px 0; }
+  footer{ width:100%; text-align:center; background:var(--primary); color:white; padding:12px 0; margin-top:18px; }
+  /* responsive */
+  @media (max-width:720px){ input[type="number"]{ width:70px; } .row{ gap:8px; } }
+</style>
 
-        /* Dark Mode Variables */
-        body.dark-mode {
-            --primary-color: #0d1117;
-            --secondary-color: #161b22;
-            --text-color: #f0f6fc;
-            --hover-bg: #21262d;
-            --border-color: #30363d;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-        }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        header {
-            width: 100%;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--box-shadow);
-            position: relative;
-        }
-
-        header h1 {
-            margin: 0;
-            font-weight: 700;
-            font-size: 2rem;
-            letter-spacing: 1px;
-            text-align: center;
-            flex: 1;
-        }
-
-        .control-button {
-            background-color: white;
-            color: var(--primary-color);
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-        }
-
-        .control-button:hover {
-            background-color: var(--accent-color);
-            color: #000;
-            transform: translateY(-2px);
-        }
-
-        .header-left,
-        .header-right {
-            display: flex;
-            align-items: center;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1000px;
-            background-color: #fff;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: var(--box-shadow);
-            margin: 2rem 0;
-            transition: background-color 0.3s ease;
-        }
-
-        body.dark-mode .container {
-            background-color: #1e2228;
-        }
-
-        .section-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .input-grid {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 1rem;
-        }
-
-        textarea {
-            width: 100%;
-            min-height: 220px;
-            padding: 0.9rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            font-family: monospace;
-            resize: vertical;
-            background-color: #fff;
-            color: var(--text-color);
-        }
-
-        body.dark-mode textarea {
-            background-color: #101318;
-            border: 1px solid #2b3138;
-            color: var(--text-color);
-        }
-
-        .side-card {
-            background-color: var(--hover-bg);
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 5px solid var(--primary-color);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .side-card label {
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        input[type="number"] {
-            width: 100%;
-            padding: 0.5rem 0.6rem;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            font-size: 1rem;
-        }
-
-        .actions {
-            display: flex;
-            gap: 0.6rem;
-            margin-top: auto;
-        }
-
-        .primary {
-            background-color: var(--primary-color);
-            color: #fff;
-            border: none;
-            padding: 0.6rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 700;
-        }
-
-        .primary:hover { transform: translateY(-3px); }
-
-        .secondary {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            padding: 0.5rem 0.8rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .preview {
-            margin-top: 1.5rem;
-            overflow: auto;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 520px;
-            background: transparent;
-        }
-
-        th, td {
-            padding: 0.75rem 0.9rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        th {
-            background-color: rgba(0,0,0,0.03);
-            font-weight: 700;
-        }
-
-        .empty-note {
-            padding: 1rem;
-            color: #666;
-        }
-
-        footer {
-            width: 100%;
-            text-align: center;
-            padding: 1.5rem 0;
-            background-color: var(--primary-color);
-            color: white;
-            margin-top: auto;
-            font-size: 0.9rem;
-            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        footer p { margin: 0; letter-spacing: 1px; }
-
-        @media (max-width: 900px) {
-            .input-grid { grid-template-columns: 1fr; }
-            textarea { min-height: 180px; }
-        }
-
-        @media (max-width: 650px) {
-            header h1 { font-size: 1.4rem; }
-            .control-button { padding: 0.4rem 0.7rem; font-size: 0.85rem; }
-        }
-
-        span { color: rgb(53, 75, 2); font-family: "Times New Roman", Times, serif; font-size: 1.5rem; }
-    </style>
+<!-- libs: SheetJS and jsPDF + autotable -->
+<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 </head>
 
 <body>
+<header>
+  <button class="btn-control" id="backBtn">⬅ Back</button>
+  <h1>NBKRIST - JavaHub </h1>
+  <button class="btn-control" id="modeToggle">🌙 Dark Mode</button>
+</header>
 
-    <header>
-        <div class="header-left">
-            <button class="control-button" id="backBtn">⬅ Back</button>
-        </div>
+<main class="container" role="main">
+  <h2>Roll Number → Experiment Mapper</h2>
 
-        <h1>NBKRIST - JavaHub </h1>
+  <!-- row: load file + range -->
+  <div class="row" aria-label="Load and range">
+    <input id="fileInput" type="file" accept=".txt" style="display:none" />
+    <button class="file-btn" id="loadBtn" title="Load 3-column .txt file">📂 Load .txt</button>
 
-        <div class="header-right">
-            <button class="control-button" id="modeToggle">🌙 Dark Mode</button>
-        </div>
-    </header>
+    <label class="range-label" for="minExp">Experiment Range</label>
+    <input id="minExp" type="number" value="1" min="1" aria-label="min experiment" />
+    <span>to</span>
+    <input id="maxExp" type="number" value="25" min="1" aria-label="max experiment" />
+  </div>
 
-    <div class="container">
-        <div class="section-title">
-            <h2>Student → Experiment Mapper <small style="font-weight:600;color:#666;">(Option C: Random with repeats)</small></h2>
-            <div style="font-size:0.9rem;color:#666;">Quickly map roll numbers to experiment numbers and download results.</div>
-        </div>
+  <!-- actions -->
+  <div class="row" aria-label="Actions">
+    <button class="primary" id="generateBtn">Generate Mapping</button>
+    <button class="secondary" id="clearBtn">Clear</button>
+    <button class="secondary" id="copyBtn">Copy</button>
+    <button class="primary" id="downloadXlsx">Download XLSX</button>
+    <button class="primary" id="downloadPdf">Download PDF</button>
+    <button class="collapser" id="toggleInstructions">Show Instructions ▼</button>
+  </div>
 
-        <div class="input-grid">
-            <div>
-                <label for="rolls"><b>Paste Roll Numbers (one per line)</b></label>
-                <textarea id="rolls" placeholder="e.g. 21A91A0501\n21A91A0502\n21A91A0503\n...">21A91A0501
-21A91A0502
-21A91A0503
-21A91A0504
-21A91A0505
-</textarea>
+  <!-- collapsible instructions -->
+  <div id="instructionsBox" style="display:none;">
+    <h3>Instructions for Students</h3>
+    <ul>
+      <li>Check your <strong>Roll Number → Experiment Number</strong> from the mapping table below.</li>
+      <li>Go to the <strong>Lab Experiments page</strong> and open the experiment corresponding to your assigned experiment number.</li>
+      <li>Use <strong>VS Code</strong> for implementation. Create a <strong>folder named with your Roll Number</strong> to keep all files organized.</li>
+      <li>Read the experiment aim, requirements, and expected output before you start.</li>
+      <li>Implement the experiment step-by-step, then <strong>test thoroughly</strong> with multiple cases.</li>
+      <li>Be prepared to <strong>explain your approach, logic and output</strong> during viva/evaluation.</li>
+    </ul>
+  </div>
 
-                <div style="display:flex;gap:0.6rem;margin-top:0.8rem;align-items:center;flex-wrap:wrap;">
-                    <button class="primary" id="generateBtn">Generate Mapping</button>
-                    <button class="secondary" id="clearBtn">Clear</button>
-                    <button class="secondary" id="copyBtn">Copy Result</button>
-                </div>
+  <!-- preview -->
+  <div class="preview" id="preview">
+    <div class="empty-note">Please load a 3-column .txt file (each row: Roll  Name  Branch — separated by spaces) then click Generate Mapping.</div>
+  </div>
 
-                <div class="preview" id="preview">
-                    <div class="empty-note">No mapping generated yet. Click <b>Generate Mapping</b> to see preview here.</div>
-                </div>
-            </div>
+</main>
 
-            <div class="side-card">
-                <label>Experiment Range</label>
-                <div style="display:flex;gap:0.5rem;align-items:center;">
-                    <input type="number" id="minExp" value="1" min="1" />
-                    <div style="font-weight:700;padding:0 0.2rem;">—</div>
-                    <input type="number" id="maxExp" value="25" min="1" />
-                </div>
+<footer>
+  © 2025 NBKRIST — Designed by Hari Babu Mutchakala
+</footer>
 
-                <div style="font-size:0.9rem;color:#444;margin-top:0.6rem;">Mapping rules:</div>
-                <ul style="margin:0.4rem 0 0 1.1rem;padding:0;color:#444">
-                    <li>Fully random experiment assigned to each roll number.</li>
-                    <li>Repeats are allowed across students.</li>
-                    <li>Validates numeric range and non-empty rolls.</li>
-                </ul>
+<!-- Main JS -->
+<script>
+(() => {
+  // Elements
+  const fileInput = document.getElementById('fileInput');
+  const loadBtn = document.getElementById('loadBtn');
+  const minExpEl = document.getElementById('minExp');
+  const maxExpEl = document.getElementById('maxExp');
+  const generateBtn = document.getElementById('generateBtn');
+  const clearBtn = document.getElementById('clearBtn');
+  const copyBtn = document.getElementById('copyBtn');
+  const downloadXlsx = document.getElementById('downloadXlsx');
+  const downloadPdf = document.getElementById('downloadPdf');
+  const preview = document.getElementById('preview');
+  const toggleInstructions = document.getElementById('toggleInstructions');
+  const instructionsBox = document.getElementById('instructionsBox');
+  const backBtn = document.getElementById('backBtn');
+  const modeToggle = document.getElementById('modeToggle');
 
-                <div style="margin-top:auto;display:flex;flex-direction:column;gap:0.6rem;">
-                    <button class="primary" id="downloadCsv">Download CSV</button>
-                    <button class="primary" id="downloadXlsx">Download XLSX</button>
-                </div>
+  // State
+  let rows = []; // each item: {roll, name, branch}
+  let mapped = []; // each item: {roll,name,branch,exp}
 
-                <div style="font-size:0.8rem;color:#666;margin-top:0.4rem;">Tip: Use the sample rolls above or paste your list.</div>
-            </div>
-        </div>
+  // Utilities
+  function escapeHtml(s){ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+  function randInt(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
 
-    </div>
+  // Robust parser for space-separated 3 columns:
+  // Prefer splitting by two-or-more spaces or tabs. If not found, fallback: first token=roll, last token=branch, middle joined = name.
+  function parseLineTo3cols(line){
+    // trim
+    const t = line.trim();
+    if(!t) return null;
+    // split by two+ spaces or tabs
+    const parts = t.split(/\s{2,}|\t+/).map(p=>p.trim()).filter(Boolean);
+    if(parts.length === 3) return { roll: parts[0], name: parts[1], branch: parts[2] };
+    // fallback: split by single space but limit to 3 (first, middle..., last)
+    const tokens = t.split(/\s+/);
+    if(tokens.length >= 3){
+      const roll = tokens[0];
+      const branch = tokens[tokens.length-1];
+      const name = tokens.slice(1, tokens.length-1).join(' ');
+      return { roll, name, branch };
+    }
+    // otherwise invalid
+    return null;
+  }
 
-    <footer>
-        <p>&copy; 2025 NBKRIST. All Rights Reserved| Designed by Hari Babu Mutchakala!!!.</p>
-    </footer>
+  // Read file
+  loadBtn.addEventListener('click', () => fileInput.click());
+  fileInput.addEventListener('change', (ev) => {
+    const f = ev.target.files && ev.target.files[0];
+    if(!f) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const text = e.target.result || '';
+      const lines = text.split(/\r?\n/);
+      rows = [];
+      for(const ln of lines){
+        const parsed = parseLineTo3cols(ln);
+        if(parsed) rows.push(parsed);
+      }
+      preview.innerHTML = `<div class="empty-note">Loaded <strong>${rows.length}</strong> rows. Click Generate Mapping.</div>`;
+    };
+    reader.onerror = () => alert('File read failed. Try again.');
+    reader.readAsText(f);
+  });
 
-    <!-- SheetJS for XLSX export (CDN). If blocked, the CSV fallback will still work. -->
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+  // Toggle instructions
+  let instrVisible = false;
+  toggleInstructions.addEventListener('click', () => {
+    instrVisible = !instrVisible;
+    instructionsBox.style.display = instrVisible ? 'block' : 'none';
+    toggleInstructions.textContent = instrVisible ? 'Hide Instructions ▲' : 'Show Instructions ▼';
+  });
 
-    <script>
-        // Back button
-        document.getElementById('backBtn').addEventListener('click', () => location.href = 'exampanel.html');
+  // Back button
+  backBtn.addEventListener('click', () => { window.location.href = 'exampanel.html'; });
 
-        // Dark Mode with persistence
-        const toggleBtn = document.getElementById('modeToggle');
-        const currentMode = localStorage.getItem('theme');
-        if (currentMode === 'dark') { document.body.classList.add('dark-mode'); toggleBtn.textContent = '☀ Light Mode'; }
-        toggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            toggleBtn.textContent = isDark ? '☀ Light Mode' : '🌙 Dark Mode';
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        });
+  // Dark mode
+  (function initTheme(){
+    const saved = localStorage.getItem('nbk_theme');
+    if(saved === 'dark'){
+      document.body.classList.add('dark-mode');
+      modeToggle.textContent = '☀ Light Mode';
+    } else {
+      modeToggle.textContent = '🌙 Dark Mode';
+    }
+  })();
+  modeToggle.addEventListener('click', () => {
+    const now = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('nbk_theme', now ? 'dark' : 'light');
+    modeToggle.textContent = now ? '☀ Light Mode' : '🌙 Dark Mode';
+  });
 
-        // Helpers
-        function parseRolls(text) {
-            return text.split(/\r?\n/).map(r => r.trim()).filter(r => r.length > 0);
-        }
+  // Generate mapping (random with repeats)
+  generateBtn.addEventListener('click', () => {
+    if(!rows.length){ alert('No rows loaded. Please load a .txt file.'); return; }
+    const min = parseInt(minExpEl.value,10);
+    const max = parseInt(maxExpEl.value,10);
+    if(isNaN(min) || isNaN(max) || min < 1 || max < min){ alert('Invalid experiment range.'); return; }
 
-        function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+    mapped = rows.map(r => ({ ...r, exp: randInt(min,max) }));
+    renderTable(mapped);
+  });
 
-        function buildTable(pairs) {
-            if (!pairs.length) return '<div class="empty-note">No mapping available.</div>';
-            let html = '<table><thead><tr><th>Roll Number</th><th>Experiment No</th></tr></thead><tbody>';
-            for (const p of pairs) {
-                html += `<tr><td>${escapeHtml(p.roll)}</td><td>${p.exp}</td></tr>`;
-            }
-            html += '</tbody></table>';
-            return html;
-        }
+  // Render table with color-coding
+  function renderTable(data){
+    if(!data || !data.length){ preview.innerHTML = '<div class="empty-note">No mapping available.</div>'; return; }
 
-        function escapeHtml(s){ return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+    let html = '<table><thead><tr><th>S No.</th><th>Roll Number</th><th>Name</th><th>Experiment</th></tr></thead><tbody>';
+    for(const p of data){
+      // determine row class by exp
+      let cls = '';
+      if(p.exp <= 10) cls = 'row-exp-low';
+      else if(p.exp <= 20) cls = 'row-exp-mid';
+      else cls = 'row-exp-high';
+      html += `<tr class="${cls}"><td>${escapeHtml(p.roll)}</td><td>${escapeHtml(p.name)}</td><td>${escapeHtml(p.branch)}</td><td>${p.exp}</td></tr>`;
+    }
+    html += '</tbody></table>';
+    preview.innerHTML = html;
+  }
 
-        // Main actions
-        const generateBtn = document.getElementById('generateBtn');
-        const clearBtn = document.getElementById('clearBtn');
-        const copyBtn = document.getElementById('copyBtn');
-        const preview = document.getElementById('preview');
-        let lastPairs = [];
+  // Clear
+  clearBtn.addEventListener('click', () => {
+    if(!confirm('Clear loaded data and mappings?')) return;
+    rows = []; mapped = [];
+    preview.innerHTML = '<div class="empty-note">Cleared.</div>';
+    fileInput.value = '';
+  });
 
-        generateBtn.addEventListener('click', () => {
-            const rollsText = document.getElementById('rolls').value;
-            const min = parseInt(document.getElementById('minExp').value, 10);
-            const max = parseInt(document.getElementById('maxExp').value, 10);
+  // Copy CSV to clipboard
+  copyBtn.addEventListener('click', async () => {
+    if(!mapped.length){ alert('Generate mapping first.'); return; }
+    const csv = toCSV(mapped);
+    try {
+      await navigator.clipboard.writeText(csv);
+      alert('Copied to clipboard (CSV).');
+    } catch(e){
+      // fallback
+      const ta = document.createElement('textarea'); ta.value = csv; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta);
+      alert('Copied (fallback).');
+    }
+  });
 
-            const rolls = parseRolls(rollsText);
-            if (!rolls.length) { preview.innerHTML = '<div class="empty-note">Please enter at least one roll number.</div>'; return; }
-            if (isNaN(min) || isNaN(max) || min < 1 || max < min) { preview.innerHTML = '<div class="empty-note">Invalid experiment range. Ensure min >= 1 and max >= min.</div>'; return; }
+  function toCSV(data){
+    const lines = [['Roll Number','Name','Branch','Experiment']];
+    for(const r of data) lines.push([r.roll, r.name, r.branch, r.exp]);
+    return lines.map(l => l.map(cell => `"${String(cell).replaceAll('"','""')}"`).join(',')).join('\n');
+  }
 
-            // Option C: completely random (repeats allowed)
-            const pairs = rolls.map(r => ({ roll: r, exp: randomInt(min, max) }));
-            lastPairs = pairs;
-            preview.innerHTML = buildTable(pairs);
-        });
+  // XLSX download (SheetJS)
+  downloadXlsx.addEventListener('click', () => {
+    if(!mapped.length){ alert('Generate mapping first.'); return; }
+    try{
+      const ws_data = [['Roll Number','Name','Branch','Experiment'], ...mapped.map(m => [m.roll, m.name, m.branch, m.exp])];
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.aoa_to_sheet(ws_data);
+      XLSX.utils.book_append_sheet(wb, ws, 'Mapping');
+      XLSX.writeFile(wb, 'mapping.xlsx');
+    } catch(err){
+      console.error(err);
+      alert('XLSX export failed.');
+    }
+  });
 
-        clearBtn.addEventListener('click', () => {
-            document.getElementById('rolls').value = '';
-            preview.innerHTML = '<div class="empty-note">No mapping generated yet. Click <b>Generate Mapping</b> to see preview here.</div>';
-            lastPairs = [];
-        });
+  // PDF export using jsPDF + autotable
+  downloadPdf.addEventListener('click', () => {
+    if(!mapped.length){ alert('Generate mapping first.'); return; }
+    try {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });
+      const columns = ['Roll Number','Name','Branch','Experiment'];
+      const rowsForPdf = mapped.map(m => [m.roll, m.name, m.branch, String(m.exp)]);
 
-        copyBtn.addEventListener('click', async () => {
-            if (!lastPairs.length) { alert('No data to copy — generate mapping first.'); return; }
-            const csv = toCSV(lastPairs);
-            try {
-                await navigator.clipboard.writeText(csv);
-                alert('Mapping copied to clipboard (CSV format).');
-            } catch (e) {
-                alert('Copy failed. You can download CSV instead.');
-            }
-        });
+      doc.setFontSize(12);
+      doc.text('Roll → Experiment Mapping', 40, 40);
+      doc.autoTable({
+        head: [columns],
+        body: rowsForPdf,
+        startY: 60,
+        styles: { fontSize: 10, cellPadding: 4 },
+        headStyles: { fillColor: [6,86,153] },
+        alternateRowStyles: { fillColor: [250,250,250] }
+      });
+      doc.save('mapping.pdf');
+    } catch(err){
+      console.error(err);
+      alert('PDF export failed. Check console.');
+    }
+  });
 
-        // CSV & XLSX exports
-        function toCSV(pairs) {
-            const lines = ['Roll Number,Experiment No'];
-            for (const p of pairs) lines.push(`"${p.roll.replaceAll('"','""')}",${p.exp}`);
-            return lines.join('\n');
-        }
+  // focus load button initially
+  window.addEventListener('load', () => loadBtn.focus());
 
-        document.getElementById('downloadCsv').addEventListener('click', () => {
-            if (!lastPairs.length) { alert('Generate mapping first'); return; }
-            const csv = toCSV(lastPairs);
-            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'mapping.csv';
-            a.click();
-            URL.revokeObjectURL(url);
-        });
-
-        document.getElementById('downloadXlsx').addEventListener('click', () => {
-            if (!lastPairs.length) { alert('Generate mapping first'); return; }
-            // Try SheetJS
-            if (window.XLSX) {
-                const ws_data = [["Roll Number","Experiment No"], ...lastPairs.map(p => [p.roll, p.exp])];
-                const wb = XLSX.utils.book_new();
-                const ws = XLSX.utils.aoa_to_sheet(ws_data);
-                XLSX.utils.book_append_sheet(wb, ws, 'Mapping');
-                XLSX.writeFile(wb, 'mapping.xlsx');
-            } else {
-                // fallback to CSV with xlsx extension
-                const csv = toCSV(lastPairs);
-                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'mapping.xlsx';
-                a.click();
-                URL.revokeObjectURL(url);
-            }
-        });
-
-    </script>
-
+})();
+</script>
 </body>
-
 </html>
