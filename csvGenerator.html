@@ -3,68 +3,31 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NBKRIST - Student Assessment (Simple Clean Version)</title>
+<title>NBKRIST - Student Assessment (Auto Load Roll Numbers)</title>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap');
-:root {
-  --primary:#004d99;
-  --secondary:#f0f8ff;
-  --text:#343a40;
-  --border:#dee2e6;
-}
-body{
-  font-family:'Merriweather',serif;
-  margin:0; padding:0;
-  background:var(--secondary); color:var(--text);
-  display:flex; flex-direction:column; align-items:center;
-  min-height:100vh;
-}
-header{
-  width:100%; background:var(--primary); color:white;
-  padding:1.2rem 0; text-align:center;
-}
+:root { --primary:#004d99; --secondary:#f0f8ff; --text:#343a40; --border:#dee2e6; }
+body{ font-family:'Merriweather',serif; margin:0; padding:0; background:var(--secondary); color:var(--text); display:flex; flex-direction:column; align-items:center; min-height:100vh;}
+header{ width:100%; background:var(--primary); color:white; padding:1.2rem 0; text-align:center;}
 header h1{ margin:0; font-family:'Roboto'; font-size:1.8rem; }
-.back-home{
-  margin-top:10px; margin-left:10px;
-  background:#6c757d; color:white;
-  padding:8px 14px; border:none;
-  border-radius:6px; cursor:pointer;
-  font-weight:700;
-}
-.container{
-  width:95%; max-width:1100px;
-  background:white; margin-top:20px;
-  padding:20px; border-radius:12px;
-  box-shadow:0 4px 15px rgba(0,0,0,0.1);
-}
+.back-home{ margin-top:10px; margin-left:10px; background:#6c757d; color:white; padding:8px 14px; border:none; border-radius:6px; cursor:pointer; font-weight:700; }
+.container{ width:95%; max-width:1100px; background:white; margin-top:20px; padding:20px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1);}
 .table-row{ margin-top: 12px; }
 table{ width:100%; border-collapse:collapse; margin-top:12px; }
-th,td{
-  border:1px solid var(--border);
-  padding:8px; text-align:center;
-  font-family:'Roboto';
-}
+th,td{ border:1px solid var(--border); padding:8px; text-align:center; font-family:'Roboto'; }
 th{ background:#eaf4ff; }
-.btn{
-  padding:10px 16px; border:none;
-  border-radius:6px; cursor:pointer;
-  font-weight:700; margin-right:10px;
-}
+.btn{ padding:10px 16px; border:none; border-radius:6px; cursor:pointer; font-weight:700; margin-right:10px; }
 .addRow{ background:#2e7d32; color:white; }
+.loadtxt{ background:#0277bd; color:white; }
 .excel{ background:#2e7d32; color:white; }
 .clear{ background:#d32f2f; color:white; }
 .report{ background:#6a1b9a; color:white; }
-.footer{
-  width:100%; text-align:center;
-  padding:14px 0; background:var(--primary);
-  color:white; margin-top:auto;
-}
-.modal-backdrop{
-  position:fixed; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center;
-}
-.modal{
-  background:white; padding:20px; border-radius:8px; width:90%; max-width:480px; box-shadow:0 6px 18px rgba(0,0,0,0.2);
-}
+.footer{ width:100%; text-align:center; padding:14px 0; background:var(--primary); color:white; margin-top:auto; }
+
+/* modal */
+.modal-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; }
+.modal{ background:white; padding:20px; border-radius:8px; width:90%; max-width:480px; box-shadow:0 6px 18px rgba(0,0,0,0.2); }
 .modal h3{ margin-top:0; }
 .modal .row{ margin-bottom:8px; display:flex; gap:8px; align-items:center; }
 .modal label{ width:160px; font-weight:600; font-size:14px; }
@@ -72,10 +35,10 @@ th{ background:#eaf4ff; }
 .modal .actions{ text-align:right; margin-top:12px; }
 </style>
 </head>
+
 <body>
-<header>
-  <h1>NBKRIST - Student Assessment Entry</h1>
-</header>
+
+<header><h1>NBKRIST - Student Assessment Entry</h1></header>
 <button class="back-home" onclick="location.href='exampanel.html'">⬅ Back to Home</button>
 
 <div class="container">
@@ -83,56 +46,48 @@ th{ background:#eaf4ff; }
 
   <div id="controls">
     <button class="btn addRow" onclick="addRow()">➕ Add Row</button>
+
+    <!-- Load roll numbers -->
+    <input type="file" id="rollFile" accept=".txt" style="display:none" onchange="loadRollNumbers(event)">
+    <button class="btn loadtxt" onclick="document.getElementById('rollFile').click()">📂 Load Roll Numbers (.txt)</button>
+
     <button class="btn excel" onclick="generateExcel()">📥 Generate Excel</button>
     <button class="btn clear" onclick="clearTable()">🧹 Clear</button>
     <button class="btn report" onclick="openMetadataModal()">📄 Generate Report</button>
   </div>
 
   <div class="table-row">
-  <table id="studentTable">
-    <thead>
-      <tr>
-        <th>S.No</th>
-        <th>Roll Number</th>
-        <th>Code</th>
-        <th>Viva</th>
-        <th>Execution</th>
-        <th>Total</th>
-        <th>Remarks</th>
-      </tr>
-    </thead>
-    <tbody id="tableBody"></tbody>
-  </table>
+    <table id="studentTable">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Roll Number</th>
+          <th>Code</th>
+          <th>Viva</th>
+          <th>Execution</th>
+          <th>Total</th>
+          <th>Remarks</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
   </div>
 </div>
 
 <footer class="footer">© 2025 NBKRIST | Authored by Hari Babu Mutchakala</footer>
 
-<!-- Metadata modal (hidden by default) -->
+<!-- Metadata modal -->
 <div id="metadataModal" style="display:none;">
-  <div class="modal-backdrop" id="modalBackdrop">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="metaTitle">
-      <h3 id="metaTitle">Enter Exam Details</h3>
-      <div class="row">
-        <label for="examName">Name of Examination</label>
-        <input id="examName" type="text" placeholder="e.g. B.Tech Practical - Java Lab">
-      </div>
-      <div class="row">
-        <label for="labName">Name of Laboratory</label>
-        <input id="labName" type="text" placeholder="e.g. OOPs Lab">
-      </div>
-      <div class="row">
-        <label for="examDate">Date(s) of Examination</label>
-        <input id="examDate" type="text" placeholder="e.g. 21-11-2025">
-      </div>
-      <div class="row">
-        <label for="examiner1">Examiner 1</label>
-        <input id="examiner1" type="text" placeholder="Examiner Name">
-      </div>
-      <div class="row">
-        <label for="examiner2">Examiner 2</label>
-        <input id="examiner2" type="text" placeholder="Examiner Name">
-      </div>
+  <div class="modal-backdrop">
+    <div class="modal">
+      <h3>Enter Exam Details</h3>
+
+      <div class="row"><label>Name of Examination</label><input id="examName" type="text"></div>
+      <div class="row"><label>Name of Laboratory</label><input id="labName" type="text"></div>
+      <div class="row"><label>Date(s) of Examination</label><input id="examDate" type="text"></div>
+      <div class="row"><label>Examiner 1</label><input id="examiner1" type="text"></div>
+      <div class="row"><label>Examiner 2</label><input id="examiner2" type="text"></div>
+
       <div class="actions">
         <button class="btn clear" onclick="closeMetadataModal()">Cancel</button>
         <button class="btn report" onclick="saveMetadataAndGenerate()">Generate Report</button>
@@ -144,6 +99,7 @@ th{ background:#eaf4ff; }
 <script>
 let rowCount = 0;
 
+/* ---------------- ADD ROW MANUALLY ---------------- */
 function addRow(){
   rowCount++;
   const tbody=document.getElementById('tableBody');
@@ -161,19 +117,78 @@ function addRow(){
   tbody.appendChild(tr);
 }
 
+/* ---------------- AUTO CALCULATE TOTAL + COLORING ---------------- */
 function updateRow(el){
   const tr = el.closest("tr");
+
   const code = Number(tr.querySelector(".code").value) || 0;
   const viva = Number(tr.querySelector(".viva").value) || 0;
   const record = Number(tr.querySelector(".record").value) || 0;
-  tr.querySelector(".total").value = code + viva + record;
+
+  let total = code + viva + record;
+
+  tr.querySelector(".total").value = total;
+
+  /* --- ALERT if > 70 --- */
+  if (total > 70) {
+    alert("⚠ Total cannot exceed 70. Please adjust the marks.");
+    tr.style.background = "#ffb3b3"; // danger red
+    return;
+  }
+
+  /* --- COLOR LOGIC --- */
+  if (total >= 65 && total <= 70) {
+    tr.style.background = "#cce0ff";   // blue
+  }
+  else if (total >= 55 && total < 65) {
+    tr.style.background = "#d4f8d4";   // green
+  }
+  else if (total < 40) {
+    tr.style.background = "#ffd6d6";   // red
+  }
+  else {
+    tr.style.background = "white";     // normal
+  }
 }
 
+/* ---------------- CLEAR TABLE ---------------- */
 function clearTable(){
   document.getElementById('tableBody').innerHTML = "";
   rowCount = 0;
 }
 
+/* ---------------- LOAD ROLL NUMBERS FROM TXT ---------------- */
+function loadRollNumbers(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const lines = e.target.result.split(/\r?\n/).map(l => l.trim()).filter(l => l !== "");
+
+    clearTable();
+
+    lines.forEach(roll => {
+      rowCount++;
+      const tbody=document.getElementById('tableBody');
+      const tr=document.createElement('tr');
+
+      tr.innerHTML =
+        "<td class='sno'>" + rowCount + "</td>" +
+        "<td><input type='text' class='roll' value='" + roll + "'></td>" +
+        "<td><input type='number' class='code' min='0' max='50' oninput='updateRow(this)'></td>" +
+        "<td><input type='number' class='viva' min='0' max='20' oninput='updateRow(this)'></td>" +
+        "<td><input type='number' class='record' min='0' max='30' oninput='updateRow(this)'></td>" +
+        "<td><input type='number' class='total' readonly></td>" +
+        "<td><input type='text' class='remarks'></td>";
+
+      tbody.appendChild(tr);
+    });
+  };
+  reader.readAsText(file);
+}
+
+/* ---------------- EXPORT EXCEL ---------------- */
 function generateExcel(){
   const rows=document.querySelectorAll('#tableBody tr');
   let csv='S.No,RollNumber,Code,Viva,Record,Total,Remarks\n';
@@ -188,6 +203,7 @@ function generateExcel(){
       r.querySelector('.remarks').value
     ].join(',') + "\n";
   });
+
   const blob=new Blob([csv],{type:'text/csv'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
@@ -195,43 +211,46 @@ function generateExcel(){
   a.click();
 }
 
-// metadata modal handlers
-function openMetadataModal(){
-  document.getElementById('metadataModal').style.display='block';
-}
-function closeMetadataModal(){
-  document.getElementById('metadataModal').style.display='none';
-}
+/* ---------------- METADATA MODAL ---------------- */
+function openMetadataModal(){ document.getElementById('metadataModal').style.display='block'; }
+function closeMetadataModal(){ document.getElementById('metadataModal').style.display='none'; }
 
-// save metadata and generate report
+/* ---------------- GENERATE REPORT ---------------- */
 function saveMetadataAndGenerate(){
   const meta = {
-    examName: document.getElementById('examName').value.trim(),
-    labName: document.getElementById('labName').value.trim(),
-    examDate: document.getElementById('examDate').value.trim(),
-    examiner1: document.getElementById('examiner1').value.trim(),
-    examiner2: document.getElementById('examiner2').value.trim()
+    examName: examName.value.trim(),
+    labName: labName.value.trim(),
+    examDate: examDate.value.trim(),
+    examiner1: examiner1.value.trim(),
+    examiner2: examiner2.value.trim()
   };
 
   const rows=document.querySelectorAll('#tableBody tr');
   const data=[];
   rows.forEach(function(r){
     const roll = r.querySelector('.roll').value.trim();
-    const code = r.querySelector('.code').value.trim();
-    const viva = r.querySelector('.viva').value.trim();
-    const record = r.querySelector('.record').value.trim();
-    const total = r.querySelector('.total').value.trim();
-    const remarks = r.querySelector('.remarks').value.trim();
     if(roll !== ''){
-      data.push({ roll, code, viva, record, total, remarks });
+      data.push({
+        roll,
+        code: r.querySelector('.code').value.trim(),
+        viva: r.querySelector('.viva').value.trim(),
+        record: r.querySelector('.record').value.trim(),
+        total: r.querySelector('.total').value.trim(),
+        remarks: r.querySelector('.remarks').value.trim()
+      });
     }
   });
 
-  const payload = { metadata: meta, rows: data, generatedAt: new Date().toISOString() };
-  localStorage.setItem('assessmentData', JSON.stringify(payload));
+  localStorage.setItem('assessmentData', JSON.stringify({
+    metadata: meta,
+    rows: data,
+    generatedAt: new Date().toISOString()
+  }));
+
   closeMetadataModal();
   window.open('report.html','_blank');
 }
 </script>
+
 </body>
 </html>
