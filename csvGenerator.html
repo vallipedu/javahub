@@ -129,26 +129,16 @@ function updateRow(el){
 
   tr.querySelector(".total").value = total;
 
-  /* --- ALERT if > 70 --- */
   if (total > 70) {
     alert("⚠ Total cannot exceed 70. Please adjust the marks.");
-    tr.style.background = "#ffb3b3"; // danger red
+    tr.style.background = "#ffb3b3";
     return;
   }
 
-  /* --- COLOR LOGIC --- */
-  if (total >= 65 && total <= 70) {
-    tr.style.background = "#cce0ff";   // blue
-  }
-  else if (total >= 55 && total < 65) {
-    tr.style.background = "#d4f8d4";   // green
-  }
-  else if (total < 40) {
-    tr.style.background = "#ffd6d6";   // red
-  }
-  else {
-    tr.style.background = "white";     // normal
-  }
+  if (total >= 65) tr.style.background = "#cce0ff";
+  else if (total >= 55) tr.style.background = "#d4f8d4";
+  else if (total < 40) tr.style.background = "#ffd6d6";
+  else tr.style.background = "white";
 }
 
 /* ---------------- CLEAR TABLE ---------------- */
@@ -157,21 +147,41 @@ function clearTable(){
   rowCount = 0;
 }
 
-/* ---------------- LOAD ROLL NUMBERS FROM TXT ---------------- */
+/* ---------------- LOAD ROLL NUMBERS (3 COLUMN TXT) ---------------- */
 function loadRollNumbers(event) {
   const file = event.target.files[0];
   if (!file) return;
 
   const reader = new FileReader();
   reader.onload = function(e) {
-    const lines = e.target.result.split(/\r?\n/).map(l => l.trim()).filter(l => l !== "");
+
+    const lines = e.target.result
+      .split(/\r?\n/)
+      .map(l => l.trim())
+      .filter(l => l !== "");
 
     clearTable();
 
-    lines.forEach(roll => {
+    let lineNumber = 0;
+
+    for (const line of lines) {
+      lineNumber++;
+
+      const parts = line.split(/\s+/);
+
+      if (parts.length < 3) {
+        alert(`❌ ERROR in line ${lineNumber}:  
+Each row should contain AT LEAST 3 space-separated values.  
+Example: 1 23KB1A0502 Hari Shankar`);
+        clearTable();
+        return;
+      }
+
+      const roll = parts[1]; // ← ONLY SECOND COLUMN
+
       rowCount++;
-      const tbody=document.getElementById('tableBody');
-      const tr=document.createElement('tr');
+      const tbody = document.getElementById('tableBody');
+      const tr = document.createElement('tr');
 
       tr.innerHTML =
         "<td class='sno'>" + rowCount + "</td>" +
@@ -183,8 +193,9 @@ function loadRollNumbers(event) {
         "<td><input type='text' class='remarks'></td>";
 
       tbody.appendChild(tr);
-    });
+    }
   };
+
   reader.readAsText(file);
 }
 
