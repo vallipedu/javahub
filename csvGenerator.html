@@ -7,52 +7,238 @@
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap');
-:root { --primary:#004d99; --secondary:#f0f8ff; --text:#343a40; --border:#dee2e6; }
-body{ font-family:'Merriweather',serif; margin:0; padding:0; background:var(--secondary); color:var(--text); display:flex; flex-direction:column; align-items:center; min-height:100vh;}
-header{ width:100%; background:var(--primary); color:white; padding:1.2rem 0; text-align:center;}
-header h1{ margin:0; font-family:'Roboto'; font-size:1.8rem; }
-.back-home{ margin-top:10px; margin-left:10px; background:#6c757d; color:white; padding:8px 14px; border:none; border-radius:6px; cursor:pointer; font-weight:700; }
-.container{ width:95%; max-width:1100px; background:white; margin-top:20px; padding:20px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1);}
-.table-row{ margin-top: 12px; }
-table{ width:100%; border-collapse:collapse; margin-top:12px; }
-th,td{ border:1px solid var(--border); padding:8px; text-align:center; font-family:'Roboto'; }
-th{ background:#eaf4ff; }
-.btn{ padding:10px 16px; border:none; border-radius:6px; cursor:pointer; font-weight:700; margin-right:10px; }
-.addRow{ background:#2e7d32; color:white; }
-.loadtxt{ background:#0277bd; color:white; }
-.excel{ background:#2e7d32; color:white; }
-.clear{ background:#d32f2f; color:white; }
-.report{ background:#6a1b9a; color:white; }
-.footer{ width:100%; text-align:center; padding:14px 0; background:var(--primary); color:white; margin-top:auto; }
 
-/* modal */
-.modal-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; }
-.modal{ background:white; padding:20px; border-radius:8px; width:90%; max-width:480px; box-shadow:0 6px 18px rgba(0,0,0,0.2); }
-.modal h3{ margin-top:0; }
-.modal .row{ margin-bottom:8px; display:flex; gap:8px; align-items:center; }
-.modal label{ width:160px; font-weight:600; font-size:14px; }
-.modal input{ flex:1; padding:8px; border:1px solid #ccc; border-radius:4px; }
-.modal .actions{ text-align:right; margin-top:12px; }
+/* ---------------- THEME VARIABLES ---------------- */
+:root {
+  --primary: linear-gradient(90deg, #0059b3, #003f7f);
+  --secondary: #f0f8ff;
+  --text: #343a40;
+  --card-bg: #ffffff;
+  --border: #d5d5d5;
+  --home-btn-bg: #ffffff22;
+  --home-btn-text: #ffffff;
+}
+
+.dark-mode {
+  --primary: linear-gradient(90deg, #000000, #222);
+  --secondary: #111;
+  --text: #e6e6e6;
+  --card-bg: #1e1e1e;
+  --border: #444;
+  --home-btn-bg: #ffffff33;
+  --home-btn-text: #ffffff;
+}
+
+/* ---------------- BASIC LAYOUT ---------------- */
+body {
+  font-family: 'Merriweather', serif;
+  margin: 0;
+  padding: 0;
+  background: var(--secondary);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* ---------------- HEADER ---------------- */
+header {
+  width: 100%;
+  background: var(--primary);
+  color: white;
+  padding: 1rem 1.2rem;
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+}
+
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-center {
+  text-align: center;
+}
+
+.header-center h1 {
+  margin: 0;
+  font-family: 'Roboto';
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px #00000055;
+}
+
+/* --- NEW Back to Home Button (Premium UI) --- */
+.back-home {
+  background: var(--home-btn-bg);
+  color: var(--home-btn-text);
+  padding: 8px 18px;
+  border: 1px solid #ffffff55;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  transition: 0.3s;
+}
+
+.back-home:hover {
+  background: #ffffff44;
+  transform: scale(1.05);
+}
+
+/* Dark/Light toggle */
+.theme-toggle {
+  font-size: 1.9rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.theme-toggle:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* ---------------- CONTAINER ---------------- */
+.container {
+  width: 95%;
+  max-width: 1100px;
+  background: var(--card-bg);
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+h2 {
+  margin-top: 0;
+  font-family: 'Roboto';
+}
+
+/* ---------------- TABLE ---------------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 8px;
+  text-align: center;
+  font-family: 'Roboto';
+}
+
+th {
+  background: #eaf4ff;
+}
+
+/* ---------------- BUTTONS ---------------- */
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.addRow { background:#2e7d32; color:white; }
+.loadtxt { background:#0277bd; color:white; }
+.excel   { background:#2e7d32; color:white; }
+.clear   { background:#d32f2f; color:white; }
+.report  { background:#6a1b9a; color:white; }
+
+/* ---------------- FOOTER ---------------- */
+.footer {
+  width: 100%;
+  text-align: center;
+  padding: 14px 0;
+  background: #003f7f;
+  color: white;
+  margin-top: auto;
+}
+
+/* ---------------- MODAL ---------------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 480px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+
+.modal h3 { margin-top: 0; }
+.modal .row { margin-bottom: 8px; display: flex; gap: 8px; align-items: center; }
+.modal label { width: 160px; font-weight: 600; font-size: 14px; }
+.modal input { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+.modal .actions { text-align: right; margin-top: 12px; }
+
+@media(max-width: 600px) {
+  header {
+    grid-template-columns: auto auto auto;
+  }
+  .header-center h1 { font-size: 1.4rem; }
+  .btn { margin-bottom: 8px; }
+}
 </style>
 </head>
 
 <body>
 
-<header><h1>NBKRIST - Student Assessment Entry</h1></header>
-<button class="back-home" onclick="location.href='exampanel.html'">⬅ Back to Home</button>
+<header>
+  <div class="header-left">
+    <button class="back-home" onclick="location.href='exampanel.html'">
+      ⬅ Home
+    </button>
+  </div>
+
+  <div class="header-center">
+    <h1>NBKRIST - JAVAHUB</h1>
+  </div>
+
+  <div class="header-right">
+     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    <span class="theme-toggle" onclick="toggleTheme()">🌙</span>
+  </div>
+</header>
 
 <div class="container">
-  <h2 style="font-family:'Roboto'; margin-top:0;">Student Assessment Table</h2>
+  <h2 style="text-align: center;">External Lab Examination Evaluation Register</h2>
 
   <div id="controls">
     <button class="btn addRow" onclick="addRow()">➕ Add Row</button>
 
-    <!-- Load roll numbers -->
     <input type="file" id="rollFile" accept=".txt" style="display:none" onchange="loadRollNumbers(event)">
     <button class="btn loadtxt" onclick="document.getElementById('rollFile').click()">📂 Load Roll Numbers (.txt)</button>
 
     <button class="btn excel" onclick="generateExcel()">📥 Generate Excel</button>
     <button class="btn clear" onclick="clearTable()">🧹 Clear</button>
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
     <button class="btn report" onclick="openMetadataModal()">📄 Generate Report</button>
   </div>
 
@@ -76,7 +262,7 @@ th{ background:#eaf4ff; }
 
 <footer class="footer">© 2025 NBKRIST | Authored by Hari Babu Mutchakala</footer>
 
-<!-- Metadata modal -->
+<!-- Metadata Modal -->
 <div id="metadataModal" style="display:none;">
   <div class="modal-backdrop">
     <div class="modal">
@@ -97,9 +283,16 @@ th{ background:#eaf4ff; }
 </div>
 
 <script>
+// ---------------- DARK MODE ----------------
+function toggleTheme() {
+  document.body.classList.toggle("dark-mode");
+  const icon = document.querySelector(".theme-toggle");
+  icon.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+}
+
 let rowCount = 0;
 
-/* ---------------- ADD ROW MANUALLY ---------------- */
+// ---------------- ADD ROW ----------------
 function addRow(){
   rowCount++;
   const tbody=document.getElementById('tableBody');
@@ -117,20 +310,18 @@ function addRow(){
   tbody.appendChild(tr);
 }
 
-/* ---------------- AUTO CALCULATE TOTAL + COLORING ---------------- */
+// ---------------- AUTO TOTAL ----------------
 function updateRow(el){
   const tr = el.closest("tr");
-
   const code = Number(tr.querySelector(".code").value) || 0;
   const viva = Number(tr.querySelector(".viva").value) || 0;
   const record = Number(tr.querySelector(".record").value) || 0;
-
   let total = code + viva + record;
 
   tr.querySelector(".total").value = total;
 
   if (total > 70) {
-    alert("⚠ Total cannot exceed 70. Please adjust the marks.");
+    alert("⚠ Total cannot exceed 70. Please adjust.");
     tr.style.background = "#ffb3b3";
     return;
   }
@@ -138,16 +329,16 @@ function updateRow(el){
   if (total >= 65) tr.style.background = "#cce0ff";
   else if (total >= 55) tr.style.background = "#d4f8d4";
   else if (total < 40) tr.style.background = "#ffd6d6";
-  else tr.style.background = "white";
+  else tr.style.background = "transparent";
 }
 
-/* ---------------- CLEAR TABLE ---------------- */
+// ---------------- CLEAR TABLE ----------------
 function clearTable(){
   document.getElementById('tableBody').innerHTML = "";
   rowCount = 0;
 }
 
-/* ---------------- LOAD ROLL NUMBERS (3 COLUMN TXT) ---------------- */
+// ---------------- LOAD ROLL NUMBERS ----------------
 function loadRollNumbers(event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -171,13 +362,12 @@ function loadRollNumbers(event) {
 
       if (parts.length < 3) {
         alert(`❌ ERROR in line ${lineNumber}:  
-Each row should contain AT LEAST 3 space-separated values.  
-Example: 1 23KB1A0502 Hari Shankar`);
+Need at least 3 columns (S.No Roll Name).`);
         clearTable();
         return;
       }
 
-      const roll = parts[1]; // ← ONLY SECOND COLUMN
+      const roll = parts[1];
 
       rowCount++;
       const tbody = document.getElementById('tableBody');
@@ -199,7 +389,7 @@ Example: 1 23KB1A0502 Hari Shankar`);
   reader.readAsText(file);
 }
 
-/* ---------------- EXPORT EXCEL ---------------- */
+// ---------------- EXPORT CSV ----------------
 function generateExcel(){
   const rows=document.querySelectorAll('#tableBody tr');
   let csv='S.No,RollNumber,Code,Viva,Record,Total,Remarks\n';
@@ -222,11 +412,11 @@ function generateExcel(){
   a.click();
 }
 
-/* ---------------- METADATA MODAL ---------------- */
+// ---------------- META MODAL ----------------
 function openMetadataModal(){ document.getElementById('metadataModal').style.display='block'; }
 function closeMetadataModal(){ document.getElementById('metadataModal').style.display='none'; }
 
-/* ---------------- GENERATE REPORT ---------------- */
+// ---------------- REPORT SAVE ----------------
 function saveMetadataAndGenerate(){
   const meta = {
     examName: examName.value.trim(),
