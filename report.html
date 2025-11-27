@@ -42,11 +42,56 @@ body {
     page-break-after: always;
 }
 
+/* ===== BACKGROUND LOGO LAYER (WORKING SOLUTION) ===== */
+.page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('nbkrist-logo.png'); /* Your logo */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 300px;
+    opacity: 0.12;        /* Faint watermark */
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* keep all page content above watermark */
+.page * {
+    position: relative;
+    z-index: 1;
+}
+
+/* PRINT FIX */
+@media print {
+    .page::before {
+        opacity: 0.15;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    .print-controls { display: none; }
+}
+
 /* ===== HEADER ===== */
-.header { text-align: center; margin-bottom: 10px; }
-.header .institute-name { font-size: 16px; font-weight: bold; }
-.header p { margin: 2px 0; font-size: 13px; }
-.header .sub-heading { margin-top: 6px; font-size: 14px; font-weight: bold; }
+.header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.header p {
+    margin: 2px 0;
+    font-size: 13px;
+    color: #0057b7;
+    font-weight: 600;
+}
+.header .institute-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+.header .sub-heading {
+    margin-top: 6px;
+    font-size: 14px;
+    font-weight: bold;
+}
 
 /* ===== DETAILS ===== */
 .details-section { margin: 8px 0; }
@@ -57,14 +102,17 @@ body {
     font-size: 14px;
 }
 .value { border-bottom: 1px dashed #000; min-height: 18px; padding-left: 6px; }
-
 .examiners-row {
     display: grid;
     grid-template-columns: 200px 25px 1fr;
     margin: 4px 0;
     font-size: 14px;
 }
-.e-value { border-bottom: 1px dashed #000; min-height: 18px; padding-left: 6px; }
+.e-value {
+    border-bottom: 1px dashed #000; 
+    min-height: 18px; 
+    padding-left: 6px; 
+}
 
 .max-marks {
     border: 1px solid #000;
@@ -82,17 +130,18 @@ body {
     margin-top: 12px;
     font-size: 13px;
 }
-
 .marks-table th, .marks-table td {
     border: 1px solid #000;
     padding: 6px;
-    vertical-align: middle;
 }
 
-.col-sno { width: 5%; }
-.col-register { width: 25%; text-align: left; }
-.col-marks-fig { width: 20%; text-align: center; }
-.col-marks-words { width: 50%; text-align: left; padding-left: 8px; }
+/* Alternating rows */
+.marks-table tbody tr:nth-child(odd) {
+    background-color: #f4f8ff;
+}
+.marks-table tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
 
 /* ===== FOOTER ===== */
 .page-footer {
@@ -105,13 +154,11 @@ body {
     padding-top: 4px;
     background: white;
 }
-
 .footer-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     font-size: 14px;
 }
-
 .signature-line {
     display: grid;
     grid-template-columns: 25px auto;
@@ -121,36 +168,14 @@ body {
     border-bottom: 1px dashed #000;
     height: 18px;
 }
-
 .page-number {
     text-align: center;
     margin-top: 8px;
     font-size: 12px;
 }
-
-/* ===== WATERMARK ===== */
-#watermark { display: none; }
-
-@media print {
-    body { background: none; }
-    .print-controls { display: none !important; }
-
-    #watermark {
-        display: block;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(-30deg);
-        font-size: 120px;
-        font-weight: bold;
-        color: rgba(0,0,0,0.06);
-        z-index: -1;
-    }
-
-    @page { size: A4; margin: 12mm; }
-}
 </style>
 </head>
+
 <body>
 
 <div class="print-controls">
@@ -158,42 +183,33 @@ body {
     <button onclick="window.print()">Save PDF</button>
 </div>
 
-<div id="watermark">NBKRIST</div>
 <div id="pagesContainer"></div>
 
 <script>
-/* Convert number to words */
 function numberToWords(n){
-    const a=["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven",
-             "Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
-    const b=["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
-    n = Number(n);
     if (!n && n !== 0) return "";
-    if (n < 20) return a[n];
-    if (n < 100) return b[Math.floor(n/10)] + (n%10 ? " " + a[n%10] : "");
-    return n;
+    let map = {
+        "0":"Zero","1":"One","2":"Two","3":"Three","4":"Four",
+        "5":"Five","6":"Six","7":"Seven","8":"Eight","9":"Nine"
+    };
+    return String(n).split("").map(d => map[d]).join(" ");
 }
 
 let payload = JSON.parse(localStorage.getItem("assessmentData") || "{}");
 let meta = payload.metadata || {};
 let rows = Array.isArray(payload.rows) ? payload.rows.slice() : [];
 
-/* ROW RULES */
 const FIRST_PAGE_ROWS = 13;
 const NEXT_PAGE_ROWS = 20;
 
-/* Paginate rows */
 function paginateRows(all){
     const pages = [];
-    let first = all.slice(0, FIRST_PAGE_ROWS);
-    while (first.length < FIRST_PAGE_ROWS) first.push(null);
-    pages.push(first);
+    pages.push(all.slice(0, FIRST_PAGE_ROWS));
 
-    let idx = FIRST_PAGE_ROWS;
-    while (idx < all.length){
-        pages.push(all.slice(idx, idx + NEXT_PAGE_ROWS));
-        idx += NEXT_PAGE_ROWS;
+    for (let i = FIRST_PAGE_ROWS; i < all.length; i += NEXT_PAGE_ROWS){
+        pages.push(all.slice(i, i + NEXT_PAGE_ROWS));
     }
+
     return pages;
 }
 
@@ -201,10 +217,10 @@ function headerHTML(){
     return `
     <div class="header">
         <p class="institute-name">N.B.K.R. INSTITUTE OF SCIENCE & TECHNOLOGY :: VIDYANAGAR</p>
-        <p class="address">(AUTONOMOUS)</p>
-        <p class="affiliation">Affiliated to Jawaharlal Nehru Technological University Ananthapur</p>
-        <p class="exam-details">B.TECH DEGREE END EXAMINATION</p>
-        <p class="address">(Strike off whichever is not applicable)</p>
+        <p>(AUTONOMOUS)</p>
+        <p>Affiliated to Jawaharlal Nehru Technological University Ananthapur</p>
+        <p>B.TECH DEGREE END EXAMINATION</p>
+        <p>(Strike off whichever is not applicable)</p>
         <p class="sub-heading">PRACTICAL EXAMINATION AWARD LIST</p>
     </div>
 
@@ -242,19 +258,18 @@ function footerHTML(){
 function tableHeader(){
     return `
     <table class="marks-table">
-        <thead>
-            <tr>
-                <th rowspan="2" class="col-sno">S.No</th>
-                <th rowspan="2" class="col-register">Register Number</th>
-                <th colspan="2">Marks</th>
-            </tr>
-            <tr>
-                <th class="col-marks-fig">In Figures</th>
-                <th class="col-marks-words">In Words</th>
-            </tr>
-        </thead>
-        <tbody>
-    `;
+    <thead>
+        <tr>
+            <th rowspan="2">S.No</th>
+            <th rowspan="2">Register Number</th>
+            <th colspan="2">Marks</th>
+        </tr>
+        <tr>
+            <th>In Figures</th>
+            <th>In Words</th>
+        </tr>
+    </thead>
+    <tbody>`;
 }
 
 function buildPages(){
@@ -262,10 +277,7 @@ function buildPages(){
     let container = document.getElementById("pagesContainer");
     container.innerHTML = "";
 
-    for (let p = 0; p < pages.length; p++){
-        let slice = pages[p];
-        let startIndex = (p === 0) ? 0 : (FIRST_PAGE_ROWS + (p - 1) * NEXT_PAGE_ROWS);
-
+    pages.forEach((slice, p)=>{
         let html = `<div class="page">`;
 
         if (p === 0) html += headerHTML();
@@ -273,28 +285,25 @@ function buildPages(){
         html += tableHeader();
 
         slice.forEach((r, i)=>{
-            let sno = r ? (startIndex + i + 1) : "";
-            let roll = r ? r.roll : "";
-            let total = r ? r.total : "";
-            let words = total ? numberToWords(total)+" Only" : "";
+            let idx = p === 0 ? i + 1 : FIRST_PAGE_ROWS + (p - 1) * NEXT_PAGE_ROWS + i + 1;
 
             html += `
             <tr>
-                <td>${sno}</td>
-                <td>${roll}</td>
-                <td>${total}</td>
-                <td>${words}</td>
+                <td>${r ? idx : ""}</td>
+                <td>${r ? r.roll : ""}</td>
+                <td>${r ? r.total : ""}</td>
+                <td>${r ? numberToWords(r.total) : ""}</td>
             </tr>`;
         });
 
         html += `</tbody></table>`;
         html += footerHTML();
         html += `</div>`;
-        container.innerHTML += html;
-    }
 
-    /* Page numbers */
-    [...document.querySelectorAll(".page")].forEach((pg, i)=>{
+        container.innerHTML += html;
+    });
+
+    document.querySelectorAll(".page").forEach((pg, i)=>{
         pg.querySelector(".page-number").textContent =
             `Page ${i+1} of ${document.querySelectorAll(".page").length}`;
     });
@@ -302,6 +311,6 @@ function buildPages(){
 
 buildPages();
 </script>
+
 </body>
 </html>
-
