@@ -34,7 +34,6 @@ body {
 .page {
     width: 190mm;
 
-    /* Increased height to correctly fit 15 rows on Page-1 */
     min-height: 240mm;
 
     padding: 14mm;
@@ -50,6 +49,16 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 300px;
+}
+
+/* ⭐ NEW — HEADER LOGO LEFT SIDE */
+.header-logo {
+    width: 70px;
+    height: auto;
+    position: absolute;
+    left: 10mm;
+    top: 10mm;
+    z-index: 5;
 }
 
 @media print {
@@ -113,7 +122,6 @@ body {
     width: 100%;
     border-collapse: collapse;
 
-    /* Reduced margin so 15 rows fit */
     margin-top: 8px;
 
     font-size: 13px;
@@ -125,7 +133,6 @@ body {
     text-align: center;
 }
 
-/* Column widths */
 .marks-table th:nth-child(1),
 .marks-table td:nth-child(1) { width: 45px; }
 .marks-table th:nth-child(2),
@@ -146,7 +153,6 @@ body {
     right: 14mm;
     bottom: 10mm;
 
-    /* Reduced footer height so 15 rows fit perfectly */
     height: 32mm;
 
     padding-top: 4px;
@@ -176,6 +182,19 @@ body {
     margin-top: 8px;
     font-size: 12px;
 }
+.page .watermark-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    font-size: 150px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    color: rgba(0, 0, 0, 0.05); /* transparent */
+    pointer-events: none;
+    user-select: none;
+    z-index: 0 !important;
+}
 </style>
 </head>
 
@@ -202,7 +221,6 @@ let payload = JSON.parse(localStorage.getItem("assessmentData") || "{}");
 let meta = payload.metadata || {};
 let rows = Array.isArray(payload.rows) ? payload.rows.slice() : [];
 
-/* FINAL FIXED ROW SETTINGS */
 const FIRST_PAGE_ROWS = 12;
 const NEXT_PAGE_ROWS = 21;
 
@@ -282,12 +300,23 @@ function buildPages(){
     pages.forEach((slice, p)=>{
         let html = `<div class="page">`;
 
-        if (p === 0) html += headerHTML();
+        /* ⭐ Insert logo on HEADER ONLY (Page 1) */
+        if (p === 0) {
+            html += `<img src="NBKRIST.png" class="header-logo">`;
+            html += headerHTML();
+        }
+
+        if (p !== 0) {
+            /* No header on other pages */
+        }
 
         html += tableHeader();
 
         slice.forEach((r, i)=>{
-            let idx = p === 0 ? i + 1 : FIRST_PAGE_ROWS + (p - 1) * NEXT_PAGE_ROWS + i + 1;
+
+            let idx = p === 0 ?
+                i + 1 :
+                FIRST_PAGE_ROWS + (p - 1) * NEXT_PAGE_ROWS + i + 1;
 
             html += `
             <tr>
