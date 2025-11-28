@@ -30,68 +30,46 @@ body {
     cursor: pointer;
 }
 
-/* ===== PAGE ===== */
+/* ===== PAGE (final working version) ===== */
 .page {
     width: 190mm;
-    min-height: 250mm;
+
+    /* Increased height to correctly fit 15 rows on Page-1 */
+    min-height: 240mm;
+
     padding: 14mm;
     margin: 14mm auto;
     background: white;
     box-sizing: border-box;
     position: relative;
-    page-break-after: always;
-}
 
-/* ===== BACKGROUND LOGO LAYER (WORKING SOLUTION) ===== */
-.page::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url('nbkrist-logo.png'); /* Your logo */
+    page-break-after: auto;
+    page-break-inside: avoid;
+
+    background-image: url('nbkrist-logo.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 300px;
-    opacity: 0.12;        /* Faint watermark */
-    z-index: 0;
-    pointer-events: none;
 }
 
-/* keep all page content above watermark */
-.page * {
-    position: relative;
-    z-index: 1;
-}
-
-/* PRINT FIX */
 @media print {
-    .page::before {
-        opacity: 0.15;
+    .print-controls { display: none; }
+    .page {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }
-    .print-controls { display: none; }
 }
 
 /* ===== HEADER ===== */
-.header {
-    text-align: center;
-    margin-bottom: 10px;
-}
+.header { text-align: center; margin-bottom: 10px; }
 .header p {
     margin: 2px 0;
     font-size: 13px;
     color: #0057b7;
     font-weight: 600;
 }
-.header .institute-name {
-    font-size: 16px;
-    font-weight: bold;
-}
-.header .sub-heading {
-    margin-top: 6px;
-    font-size: 14px;
-    font-weight: bold;
-}
+.header .institute-name { font-size: 16px; font-weight: bold; }
+.header .sub-heading { margin-top: 6px; font-size: 14px; font-weight: bold; }
 
 /* ===== DETAILS ===== */
 .details-section { margin: 8px 0; }
@@ -101,7 +79,12 @@ body {
     margin: 4px 0;
     font-size: 14px;
 }
-.value { border-bottom: 1px dashed #000; min-height: 18px; padding-left: 6px; }
+.value {
+    border-bottom: 1px dashed #000;
+    min-height: 18px;
+    padding-left: 6px;
+    font-style: italic;
+}
 .examiners-row {
     display: grid;
     grid-template-columns: 200px 25px 1fr;
@@ -109,39 +92,51 @@ body {
     font-size: 14px;
 }
 .e-value {
-    border-bottom: 1px dashed #000; 
-    min-height: 18px; 
-    padding-left: 6px; 
+    font-style: italic;
+    border-bottom: 1px dashed #000;
+    min-height: 18px;
+    padding-left: 6px;
 }
 
 .max-marks {
     border: 1px solid #000;
     width: 140px;
     padding: 5px;
-    float: right;
     font-weight: bold;
     text-align: center;
+    margin-left: auto;
+    margin-bottom: 10px;
 }
 
 /* ===== TABLE ===== */
 .marks-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 12px;
+
+    /* Reduced margin so 15 rows fit */
+    margin-top: 8px;
+
     font-size: 13px;
 }
+
 .marks-table th, .marks-table td {
     border: 1px solid #000;
     padding: 6px;
+    text-align: center;
 }
 
-/* Alternating rows */
-.marks-table tbody tr:nth-child(odd) {
-    background-color: #f4f8ff;
-}
-.marks-table tbody tr:nth-child(even) {
-    background-color: #ffffff;
-}
+/* Column widths */
+.marks-table th:nth-child(1),
+.marks-table td:nth-child(1) { width: 45px; }
+.marks-table th:nth-child(2),
+.marks-table td:nth-child(2) { width: 125px; }
+.marks-table th:nth-child(3),
+.marks-table td:nth-child(3) { width: 80px; }
+.marks-table th:nth-child(4),
+.marks-table td:nth-child(4) { width: 230px; }
+
+.marks-table tbody tr:nth-child(odd) { background-color: #f4f8ff; }
+.marks-table tbody tr:nth-child(even) { background-color: #ffffff; }
 
 /* ===== FOOTER ===== */
 .page-footer {
@@ -150,24 +145,32 @@ body {
     left: 14mm;
     right: 14mm;
     bottom: 10mm;
-    height: 38mm;
+
+    /* Reduced footer height so 15 rows fit perfectly */
+    height: 32mm;
+
     padding-top: 4px;
     background: white;
 }
+
 .footer-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     font-size: 14px;
 }
+
 .signature-line {
     display: grid;
     grid-template-columns: 25px auto;
     margin-bottom: 8px;
 }
+
 .signature-value {
+    font-style: italic;
     border-bottom: 1px dashed #000;
     height: 18px;
 }
+
 .page-number {
     text-align: center;
     margin-top: 8px;
@@ -199,17 +202,16 @@ let payload = JSON.parse(localStorage.getItem("assessmentData") || "{}");
 let meta = payload.metadata || {};
 let rows = Array.isArray(payload.rows) ? payload.rows.slice() : [];
 
-const FIRST_PAGE_ROWS = 13;
-const NEXT_PAGE_ROWS = 20;
+/* FINAL FIXED ROW SETTINGS */
+const FIRST_PAGE_ROWS = 12;
+const NEXT_PAGE_ROWS = 21;
 
 function paginateRows(all){
     const pages = [];
     pages.push(all.slice(0, FIRST_PAGE_ROWS));
-
     for (let i = FIRST_PAGE_ROWS; i < all.length; i += NEXT_PAGE_ROWS){
         pages.push(all.slice(i, i + NEXT_PAGE_ROWS));
     }
-
     return pages;
 }
 
@@ -289,10 +291,10 @@ function buildPages(){
 
             html += `
             <tr>
-                <td>${r ? idx : ""}</td>
-                <td>${r ? r.roll : ""}</td>
-                <td>${r ? r.total : ""}</td>
-                <td>${r ? numberToWords(r.total) : ""}</td>
+                <td>${idx}</td>
+                <td>${r.roll}</td>
+                <td>${r.total}</td>
+                <td>${numberToWords(r.total)}</td>
             </tr>`;
         });
 
